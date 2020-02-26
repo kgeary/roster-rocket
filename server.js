@@ -2,9 +2,10 @@ require("dotenv").config();
 const express = require("express");
 var compression = require("compression");
 const mongoose = require("mongoose");
+var session = require("express-session");
+var passport = require("./config/passport");
 const routes = require("./routes");
-
-const app = express();
+var logger = require('morgan');
 const DBNAME = "project3";
 const PORT = process.env.PORT || 3001;
 
@@ -17,7 +18,10 @@ function shouldCompress(req, res) {
   return compression.filter(req, res)
 }
 
+const app = express();
+
 // Define middleware here
+app.use(logger("dev"));
 app.use(compression({ filter: shouldCompress }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -31,6 +35,10 @@ if (process.env.NODE_ENV === "production") {
   console.log("DEV BUILD");
 }
 
+// We need to use sessions to keep track of our user's login status
+app.use(session({ secret: "mr. little jeans", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Add routes, both API and view
 app.use(routes);
