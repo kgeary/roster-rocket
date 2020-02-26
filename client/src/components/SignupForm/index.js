@@ -83,7 +83,6 @@ function SignupForm() {
           />
 
           {/* PASSWORD */}
-          <label htmlFor="password">Password</label>
           <InputForm
             id="password"
             inputRef={passwordRef}
