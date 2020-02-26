@@ -1,7 +1,9 @@
 const db = require("../models");
 
 function getUser(user) {
-  if (!user.username) return undefined;
+  if (!user.username) {
+    return undefined;
+  }
 
   const newUser = {
     _id: user._id,
@@ -16,7 +18,7 @@ module.exports = {
   create: function (req, res) {
     db.User.create(req.body)
       .then(dbModel => {
-        console.log(dbModel)
+        console.log(dbModel);
         res.json(getUser(dbModel));
       })
       .catch(err => {
@@ -36,7 +38,7 @@ module.exports = {
 
   logout: function (req, res) {
     if (!req.user) {
-      res.json({ message: `No users logged in out` });
+      res.json({ message: "No users logged in out" });
     }
     console.log("Logging Out User");
     const username = req.user.username;
@@ -51,4 +53,4 @@ module.exports = {
       res.json();
     }
   },
-}
+};

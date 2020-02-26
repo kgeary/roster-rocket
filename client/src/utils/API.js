@@ -1,5 +1,4 @@
 import axios from "axios";
-import * as ACTIONS from "./actions";
 
 export default {
   // Create a new user

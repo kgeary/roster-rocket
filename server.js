@@ -5,17 +5,17 @@ const mongoose = require("mongoose");
 var session = require("express-session");
 var passport = require("./config/passport");
 const routes = require("./routes");
-var logger = require('morgan');
+var logger = require("morgan");
 const DBNAME = "project3";
 const PORT = process.env.PORT || 3001;
 
 function shouldCompress(req, res) {
-  if (req.headers['x-no-compression']) {
+  if (req.headers["x-no-compression"]) {
     // don't compress responses with this request header
-    return false
+    return false;
   }
   // fallback to standard filter function
-  return compression.filter(req, res)
+  return compression.filter(req, res);
 }
 
 const app = express();
