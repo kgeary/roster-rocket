@@ -44,16 +44,18 @@ function SignupForm() {
         username: user,
         email,
         password
-      }).then(dbUser => {
-        console.log("USER", dbUser.user);
-        dispatch({ type: ACTIONS.SET_USER, user: dbUser.user });
-        dispatch({ type: ACTIONS.DONE });
-        setTimeout(() => {
-          window.history.push("/");
-        }, 1000);
+      }).then(res => {
+        console.log("USER", res.data);
+        userRef.current.value = "";
+        email.current.value = "";
+        passwordRef.current.value = "";
+        password2Ref.current.value = "";
+        dispatch({ type: ACTIONS.SET_USER, user: res.data });
       }).catch(err => {
-        console.log("SIGNUP ERR", err);
+        console.log("SIGNUP ERROR", err);
         signupAlert("Username Already Exists!");
+      }).finally(() => {
+        dispatch({ type: ACTIONS.DONE });
       })
     }
   }

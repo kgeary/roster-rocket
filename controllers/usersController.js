@@ -1,6 +1,7 @@
 const db = require("../models");
 
-function getUser(user) {
+// Return a user with sensitive fields (password) removed
+function getUserStrip(user) {
   if (!user.username) {
     return undefined;
   }
@@ -16,10 +17,14 @@ function getUser(user) {
 // Defining methods for the usersController
 module.exports = {
   create: function (req, res) {
-    db.User.create(req.body)
+    db.User.create({
+      username: req.body.username.toLowerCase(),
+      email: req.body.email.toLowerCase(),
+      password: req.body.password,
+    })
       .then(dbModel => {
         console.log(dbModel);
-        res.json(getUser(dbModel));
+        res.json(getUserStrip(dbModel));
       })
       .catch(err => {
         console.log("ERROR ADDING USER");
@@ -33,7 +38,7 @@ module.exports = {
   },
 
   login: function (req, res) {
-    res.json(getUser(req.user));
+    res.json(getUserStrip(req.user));
   },
 
   logout: function (req, res) {
@@ -48,7 +53,7 @@ module.exports = {
 
   read: function (req, res) {
     if (req.user) {
-      res.json(getUser(req.user));
+      res.json(getUserStrip(req.user));
     } else {
       res.json();
     }
