@@ -19,7 +19,7 @@ module.exports = function (sequelize, DataTypes) {
 
   Course.associate = (models) => {
     models.Course.belongsToMany(models.Student, { through: "StudentCourses" }); // Course <-> Students
-    models.Course.belongsTo(models.User); // Course <-> User
+    models.Course.belongsTo(models.User, { foreignKey: "teacherId" });
   };
 
   return Course;
