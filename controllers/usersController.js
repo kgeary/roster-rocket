@@ -2,13 +2,14 @@ const db = require("../models");
 
 // Return a user with sensitive fields (password) removed
 function getUserStrip(user) {
-  if (!user.username) {
+  if (!user.email) {
     return undefined;
   }
 
   const newUser = {
     id: user.id,
     email: user.email,
+    username: user.name,
   };
   return newUser;
 }
@@ -19,6 +20,9 @@ module.exports = {
     db.User.create({
       email: req.body.email.toLowerCase(),
       password: req.body.password,
+      // TODO - Update default value fields
+      name: "",
+      img: ""
     })
       .then(dbModel => {
         console.log(dbModel);
@@ -44,7 +48,7 @@ module.exports = {
       res.json({ message: "No users logged in out" });
     }
     console.log("Logging Out User");
-    const username = req.user.username;
+    const username = req.user.name || req.user.email;
     req.logout();
     res.json({ message: `${username} logged out` });
   },

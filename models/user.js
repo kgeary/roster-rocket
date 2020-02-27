@@ -12,15 +12,33 @@ module.exports = function (sequelize, DataTypes) {
         isEmail: true
       }
     },
+
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
     // The password cannot be null
     password: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+
+    img: {
+      type: DataTypes.STRING,
+      defaultValue: "https://via.placeholder.com/150"
     }
+
   });
+
   User.associate = (models) => {
-    models.User.hasMany(models.Student); // Kids <-> User
-    models.User.hasMany(models.Course); // Teach <-> Course
+    models.User.hasMany(models.Student, { foreignKey: "parentId" }); // Kids <-> User
+    models.User.hasMany(models.Course, { foreignKey: "teacherId" }); // Teach <-> Course
   };
 
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database

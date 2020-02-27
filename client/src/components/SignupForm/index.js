@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Container } from "../Grid";
 import validate from "../../utils/validate";
 import alertFactory from "../../utils/alertFactory";
@@ -56,6 +56,7 @@ function SignupForm() {
 
   return (
     <Container>
+      {state.username ? <Redirect to="/" /> : null}
       <div className="form-container">
         <h1>Signup for an Account</h1>
         <form className="form-group mt-3 mb-2 form-signup">
