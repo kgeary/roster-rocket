@@ -8,10 +8,10 @@ passport.use(new LocalStrategy(
   { usernameField: "username", passwordField: "password" },
   function (username, password, done) {
     // When a user tries to sign in this code runs
-    db.User.findOne({ username: username })
+    db.User.findOne({ username: username.toLowerCase() })
       .then(function (dbUser) {
         console.log(dbUser);
-        // If there's no user with the given email
+        // If there's no user with the given username
         if (!dbUser) {
           return done(null, false, {
             message: "UserName Not Found"

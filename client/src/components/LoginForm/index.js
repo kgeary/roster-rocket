@@ -40,14 +40,14 @@ function LoginForm() {
       API.loginUser({ username: user, password })
         .then(res => {
           // Successful Login
+          console.log("LOGGED IN");
           userRef.current.value = "";
           passwordRef.current.value = "";
           dispatch({ type: ACTIONS.SET_USER, user: res.data });
-          console.log("LOGGED IN");
         })
         .catch((err) => {
           // Login Failed
-          console.log(err);
+          console.log("LOGIN ERROR", err);
           if (err.status) { console.log("ERROR STATUS", err.status); }
           if (err.message.includes("status code 404")) {
             loginAlert("Unable to connect to server");
