@@ -10,7 +10,6 @@ import InputForm from "../InputForm";
 
 function SignupForm() {
 
-  const userRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const password2Ref = useRef();
@@ -22,9 +21,6 @@ function SignupForm() {
   const handleSubmit = e => {
     e.preventDefault();
     const errors = [];
-
-    const user = userRef.current.value;
-    if (!validate.user(user)) { errors.push("Invalid User Name"); }
 
     const email = emailRef.current.value;
     if (!validate.email(email)) { errors.push("Invalid Email Address"); }
@@ -41,13 +37,11 @@ function SignupForm() {
       signupAlert(false);
       dispatch({ type: ACTIONS.LOADING });
       API.addUser({
-        username: user,
         email,
         password
       }).then(res => {
         console.log("USER", res.data);
-        userRef.current.value = "";
-        email.current.value = "";
+        emailRef.current.value = "";
         passwordRef.current.value = "";
         password2Ref.current.value = "";
         dispatch({ type: ACTIONS.SET_USER, user: res.data });
@@ -65,15 +59,6 @@ function SignupForm() {
       <div className="form-container">
         <h1>Signup for an Account</h1>
         <form className="form-group mt-3 mb-2 form-signup">
-
-          {/* USER NAME */}
-          <InputForm
-            id="user"
-            inputRef={userRef}
-            type="text"
-            length="25"
-            placeholder="User"
-          />
 
           {/* EMAIL */}
           <InputForm

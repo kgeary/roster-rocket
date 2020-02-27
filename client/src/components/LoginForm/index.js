@@ -11,7 +11,7 @@ import InputForm from "../InputForm";
 function LoginForm() {
 
   const [state, dispatch] = useStoreContext();
-  const userRef = useRef();
+  const emailRef = useRef();
   const passwordRef = useRef();
   const loginAlert = alertFactory("alert");
 
@@ -20,9 +20,9 @@ function LoginForm() {
     e.preventDefault();
     const errors = [];
 
-    // User Name
-    const user = userRef.current.value;
-    if (!validate.user(user)) { errors.push("Invalid User Name"); }
+    // Email
+    const email = emailRef.current.value;
+    if (!validate.email(email)) { errors.push("Invalid Email"); }
 
     // Password
     const password = passwordRef.current.value;
@@ -37,11 +37,11 @@ function LoginForm() {
 
       dispatch({ type: ACTIONS.LOADING });
 
-      API.loginUser({ username: user, password })
+      API.loginUser({ email, password })
         .then(res => {
           // Successful Login
           console.log("LOGGED IN");
-          userRef.current.value = "";
+          emailRef.current.value = "";
           passwordRef.current.value = "";
           dispatch({ type: ACTIONS.SET_USER, user: res.data });
         })
@@ -52,7 +52,7 @@ function LoginForm() {
           if (err.message.includes("status code 404")) {
             loginAlert("Unable to connect to server");
           } else {
-            loginAlert("Invalid Username or Password");
+            loginAlert("Invalid Email or Password");
           }
 
         })
@@ -69,13 +69,13 @@ function LoginForm() {
       <div className="form-container">
         <h1>Login</h1>
         <form className="form-group mt-3 mb-2 form-login">
-          {/* USER NAME */}
+          {/* EMAIL */}
           <InputForm
-            id="user"
-            inputRef={userRef}
+            id="email"
+            inputRef={emailRef}
             type="text"
             length="25"
-            placeholder="User"
+            placeholder="Email"
           />
           {/* PASSWORD */}
           <InputForm

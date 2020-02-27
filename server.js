@@ -1,13 +1,11 @@
 require("dotenv").config();
 const express = require("express");
-var compression = require("compression");
-const mongoose = require("mongoose");
-var session = require("express-session");
-var passport = require("./config/passport");
+const compression = require("compression");
+const session = require("express-session");
+const passport = require("./config/passport");
 const routes = require("./routes");
-var logger = require("morgan");
-const DBNAME = "project3";
-const PORT = process.env.PORT || 3001;
+const logger = require("morgan");
+const db = require("./models");
 
 function shouldCompress(req, res) {
   if (req.headers["x-no-compression"]) {
@@ -43,11 +41,14 @@ app.use(passport.session());
 // Add routes, both API and view
 app.use(routes);
 
-// Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost/${DBNAME}`, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// Start the API server
-app.listen(PORT, function () {
-  console.log(`==> API Server now listening on PORT ${PORT}! http://localhost:${PORT}`);
+// Syncing our database and logging a message to the user upon success
+var forceSync = false;
+
+db.sequelize.sync({ force: forceSync }).then(function () {
+  app.listen(PORT, function () {
+    console.log(`Listening on port ${PORT}. Visit http://localhost:${PORT}`);
+  });
 });
+
 
