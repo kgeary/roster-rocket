@@ -6,6 +6,7 @@ const passport = require("./config/passport");
 const routes = require("./routes");
 const logger = require("morgan");
 const db = require("./models");
+const PORT = process.env.PORT || 3001;
 
 function shouldCompress(req, res) {
   if (req.headers["x-no-compression"]) {

@@ -17,7 +17,6 @@ function getUserStrip(user) {
 module.exports = {
   create: function (req, res) {
     db.User.create({
-      username: req.body.username.toLowerCase(),
       email: req.body.email.toLowerCase(),
       password: req.body.password,
     })
