@@ -7,8 +7,7 @@ function getUserStrip(user) {
   }
 
   const newUser = {
-    _id: user._id,
-    username: user.username,
+    id: user.id,
     email: user.email,
   };
   return newUser;
