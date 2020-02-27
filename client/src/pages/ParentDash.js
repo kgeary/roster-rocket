@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row, Container } from "../components/Grid";
 import { useStoreContext } from "../utils/GlobalState";
-import Card from "../components/ChildCard";
+import CardParent from "../components/CardParent";
 
 function ParentDash() {
   const [state, dispatch] = useStoreContext();
@@ -15,7 +15,10 @@ function ParentDash() {
         <Col size="md-6 sm-12">
           <h3>Dashboard data will go here</h3>
         </Col>
-        <Card></Card>
+        <CardParent />
+        
+
+
       </Row>
     </Container>
   );
