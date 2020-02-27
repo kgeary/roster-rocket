@@ -4,7 +4,10 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
+import AdminDash from "./pages/AdminDash";
+import ParentDash from "./pages/ParentDash";
 import Nav from "./components/Nav";
+
 import { StoreProvider } from "./utils/GlobalState";
 
 function App() {
@@ -19,6 +22,8 @@ function App() {
             <Route exact path="/home" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
+            <Route exact path="/admindash" component={AdminDash} />
+            <Route exact path="/parentdash" component={ParentDash} />
             <Route component={NoMatch} />
           </Switch>
         </div>
