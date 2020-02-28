@@ -48,7 +48,7 @@ const Nav = () => {
       {state.loading ?
         <NavLink className="navbar-brand ml-auto" to="/">Loading...</NavLink> :
         <React.Fragment>
-          <Link exact className="navbar-brand" to="/home">
+          <Link className="navbar-brand" to="/home">
             <img src={Logo} width="30" height="30" alt="" /> <span className="brand">Roster Rocket</span>
           </Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

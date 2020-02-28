@@ -21,9 +21,8 @@ router
   .route("/logout")
   .post(usersController.logout);
 
-// Matches with "/api/user/reset"
 router
-  .route("/reset")
-  .post(usersController.resetPassword);
+  .route("/change")
+  .post(usersController.changePassword);
 
 module.exports = router;

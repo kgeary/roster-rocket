@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { Redirect, Link } from "react-router-dom";
-import { Container } from "../Grid";
-import validate from "../../utils/validate";
-import alertFactory from "../../utils/alertFactory";
-import API from "../../utils/API";
-import * as ACTIONS from "../../utils/actions";
-import { useStoreContext } from "../../utils/GlobalState";
+import { Container } from "../../Grid";
+import validate from "../../../utils/validate";
+import alertFactory from "../../../utils/alertFactory";
+import API from "../../../utils/API";
+import * as ACTIONS from "../../../utils/actions";
+import { useStoreContext } from "../../../utils/GlobalState";
 import InputForm from "../InputForm";
 
 function LoginForm() {

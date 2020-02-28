@@ -7,6 +7,8 @@ import NoMatch from "./pages/NoMatch";
 import AdminDash from "./pages/AdminDash";
 import ParentDash from "./pages/ParentDash";
 import Nav from "./components/Nav";
+import PasswordChange from './pages/PasswordChange';
+import PasswordReset from './pages/PasswordReset';
 
 import { StoreProvider } from "./utils/GlobalState";
 
@@ -24,6 +26,8 @@ function App() {
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/admindash" component={AdminDash} />
             <Route exact path="/parentdash" component={ParentDash} />
+            <Route exact path="/changePassword" component={PasswordChange} />
+            <Route exact path="/resetPassword" component={PasswordReset} />
             <Route component={NoMatch} />
           </Switch>
         </div>

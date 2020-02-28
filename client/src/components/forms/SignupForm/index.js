@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { Container } from "../Grid";
-import validate from "../../utils/validate";
-import alertFactory from "../../utils/alertFactory";
-import API from "../../utils/API";
-import { useStoreContext } from "../../utils/GlobalState";
-import * as ACTIONS from "../../utils/actions";
+import { Container } from "../../Grid";
+import validate from "../../../utils/validate";
+import alertFactory from "../../../utils/alertFactory";
+import API from "../../../utils/API";
+import { useStoreContext } from "../../../utils/GlobalState";
+import * as ACTIONS from "../../../utils/actions";
 import InputForm from "../InputForm";
 
 function SignupForm() {
@@ -13,8 +13,7 @@ function SignupForm() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const password2Ref = useRef();
-
-  const signupAlert = alertFactory("alert");
+  const formAlert = alertFactory("alert");
 
   const [state, dispatch] = useStoreContext();
 
@@ -32,13 +31,15 @@ function SignupForm() {
     if (password !== password2) { errors.push("Passwords Do Not Match!"); }
 
     if (errors.length > 0) {
-      signupAlert(errors.join("<br>"));
+      formAlert(errors.join("<br>"));
     } else {
-      signupAlert(false);
+      formAlert(false);
       dispatch({ type: ACTIONS.LOADING });
       API.addUser({
         email,
-        password
+        password,
+        name: "DEFAULT NAME",
+        phone: "DEFAULT PHONE"
       }).then(res => {
         console.log("USER", res.data);
         emailRef.current.value = "";
@@ -46,8 +47,12 @@ function SignupForm() {
         password2Ref.current.value = "";
         dispatch({ type: ACTIONS.SET_USER, user: res.data });
       }).catch(err => {
-        console.log("SIGNUP ERROR", err);
-        signupAlert("Username Already Exists!");
+        if (err.message) {
+          formAlert(err.message);
+        } else {
+          console.log(err);
+          formAlert("Username Already Exists!");
+        }
       }).finally(() => {
         dispatch({ type: ACTIONS.DONE });
       })
@@ -85,7 +90,7 @@ function SignupForm() {
             inputRef={password2Ref}
             type="password"
             length="32"
-            placeholder="Password"
+            placeholder="Confirm Password"
           />
 
           <button
