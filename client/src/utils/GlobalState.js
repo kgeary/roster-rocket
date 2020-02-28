@@ -25,7 +25,7 @@ const reducer = (state, action) => {
 
     case ACTIONS.SET_USER:
       if (action.user) {
-        newState.username = action.user.username;
+        newState.username = action.user.name || action.user.email;
         newState.email = action.user.email;
       } else {
         newState.username = undefined;

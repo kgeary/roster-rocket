@@ -4,7 +4,7 @@ body.dark {
 }
 
 body.light {
-  background-color: #DDD;
+  background-color: #ddd;
   color: #222;
 }
 
@@ -27,4 +27,14 @@ body.dark .navbar.navbar-light.bg-light {
   .active {
     border-top: 1px solid black;
   }
+}
+
+.brand {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.change-theme {
+  font-size: 12px;
+  border-radius: 5px;
 }

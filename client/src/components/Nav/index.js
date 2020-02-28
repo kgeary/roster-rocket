@@ -1,8 +1,9 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useStoreContext } from "../../utils/GlobalState";
 import useBodyClass from "../../utils/useBodyClass";
 import "./style.css";
+import Logo from "./rocket-logo.png";
 import API from "../../utils/API";
 import * as ACTIONS from "../../utils/actions";
 const Nav = () => {
@@ -36,26 +37,29 @@ const Nav = () => {
   const getNonUserOptions = () => {
     return (
       <React.Fragment>
-        <NavLink exact className="nav-link" activeClassName="active" to="/signup">Signup</NavLink>
-        <NavLink exact className="nav-link" activeClassName="active" to="/login">Login</NavLink>
+        <NavLink className="nav-link" activeClassName="active" to="/signup">Signup</NavLink>
+        <NavLink className="nav-link" activeClassName="active" to="/login">Login</NavLink>
       </React.Fragment>
     );
   }
 
   return (
-    <nav className="navbar navbar-expand-md navbar-light bg-light">
+    <nav className="navbar navbar-expand-md navbar-light bg-warning">
       {state.loading ?
         <NavLink className="navbar-brand ml-auto" to="/">Loading...</NavLink> :
         <React.Fragment>
-          <button className="navbar-brand" onClick={toggleTheme}>Project 3</button>
+          <Link exact className="navbar-brand" to="/home">
+            <img src={Logo} width="30" height="30" alt="" /> <span className="brand">Roster Rocket</span>
+          </Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <div className="navbar-nav mr-auto">
-              <NavLink exact className="nav-link" activeClassName="active" to="/home">Home</NavLink>
+              {/* <NavLink className="nav-link" activeClassName="active" to="/home">Home</NavLink> */}
             </div>
             {state.username ? getUserOptions() : getNonUserOptions()}
+            <button className="change-theme" onClick={toggleTheme}>*</button>
           </div>
         </React.Fragment>
       }

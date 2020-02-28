@@ -31,16 +31,16 @@ function sendEmail(to, from, subject, body) {
 
 }
 
-// Remove Sensitive Info from User object
-function getUserStripped(user) {
-  if (!user.username) {
+// Return a user with sensitive fields (password) removed
+function stripPassword(user) {
+  if (!user.email) {
     return undefined;
   }
 
   const newUser = {
-    _id: user._id,
-    username: user.username,
+    id: user.id,
     email: user.email,
+    username: user.name,
   };
   return newUser;
 }
@@ -48,24 +48,26 @@ function getUserStripped(user) {
 // Defining methods for the usersController
 module.exports = {
   create: function (req, res) {
-    db.User.create(req.body)
+    db.User.create({
+      email: req.body.email.toLowerCase(),
+      password: req.body.password,
+      // TODO - Update default value fields
+      name: "",
+      img: ""
+    })
       .then(dbModel => {
         console.log(dbModel);
-        res.json(getUserStripped(dbModel));
+        res.json(stripPassword(dbModel));
       })
       .catch(err => {
         console.log("ERROR ADDING USER");
         console.log(err);
-        if (err.code === 11000) {
-          res.status(409).json(err);
-        } else {
-          res.status(422).json(err);
-        }
+        res.status(422).json(err);
       });
   },
 
   login: function (req, res) {
-    res.json(getUserStripped(req.user));
+    res.json(stripPassword(req.user));
   },
 
   logout: function (req, res) {
@@ -73,14 +75,14 @@ module.exports = {
       res.json({ message: "No users logged in out" });
     }
     console.log("Logging Out User");
-    const username = req.user.username;
+    const username = req.user.name || req.user.email;
     req.logout();
     res.json({ message: `${username} logged out` });
   },
 
   read: function (req, res) {
     if (req.user) {
-      res.json(getUserStripped(req.user));
+      res.json(stripPassword(req.user));
     } else {
       res.json();
     }
