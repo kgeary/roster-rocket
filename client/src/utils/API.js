@@ -35,6 +35,10 @@ export default {
   getUsersByCourse: function (courseId) {
     return axios.get("/api/user/course/" + courseId)
   },
+  
+  getStudentsByParent: function (userId){
+    return axios.get("/api/user/" + userId)
+  },
 
   changePassword: function ({ pwOld, pwNew }) {
     return axios.post("/api/user/change", {

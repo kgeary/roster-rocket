@@ -30,24 +30,32 @@ function AdminDash() {
 
   return (
     <Container fluid>
+    <h1>Admin Dashboard</h1>
       <Row>
-        <Col size="md-6">
-          <h1>Admin Dashboard</h1>
+        <Col size="md-4">
+        <div className="card">
           {users.map(user => (
             <h3 key={user.id}>{user.email}</h3>
-          ))}
-
-          <h3>Students</h3>
-          {students.map(student => (
-            <h3 key={student.id}>{student.name}</h3>
-          ))}
+          )
+          )}
+          </div>
         </Col>
-        <Col size="md-6 sm-12">
-          <h3>Dashboard data will go here</h3>
+        <Col size="md-4">          
+          <div className="card">
           {courses.map(course => (
-            <h3 key={course.id}>{course.name} + {" costs $" + course.cost}</h3>
-          ))}
+            <h3 key={course.id}>{course.title}</h3>
+          )
+          )}
+          </div>
         </Col>
+        <Col size="md-4">          
+        <div className="card">
+        {students.map(student => (
+          <h3 key={student.id}>{student.name}</h3>
+        )
+        )}
+        </div>
+      </Col>
       </Row>
     </Container>
   );

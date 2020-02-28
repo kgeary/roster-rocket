@@ -1,27 +1,39 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import { useStoreContext } from "../utils/GlobalState";
 import CardParent from "../components/CardParent";
+import API from "../utils/API";
 
 function ParentDash() {
   const [state, dispatch] = useStoreContext();
+  const [students, setStudents] = useState([]);
 
-  const { id } = useParams();
+  useEffect(() => {
+    API.getStudentsByParent().then(res => {
+      console.log("GET ALL STUDENTS By PARENT RESP", res.data);
+      setStudents(res.data);
+    });
+  }, []);
+
+  // const { id } = useParams();
 
   return (
     <Container fluid>
+      <h1>Parent Dashboard</h1>
       <Row>
-        <Col size="md-6">
-          <h1>Parent Dashboard</h1>
+        <Col size='md-12'>
+          <CardParent />
         </Col>
-        <Col size="md-6 sm-12">
-          <h3>Dashboard data will go here</h3>
+      </Row>
+      <Row>
+        <Col size='md-12'>
+          <div className='card'>
+            {/*{students.map(student => (
+          <h3 key={student.id}>{student.name}</h3>
+        )
+        )} */}
+          </div>
         </Col>
-        <CardParent />
-
-
-
       </Row>
     </Container>
   );
