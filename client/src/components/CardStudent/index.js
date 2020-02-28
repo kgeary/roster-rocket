@@ -1,18 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Card(props) {
+function CardStudent(props) {
     return (
-        <div className="card">
-            <img src={props.image} className="card-img-top" alt={props.name} />
+        <div className="card student-card">
+            <img src={props.student.img} className="card-img-top" alt={props.student.name} style={{ width: 150, height: 150 }} />
             <div className="card-body">
-                <h5 className="card-title">{props.nameOfStudent}</h5>
+                <h5 className="card-title">{props.student.name}</h5>
             </div>
             <ul className="list-group list-group-flush">
-            <li className="list-group-item">studentName{props.name}</li>
-            
-            <li className="list-group-item">Class here</li>
-            <li className="list-group-item">Class card here</li>
+                <li className="list-group-item">Name: {props.student.name}</li>
+                <li className="list-group-item">Age: {props.student.age}</li>
+                <li className="list-group-item">Class card here</li>
             </ul>
             {/* {this.state.students.map(student => (
                 <CardStudent />))};
@@ -24,4 +23,4 @@ function Card(props) {
     );
 }
 
-export default Card;
+export default CardStudent;

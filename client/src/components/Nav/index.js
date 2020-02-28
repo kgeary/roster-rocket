@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useStoreContext } from "../../utils/GlobalState";
 import useBodyClass from "../../utils/useBodyClass";
@@ -9,6 +9,20 @@ import * as ACTIONS from "../../utils/actions";
 const Nav = () => {
 
   const [state, dispatch] = useStoreContext();
+  const stableDispatch = useCallback(dispatch, []) //assuming that it doesn't need to change
+
+  useEffect(() => {
+    // On First Load - Get the user from server
+    API.getUser()
+      .then(res => {
+        dispatch({ type: ACTIONS.SET_USER, user: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: ACTIONS.SET_USER, user: undefined });
+      });
+  }, [stableDispatch]);
+
+
   useBodyClass(state.theme);
 
   const toggleTheme = () => {
@@ -30,7 +44,15 @@ const Nav = () => {
 
   const getUserOptions = () => {
     return (
-      <button className="nav-button" onClick={onLogout}>Logout</button>
+      <React.Fragment>
+        {
+          state.user && state.user.isAdmin ?
+            <NavLink className="nav-link" activeClassName="active" to="/admin">Admin</NavLink> :
+            null
+        }
+        <NavLink className="nav-link" activeClassName="active" to="/parent">My Profile</NavLink>
+        <button className="nav-button" onClick={onLogout}>Logout</button>
+      </React.Fragment>
     );
   }
 

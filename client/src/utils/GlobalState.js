@@ -25,14 +25,13 @@ const reducer = (state, action) => {
 
     case ACTIONS.SET_USER:
       if (action.user) {
-        newState.username = action.user.name || action.user.email;
-        newState.email = action.user.email;
+        newState.user = action.user;
+        newState.username = action.user.email;
       } else {
+        newState.user = undefined;
         newState.username = undefined;
-        newState.email = undefined;
       }
       sessionStorage.setItem("username", newState.username);
-      sessionStorage.setItem("email", newState.email);
       return newState;
 
     default:
@@ -44,8 +43,8 @@ const StoreProvider = ({ value = [], ...props }) => {
   const initialState = {
     loading: false,
     theme: localStorage.getItem("theme") || "dark",
+    user: undefined,
     username: sessionStorage.getItem("username") || "",
-    email: sessionStorage.getItem("email") || "",
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   return <Provider value={[state, dispatch]} {...props} />;

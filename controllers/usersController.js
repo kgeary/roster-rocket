@@ -1,19 +1,5 @@
 const db = require("../models");
 
-// Return a user with sensitive fields (password) removed
-function stripPassword(user) {
-  if (!user.email) {
-    return undefined;
-  }
-
-  const newUser = {
-    id: user.id,
-    email: user.email,
-    username: user.name,
-  };
-  return newUser;
-}
-
 // Defining methods for the usersController
 module.exports = {
   create: function (req, res) {
@@ -29,7 +15,7 @@ module.exports = {
         console.log(dbModel);
         req.login(dbModel, function (err) {
           if (!err) {
-            res.json(stripPassword(dbModel));
+            res.json(dbModel);
           } else {
             //handle error
             console.log("SIGNUP LOGIN ERR", err);
@@ -46,7 +32,7 @@ module.exports = {
   },
 
   login: function (req, res) {
-    res.json(stripPassword(req.user));
+    res.json(req.user);
   },
 
   logout: function (req, res) {
@@ -65,9 +51,31 @@ module.exports = {
 
   getCurrentUser: function (req, res) {
     if (req.user) {
-      res.json(stripPassword(req.user));
+      db.User.findOne({ where: { id: req.user.id } })
+        .then(data => {
+          res.json(data);
+        })
+        .catch(err => {
+          console.log("ERROR GETTING CURRENT USER", err);
+          res.status(422).json("Error retrieving user");
+        });
     } else {
-      res.json();
+      res.status(401).json({ message: "Not Authorized" });
+    }
+  },
+
+  getCurrentUserWithChildren: function (req, res) {
+    if (req.user) {
+      db.User.findOne({ where: { id: req.user.id }, include: db.Student })
+        .then(data => {
+          res.json(data);
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(422).json("Error retrieving user");
+        });
+    } else {
+      res.status(401).json({ message: "Not Authorized" });
     }
   },
 

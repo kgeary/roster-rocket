@@ -28,34 +28,38 @@ function AdminDash() {
       })
   }, []);
 
+  if (state.loading) {
+    return <h1>Loading Data...</h1>
+  }
+
   return (
     <Container fluid>
-    <h1>Admin Dashboard</h1>
+      <h1>Admin Dashboard</h1>
       <Row>
         <Col size="md-4">
-        <div className="card">
-          {users.map(user => (
-            <h3 key={user.id}>{user.email}</h3>
-          )
-          )}
-          </div>
-        </Col>
-        <Col size="md-4">          
           <div className="card">
-          {courses.map(course => (
-            <h3 key={course.id}>{course.title}</h3>
-          )
-          )}
+            {users.map(user => (
+              <h3 key={user.id}>{user.email}</h3>
+            )
+            )}
           </div>
         </Col>
-        <Col size="md-4">          
-        <div className="card">
-        {students.map(student => (
-          <h3 key={student.id}>{student.name}</h3>
-        )
-        )}
-        </div>
-      </Col>
+        <Col size="md-4">
+          <div className="card">
+            {courses.map(course => (
+              <h3 key={course.id}>{course.title}</h3>
+            )
+            )}
+          </div>
+        </Col>
+        <Col size="md-4">
+          <div className="card">
+            {students.map(student => (
+              <h3 key={student.id}>{student.name}</h3>
+            )
+            )}
+          </div>
+        </Col>
       </Row>
     </Container>
   );

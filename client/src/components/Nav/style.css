@@ -1,5 +1,9 @@
 body.dark {
   background-color: #222;
+  /* color: #ddd; */
+}
+
+body.dark h1 {
   color: #ddd;
 }
 
