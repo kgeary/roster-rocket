@@ -7,6 +7,12 @@ router
   .route("/")
   .get(usersController.read);
 
+// Matches with "/api/user/all"
+router
+  .route("/all")
+  .get(usersController.readAll);
+
+// Matches with "/api/user/login"
 router
   .route("/login")
   .post(passport.authenticate("local"), usersController.login);

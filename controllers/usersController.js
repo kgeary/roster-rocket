@@ -71,6 +71,13 @@ module.exports = {
     }
   },
 
+  readAll: function (req, res) {
+    db.User.findAll({ where: { isAdmin: false } }).then(data => {
+      res.json(data);
+    });
+
+  },
+
   changePassword: async function (req, res) {
     if (req.user) {
       // Find the user in the database
