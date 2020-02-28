@@ -5,12 +5,17 @@ const passport = require("../../config/passport");
 // Matches with "/api/user"
 router
   .route("/")
-  .get(usersController.read);
+  .get(usersController.getCurrentUser);
 
 // Matches with "/api/user/all"
 router
   .route("/all")
   .get(usersController.readAll);
+
+// Matches with "/api/user/:id"
+router
+  .route("/:id")
+  .get(usersController.readById);
 
 // Matches with "/api/user/login"
 router

@@ -63,7 +63,7 @@ module.exports = {
     }
   },
 
-  read: function (req, res) {
+  getCurrentUser: function (req, res) {
     if (req.user) {
       res.json(stripPassword(req.user));
     } else {
@@ -72,10 +72,18 @@ module.exports = {
   },
 
   readAll: function (req, res) {
-    db.User.findAll({ where: { isAdmin: false } }).then(data => {
-      res.json(data);
-    });
+    db.User.findAll({ where: { isAdmin: false } })
+      .then(data => {
+        res.json(data);
+      });
 
+  },
+
+  readById: function (req, res) {
+    db.User.findAll({ where: { id: req.params.id }, include: { model: Student } })
+      .then(data => {
+        res.json(data);
+      });
   },
 
   changePassword: async function (req, res) {
