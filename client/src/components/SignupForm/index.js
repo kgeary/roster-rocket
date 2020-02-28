@@ -85,7 +85,7 @@ function SignupForm() {
             inputRef={password2Ref}
             type="password"
             length="32"
-            placeholder="Password"
+            placeholder="Confirm Password"
           />
 
           <button
