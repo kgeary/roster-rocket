@@ -1,5 +1,3 @@
-const passport = require("../config/passport");
-
 const db = require("../models");
 
 // Return a user with sensitive fields (password) removed
