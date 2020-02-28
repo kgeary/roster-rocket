@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import { useStoreContext } from "../../utils/GlobalState";
 import useBodyClass from "../../utils/useBodyClass";
 import "./style.css";
-import Logo from "./rocket-logo.png";
+import Logo from "./rocket.svg";
 import API from "../../utils/API";
 import * as ACTIONS from "../../utils/actions";
 const Nav = () => {
@@ -49,7 +49,7 @@ const Nav = () => {
         <NavLink className="navbar-brand ml-auto" to="/">Loading...</NavLink> :
         <React.Fragment>
           <Link className="navbar-brand" to="/home">
-            <img src={Logo} width="30" height="30" alt="" /> <span className="brand">Roster Rocket</span>
+            <img src={Logo} width="30" height="30" alt="" className="brand-logo" /><span className="brand">Roster Rocket</span>
           </Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
