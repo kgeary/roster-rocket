@@ -21,8 +21,9 @@ module.exports = {
       email: req.body.email.toLowerCase(),
       password: req.body.password,
       // TODO - Update default value fields
-      name: "",
-      img: ""
+      phone: req.body.phone || "None",
+      name: req.body.name || "",
+      img: req.body.img || ""
     })
       .then(dbModel => {
         console.log(dbModel);

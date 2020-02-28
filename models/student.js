@@ -3,7 +3,6 @@ module.exports = function (sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
 
     age: {
@@ -13,7 +12,6 @@ module.exports = function (sequelize, DataTypes) {
 
     img: {
       type: DataTypes.STRING,
-      allowNull: true,
       defaultValue: "https://via.placeholder.com/150"
     }
 
@@ -21,7 +19,7 @@ module.exports = function (sequelize, DataTypes) {
 
   Student.associate = (models) => {
     models.Student.belongsToMany(models.Course, { through: "StudentCourses" });
-    models.Student.belongsTo(models.User, { foreignKey: "parentId" });
+    models.Student.belongsTo(models.User, { foreignKey: "ParentId" });
   };
 
   return Student;
