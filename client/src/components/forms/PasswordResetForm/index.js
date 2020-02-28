@@ -32,7 +32,7 @@ function PasswordResetForm() {
 
       dispatch({ type: ACTIONS.LOADING });
 
-      API.resetPassword({ email })
+      API.resetPassword(email)
         .then(res => {
           // Successful Login
           console.log("Password Reset Submitted");
@@ -57,9 +57,8 @@ function PasswordResetForm() {
 
   return (
     <Container>
-      {state.username ? <Redirect to="/" /> : null}
       <div className="form-container">
-        <h1>Login</h1>
+        <h1>Reset Password</h1>
         <form className="form-group mt-3 mb-2 form-login">
           {/* EMAIL */}
           <InputForm

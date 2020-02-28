@@ -3,7 +3,7 @@ const sgMail = require("@sendgrid/mail");
 
 // Generate a random password
 function generateRandomPw() {
-  const pwChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!$#";
+  const pwChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
   const length = Math.floor(Math.random() * 5) + 6;
   let pw = [];
   for (let i = 0; i < length; i++) {
@@ -33,14 +33,16 @@ function sendEmail(to, from, subject, body) {
 module.exports = {
   resetPassword: function (req, res) {
     if (req.body && req.body.email) {
+      console.log("RESET PW FOR EMAIL", req.body.email);
       const tempPassword = generateRandomPw();
-      db.User.findOne({ email: req.body.email.toLowerCase() })
+      db.User.findOne({ where: { email: req.body.email.toLowerCase() } })
         .then(dbUser => {
           dbUser.password = tempPassword;
           return dbUser.save({ individualHooks: true });
         })
         .then(() => {
           const body = `Your temporary password is: ${tempPassword}`;
+          console.log("TEMP PW", body);
           sendEmail(req.body.email, "rosterrocket2020@gmail.com", "Your new password", body);
           res.json();
         })
