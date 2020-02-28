@@ -9,9 +9,7 @@ import ParentDash from "./pages/ParentDash";
 import Nav from "./components/Nav";
 import PasswordChange from './pages/PasswordChange';
 import PasswordReset from './pages/PasswordReset';
-
 import { StoreProvider } from "./utils/GlobalState";
-
 function App() {
 
   return (
@@ -24,8 +22,8 @@ function App() {
             <Route exact path="/home" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
-            <Route exact path="/admindash" component={AdminDash} />
-            <Route exact path="/parentdash" component={ParentDash} />
+            <Route exact path="/admin" component={AdminDash} />
+            <Route exact path="/parent" component={ParentDash} />
             <Route exact path="/changePassword" component={PasswordChange} />
             <Route exact path="/resetPassword" component={PasswordReset} />
             <Route component={NoMatch} />

@@ -7,6 +7,11 @@ router
   .route("/")
   .get(usersController.getCurrentUser);
 
+router
+  .route("/children")
+  .get(usersController.getCurrentUserWithChildren);
+
+
 // Matches with "/api/user/all"
 router
   .route("/all")

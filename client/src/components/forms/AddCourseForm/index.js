@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Container } from "../../Grid";
-import validate from "../../../utils/validate";
+// import validate from "../../../utils/validate";
 import alertFactory from "../../../utils/alertFactory";
 import API from "../../../utils/API";
 import { useStoreContext } from "../../../utils/GlobalState";
@@ -43,7 +43,6 @@ function AddCourseForm() {
           locRef.current.value = "";
           capacityRef.current.value = "";
           teacherRef.current.value = "";
-          dispatch({ type: ACTIONS.SET_COURSE, course: res.data });
         })
         .catch(err => {
           if (err.message) {
@@ -115,4 +114,4 @@ function AddCourseForm() {
   );
 }
 
-export default SignupForm;
+export default AddCourseForm;

@@ -16,8 +16,12 @@ export default {
     return axios.post("/api/user/logout");
   },
 
-  getUser: function () {
-    return axios.get("/api/user");
+  getUser: function (includeChildren = false) {
+    if (includeChildren) {
+      return axios.get("/api/user/children");
+    } else {
+      return axios.get("/api/user");
+    }
   },
 
   getAllUsers: function () {
@@ -32,12 +36,12 @@ export default {
     return axios.get("/api/student/all");
   },
 
+  getAllStudentCourses: function () {
+    return axios.get("/api/student/courses"); // nOT YET WORKING
+  },
+
   getUsersByCourse: function (courseId) {
     return axios.get("/api/user/course/" + courseId)
-  },
-  
-  getStudentsByParent: function (userId){
-    return axios.get("/api/user/" + userId)
   },
 
   changePassword: function ({ pwOld, pwNew }) {
