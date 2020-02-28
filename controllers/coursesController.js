@@ -33,6 +33,13 @@ module.exports = {
 
   updateCourse: function (req, res) {
     db.Course.updateOne({ id: req.params.id }, req.body)
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.status(422).json(err);
+      })
+
   },
 
   removeCourse: function (req, res) {
