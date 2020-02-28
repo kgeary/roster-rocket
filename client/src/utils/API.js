@@ -20,6 +20,22 @@ export default {
     return axios.get("/api/user");
   },
 
+  getAllUsers: function () {
+    return axios.get("/api/user/all");
+  },
+
+  getAllCourses: function () {
+    return axios.get("/api/course/all");
+  },
+
+  getAllStudents: function () {
+    return axios.get("/api/student/all");
+  },
+
+  getUsersByCourse: function (courseId) {
+    return axios.get("/api/user/course/" + courseId)
+  },
+
   changePassword: function ({ pwOld, pwNew }) {
     return axios.post("/api/user/change", {
       oldPassword: pwOld,
