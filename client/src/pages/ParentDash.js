@@ -1,10 +1,13 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { useStoreContext } from "../utils/GlobalState";
 import CardParent from "../components/CardParent";
 
 function ParentDash() {
   const [state, dispatch] = useStoreContext();
+
+  const { id } = useParams();
 
   return (
     <Container fluid>
@@ -16,7 +19,7 @@ function ParentDash() {
           <h3>Dashboard data will go here</h3>
         </Col>
         <CardParent />
-        
+
 
 
       </Row>

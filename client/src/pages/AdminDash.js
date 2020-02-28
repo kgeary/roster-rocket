@@ -33,13 +33,20 @@ function AdminDash() {
       <Row>
         <Col size="md-6">
           <h1>Admin Dashboard</h1>
+          {users.map(user => (
+            <h3 key={user.id}>{user.email}</h3>
+          ))}
+
+          <h3>Students</h3>
+          {students.map(student => (
+            <h3 key={student.id}>{student.name}</h3>
+          ))}
         </Col>
         <Col size="md-6 sm-12">
           <h3>Dashboard data will go here</h3>
-          {users.map(user => (
-            <h3 key={user.id}>{user.email}</h3>
-          )
-          )}
+          {courses.map(course => (
+            <h3 key={course.id}>{course.name} + {" costs $" + course.cost}</h3>
+          ))}
         </Col>
       </Row>
     </Container>
