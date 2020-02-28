@@ -18,6 +18,17 @@ export default {
 
   getUser: function () {
     return axios.get("/api/user");
-  }
+  },
+
+  changePassword: function ({ pwOld, pwNew }) {
+    return axios.post("/api/user/change", {
+      oldPassword: pwOld,
+      newPassword: pwNew,
+    });
+  },
+
+  resetPassword: function (email) {
+    return axios.post("/api/reset", { email });
+  },
 
 };

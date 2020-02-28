@@ -11,19 +11,22 @@
 const alertFactory = (id) => {
   const setAlert = (msg, style = "alert-danger", timeoutMs = 5000) => {
     const alertEl = document.getElementById(id);
-    if (!alertEl) throw new Error(`Failed to Find Alert Element! ${id}`);
-
-    if (typeof msg === "boolean") {
-      alertEl.innerHTML = "";
-      alertEl.classList = [];
-    } else {
-      alertEl.classList.add("alert", ...style.split(" "));
-      alertEl.innerHTML = msg;
-      if (timeoutMs > 0) {
-        setTimeout(() => { setAlert(false) }, timeoutMs);
+    if (alertEl) {
+      if (typeof msg === "boolean") {
+        alertEl.innerHTML = "";
+        alertEl.classList = [];
+      } else {
+        alertEl.classList.add("alert", ...style.split(" "));
+        alertEl.innerHTML = msg;
+        if (timeoutMs > 0) {
+          setTimeout(() => { setAlert(false) }, timeoutMs);
+        }
       }
+    } else {
+      //throw new Error(`Failed to Find Alert Element! ${id}`);
     }
   }
+
   return setAlert;
 }
 
