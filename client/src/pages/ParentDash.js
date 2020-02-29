@@ -51,7 +51,7 @@ function ParentDash() {
       <h1>Parent Dashboard {parent ? parent.email : null}</h1>
       <Row>
         <Col size='md-12'>
-          <CardParent user={parent} />
+          <CardParent user={parent} includeChildren={true} />
         </Col>
       </Row>
     </Container>

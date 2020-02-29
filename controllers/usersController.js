@@ -36,10 +36,7 @@ module.exports = {
   },
 
   logout: function (req, res) {
-    if (!req.user) {
-      res.json({ message: "No users logged in out" });
-    }
-    console.log("Logging Out User");
+    console.log("Logging out user");
     if (req.user) {
       const username = req.user.name || req.user.email;
       req.logout();
@@ -73,7 +70,10 @@ module.exports = {
           include: {
             model: db.StudentCourse,
             include: {
-              model: db.Course
+              model: db.Course,
+              include: {
+                model: db.User,
+              }
             }
           }
         }
@@ -91,11 +91,28 @@ module.exports = {
   },
 
   readAll: function (req, res) {
-    db.User.findAll({ where: { isAdmin: false } })
+    db.User.findAll({
+      where: { isAdmin: false },
+      include: {
+        model: db.Student,
+        include: {
+          model: db.StudentCourse,
+          include: {
+            model: db.Course,
+            include: {
+              model: db.User,
+            }
+          }
+        }
+      }
+    })
       .then(data => {
         res.json(data);
+      })
+      .catch(err => {
+        console.log("readAll ERROR", err);
+        res.status(422).json(err);
       });
-
   },
 
   readById: function (req, res) {

@@ -12,7 +12,23 @@ module.exports = {
   },
 
   readAll: function (req, res) {
-    db.Student.findAll({}).then(data => {
+    db.Student.findAll({
+      include: [
+        {
+          model: db.User, // Parent
+        },
+        {
+          model: db.StudentCourse, // Students Courses
+          include: {
+            model: db.Course, // Course Info for those courses
+            as: "Course",
+            include: {
+              model: db.User, // Teacher
+            }
+          }
+        }
+      ]
+    }).then(data => {
       res.json(data);
     });
   },

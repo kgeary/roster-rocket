@@ -28,6 +28,7 @@ export default {
     return axios.get("/api/user/all");
   },
 
+
   getAllCourses: function () {
     return axios.get("/api/course/all");
   },

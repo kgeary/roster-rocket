@@ -1,6 +1,6 @@
 USE roster_rocket_db;
 -- USER LIST --
-INSERT INTO users(
+INSERT INTO Users(
     isAdmin,
     createdAt,
     updatedAt,
@@ -83,19 +83,19 @@ VALUES
     null
   );
 -- 4
-INSERT INTO studentcourses(CourseId, StudentId, createdAt, updatedAt)
+INSERT INTO StudentCourses(CourseId, StudentId, paid, createdAt, updatedAt)
 VALUES
-  (1, 1, now(), now()),
+  (1, 1, true, now(), now()),
   -- 1
-  (1, 2, now(), now()),
+  (1, 2, false, now(), now()),
   -- 2
-  (2, 1, now(), now()),
+  (2, 1, false, now(), now()),
   -- 3
-  (2, 2, now(), now()),
+  (2, 2, true, now(), now()),
   -- 4
-  (3, 1, now(), now()),
+  (3, 1, false, now(), now()),
   -- 5
-  (3, 2, now(), now());
+  (3, 2, false, now(), now());
 -- 6
 SELECT
   *
