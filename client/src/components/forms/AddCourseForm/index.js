@@ -58,7 +58,7 @@ function AddCourseForm(props) {
         })
         .finally(() => {
           dispatch({ type: ACTIONS.DONE });
-          props.setIsOpen(false);
+          props.closeModal();
         });
     }
   };
