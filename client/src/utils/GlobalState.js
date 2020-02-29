@@ -1,6 +1,5 @@
 import React, { useContext, useReducer, createContext } from "react";
 import * as ACTIONS from "./actions";
-import API from "./API";
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
@@ -54,7 +53,7 @@ const reducer = (state, action) => {
 
 const StoreProvider = ({ value = [], ...props }) => {
   const initialState = {
-    loading: false,
+    loading: true,
     theme: localStorage.getItem("theme") || "dark",
     user: undefined,
     username: sessionStorage.getItem("username") || "",

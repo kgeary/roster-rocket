@@ -27,9 +27,13 @@ function AdminDash() {
   const [studentFilter, setStudentFilter] = useState("");
   const studentFilterRef = useRef("");
 
+  const updateUsers = () => API.getAllUsers();
+  const updateStudents = () => API.getAllStudents();
+  const updateCourses = () => API.getAllCourses();
+
   const updateCoursesOnly = () => {
     dispatch({ type: ACTIONS.LOADING });
-    API.getAllCourses()
+    updateUsers()
       .then(res => {
         setCourses(res.data);
       })
@@ -42,7 +46,7 @@ function AdminDash() {
 
   const updateStudentsOnly = () => {
     dispatch({ type: ACTIONS.LOADING });
-    API.getAllStudents()
+    updateStudents()
       .then(res => {
         setStudents(res.data);
       })
@@ -54,17 +58,6 @@ function AdminDash() {
   }
 
   const updateAll = () => {
-    const updateUsers = () => {
-      return API.getAllUsers();
-    }
-
-    const updateStudents = () => {
-      return API.getAllStudents();
-    };
-
-    const updateCourses = () => {
-      return API.getAllCourses();
-    }
     dispatch({ type: ACTIONS.LOADING });
     Promise.all([updateUsers(), updateCourses(), updateStudents()]).then((res) => {
       console.log(res);
@@ -129,6 +122,37 @@ function AdminDash() {
       <h1>Admin Dashboard</h1>
       <Row>
         <Col size="md-4">
+          <div className="card">
+            <div className="card-body">
+              <p className="card-text">
+                Classes: {state.courses.length}<br />
+                Students: {state.students.length}<br />
+              </p>
+            </div>
+          </div>
+        </Col>
+        <Col size="md-4">
+          <div className="card">
+            <div className="card-body">
+              <p className="card-text">
+                Students Unpaid: {state.students.reduce((a, c) => a += c.StudentCourses.filter(sc => !sc.Paid).length, 0)}<br />
+                Classes without teachers: {state.courses.filter(course => course.TeacherId === null).length}<br />
+              </p>
+            </div>
+          </div>
+        </Col>
+
+        <Col size="md-4">
+          <div className="card card-dark">
+            <div className="card-body card-dark dark">
+              Emergency Hotline: 555-1212<br />
+              Class-Code: 3925643<br />
+            </div>
+          </div>
+        </Col>
+      </Row>
+      <Row>
+        <Col size="md-4">
           <h1>Parents</h1>
           <label htmlFor="userFilter">User Filter:</label>
           <input type="text" id="userFilter" name="userFilter" ref={userFilterRef} onChange={onFilterChange} />
@@ -137,7 +161,7 @@ function AdminDash() {
             {
               state.users ?
                 state.users.map(user => (
-                  <CardParent user={user} key={user.id} admin={true} updateFunc={updateAll} />
+                  <CardParent user={user} key={user.id} admin={true} updateFunc={updateAll} includeChildren={true} />
                 )) : null
             }
           </div>

@@ -22,4 +22,15 @@ module.exports = {
         res.status(422).json(err);
       });
   },
+
+  paid: function (req, res) {
+    console.log("PAY FOR COURSE", req.params.StudentId, req.params.CourseId);
+    db.StudentCourse.update(req.body, { where: { CourseId: req.params.CourseId, StudentId: req.params.StudentId } })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.status(422).json(err);
+      });
+  }
 };

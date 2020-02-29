@@ -9,10 +9,10 @@ router
   .route("/")
   .get(usersController.getCurrentUser);
 
+// Matches with "/api/user/children"
 router
   .route("/children")
   .get(usersController.getCurrentUserWithChildren);
-
 
 // Matches with "/api/user/all"
 router

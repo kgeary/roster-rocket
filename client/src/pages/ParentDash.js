@@ -58,7 +58,7 @@ function ParentDash() {
             <h1>Parent Dashboard {parent ? parent.email : null}</h1>
             <Row>
               <Col size='md-12'>
-                <CardParent user={parent} includeChildren={true} updateFunc={loadData} />
+                <CardParent user={parent} includeChildren={true} updateFunc={loadData} accordion={true} />
               </Col>
             </Row>
           </React.Fragment> : null
