@@ -122,6 +122,13 @@ module.exports = {
       });
   },
 
+  removeById: function (req, res) {
+    db.User.destroy({ where: { id: req.params.id } })
+      .then(data => {
+        res.json(data);
+      });
+  },
+
   changePassword: async function (req, res) {
     if (req.user) {
       // Find the user in the database

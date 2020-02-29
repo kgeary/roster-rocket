@@ -1,9 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import API from "../../utils/API";
 
 function CardStudent(props) {
 
     // console.log("CARD STUDENT", props.student);
+    const onDelete = (id) => {
+        API.removeStudent(id).then(res => {
+            if (props.updateFunc) {
+                props.updateFunc();
+            }
+        });
+    }
 
     return (
         <div className="card student-card">
@@ -14,6 +22,8 @@ function CardStudent(props) {
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">Name: {props.student.name}</li>
                 <li className="list-group-item">Age: {props.student.age}</li>
+                {props.admin ? <button className="btn btn-danger" onClick={() => onDelete(props.student.id)}>Delete Student</button> : null}
+
                 {props.student.StudentCourses.length === 0 ? <li className="list-group-item">Not Currently Enrolled</li> : null}
             </ul>
             <div className="card-body">

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { useStoreContext } from "../utils/GlobalState";
 import API from "../utils/API";
@@ -66,10 +65,15 @@ function AdminDash() {
       })
   }
 
+  const updateAll = () => {
+    updateUsers();
+    updateCourses();
+    updateStudents();
+  }
+
   useEffect(() => { updateUsers(); }, []);
   useEffect(() => { updateCourses(); }, []);
   useEffect(() => { updateStudents(); }, []);
-
 
   useEffect(() => {
     console.log("ADMIN DASH USE EFFECT - USER FILTER");
@@ -118,7 +122,7 @@ function AdminDash() {
           <input type="text" id="userFilter" name="userFilter" ref={userFilterRef} onChange={onFilterChange} />
           <div className="card">
             {users.map(user => (
-              <CardParent user={user} key={user.id} />
+              <CardParent user={user} key={user.id} admin={true} updateFunc={updateAll} />
             )
             )}
           </div>
@@ -131,7 +135,7 @@ function AdminDash() {
           <input type="text" id="courseFilter" name="courseFilter" placeholder="Filter by Course" ref={courseFilterRef} onChange={onFilterChange} />
           {
             courses.map(course => (
-              <CardCourse course={course} key={course.title} />
+              <CardCourse course={course} key={course.title} admin={true} updateFunc={updateAll} />
             ))
           }
         </Col>
@@ -140,7 +144,7 @@ function AdminDash() {
           <AddModal title="Add Student" form={AddStudentForm} users={users} onReturn={updateStudents} />
           <input type="text" id="studentFilter" name="studentFilter" placeholder="Filter by Student" ref={studentFilterRef} onChange={onFilterChange} />
           {students.map(student => (
-            <CardStudent student={student} key={student.id} />
+            <CardStudent student={student} key={student.id} admin={true} updateFunc={updateAll} />
           )
           )}
         </Col>

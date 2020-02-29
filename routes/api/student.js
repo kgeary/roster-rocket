@@ -12,4 +12,9 @@ router
   .route("/all")
   .get(isAdmin, studentsController.readAll);
 
+router
+  .route("/:id")
+  .get(isAdmin, studentsController.readById)
+  .delete(isAdmin, studentsController.removeById);
+
 module.exports = router;
