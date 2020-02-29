@@ -66,13 +66,24 @@ module.exports = {
 
   getCurrentUserWithChildren: function (req, res) {
     if (req.user) {
-      db.User.findOne({ where: { id: req.user.id }, include: db.Student })
+      db.User.findOne({
+        where: { id: req.user.id },
+        include: {
+          model: db.Student,
+          include: {
+            model: db.StudentCourse,
+            include: {
+              model: db.Course
+            }
+          }
+        }
+      })
         .then(data => {
           res.json(data);
         })
         .catch(err => {
-          console.log(err);
-          res.status(422).json("Error retrieving user");
+          console.log("GetUserWithKids", err);
+          res.status(422).json("Error retrieving User");
         });
     } else {
       res.status(401).json({ message: "Not Authorized" });

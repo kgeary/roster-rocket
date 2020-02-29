@@ -25,3 +25,7 @@ code {
 .parent-card, .student-card {
   margin-bottom: 3rem;
 }
+
+.course-card {
+  margin: 1rem;
+}
