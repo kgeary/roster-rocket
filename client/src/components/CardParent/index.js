@@ -1,6 +1,8 @@
 import React from "react";
 import CardStudent from "../CardStudent";
 import API from "../../utils/API";
+import AddModal from "../AddModal"
+import AddStudentForm from "../forms/AddStudentForm";
 
 function CardParent(props) {
 
@@ -22,16 +24,21 @@ function CardParent(props) {
             <li className='list-group-item'>{props.user.email}</li>
             <li className='list-group-item'>{props.user.phone}</li>
             <li className='list-group-item'>mailing address</li>
-            {props.admin ? <button className="btn btn-danger" onClick={() => onDelete(props.user.id)}>Delete User</button> : null}
+            {props.admin ? <button className="btn btn-danger btn-sm" onClick={() => onDelete(props.user.id)}>Delete User</button> : null}
+            <AddModal title="Add Child" users={[props.user]} form={AddStudentForm} onReturn={props.updateFunc} />
           </ul>
         </div>
       </div>
       <div>
         {
           props.includeChildren ?
-            props.user.Students.map(student => (
-              <CardStudent student={student} key={student.name} />
-            )) :
+            <React.Fragment>
+              {
+                props.user.Students.map(student => (
+                  <CardStudent student={student} key={student.name} />
+                ))
+              }
+            </React.Fragment> :
             null
         }
       </div>

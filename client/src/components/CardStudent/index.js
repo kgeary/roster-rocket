@@ -22,8 +22,8 @@ function CardStudent(props) {
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">Name: {props.student.name}</li>
                 <li className="list-group-item">Age: {props.student.age}</li>
-                {props.admin ? <button className="btn btn-danger" onClick={() => onDelete(props.student.id)}>Delete Student</button> : null}
-
+                <li className="list-group-item">Parent: {props.student.User.name}</li>
+                {props.admin ? <button className="btn btn-danger btn-sm" onClick={() => onDelete(props.student.id)}>Delete Student</button> : null}
                 {props.student.StudentCourses.length === 0 ? <li className="list-group-item">Not Currently Enrolled</li> : null}
             </ul>
             <div className="card-body">
