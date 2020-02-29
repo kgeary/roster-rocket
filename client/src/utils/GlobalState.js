@@ -1,6 +1,5 @@
 import React, { useContext, useReducer, createContext } from "react";
 import * as ACTIONS from "./actions";
-import API from "./API";
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;

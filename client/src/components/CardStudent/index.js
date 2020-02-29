@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import EnrollStudentModal from "../EnrollStudentModal";
 import EnrollStudentForm from "../forms/EnrollStudentForm";
+import PayButton from "../PayButton";
 
 function CardStudent(props) {
 
@@ -46,6 +46,12 @@ function CardStudent(props) {
                                 <h6>Cost: {sc.Course.cost}</h6>
                                 <h6>paid: {sc.Paid ? "PAID" : <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID</span>}</h6>
                                 <button className="btn btn-danger btn-sm" onClick={() => onDrop(props.student.id, sc.CourseId)}>Drop Class</button>
+                                {
+                                    !sc.Paid ?
+                                        <PayButton StudentId={props.student.id} CourseId={sc.Course.id} updateFunc={props.updateFunc} Paid={props.student.Paid}>
+                                            Pay
+                                </PayButton> : null
+                                }
                             </div>
                         </div>
                     ))

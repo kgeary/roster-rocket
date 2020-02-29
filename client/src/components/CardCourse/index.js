@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
+import PayButton from "../PayButton";
 
 function CardCourse(props) {
 
@@ -34,8 +35,14 @@ function CardCourse(props) {
                     <div className="card student-card" key={student.name}>
                         <h5 className="card-title">Name: {student.name}</h5>
                         <div className="card-body">
-                            <h5>Age: {student.age}</h5>
-                            <h5>paid: {student.Paid ? "PAID" : <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID</span>}</h5>
+                            <h6>Age: {student.age}</h6>
+                            <h6>paid: {student.Paid ? "PAID" : <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID</span>}</h6>
+                            {
+                                !student.Paid ?
+                                    <PayButton StudentId={student.id} CourseId={props.course.id} updateFunc={props.updateFunc} Paid={student.Paid}>
+                                        Pay
+                                </PayButton> : null
+                            }
                         </div>
                     </div>
                 ))

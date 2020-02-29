@@ -35,6 +35,10 @@ export default {
     return axios.delete(`/api/studentcourse/drop/${StudentId}/${CourseId}`);
   },
 
+  markPaid: function (StudentId, CourseId) {
+    return axios.post(`/api/studentcourse/paid/${StudentId}/${CourseId}`, { Paid: true });
+  },
+
   // Login user
   loginUser: function (user) {
     return axios.post("/api/user/login", user);
