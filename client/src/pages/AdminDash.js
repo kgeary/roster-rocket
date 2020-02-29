@@ -27,22 +27,44 @@ function AdminDash() {
   const [studentFilter, setStudentFilter] = useState("");
   const studentFilterRef = useRef("");
 
-  const updateUsers = () => {
-    console.log("ADMIN DASH USE EFFECT USERS");
-    return API.getAllUsers();
+  const updateCoursesOnly = () => {
+    dispatch({ type: ACTIONS.LOADING });
+    API.getAllCourses()
+      .then(res => {
+        setCourses(res.data);
+      })
+      .catch(err => {
+        console.log("UPDATE ALL COURSES ERROR", err);
+      }).finally(() => {
+        dispatch({ type: ACTIONS.DONE });
+      });
   }
 
-  const updateStudents = () => {
-    console.log("ADMIN DASH USE EFFECT STUDENTS");
-    return API.getAllStudents();
-  };
-
-  const updateCourses = () => {
-    console.log("ADMIN DASH USE EFFECT COURSES");
-    return API.getAllCourses();
+  const updateStudentsOnly = () => {
+    dispatch({ type: ACTIONS.LOADING });
+    API.getAllStudents()
+      .then(res => {
+        setStudents(res.data);
+      })
+      .catch(err => {
+        console.log("UPDATE ALL STUDENTS ALL ERROR", err);
+      }).finally(() => {
+        dispatch({ type: ACTIONS.DONE });
+      });
   }
 
   const updateAll = () => {
+    const updateUsers = () => {
+      return API.getAllUsers();
+    }
+
+    const updateStudents = () => {
+      return API.getAllStudents();
+    };
+
+    const updateCourses = () => {
+      return API.getAllCourses();
+    }
     dispatch({ type: ACTIONS.LOADING });
     Promise.all([updateUsers(), updateCourses(), updateStudents()]).then((res) => {
       console.log(res);
@@ -122,7 +144,7 @@ function AdminDash() {
         </Col>
         <Col size="md-4">
           <h1>Courses</h1>
-          <AddModal title="Add Course" users={state.users} form={AddCourseForm} onReturn={updateCourses} />
+          <AddModal title="Add Course" users={state.users} form={AddCourseForm} onReturn={updateCoursesOnly} />
 
           <br />
           <input type="text" id="courseFilter" name="courseFilter" placeholder="Filter by Course" ref={courseFilterRef} onChange={onFilterChange} />
@@ -135,7 +157,7 @@ function AdminDash() {
         </Col>
         <Col size="md-4">
           <h1>Students</h1>
-          <AddModal title="Add Student" form={AddStudentForm} users={state.users} onReturn={updateStudents} />
+          <AddModal title="Add Student" form={AddStudentForm} users={state.users} onReturn={updateStudentsOnly} />
           <input type="text" id="studentFilter" name="studentFilter" placeholder="Filter by Student" ref={studentFilterRef} onChange={onFilterChange} />
           {
             state.students ?
