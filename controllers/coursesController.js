@@ -2,6 +2,7 @@ const db = require("../models");
 
 module.exports = {
   addCourse: function (req, res) {
+    console.log("ADD COURSE", req.body);
     db.Course.create(req.body)
       .then(data => {
         res.json(data);

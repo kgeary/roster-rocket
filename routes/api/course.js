@@ -14,7 +14,7 @@ router
 // Matches with "/api/course/add"
 router
   .route("/add")
-  .post(coursesController.addCourse);
+  .post(isAdmin, coursesController.addCourse);
 
 
 // Matches with "/api/course/add"

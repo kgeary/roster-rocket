@@ -6,6 +6,10 @@ export default {
     return axios.post("/api/user/signup/", user);
   },
 
+  addCourse: function (course) {
+    return axios.post("/api/course/add", course);
+  },
+
   // Login user
   loginUser: function (user) {
     return axios.post("/api/user/login", user);

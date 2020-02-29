@@ -6,6 +6,21 @@ import API from "../utils/API";
 import CardParent from "../components/CardParent";
 import CardCourse from "../components/CardCourse";
 import CardStudent from "../components/CardStudent";
+import AddCourseForm from "../components/forms/AddCourseForm";
+import Modal from "react-modal";
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
+
+Modal.setAppElement('#root');
 
 function AdminDash() {
   const [state] = useStoreContext();
@@ -22,9 +37,23 @@ function AdminDash() {
   const [studentFilter, setStudentFilter] = useState("");
   const studentFilterRef = useRef("");
 
-  useEffect(() => {
-    console.log("ADMIN DASH USE EFFECT");
+  const [modalIsOpen, setIsOpen] = React.useState(false);
 
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    //subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  useEffect(() => {
+    console.log("ADMIN DASH USE EFFECT USERS");
     API.getAllUsers()
       .then(res => {
         console.log("GET ALL USER RESP", res.data);
@@ -34,6 +63,11 @@ function AdminDash() {
         console.log("FAILED TO GET ALL USERS", err.response.statusText);
         setUsers([]);
       });
+
+  }, []);
+
+  useEffect(() => {
+    console.log("ADMIN DASH USE EFFECT COURSES");
     API.getAllCourses()
       .then(res => {
         console.log("GET ALL COURSES RESP", res.data);
@@ -44,6 +78,10 @@ function AdminDash() {
         console.log("FAILED TO GET ALL COURSES", err.response.statusText);
         setCourses([]);
       })
+  }, [modalIsOpen]);
+
+  useEffect(() => {
+    console.log("ADMIN DASH USE EFFECT STUDENTS");
     API.getAllStudents()
       .then(res => {
         console.log("GET ALL STUDENTS RESP", res.data);
@@ -53,7 +91,8 @@ function AdminDash() {
         console.log("FAILED TO GET ALL STUDENTS", err.response.statusText);
         setStudents([]);
       });
-  }, []);
+  }, [modalIsOpen]);
+
 
   useEffect(() => {
     console.log("ADMIN DASH USE EFFECT - USER FILTER");
@@ -109,7 +148,19 @@ function AdminDash() {
         </Col>
         <Col size="md-4">
           <h1>Courses</h1>
-          <Link to="/addcourse">Add New Course</Link>
+          <button className="btn btn-primary btn-sm" onClick={openModal}>Add New Course</button>
+          <Modal
+            isOpen={modalIsOpen}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+            <AddCourseForm
+              users={users}
+              setIsOpen={setIsOpen}
+            />
+          </Modal>
           <input type="text" id="courseFilter" name="courseFilter" placeholder="Filter by Course" ref={courseFilterRef} onChange={onFilterChange} />
           {
             courses.map(course => (

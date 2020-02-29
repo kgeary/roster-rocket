@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-// import { Link, Redirect } from "react-router-dom";
+
 import { Container } from "../../Grid";
 // import validate from "../../../utils/validate";
 import alertFactory from "../../../utils/alertFactory";
@@ -8,11 +8,11 @@ import { useStoreContext } from "../../../utils/GlobalState";
 import * as ACTIONS from "../../../utils/actions";
 import InputForm from "../InputForm";
 
-function AddCourseForm() {
+function AddCourseForm(props) {
   const titleRef = useRef();
   const locRef = useRef();
   const capacityRef = useRef();
-  const teacherRef = useRef();
+  const costRef = useRef();
   const formAlert = alertFactory("alert");
 
   const [state, dispatch] = useStoreContext();
@@ -24,25 +24,29 @@ function AddCourseForm() {
     const title = titleRef.current.value;
     const location = locRef.current.value;
     const capacity = capacityRef.current.value;
-    const teacher = teacherRef.current.value;
+    const cost = costRef.current.value;
 
     if (errors.length > 0) {
       formAlert(errors.join("<br>"));
     } else {
       formAlert(false);
+
+      const TeacherId = document.getElementById("teacher").value || null;
+
       dispatch({ type: ACTIONS.LOADING });
       API.addCourse({
         title,
         location,
-        capacity,
-        teacher
+        capacity: parseInt(capacity),
+        cost: parseFloat(cost),
+        TeacherId: TeacherId
       })
         .then(res => {
           console.log("COURSE", res.data);
           titleRef.current.value = "";
           locRef.current.value = "";
           capacityRef.current.value = "";
-          teacherRef.current.value = "";
+          costRef.current.value = "";
         })
         .catch(err => {
           if (err.message) {
@@ -54,6 +58,7 @@ function AddCourseForm() {
         })
         .finally(() => {
           dispatch({ type: ACTIONS.DONE });
+          props.setIsOpen(false);
         });
     }
   };
@@ -90,14 +95,25 @@ function AddCourseForm() {
             placeholder='Max Course Capacity...'
           />
 
-          {/* COURSE TEACHER */}
+          {/* COURSE COST */}
           <InputForm
-            id='teacher'
-            inputRef={teacherRef}
-            type='text'
+            id='cost'
+            inputRef={costRef}
+            type='int'
             length='64'
-            placeholder='Teacher Name...'
+            placeholder='Cost'
           />
+
+          {/* COURSE TEACHER */}
+          <label htmlFor="teacher">Teacher</label>
+          <select className="form-control" id="teacher">
+            <option key={null} value="">None</option>
+            {
+              props.users.map(user => (
+                <option key={user.id} value={user.id}>{user.name}</option>
+              ))
+            }
+          </select>
 
           <button
             id='submitCourse'
