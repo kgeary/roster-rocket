@@ -20,6 +20,9 @@ module.exports = {
       {
         model: db.Student, // Students
         as: "Students",
+        include: {
+          model: db.User, // Parent
+        },
       }]
     }).then(data => {
       res.json(data);

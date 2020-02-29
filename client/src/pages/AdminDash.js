@@ -60,11 +60,11 @@ function AdminDash() {
   const updateAll = () => {
     dispatch({ type: ACTIONS.LOADING });
     Promise.all([updateUsers(), updateCourses(), updateStudents()]).then((res) => {
-      console.log(res);
-      setUsers(res[0].data);
-      setCourses(res[1].data);
-      setStudents(res[2].data);
-      console.log("ADMIN PROMISE ALL COMPLETE");
+      console.log("PROMISE COMPLETE");
+      const [userData, courseData, studentData] = res.map(i => i.data);
+      setUsers(userData);
+      setCourses(courseData);
+      setStudents(studentData);
     }).catch(err => {
       console.log("PROMISE ALL ERROR", err);
     }).finally(() => {
@@ -77,18 +77,12 @@ function AdminDash() {
   }, []);
 
   useEffect(() => {
-    console.log("ADMIN DASH USE EFFECT - USER FILTER");
-    console.log(userFilter);
   }, [userFilter]);
 
   useEffect(() => {
-    console.log("ADMIN DASH USE EFFECT - COURSE FILTER");
-    console.log(courseFilter);
   }, [courseFilter]);
 
   useEffect(() => {
-    console.log("ADMIN DASH USE EFFECT - STUDENT FILTER");
-    console.log(studentFilter);
   }, [studentFilter]);
 
   const onFilterChange = e => {
