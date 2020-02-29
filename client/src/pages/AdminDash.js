@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { useStoreContext } from "../utils/GlobalState";
 import API from "../utils/API";
@@ -30,8 +31,8 @@ function AdminDash() {
         setUsers(res.data);
       })
       .catch(err => {
-        console.log("FAILED TO GET ALL USERS", err);
-        setUsers(undefined);
+        console.log("FAILED TO GET ALL USERS", err.response.statusText);
+        setUsers([]);
       });
     API.getAllCourses()
       .then(res => {
@@ -39,8 +40,9 @@ function AdminDash() {
         setCourses(res.data);
       })
       .catch(err => {
-        console.log("FAILED TO GET ALL COURSES", err);
-        setCourses(undefined);
+        console.log(err.response.status);
+        console.log("FAILED TO GET ALL COURSES", err.response.statusText);
+        setCourses([]);
       })
     API.getAllStudents()
       .then(res => {
@@ -48,8 +50,8 @@ function AdminDash() {
         setStudents(res.data);
       })
       .catch(err => {
-        console.log("FAILED TO GET ALL STUDENTS", err);
-        setStudents(undefined);
+        console.log("FAILED TO GET ALL STUDENTS", err.response.statusText);
+        setStudents([]);
       });
   }, []);
 
@@ -95,6 +97,7 @@ function AdminDash() {
       <h1>Admin Dashboard</h1>
       <Row>
         <Col size="md-4">
+          <h1>Parents</h1>
           <label htmlFor="userFilter">User Filter:</label>
           <input type="text" id="userFilter" name="userFilter" ref={userFilterRef} onChange={onFilterChange} />
           <div className="card">
@@ -105,8 +108,9 @@ function AdminDash() {
           </div>
         </Col>
         <Col size="md-4">
-          <label htmlFor="courseFilter">Course Filter:</label>
-          <input type="text" id="courseFilter" name="courseFilter" ref={courseFilterRef} onChange={onFilterChange} />
+          <h1>Courses</h1>
+          <Link to="/addcourse">Add New Course</Link>
+          <input type="text" id="courseFilter" name="courseFilter" placeholder="Filter by Course" ref={courseFilterRef} onChange={onFilterChange} />
           {
             courses.map(course => (
               <CardCourse course={course} key={course.title} />
@@ -114,6 +118,7 @@ function AdminDash() {
           }
         </Col>
         <Col size="md-4">
+          <h1>Students</h1>
           <label htmlFor="studentFilter">Student Filter:</label>
           <input type="text" id="studentFilter" name="studentFilter" ref={studentFilterRef} onChange={onFilterChange} />
           {students.map(student => (

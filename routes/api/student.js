@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const studentsController = require("../../controllers/studentsController");
+const isAdmin = require("../../config/middleware/isAdmin");
 
 // Matches with "/api/course/all"
 router
@@ -8,6 +9,6 @@ router
 
 router
   .route("/all")
-  .get(studentsController.readAll);
+  .get(isAdmin, studentsController.readAll);
 
 module.exports = router;

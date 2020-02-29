@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
 const passport = require("../../config/passport");
+const isAdmin = require("../../config/middleware/isAdmin");
+// const isAuthenticated = require("../../config/middleware/isAuthenticated");
 
 // Matches with "/api/user"
 router
@@ -15,7 +17,7 @@ router
 // Matches with "/api/user/all"
 router
   .route("/all")
-  .get(usersController.readAll);
+  .get(isAdmin, usersController.readAll);
 
 // Matches with "/api/user/:id"
 router
