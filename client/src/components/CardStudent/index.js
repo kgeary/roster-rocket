@@ -1,12 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
+import EnrollStudentModal from "../EnrollStudentModal";
+import EnrollStudentForm from "../forms/EnrollStudentForm";
 
 function CardStudent(props) {
 
     // console.log("CARD STUDENT", props.student);
     const onDelete = (id) => {
         API.removeStudent(id).then(res => {
+            if (props.updateFunc) {
+                props.updateFunc();
+            }
+        });
+    }
+
+    const onDrop = (StudentId, CourseId) => {
+        API.dropCourse(StudentId, CourseId).then(res => {
             if (props.updateFunc) {
                 props.updateFunc();
             }
@@ -35,11 +45,13 @@ function CardStudent(props) {
                                 <h5 className="card-title">Title: {sc.Course.title}</h5>
                                 <h6>Cost: {sc.Course.cost}</h6>
                                 <h6>paid: {sc.Paid ? "PAID" : <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID</span>}</h6>
+                                <button className="btn btn-danger btn-sm" onClick={() => onDrop(props.student.id, sc.CourseId)}>Drop Class</button>
                             </div>
                         </div>
                     ))
                 }
-                <Link to="/" className="card-link">Add another Class</Link>
+                <EnrollStudentModal student={props.student} form={EnrollStudentForm} onReturn={props.updateFunc} />
+
             </div>
         </div>
     );

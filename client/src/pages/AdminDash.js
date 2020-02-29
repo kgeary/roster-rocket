@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import { useStoreContext } from "../utils/GlobalState";
+import * as ACTIONS from "../utils/actions";
 import API from "../utils/API";
 import CardParent from "../components/CardParent";
 import CardCourse from "../components/CardCourse";
@@ -8,12 +9,14 @@ import CardStudent from "../components/CardStudent";
 import AddCourseForm from "../components/forms/AddCourseForm";
 import AddStudentForm from "../components/forms/AddStudentForm";
 import AddModal from "../components/AddModal";
+import { Redirect } from "react-router-dom";
 
 function AdminDash() {
-  const [state] = useStoreContext();
-  const [users, setUsers] = useState([]);
-  const [courses, setCourses] = useState([]);
-  const [students, setStudents] = useState([]);
+  const [state, dispatch] = useStoreContext();
+
+  const setUsers = (val) => { dispatch({ type: ACTIONS.SET_USERS, value: val }); }
+  const setCourses = (val) => { dispatch({ type: ACTIONS.SET_COURSES, value: val }); }
+  const setStudents = (val) => { dispatch({ type: ACTIONS.SET_STUDENTS, value: val }); }
 
   const [userFilter, setUserFilter] = useState("");
   const userFilterRef = useRef("");
@@ -26,54 +29,37 @@ function AdminDash() {
 
   const updateUsers = () => {
     console.log("ADMIN DASH USE EFFECT USERS");
-    API.getAllUsers()
-      .then(res => {
-        console.log("GET ALL USER RESP", res.data);
-        setUsers(res.data);
-      })
-      .catch(err => {
-        console.log("FAILED TO GET ALL USERS", err.response.statusText);
-        setUsers([]);
-      });
-
+    return API.getAllUsers();
   }
 
   const updateStudents = () => {
     console.log("ADMIN DASH USE EFFECT STUDENTS");
-    API.getAllStudents()
-      .then(res => {
-        console.log("GET ALL STUDENTS RESP", res.data);
-        setStudents(res.data);
-      })
-      .catch(err => {
-        console.log("FAILED TO GET ALL STUDENTS", err.response.statusText);
-        setStudents([]);
-      });
+    return API.getAllStudents();
   };
 
   const updateCourses = () => {
     console.log("ADMIN DASH USE EFFECT COURSES");
-    API.getAllCourses()
-      .then(res => {
-        console.log("GET ALL COURSES RESP", res.data);
-        setCourses(res.data);
-      })
-      .catch(err => {
-        console.log(err.response.status);
-        console.log("FAILED TO GET ALL COURSES", err.response.statusText);
-        setCourses([]);
-      })
+    return API.getAllCourses();
   }
 
   const updateAll = () => {
-    updateUsers();
-    updateCourses();
-    updateStudents();
+    dispatch({ type: ACTIONS.LOADING });
+    Promise.all([updateUsers(), updateCourses(), updateStudents()]).then((res) => {
+      console.log(res);
+      setUsers(res[0].data);
+      setCourses(res[1].data);
+      setStudents(res[2].data);
+      console.log("ADMIN PROMISE ALL COMPLETE");
+    }).catch(err => {
+      console.log("PROMISE ALL ERROR", err);
+    }).finally(() => {
+      dispatch({ type: ACTIONS.DONE });
+    });
   }
 
-  useEffect(() => { updateUsers(); }, []);
-  useEffect(() => { updateCourses(); }, []);
-  useEffect(() => { updateStudents(); }, []);
+  useEffect(() => {
+    updateAll();
+  }, []);
 
   useEffect(() => {
     console.log("ADMIN DASH USE EFFECT - USER FILTER");
@@ -112,6 +98,10 @@ function AdminDash() {
     return <h1>Loading Data...</h1>
   }
 
+  if (!state.user || !state.user.isAdmin) {
+    return <Redirect to="/" />
+  }
+
   return (
     <Container fluid>
       <h1>Admin Dashboard</h1>
@@ -121,32 +111,38 @@ function AdminDash() {
           <label htmlFor="userFilter">User Filter:</label>
           <input type="text" id="userFilter" name="userFilter" ref={userFilterRef} onChange={onFilterChange} />
           <div className="card">
-            {users.map(user => (
-              <CardParent user={user} key={user.id} admin={true} updateFunc={updateAll} />
-            )
-            )}
+
+            {
+              state.users ?
+                state.users.map(user => (
+                  <CardParent user={user} key={user.id} admin={true} updateFunc={updateAll} />
+                )) : null
+            }
           </div>
         </Col>
         <Col size="md-4">
           <h1>Courses</h1>
-          <AddModal title="Add Course" users={users} form={AddCourseForm} onReturn={updateCourses} />
+          <AddModal title="Add Course" users={state.users} form={AddCourseForm} onReturn={updateCourses} />
 
           <br />
           <input type="text" id="courseFilter" name="courseFilter" placeholder="Filter by Course" ref={courseFilterRef} onChange={onFilterChange} />
           {
-            courses.map(course => (
-              <CardCourse course={course} key={course.title} admin={true} updateFunc={updateAll} />
-            ))
+            state.courses ?
+              state.courses.map(course => (
+                <CardCourse course={course} key={course.title} admin={true} updateFunc={updateAll} />
+              )) : null
           }
         </Col>
         <Col size="md-4">
           <h1>Students</h1>
-          <AddModal title="Add Student" form={AddStudentForm} users={users} onReturn={updateStudents} />
+          <AddModal title="Add Student" form={AddStudentForm} users={state.users} onReturn={updateStudents} />
           <input type="text" id="studentFilter" name="studentFilter" placeholder="Filter by Student" ref={studentFilterRef} onChange={onFilterChange} />
-          {students.map(student => (
-            <CardStudent student={student} key={student.id} admin={true} updateFunc={updateAll} />
-          )
-          )}
+          {
+            state.students ?
+              state.students.map(student => (
+                <CardStudent student={student} key={student.id} admin={true} updateFunc={updateAll} />
+              )) : null
+          }
         </Col>
       </Row>
     </Container>

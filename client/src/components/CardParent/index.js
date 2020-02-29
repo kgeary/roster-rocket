@@ -32,14 +32,17 @@ function CardParent(props) {
       <div>
         {
           props.includeChildren ?
-            <React.Fragment>
-              {
-                props.user.Students.map(student => (
-                  <CardStudent student={student} key={student.name} />
-                ))
-              }
-            </React.Fragment> :
-            null
+            props.user.Students.length > 0 ?
+              <React.Fragment>
+                <h3>Children</h3>
+                {
+                  props.user.Students.map(student => (
+                    <CardStudent student={student} key={student.name} updateFunc={props.updateFunc} />
+                  ))
+                }
+              </React.Fragment>
+              : <h3>No Children</h3>
+            : null
         }
       </div>
     </div >

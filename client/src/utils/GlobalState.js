@@ -1,5 +1,6 @@
 import React, { useContext, useReducer, createContext } from "react";
 import * as ACTIONS from "./actions";
+import API from "./API";
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
@@ -34,6 +35,18 @@ const reducer = (state, action) => {
       sessionStorage.setItem("username", newState.username);
       return newState;
 
+    case ACTIONS.SET_USERS:
+      newState.users = action.value;
+      return newState;
+
+    case ACTIONS.SET_COURSES:
+      newState.courses = action.value;
+      return newState;
+
+    case ACTIONS.SET_STUDENTS:
+      newState.students = action.value;
+      return newState;
+
     default:
       return newState;
   }
@@ -45,6 +58,9 @@ const StoreProvider = ({ value = [], ...props }) => {
     theme: localStorage.getItem("theme") || "dark",
     user: undefined,
     username: sessionStorage.getItem("username") || "",
+    users: [],
+    courses: [],
+    students: [],
   };
   const [state, dispatch] = useReducer(reducer, initialState);
   return <Provider value={[state, dispatch]} {...props} />;

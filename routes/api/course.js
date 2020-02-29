@@ -5,7 +5,7 @@ const isAdmin = require("../../config/middleware/isAdmin");
 // Matches with "/api/course/all"
 router
   .route("/all")
-  .get(isAdmin, coursesController.readAll);
+  .get(coursesController.readAll);
 
 // Matches with "/api/course/:id"
 router

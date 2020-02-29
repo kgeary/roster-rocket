@@ -8,15 +8,20 @@ import * as ACTIONS from "../utils/actions";
 
 function ParentDash() {
   const [state, dispatch] = useStoreContext();
-  const [parent, setParent] = useState();
-  const [loaded, setLoaded] = useState(false);
+  const [parent, setParent] = useState(null);
 
-  useEffect(() => {
+  const loadData = () => {
     dispatch({ type: ACTIONS.LOADING });
     API.getUser(true)
       .then(res => {
         console.log("GET Current user", res.data);
         setParent(res.data);
+      })
+      .then(() => {
+        return API.getAllCourses();
+      })
+      .then(res => {
+        dispatch({ type: ACTIONS.SET_COURSES, value: res.data });
       })
       .catch(err => {
         console.log("Error Getting Current user", err);
@@ -24,8 +29,11 @@ function ParentDash() {
       })
       .finally(() => {
         dispatch({ type: ACTIONS.DONE });
-        setLoaded(true);
       });
+  }
+
+  useEffect(() => {
+    loadData();
   }, []);
 
 
@@ -38,22 +46,23 @@ function ParentDash() {
   }
 
 
-  if (!loaded) {
+  if (state.loading) {
     return LoadScreen();
-  }
-
-  if (!parent) {
-    return <Redirect to="/login" />;
   }
 
   return (
     <Container fluid>
-      <h1>Parent Dashboard {parent ? parent.email : null}</h1>
-      <Row>
-        <Col size='md-12'>
-          <CardParent user={parent} includeChildren={true} />
-        </Col>
-      </Row>
+      {
+        parent ?
+          <React.Fragment>
+            <h1>Parent Dashboard {parent ? parent.email : null}</h1>
+            <Row>
+              <Col size='md-12'>
+                <CardParent user={parent} includeChildren={true} updateFunc={loadData} />
+              </Col>
+            </Row>
+          </React.Fragment> : null
+      }
     </Container>
   );
 }
