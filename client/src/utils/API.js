@@ -6,6 +6,15 @@ export default {
     return axios.post("/api/user/signup/", user);
   },
 
+  addCourse: function (course) {
+    return axios.post("/api/course/add", course);
+  },
+
+
+  addStudent: function (student) {
+    return axios.post("/api/student/add", student);
+  },
+
   // Login user
   loginUser: function (user) {
     return axios.post("/api/user/login", user);
@@ -27,6 +36,7 @@ export default {
   getAllUsers: function () {
     return axios.get("/api/user/all");
   },
+
 
   getAllCourses: function () {
     return axios.get("/api/course/all");

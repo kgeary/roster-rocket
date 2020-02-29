@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const coursesController = require("../../controllers/coursesController");
+const isAdmin = require("../../config/middleware/isAdmin");
 
 // Matches with "/api/course/all"
 router
   .route("/all")
-  .get(coursesController.readAll);
+  .get(isAdmin, coursesController.readAll);
 
 router
   .route("/:id")
@@ -13,7 +14,7 @@ router
 // Matches with "/api/course/add"
 router
   .route("/add")
-  .post(coursesController.addCourse);
+  .post(isAdmin, coursesController.addCourse);
 
 
 // Matches with "/api/course/add"

@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import { Redirect, Link } from "react-router-dom";
 import { Container } from "../../Grid";
 import validate from "../../../utils/validate";
 import alertFactory from "../../../utils/alertFactory";

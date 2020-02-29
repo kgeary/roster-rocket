@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NoMatch from "./pages/NoMatch";
+import NotAuthorized from "./pages/NotAuthorized";
 import AdminDash from "./pages/AdminDash";
 import ParentDash from "./pages/ParentDash";
 import Nav from "./components/Nav";
@@ -26,6 +27,7 @@ function App() {
             <Route exact path="/parent" component={ParentDash} />
             <Route exact path="/changePassword" component={PasswordChange} />
             <Route exact path="/resetPassword" component={PasswordReset} />
+            <Route exact path="/notauthorized" component={NotAuthorized} />
             <Route component={NoMatch} />
           </Switch>
         </div>

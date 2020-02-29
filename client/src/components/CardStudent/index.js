@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function CardStudent(props) {
 
-    console.log("CARD STUDENT", props.student);
+    // console.log("CARD STUDENT", props.student);
 
     return (
         <div className="card student-card">
@@ -14,20 +14,21 @@ function CardStudent(props) {
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">Name: {props.student.name}</li>
                 <li className="list-group-item">Age: {props.student.age}</li>
-                <li className="list-group-item">Class card here</li>
+                {props.student.StudentCourses.length === 0 ? <li className="list-group-item">Not Currently Enrolled</li> : null}
             </ul>
-            {
-                props.student.StudentCourses.map(sc => (
-                    <div className="card course-card" key={sc.Course.title}>
-                        <h5 className="card-title">Title: {sc.Course.title}</h5>
-                        <div className="card-body">
-                            <h5>Cost: {sc.Course.cost}</h5>
-                            <h5>paid: {sc.Paid ? "PAID" : <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID</span>}</h5>
-                        </div>
-                    </div>
-                ))
-            }
             <div className="card-body">
+                {props.student.StudentCourses.length > 0 ? <h3 className="subtitle">Classes</h3> : null}
+                {
+                    props.student.StudentCourses.map(sc => (
+                        <div className="card course-card" key={sc.Course.title}>
+                            <div className="card-body">
+                                <h5 className="card-title">Title: {sc.Course.title}</h5>
+                                <h6>Cost: {sc.Course.cost}</h6>
+                                <h6>paid: {sc.Paid ? "PAID" : <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID</span>}</h6>
+                            </div>
+                        </div>
+                    ))
+                }
                 <Link to="/" className="card-link">Add another Class</Link>
             </div>
         </div>

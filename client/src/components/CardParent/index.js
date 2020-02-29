@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import CardStudent from "../CardStudent";
 
-function Card(props) {
+function CardParent(props) {
   return (
     <div className='container'>
       <div className='card parent-card'>
@@ -17,17 +16,16 @@ function Card(props) {
         </div>
       </div>
       <div>
-        <ul className='list-group list-group-flush'>
-        </ul>
         {
-          props.user.Students.map(student => (
-            <CardStudent student={student} key={student.name} />
-          ))
+          props.includeChildren ?
+            props.user.Students.map(student => (
+              <CardStudent student={student} key={student.name} />
+            )) :
+            null
         }
-        <div className='card-body'></div>
       </div>
     </div >
   );
 }
 
-export default Card;
+export default CardParent;
