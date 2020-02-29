@@ -161,7 +161,7 @@ function AdminDash() {
             {
               state.users ?
                 state.users.map(user => (
-                  <CardParent user={user} key={user.id} admin={true} updateFunc={updateAll} />
+                  <CardParent user={user} key={user.id} admin={true} updateFunc={updateAll} includeChildren={true} />
                 )) : null
             }
           </div>

@@ -99,15 +99,20 @@ module.exports = {
       where: { isAdmin: false },
       include: {
         model: db.Student,
-        include: {
-          model: db.StudentCourse,
-          include: {
-            model: db.Course,
+        include: [
+          {
+            model: db.User
+          },
+          {
+            model: db.StudentCourse,
             include: {
-              model: db.User,
+              model: db.Course,
+              include: {
+                model: db.User,
+              }
             }
           }
-        }
+        ]
       }
     })
       .then(data => {
