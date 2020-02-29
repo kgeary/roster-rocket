@@ -13,8 +13,13 @@ function AdminDash() {
   const [students, setStudents] = useState([]);
 
   const [userFilter, setUserFilter] = useState("");
+  const userFilterRef = useRef("");
 
-  const parentRef = useRef("");
+  const [courseFilter, setCourseFilter] = useState("");
+  const courseFilterRef = useRef("");
+
+  const [studentFilter, setStudentFilter] = useState("");
+  const studentFilterRef = useRef("");
 
   useEffect(() => {
     console.log("ADMIN DASH USE EFFECT");
@@ -48,12 +53,38 @@ function AdminDash() {
       });
   }, []);
 
-
   useEffect(() => {
-    console.log("ADMIN DASH USE EFFECT - PARENT REF");
-    setUserFilter(parentRef.current.value);
+    console.log("ADMIN DASH USE EFFECT - USER FILTER");
     console.log(userFilter);
   }, [userFilter]);
+
+  useEffect(() => {
+    console.log("ADMIN DASH USE EFFECT - COURSE FILTER");
+    console.log(courseFilter);
+  }, [courseFilter]);
+
+  useEffect(() => {
+    console.log("ADMIN DASH USE EFFECT - STUDENT FILTER");
+    console.log(studentFilter);
+  }, [studentFilter]);
+
+  const onFilterChange = e => {
+    const { name, value } = e.target;
+    switch (name) {
+      case "userFilter":
+        setUserFilter(value);
+        break;
+      case "courseFilter":
+        setCourseFilter(value);
+        break;
+      case "studentFilter":
+        setStudentFilter(value);
+        break;
+      default:
+        throw new Error("Unknown filter");
+    }
+  };
+
 
   if (state.loading) {
     return <h1>Loading Data...</h1>
@@ -64,7 +95,8 @@ function AdminDash() {
       <h1>Admin Dashboard</h1>
       <Row>
         <Col size="md-4">
-          <input type="text" ref={parentRef} />
+          <label htmlFor="userFilter">User Filter:</label>
+          <input type="text" id="userFilter" name="userFilter" ref={userFilterRef} onChange={onFilterChange} />
           <div className="card">
             {users.map(user => (
               <CardParent user={user} key={user.id} />
@@ -73,6 +105,8 @@ function AdminDash() {
           </div>
         </Col>
         <Col size="md-4">
+          <label htmlFor="courseFilter">Course Filter:</label>
+          <input type="text" id="courseFilter" name="courseFilter" ref={courseFilterRef} onChange={onFilterChange} />
           {
             courses.map(course => (
               <CardCourse course={course} key={course.title} />
@@ -80,6 +114,8 @@ function AdminDash() {
           }
         </Col>
         <Col size="md-4">
+          <label htmlFor="studentFilter">Student Filter:</label>
+          <input type="text" id="studentFilter" name="studentFilter" ref={studentFilterRef} onChange={onFilterChange} />
           {students.map(student => (
             <CardStudent student={student} key={student.id} />
           )
