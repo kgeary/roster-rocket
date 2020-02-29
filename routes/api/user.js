@@ -22,7 +22,8 @@ router
 // Matches with "/api/user/:id"
 router
   .route("/:id")
-  .get(usersController.readById);
+  .get(usersController.readById)
+  .delete(isAdmin, usersController.removeById);
 
 // Matches with "/api/user/login"
 router

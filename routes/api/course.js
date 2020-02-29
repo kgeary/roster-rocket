@@ -7,9 +7,11 @@ router
   .route("/all")
   .get(isAdmin, coursesController.readAll);
 
+// Matches with "/api/course/:id"
 router
   .route("/:id")
-  .get(coursesController.readById);
+  .get(coursesController.readById)
+  .delete(isAdmin, coursesController.removeById);
 
 // Matches with "/api/course/add"
 router

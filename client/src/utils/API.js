@@ -15,6 +15,18 @@ export default {
     return axios.post("/api/student/add", student);
   },
 
+  removeUser: function (id) {
+    return axios.delete(`/api/user/${id}`);
+  },
+
+  removeCourse: function (id) {
+    return axios.delete(`/api/course/${id}`);
+  },
+
+  removeStudent: function (id) {
+    return axios.delete(`/api/student/${id}`);
+  },
+
   // Login user
   loginUser: function (user) {
     return axios.post("/api/user/login", user);

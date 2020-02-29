@@ -1,7 +1,17 @@
 import React from "react";
 import CardStudent from "../CardStudent";
+import API from "../../utils/API";
 
 function CardParent(props) {
+
+  const onDelete = (id) => {
+    API.removeUser(id).then(res => {
+      if (props.updateFunc) {
+        props.updateFunc();
+      }
+    });
+  }
+
   return (
     <div className='container'>
       <div className='card parent-card'>
@@ -12,6 +22,7 @@ function CardParent(props) {
             <li className='list-group-item'>{props.user.email}</li>
             <li className='list-group-item'>{props.user.phone}</li>
             <li className='list-group-item'>mailing address</li>
+            {props.admin ? <button className="btn btn-danger" onClick={() => onDelete(props.user.id)}>Delete User</button> : null}
           </ul>
         </div>
       </div>

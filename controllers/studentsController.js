@@ -42,4 +42,14 @@ module.exports = {
         res.status(422).json(err);
       });
   },
+
+  removeById: function (req, res) {
+    db.Student.destroy({ where: { id: req.params.id } })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.status(422).json(err);
+      });
+  },
 };
