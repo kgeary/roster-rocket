@@ -51,7 +51,7 @@ const Nav = () => {
             null
         }
         <NavLink className="nav-link" activeClassName="active" to="/parent">My Profile</NavLink>
-        <button className="nav-button" onClick={onLogout}>Logout</button>
+        <button className="nav-link btn" onClick={onLogout}>Logout</button>
       </React.Fragment>
     );
   }
@@ -81,7 +81,7 @@ const Nav = () => {
               {/* <NavLink className="nav-link" activeClassName="active" to="/home">Home</NavLink> */}
             </div>
             {state.username ? getUserOptions() : getNonUserOptions()}
-            <button className="change-theme" onClick={toggleTheme}>*</button>
+            <button className="btn change-theme" onClick={toggleTheme}>{"Theme " + state.theme}</button>
           </div>
         </React.Fragment>
       }
