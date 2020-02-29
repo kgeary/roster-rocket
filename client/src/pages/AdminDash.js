@@ -27,9 +27,13 @@ function AdminDash() {
   const [studentFilter, setStudentFilter] = useState("");
   const studentFilterRef = useRef("");
 
+  const updateUsers = () => API.getAllUsers();
+  const updateStudents = () => API.getAllStudents();
+  const updateCourses = () => API.getAllCourses();
+
   const updateCoursesOnly = () => {
     dispatch({ type: ACTIONS.LOADING });
-    API.getAllCourses()
+    updateUsers()
       .then(res => {
         setCourses(res.data);
       })
@@ -42,7 +46,7 @@ function AdminDash() {
 
   const updateStudentsOnly = () => {
     dispatch({ type: ACTIONS.LOADING });
-    API.getAllStudents()
+    updateStudents()
       .then(res => {
         setStudents(res.data);
       })
@@ -54,17 +58,6 @@ function AdminDash() {
   }
 
   const updateAll = () => {
-    const updateUsers = () => {
-      return API.getAllUsers();
-    }
-
-    const updateStudents = () => {
-      return API.getAllStudents();
-    };
-
-    const updateCourses = () => {
-      return API.getAllCourses();
-    }
     dispatch({ type: ACTIONS.LOADING });
     Promise.all([updateUsers(), updateCourses(), updateStudents()]).then((res) => {
       console.log(res);

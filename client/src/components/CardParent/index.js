@@ -17,7 +17,7 @@ function CardParent(props) {
   return (
     <div className='container'>
       <div className='card parent-card'>
-        <img src={props.user.img} className='card-img-top' alt={props.user.name} style={{ width: 150, height: 150 }} />
+        <img src={props.user.img} className='card-img' alt={props.user.name} style={{ width: 150, height: 150 }} />
         <div className='card-body'>
           <h5 className='card-title'>{props.user.name}</h5>
           <ul className='card-text'>
