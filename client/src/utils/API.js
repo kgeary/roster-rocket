@@ -27,6 +27,14 @@ export default {
     return axios.delete(`/api/student/${id}`);
   },
 
+  enrollCourse: function (StudentId, CourseId) {
+    return axios.post(`/api/studentcourse/add`, { StudentId, CourseId });
+  },
+
+  dropCourse: function (StudentId, CourseId) {
+    return axios.delete(`/api/studentcourse/drop/${StudentId}/${CourseId}`);
+  },
+
   // Login user
   loginUser: function (user) {
     return axios.post("/api/user/login", user);
