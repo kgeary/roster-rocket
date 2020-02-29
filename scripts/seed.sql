@@ -16,7 +16,7 @@ VALUES
     now(),
     now(),
     "blah1@blah.com",
-    "Blah 1",
+    "Adam Anderson",
     "555-1212",
     "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG",
     "https://via.placeholder.com/150"
@@ -26,7 +26,7 @@ VALUES
     now(),
     now(),
     "blah2@blah.com",
-    "Blah 2",
+    "Brian Boyd",
     "555-1213",
     "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG",
     "https://via.placeholder.com/150"
@@ -36,7 +36,7 @@ VALUES
     now(),
     now(),
     "blah3@blah.com",
-    "Blah 3",
+    "Chris Cousins",
     "555-1214",
     "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG",
     "https://via.placeholder.com/150"
