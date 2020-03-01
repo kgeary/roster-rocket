@@ -2,14 +2,13 @@ const router = require("express").Router();
 const userRoutes = require("./user");
 const courseRoutes = require("./course");
 const studentRoutes = require("./student");
-const resetRoutes = require("./reset");
+const authRoutes = require("./auth");
 const studentCourseRoutes = require("./studentCourse");
-
+const isAuthenticated = require("../../config/middleware/isAuthenticated");
 // User routes
-router.use("/user", userRoutes);
-router.use("/course", courseRoutes);
-router.use("/student", studentRoutes);
-router.use("/reset", resetRoutes);
-router.use("/studentcourse", studentCourseRoutes);
-
+router.use("/user", isAuthenticated, userRoutes);
+router.use("/course", isAuthenticated, courseRoutes);
+router.use("/student", isAuthenticated, studentRoutes);
+router.use("/studentcourse", isAuthenticated, studentCourseRoutes);
+router.use("/auth", authRoutes);
 module.exports = router;

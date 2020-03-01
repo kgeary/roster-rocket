@@ -31,6 +31,54 @@ function sendEmail(to, from, subject, body) {
 
 }
 module.exports = {
+
+  create: function (req, res) {
+    db.User.create({
+      email: req.body.email.toLowerCase(),
+      password: req.body.password,
+      // TODO - Update default value fields
+      phone: "555-1212",
+      name: "Default User Name",
+    })
+      .then(dbModel => {
+        console.log(dbModel);
+        req.login(dbModel, function (err) {
+          if (!err) {
+            res.json(dbModel);
+          } else {
+            //handle error
+            console.log("SIGNUP LOGIN ERR", err);
+            res.status(422).json(err);
+          }
+        });
+
+      })
+      .catch(err => {
+        console.log("ERROR ADDING USER");
+        console.log(err);
+        res.status(422).json(err);
+      });
+  },
+
+  login: function (req, res) {
+    res.json(req.user);
+  },
+
+  getCurrentUser: function (req, res) {
+    if (req.user) {
+      db.User.findOne({ where: { id: req.user.id } })
+        .then(data => {
+          res.json(data);
+        })
+        .catch(err => {
+          console.log("ERROR GETTING CURRENT USER", err);
+          res.status(422).json("Error retrieving user");
+        });
+    } else {
+      res.status(401).json({ message: "Not Authorized" });
+    }
+  },
+
   resetPassword: function (req, res) {
     if (req.body && req.body.email) {
       console.log("RESET PW FOR EMAIL", req.body.email);

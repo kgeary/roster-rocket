@@ -30,7 +30,20 @@ module.exports = {
       ]
     }).then(data => {
       res.json(data);
+    }).catch(err => {
+      res.status(422).json(err);
     });
+  },
+
+  getUserStudents: function (req, res) {
+    db.Student.findAll({
+      where: { ParentId: req.user.id }
+    })
+      .then(data => {
+        res.json(data);
+      }).catch(err => {
+        res.status(422).json(err);
+      });
   },
 
   readById: function (req, res) {
