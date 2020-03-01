@@ -9,7 +9,6 @@ module.exports = {
       // TODO - Update default value fields
       phone: "555-1212",
       name: "Default User Name",
-      img: null
     })
       .then(dbModel => {
         console.log(dbModel);

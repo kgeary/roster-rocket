@@ -93,8 +93,9 @@ function LoginForm() {
             Login
         </button>
           <br />
-          <Link to="/signup">Signup for a new Account</Link>
           <div id="alert" role="alert" />
+          <Link to="/signup">Signup for a new Account</Link>
+          <Link to="/resetPassword">Forgot Password?</Link>
         </form>
       </div>
     </Container >

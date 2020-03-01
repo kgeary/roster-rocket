@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { useStoreContext } from "../utils/GlobalState";
 import CardParent from "../components/CardParent";
@@ -58,6 +58,7 @@ function ParentDash() {
             <h1>Parent Dashboard {parent ? parent.email : null}</h1>
             <Row>
               <Col size='md-12'>
+                <Link to="/changePassword">Change Password</Link>
                 <CardParent user={parent} includeChildren={true} updateFunc={loadData} accordion={true} />
               </Col>
             </Row>
