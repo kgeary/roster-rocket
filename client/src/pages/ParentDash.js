@@ -50,6 +50,14 @@ function ParentDash() {
     return LoadScreen();
   }
 
+  if (!state.user) {
+    return (
+      <Container fluid>
+        <h1>You must be logged in to access this page.</h1>
+      </Container>
+    )
+  }
+
   return (
     <Container fluid>
       {
@@ -58,8 +66,7 @@ function ParentDash() {
             <h1>Parent Dashboard {parent ? parent.email : null}</h1>
             <Row>
               <Col size='md-12'>
-                <Link to="/changePassword">Change Password</Link>
-                <CardParent user={parent} includeChildren={true} updateFunc={loadData} accordion={true} />
+                <CardParent user={parent} includeChildren={true} updateFunc={loadData} accordion={true} changePw={true} />
               </Col>
             </Row>
           </React.Fragment> : null

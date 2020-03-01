@@ -90,10 +90,10 @@ const Nav = (props) => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <div className="navbar-nav mr-auto">
           {/* Left Aligned Links */}
+          <button className="btn change-theme" onClick={toggleTheme}>{"Theme " + state.theme}</button>
         </div>
         {/* Right Aligned Links */}
         {state.username ? getUserOptions() : getNonUserOptions()}
-        <button className="btn change-theme" onClick={toggleTheme}>{"Theme " + state.theme}</button>
       </div>
     </nav >
   );

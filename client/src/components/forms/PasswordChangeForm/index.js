@@ -78,7 +78,7 @@ function PasswordChangeForm() {
   return (
     <Container>
       <div className="form-container">
-        <h1>Login</h1>
+        <h1>Change Password</h1>
         <form className="form-group mt-3 mb-2 form-login">
           {/* OLD PASSWORD */}
           <InputForm
