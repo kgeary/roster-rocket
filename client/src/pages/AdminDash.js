@@ -116,7 +116,11 @@ function AdminDash() {
     )
   }
   if (!state.user || !state.user.isAdmin) {
-    return <Redirect to="/" />
+    return (
+      <Container fluid>
+        <h1>You must be an administrator to access this page.</h1>
+      </Container>
+    )
   }
 
   return (

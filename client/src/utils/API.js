@@ -57,6 +57,10 @@ export default {
     }
   },
 
+  getUserById: function (id) {
+    return axios.get(`/api/user/children/${id}`);
+  },
+
   getAllUsers: function () {
     return axios.get("/api/user/all");
   },

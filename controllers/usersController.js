@@ -94,6 +94,39 @@ module.exports = {
     }
   },
 
+  getUserByIdWithChildren: function (req, res) {
+    if (req.user) {
+      db.User.findOne({
+        where: { id: req.params.id },
+        include: {
+          model: db.Student,
+          include: [
+            {
+              model: db.User
+            },
+            {
+              model: db.StudentCourse,
+              include: {
+                model: db.Course,
+                include: {
+                  model: db.User,
+                }
+              }
+            }]
+        }
+      })
+        .then(data => {
+          res.json(data);
+        })
+        .catch(err => {
+          console.log("GetUserByIdWithKids", err);
+          res.status(422).json("Error retrieving User");
+        });
+    } else {
+      res.status(401).json({ message: "Not Authorized" });
+    }
+  },
+
   readAll: function (req, res) {
     db.User.findAll({
       where: { isAdmin: false },
