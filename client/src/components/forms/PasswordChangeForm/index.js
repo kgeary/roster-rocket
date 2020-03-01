@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
+import { Redirect } from "react-router-dom";
 import { Container } from "../../Grid";
 import validate from "../../../utils/validate";
 import alertFactory from "../../../utils/alertFactory";
@@ -14,6 +15,7 @@ function PasswordChangeForm() {
   const newPassword = useRef();
   const newPassword2 = useRef();
   const formAlert = alertFactory("alert");
+  const [finished, setFinished] = useState(false);
 
   // Submit Click
   const handleSubmit = e => {
@@ -49,6 +51,7 @@ function PasswordChangeForm() {
           newPassword.current.value = "";
           newPassword2.current.value = "";
           formAlert("Password Updated");
+          setTimeout(() => setFinished(true), 2000);
         })
         .catch((err) => {
           // Login Failed
@@ -67,11 +70,15 @@ function PasswordChangeForm() {
     }
   }
 
+  if (finished) {
+    return <Redirect to="/parent" />
+  }
+
 
   return (
     <Container>
       <div className="form-container">
-        <h1>Login</h1>
+        <h1>Change Password</h1>
         <form className="form-group mt-3 mb-2 form-login">
           {/* OLD PASSWORD */}
           <InputForm

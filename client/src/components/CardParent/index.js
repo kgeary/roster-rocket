@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import CardStudent from "../CardStudent";
 import API from "../../utils/API";
 import AddModal from "../AddModal"
@@ -53,6 +54,7 @@ function CardParent(props) {
         <img src={props.user.img} className='card-img' alt={props.user.name} style={{ width: 150, height: 150 }} />
         <div className='card-body'>
           <h5 className='card-title'>{props.user.name}</h5>
+          <Link to="/changePassword">Change Password</Link>
           <ul className='card-text'>
             <li className='list-group-item'>{props.user.email}</li>
             <li className='list-group-item'>{props.user.phone}</li>

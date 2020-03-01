@@ -41,9 +41,9 @@ module.exports = {
           return dbUser.save({ individualHooks: true });
         })
         .then(() => {
-          const body = `Your temporary password is: ${tempPassword}`;
+          const body = `Your temporary password is: ${tempPassword}.  If you are still having issues, please visit RosterRocket.com`;
           console.log("TEMP PW", body);
-          sendEmail(req.body.email, "rosterrocket2020@gmail.com", "Your new password", body);
+          sendEmail(req.body.email, "no-reply@roster.rocket.com", "RosterRocket: Your new password", body);
           res.json();
         })
         .catch(err => {

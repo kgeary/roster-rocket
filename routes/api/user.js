@@ -14,6 +14,12 @@ router
   .route("/children")
   .get(usersController.getCurrentUserWithChildren);
 
+// Matches with "/api/user/children/:id"
+router
+  .route("/children/:id")
+  .get(usersController.getUserByIdWithChildren);
+
+
 // Matches with "/api/user/all"
 router
   .route("/all")
