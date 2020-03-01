@@ -13,6 +13,7 @@ import { Redirect } from "react-router-dom";
 
 function AdminDash() {
   const [state, dispatch] = useStoreContext();
+  const [loaded, setLoaded] = useState(false);
 
   const setUsers = (val) => { dispatch({ type: ACTIONS.SET_USERS, value: val }); }
   const setCourses = (val) => { dispatch({ type: ACTIONS.SET_COURSES, value: val }); }
@@ -41,6 +42,7 @@ function AdminDash() {
         console.log("UPDATE ALL COURSES ERROR", err);
       }).finally(() => {
         dispatch({ type: ACTIONS.DONE });
+        setLoaded(true);
       });
   }
 
@@ -54,10 +56,12 @@ function AdminDash() {
         console.log("UPDATE ALL STUDENTS ALL ERROR", err);
       }).finally(() => {
         dispatch({ type: ACTIONS.DONE });
+        setLoaded(true);
       });
   }
 
   const updateAll = () => {
+    console.log("ADMIN LOAD DATA");
     dispatch({ type: ACTIONS.LOADING });
     Promise.all([updateUsers(), updateCourses(), updateStudents()]).then((res) => {
       console.log("PROMISE COMPLETE");
@@ -69,6 +73,7 @@ function AdminDash() {
       console.log("PROMISE ALL ERROR", err);
     }).finally(() => {
       dispatch({ type: ACTIONS.DONE });
+      setLoaded(true);
     });
   }
 
@@ -103,10 +108,13 @@ function AdminDash() {
   };
 
 
-  if (state.loading) {
-    return <h1>Loading Data...</h1>
+  if (state.loading || !loaded) {
+    return (
+      <Container fluid>
+        <h1>Loading Admin Data...</h1>
+      </Container>
+    )
   }
-
   if (!state.user || !state.user.isAdmin) {
     return <Redirect to="/" />
   }
@@ -135,7 +143,6 @@ function AdminDash() {
             </div>
           </div>
         </Col>
-
         <Col size="md-4">
           <div className="card card-dark">
             <div className="card-body card-dark dark">
@@ -151,7 +158,6 @@ function AdminDash() {
           <label htmlFor="userFilter">User Filter:</label>
           <input type="text" id="userFilter" name="userFilter" ref={userFilterRef} onChange={onFilterChange} />
           <div className="card">
-
             {
               state.users ?
                 state.users.map(user => (
@@ -163,7 +169,6 @@ function AdminDash() {
         <Col size="md-4">
           <h1>Courses</h1>
           <AddModal title="Add Course" users={state.users} form={AddCourseForm} onReturn={updateCoursesOnly} />
-
           <br />
           <input type="text" id="courseFilter" name="courseFilter" placeholder="Filter by Course" ref={courseFilterRef} onChange={onFilterChange} />
           {
