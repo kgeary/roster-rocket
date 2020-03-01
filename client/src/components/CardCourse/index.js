@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import PayButton from "../PayButton";
+import EnrollCourseModal from "../EnrollCourseModal";
+import EnrollCourseForm from "../forms/EnrollCourseForm";
 
 function CardCourse(props) {
 
-    const [studentState, setStudentState] = useState(false);
+    const [courseState, setCourseState] = useState(props.accordion || false);
 
     //console.log("CARD COURSE", props.course);
     const onDelete = (id) => {
@@ -37,7 +39,7 @@ function CardCourse(props) {
                         </div>
                     ))
                 }
-                <Link to="/" className="card-link">Add another Student</Link>
+                <EnrollCourseModal course={props.course} form={EnrollCourseForm} onReturn={props.updateFunc} />
             </React.Fragment>
         );
     }
@@ -56,10 +58,11 @@ function CardCourse(props) {
                     <li className="list-group-item">Paid: {props.course.Students.filter(s => s.Paid).length}</li>
                     <li className="list-group-item">Unpaid: {props.course.Students.filter(s => !s.Paid).length}</li>
                     {props.admin ? <button className="btn btn-danger btn-sm" onClick={() => onDelete(props.course.id)}>Delete Course</button> : null}
-                    <button className="btn btn-info btn-sm" onClick={() => { setStudentState(!studentState) }}>{studentState ? "Hide Students" : "Show Students"}</button>
+
+                    <button className="btn btn-info btn-sm" onClick={() => { setCourseState(!courseState) }}>{courseState ? "Hide Students" : "Show Students"}</button>
                 </ul>
                 {
-                    studentState ?
+                    courseState ?
                         renderStudents() :
                         null
                 }

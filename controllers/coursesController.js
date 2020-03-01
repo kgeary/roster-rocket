@@ -33,7 +33,19 @@ module.exports = {
   },
 
   readById: function (req, res) {
-    db.Course.findAll({ where: { id: req.params.id } })
+    db.Course.findOne({
+      where: { id: req.params.id },
+      include: [{
+        model: db.User, // Teacher
+      },
+      {
+        model: db.Student, // Students
+        as: "Students",
+        include: {
+          model: db.User, // Parent
+        },
+      }]
+    })
       .then(data => {
         res.json(data);
       })

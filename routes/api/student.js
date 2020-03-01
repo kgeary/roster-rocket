@@ -12,6 +12,12 @@ router
   .route("/all")
   .get(isAdmin, studentsController.readAll);
 
+// Matches with "/api/student/user"
+router
+  .route("/user")
+  .get(studentsController.getUserStudents);
+
+// Matches with "/api/student/:id"
 router
   .route("/:id")
   .get(isAdmin, studentsController.readById)
