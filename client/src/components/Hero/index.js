@@ -18,7 +18,12 @@ const Hero = () => {
                 has 10 students or 10,000...Roster Rocket is here to help you
                 manage it!
               </p>
-              <a href="/signup"><button className="hero-btn" to="/signup"><img src={btnIcon} className="btn-icon" />PREPARE FOR LAUNCH</button></a>
+              <a href='/signup'>
+                <button className='hero-btn'>
+                  <img src={btnIcon} className='btn-icon' />
+                  PREPARE FOR LAUNCH
+                </button>
+              </a>
             </div>
           </div>
         </div>
