@@ -95,6 +95,7 @@ function LoginForm() {
           <br />
           <div id="alert" role="alert" />
           <Link to="/signup">Signup for a new Account</Link>
+          <br />
           <Link to="/resetPassword">Forgot Password?</Link>
         </form>
       </div>

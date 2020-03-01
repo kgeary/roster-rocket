@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 import btnIcon from "../Nav/rocket.svg";
 
@@ -18,7 +19,12 @@ const Hero = () => {
                 has 10 students or 10,000...Roster Rocket is here to help you
                 manage it!
               </p>
-              <a href="/signup"><button className="hero-btn" to="/signup"><img src={btnIcon} className="btn-icon" />PREPARE FOR LAUNCH</button></a>
+              <Link to="/signup">
+                <button className="hero-btn">
+                  <img src={btnIcon} className="btn-icon" alt="Signup" />
+                  PREPARE FOR LAUNCH
+                </button>
+              </Link>
             </div>
           </div>
         </div>
