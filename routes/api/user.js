@@ -38,4 +38,5 @@ router
 router
   .route("/img")
   .patch(usersController.updateImage);
+
 module.exports = router;

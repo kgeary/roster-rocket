@@ -105,6 +105,10 @@ export default {
 
   setUserImage: function (userId, imgUrl) {
     return axios.patch("/api/user/img", { id: userId, img: imgUrl });
+  },
+
+  setStudentImage: function (studentId, imgUrl) {
+    return axios.patch("/api/student/img", { id: studentId, img: imgUrl });
   }
 
 };
