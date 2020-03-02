@@ -74,8 +74,18 @@ function CardStudent(props) {
     }
     // End of Cloudinary Upload Widget
 
+    const showCoursesBtn = () => {
+        if (props.student.StudentCourses.length === 0) {
+            return null;
+        } else {
+            return               <button
+            className="btn btn-info btn-sm"
+            disabled={props.student.StudentCourses.length === 0}
+            onClick={() => { setCourseState(!courseState) }}>{courseState ? "Hide Classes" : "Show Classes"}</button>
+        }
+    }
     return (
-        <div className="card student-card">
+        <div className="card student-card benefit">
             {
                 props.student.img.includes("via.placeholder") ?
                     <Avatar name={props.student.name} className='avatarCss' /> :
@@ -85,19 +95,16 @@ function CardStudent(props) {
             <button id="upload_widget" className="cloudinary-button" onClick={openWidget}>Upload Image</button>
             <div className="card-body">
 
-                <h5 className="card-title">{props.student.name}</h5>
-            </div>
-            <ul className="list-group list-group-flush">
+                <h5 className="card-title student-card-title">{props.student.name}</h5>
+            <ul className="list-group">
                 <li className="list-group-item">Age: {props.student.age}</li>
                 <li className="list-group-item">Parent: {props.student.User.name}</li>
                 {props.student.StudentCourses.length === 0 ? <li className="list-group-item">Not Currently Enrolled</li> : null}
                 {props.admin ? <button className="btn btn-danger btn-sm" onClick={() => onDelete(props.student.id)}>Delete Student</button> : null}
                 <EnrollStudentModal student={props.student} form={EnrollStudentForm} onReturn={props.updateFunc} />
-                <button
-                    className="btn btn-info btn-sm"
-                    disabled={props.student.StudentCourses.length === 0}
-                    onClick={() => { setCourseState(!courseState) }}>{courseState ? "Hide Classes" : "Show Classes"}</button>
+                {showCoursesBtn()}
             </ul>
+            </div>
             {
                 courseState ?
                     <div className="card-body">

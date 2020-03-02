@@ -1,5 +1,6 @@
-.avatarCss {
-    
-    border-radius: 50%;
-
+.student-card-title {
+  text-align: center;
+  font-family: Acme;
+  font-size: 30px;
+  color: #213946;
 }
