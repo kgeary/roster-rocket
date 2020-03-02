@@ -1,30 +1,36 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { useStoreContext } from "../utils/GlobalState";
-import CardParent from "../components/CardParent";
+import CardCourse from "../components/CardCourse";
 import API from "../utils/API";
 import * as ACTIONS from "../utils/actions";
 
-function ParentDash() {
+function Course() {
   const [state, dispatch] = useStoreContext();
-  const [parent, setParent] = useState(null);
+  const [course, setCourse] = useState(null);
+  const [status, setStatus] = useState(null);
+  const { id } = useParams();
 
   const loadData = () => {
     dispatch({ type: ACTIONS.LOADING });
-    API.getUser(true)
+    API.getCourseById(id)
       .then(res => {
-        console.log("GET Current user", res.data);
-        setParent(res.data);
+        console.log("GET COURSE BY ID " + id, res.data);
+        setCourse(res.data);
+        if (!res.data) {
+          throw new Error("Unable to Find Course");
+        }
       })
       .then(() => {
-        return API.getAllCourses();
+        return API.getUserStudents();
       })
       .then(res => {
-        dispatch({ type: ACTIONS.SET_COURSES, value: res.data });
+        dispatch({ type: ACTIONS.SET_STUDENTS, value: res.data });
       })
       .catch(err => {
-        console.log("Error Getting Current user", err);
-        setParent(undefined);
+        setStatus(<h1>{err.message}</h1>);
+        setCourse(undefined);
       })
       .finally(() => {
         dispatch({ type: ACTIONS.DONE });
@@ -39,7 +45,7 @@ function ParentDash() {
   const LoadScreen = () => {
     return (
       <Container fluid>
-        <h1>Loading Parent Data...</h1>
+        <h1>Loading Course Data...</h1>
       </Container>
     )
   }
@@ -49,29 +55,21 @@ function ParentDash() {
     return LoadScreen();
   }
 
-  if (!state.user) {
-    return (
-      <Container fluid>
-        <h1>You must be logged in to access this page.</h1>
-      </Container>
-    )
-  }
-
   return (
     <Container fluid>
       {
-        parent ?
+        course ?
           <React.Fragment>
-            <h1>Parent Dashboard {parent ? parent.email : null}</h1>
+            <h1>Course Page {course ? course.title : null}</h1>
             <Row>
               <Col size='md-12'>
-                <CardParent user={parent} includeChildren={true} updateFunc={loadData} accordion={true} changePw={true} />
+                <CardCourse course={course} updateFunc={loadData} accordion={true} />
               </Col>
             </Row>
-          </React.Fragment> : null
+          </React.Fragment> : status
       }
     </Container>
   );
 }
 
-export default ParentDash;
+export default Course;

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Container } from "../../Grid";
 import validate from "../../../utils/validate";
 import alertFactory from "../../../utils/alertFactory";
@@ -6,10 +6,13 @@ import API from "../../../utils/API";
 import * as ACTIONS from "../../../utils/actions";
 import { useStoreContext } from "../../../utils/GlobalState";
 import InputForm from "../InputForm";
+import { Redirect } from "react-router-dom";
 
 function PasswordResetForm() {
 
   const [state, dispatch] = useStoreContext();
+  const [finished, setFinished] = useState(false);
+
   const emailRef = useRef();
   const formAlert = alertFactory("alert");
 
@@ -34,8 +37,10 @@ function PasswordResetForm() {
       API.resetPassword(email)
         .then(res => {
           // Successful Login
+          formAlert("Password Reset. Check Your Inbox for new Password");
           console.log("Password Reset Submitted");
           emailRef.current.value = "";
+          setTimeout(() => setFinished(true), 2000);
         })
         .catch((err) => {
           // Login Failed
@@ -51,6 +56,10 @@ function PasswordResetForm() {
           dispatch({ type: ACTIONS.DONE });
         });
     }
+  }
+
+  if (finished) {
+    return <Redirect to="/login" />
   }
 
 

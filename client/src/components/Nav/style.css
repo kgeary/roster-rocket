@@ -11,6 +11,39 @@ body.dark p {
   color: #ddd;
 }
 
+body.dark a {
+  color: #ddd;
+}
+
+body.dark a.nav-link {
+  color: #222;
+}
+
+body.dark .card {
+  background-color: #AAA;
+}
+
+body.dark .card li {
+  background-color: #AAA;
+}
+
+body.dark label {
+  color: #ddd;
+}
+
+body.dark input {
+  color: #ddd;
+  background-color: #AAA;
+}
+
+body.dark .card a, body.dark .card h1, body.dark .card h2, body.dark .card h3, body.dark .card h4, body.dark .card h5, body.dark .card h6, body.dark .card p {
+  color: #222;
+}
+
+.card p {
+  color: #222;
+}
+
 body.light {
   background-color: #ddd;
   color: #222;
@@ -68,5 +101,5 @@ a {
 }
 
 a:hover {
-  color: #666;
+  color: #AAA;
 }

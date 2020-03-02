@@ -1,15 +1,19 @@
 import axios from "axios";
 
 export default {
+  // Login user
+  loginUser: function (user) {
+    return axios.post("/api/auth/login", user);
+  },
+
   // Create a new user
   addUser: function (user) {
-    return axios.post("/api/user/signup/", user);
+    return axios.post("/api/auth/signup/", user);
   },
 
   addCourse: function (course) {
     return axios.post("/api/course/add", course);
   },
-
 
   addStudent: function (student) {
     return axios.post("/api/student/add", student);
@@ -39,11 +43,6 @@ export default {
     return axios.post(`/api/studentcourse/paid/${StudentId}/${CourseId}`, { Paid: true });
   },
 
-  // Login user
-  loginUser: function (user) {
-    return axios.post("/api/user/login", user);
-  },
-
   // Logout current user
   logoutUser: function () {
     return axios.post("/api/user/logout");
@@ -53,14 +52,25 @@ export default {
     if (includeChildren) {
       return axios.get("/api/user/children");
     } else {
-      return axios.get("/api/user");
+      return axios.get("/api/auth/user");
     }
+  },
+
+  getUserById: function (id) {
+    return axios.get(`/api/user/children/${id}`);
   },
 
   getAllUsers: function () {
     return axios.get("/api/user/all");
   },
 
+  getUserStudents: function () {
+    return axios.get("/api/student/user");
+  },
+
+  getCourseById: function (id) {
+    return axios.get(`/api/course/${id}`);
+  },
 
   getAllCourses: function () {
     return axios.get("/api/course/all");
@@ -86,7 +96,7 @@ export default {
   },
 
   resetPassword: function (email) {
-    return axios.post("/api/reset", { email });
+    return axios.post("/api/auth/reset", { email });
   },
 
 };

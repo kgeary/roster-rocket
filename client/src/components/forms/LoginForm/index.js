@@ -65,7 +65,7 @@ function LoginForm() {
 
   return (
     <Container>
-      {state.username ? <Redirect to="/" /> : null}
+      {state.user ? (state.user.isAdmin ? <Redirect to="/admin" /> : <Redirect to="/parent" />) : null}
       <div className="form-container">
         <h1>Login</h1>
         <form className="form-group mt-3 mb-2 form-login">
@@ -93,8 +93,10 @@ function LoginForm() {
             Login
         </button>
           <br />
-          <Link to="/signup">Signup for a new Account</Link>
           <div id="alert" role="alert" />
+          <Link to="/signup">Signup for a new Account</Link>
+          <br />
+          <Link to="/resetPassword">Forgot Password?</Link>
         </form>
       </div>
     </Container >
