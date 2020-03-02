@@ -1,0 +1,50 @@
+.footer {
+  margin-top: 75px;
+  border-top: 1px solid #000;
+  background-color: #2e4e5d;
+  color: #ddd !important;
+  padding: 45px 0px 45px 0px;
+  font-size: 16px;
+}
+
+.footer-title {
+  font-family: Acme;
+  font-size: 24px;
+  color: #ffc108 !important;
+  padding-top: 25px;
+}
+
+.footer-brand {
+  text-align: center;
+}
+
+.footer-brand img {
+  padding-bottom: 15px;
+}
+
+.footer-brand-title {
+  font-family: Acme;
+  font-size: 28px;
+  color: #ddd !important;
+}
+
+.separator {
+  height: 2px;
+  background-color: #45738b;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.copyright {
+  font-size: 14px;
+  color: #ddd !important;
+}
+
+.footer a {
+  color: rgb(197, 197, 197);
+  font-size: 16px;
+}
+
+.footer a:hover {
+  color: #ffc108;
+}

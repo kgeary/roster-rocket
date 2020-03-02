@@ -7,6 +7,10 @@ body.dark h1 {
   color: #ddd;
 }
 
+body.dark p {
+  color: #ddd;
+}
+
 body.dark a {
   color: #ddd;
 }
@@ -45,6 +49,10 @@ body.light {
   color: #222;
 }
 
+body.light p {
+  color: #222;
+}
+
 body.dark .navbar.navbar-light.bg-light {
   background-color: red;
 }
@@ -67,7 +75,8 @@ body.dark .navbar.navbar-light.bg-light {
 }
 
 .navbar {
-  border-bottom: 1px solid #AAA;
+  border-bottom: 1px solid #666;
+  box-shadow: inset 0px -6px 5px rgba(0, 0, 0, 0.7)
 }
 
 .brand {

@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import { Col, Row, Container } from "../components/Grid";
-import Hero from "../components/Hero";
 import { useStoreContext } from "../utils/GlobalState";
 import * as ACTIONS from "../utils/actions";
+import Hero from "../components/Hero";
+import Benefit from "../components/Benefit";
+import Footer from "../components/Footer";
+import CallToAction from "../components/CallToAction";
 
 function Home() {
   const [state, dispatch] = useStoreContext();
@@ -12,13 +15,20 @@ function Home() {
   }, []);
 
   if (!state.user) {
-    return <Hero />
+    return (
+      <div>
+        <Hero />
+        <Benefit />
+        <CallToAction />
+        <Footer />
+      </div>
+    );
   }
 
   return (
     <Container fluid>
       <Row>
-        <Col size="12">
+        <Col size='12'>
           <h1>Hi {state.username ? state.username : "Guest User"}</h1>
         </Col>
       </Row>
