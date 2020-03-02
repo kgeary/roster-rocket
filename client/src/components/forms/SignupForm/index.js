@@ -10,6 +10,9 @@ import InputForm from "../InputForm";
 
 function SignupForm() {
   const emailRef = useRef();
+  const nameRef = useRef();
+  const phoneRef = useRef();
+  const imgRef = useRef();
   const passwordRef = useRef();
   const password2Ref = useRef();
   const formAlert = alertFactory("alert");
@@ -20,19 +23,36 @@ function SignupForm() {
     e.preventDefault();
     const errors = [];
 
-    const email = emailRef.current.value;
-    if (!validate.email(email)) {
-      errors.push("Invalid Email Address");
-    }
+    const email = emailRef.current.value.trim();
+    if (!validate.email(email)) { errors.push("Invalid Email Address"); }
+
+    const name = nameRef.current.value.trim();
+    if (name.length < 2) { errors.push("Invalid Name"); }
+
+    const phone = phoneRef.current.value.trim();
+    // Validate Phone?
+
+    const img = imgRef.current.value.trim();
+    // Validate image?
 
     const password = passwordRef.current.value;
     if (!validate.password(password)) {
-      errors.push("Invalid Password");
+      errors.push("Invalid Password.<br>Password must be 6-18 chars and may only contain Letters, Numbers, Space, -, or _");
     }
 
     const password2 = password2Ref.current.value;
     if (password !== password2) {
       errors.push("Passwords Do Not Match!");
+    }
+    const newUser = {
+      email,
+      password,
+      name,
+      phone
+    };
+
+    if (img.includes("http")) {
+      newUser.img = img;
     }
 
     if (errors.length > 0) {
@@ -40,28 +60,24 @@ function SignupForm() {
     } else {
       formAlert(false);
       dispatch({ type: ACTIONS.LOADING });
-      API.addUser({
-        email,
-        password,
-        name: "DEFAULT NAME",
-        phone: "DEFAULT PHONE"
-      })
+      API.addUser(newUser)
         .then(res => {
           console.log("USER", res.data);
           emailRef.current.value = "";
+          nameRef.current.value = "";
+          phoneRef.current.value = "";
+          imgRef.current.value = "";
           passwordRef.current.value = "";
           password2Ref.current.value = "";
           dispatch({ type: ACTIONS.SET_USER, user: res.data });
-        })
-        .catch(err => {
+        }).catch(err => {
           if (err.message) {
             formAlert(err.message);
           } else {
             console.log(err);
             formAlert("Username Already Exists!");
           }
-        })
-        .finally(() => {
+        }).finally(() => {
           dispatch({ type: ACTIONS.DONE });
         });
     }
@@ -81,6 +97,33 @@ function SignupForm() {
             type='email'
             length='64'
             placeholder='Email'
+          />
+
+          {/* NAME */}
+          <InputForm
+            id="name"
+            inputRef={nameRef}
+            type="text"
+            length="32"
+            placeholder="Your Name"
+          />
+
+          {/* PHONE */}
+          <InputForm
+            id="phone"
+            inputRef={phoneRef}
+            type="tel"
+            length="32"
+            placeholder="Phone Number"
+          />
+
+          {/* Photo */}
+          <InputForm
+            id="img"
+            inputRef={imgRef}
+            type="url"
+            length="128"
+            placeholder="URL to Your Photo (Leave Blank for Default)"
           />
 
           {/* PASSWORD */}

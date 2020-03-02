@@ -73,7 +73,11 @@ const Benefit = () => {
           </p>
         </div>
         <div className='col-sm-6'>
-          <img src='https://via.placeholder.com/540x325' class='screenshot' />
+          <img
+            src='https://via.placeholder.com/540x325'
+            class='screenshot'
+            alt='placeholder for screenshot of admin dashboard'
+          />
         </div>
       </div>
       <div className='gap'></div>

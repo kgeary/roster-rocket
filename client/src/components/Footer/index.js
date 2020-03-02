@@ -9,7 +9,7 @@ const Footer = () => {
       <div className='container'>
         <div className='row'>
           <div className='col-sm-3 footer-brand'>
-            <img src={Icon} />
+            <img src={Icon} alt='rocket-icon' />
             <p className='footer-brand-title'>Roster Rocket</p>
             <p className='copyright'>
               &copy;2020 Rocket Roster, Inc.
@@ -20,18 +20,18 @@ const Footer = () => {
           <div className='col-sm-3'>
             <p className='footer-title'>Contact Us</p>
             <div className='separator'></div>
-            <a href='#'>(800) 707-1337</a>
+            <Link to='tel:8007071337'>(800) 707-1337</Link>
             <br />
-            <a href='mailto:rosterrocket2020@gmail.com'>
+            <Link to='mailto:rosterrocket2020@gmail.com'>
               rosterrocket2020@gmail.com
-            </a>
+            </Link>
           </div>
           <div className='col-sm-3'>
             <p className='footer-title'>Legal</p>
             <div className='separator'></div>
-            <a href='#'>Privacy Policy</a>
+            <Link to='#'>Privacy Policy</Link>
             <br />
-            <a href='#'>Terms of Service</a>
+            <Link to='#'>Terms of Service</Link>
           </div>
           <div className='col-sm-3'>
             <p className='footer-title'>Navigation</p>

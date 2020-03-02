@@ -1,10 +1,7 @@
 const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
-const isAuthenticated = require("../../config/middleware/isAuthenticated");
+// const isAuthenticated = require("../../config/middleware/isAuthenticated");
 const isAdmin = require("../../config/middleware/isAdmin");
-
-// Matches with "/api/user"
-
 
 // Matches with "/api/user/children"
 router
