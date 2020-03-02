@@ -3,13 +3,10 @@ import { Col, Row, Container } from "../components/Grid";
 import { useStoreContext } from "../utils/GlobalState";
 import * as ACTIONS from "../utils/actions";
 import API from "../utils/API";
-import CardParent from "../components/CardParent";
-import CardCourse from "../components/CardCourse";
-import CardStudent from "../components/CardStudent";
 import AddCourseForm from "../components/forms/AddCourseForm";
 import AddStudentForm from "../components/forms/AddStudentForm";
 import AddModal from "../components/AddModal";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function AdminDash() {
   const [state, dispatch] = useStoreContext();
@@ -94,13 +91,13 @@ function AdminDash() {
     const { name, value } = e.target;
     switch (name) {
       case "userFilter":
-        setUserFilter(value);
+        setUserFilter(value.toLowerCase());
         break;
       case "courseFilter":
-        setCourseFilter(value);
+        setCourseFilter(value.toLowerCase());
         break;
       case "studentFilter":
-        setStudentFilter(value);
+        setStudentFilter(value.toLowerCase());
         break;
       default:
         throw new Error("Unknown filter");
@@ -161,40 +158,44 @@ function AdminDash() {
           <h1>Parents</h1>
           <label htmlFor="userFilter">User Filter:</label>
           <input type="text" id="userFilter" name="userFilter" ref={userFilterRef} onChange={onFilterChange} />
-          <div className="card">
+          <table className="table table-striped">
             {
               state.users ?
-                state.users.map(user => (
-                  <CardParent user={user} key={user.id} admin={true} updateFunc={updateAll} includeChildren={true} />
+                state.users.filter(user => user.name.toLowerCase().includes(userFilter)).map(user => (
+                  <tr><td><Link to={`/user/${user.id}`}>{user.name}</Link></td></tr>
                 )) : null
             }
-          </div>
+          </table>
         </Col>
         <Col size="md-4">
           <h1>Courses</h1>
           <AddModal title="Add Course" users={state.users} form={AddCourseForm} onReturn={updateCoursesOnly} />
           <br />
           <input type="text" id="courseFilter" name="courseFilter" placeholder="Filter by Course" ref={courseFilterRef} onChange={onFilterChange} />
-          {
-            state.courses ?
-              state.courses.map(course => (
-                <CardCourse course={course} key={course.title} admin={true} updateFunc={updateAll} />
-              )) : null
-          }
+          <table className="table table-striped">
+            {
+              state.courses ?
+                state.courses.filter(course => course.title.toLowerCase().includes(courseFilter)).map(course => (
+                  <tr><td><Link to={`/course/${course.id}`}>{course.title}</Link></td></tr>
+                )) : null
+            }
+          </table>
         </Col>
         <Col size="md-4">
           <h1>Students</h1>
           <AddModal title="Add Student" form={AddStudentForm} users={state.users} onReturn={updateStudentsOnly} />
           <input type="text" id="studentFilter" name="studentFilter" placeholder="Filter by Student" ref={studentFilterRef} onChange={onFilterChange} />
-          {
-            state.students ?
-              state.students.map(student => (
-                <CardStudent student={student} key={student.id} admin={true} updateFunc={updateAll} />
-              )) : null
-          }
+          <table className="table table-striped">
+            {
+              state.students ?
+                state.students.filter(student => student.name.toLowerCase().includes(studentFilter)).map(student => (
+                  <tr><td><Link to={`/student/${student.id}`}>{student.name}</Link></td></tr>
+                )) : null
+            }
+          </table>
         </Col>
       </Row>
-    </Container>
+    </Container >
   );
 }
 

@@ -9,6 +9,7 @@ import AdminDash from "./pages/AdminDash";
 import ParentDash from "./pages/ParentDash";
 import User from "./pages/User";
 import Course from "./pages/Course";
+import Student from "./pages/Student";
 import Nav from "./components/Nav";
 import PasswordChange from './pages/PasswordChange';
 import PasswordReset from './pages/PasswordReset';
@@ -29,6 +30,7 @@ function App() {
             <Route exact path="/parent" component={ParentDash} />
             <Route exact path="/user/:id" component={User} />
             <Route exact path="/course/:id" component={Course} />
+            <Route exact path="/student/:id" component={Student} />
             <Route exact path="/changePassword" component={PasswordChange} />
             <Route exact path="/resetPassword" component={PasswordReset} />
             <Route exact path="/notauthorized" component={NotAuthorized} />

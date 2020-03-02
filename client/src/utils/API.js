@@ -72,6 +72,10 @@ export default {
     return axios.get(`/api/course/${id}`);
   },
 
+  getStudentById: function (id) {
+    return axios.get(`/api/student/${id}`);
+  },
+
   getAllCourses: function () {
     return axios.get("/api/course/all");
   },

@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Jumbotron from "../components/Jumbotron";
 import { Col, Row, Container } from "../components/Grid";
+import { useStoreContext } from "../utils/GlobalState";
+import * as ACTIONS from "../utils/actions";
 
 function NoMatch() {
+
+  const [state, dispatch] = useStoreContext();
+
+  useEffect(() => {
+    dispatch({ type: ACTIONS.DONE });
+  }, []);
+
   return (
     <Container fluid>
       <Row>
