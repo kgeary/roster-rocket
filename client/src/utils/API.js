@@ -103,4 +103,8 @@ export default {
     return axios.post("/api/auth/reset", { email });
   },
 
+  setUserImage: function (userId, imgUrl) {
+    return axios.patch("/api/user/img", { id: userId, img: imgUrl });
+  }
+
 };
