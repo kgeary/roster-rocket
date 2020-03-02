@@ -1,9 +1,17 @@
 import React from "react";
 import SignupForm from "../components/forms/SignupForm";
+import Parallax from "../components/Parallax";
+import CallToAction from "../components/CallToAction";
+import Footer from "../components/Footer";
 
 function Signup() {
   return (
-    <SignupForm />
+    <div>
+      <SignupForm />
+      <Parallax />
+      <CallToAction />
+      <Footer />
+    </div>
   );
 }
 

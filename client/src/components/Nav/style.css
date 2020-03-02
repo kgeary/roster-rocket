@@ -20,11 +20,11 @@ body.dark a.nav-link {
 }
 
 body.dark .card {
-  background-color: #AAA;
+  background-color: #aaa;
 }
 
 body.dark .card li {
-  background-color: #AAA;
+  background-color: #aaa;
 }
 
 body.dark label {
@@ -33,10 +33,17 @@ body.dark label {
 
 body.dark input {
   color: #ddd;
-  background-color: #AAA;
+  background-color: #aaa;
 }
 
-body.dark .card a, body.dark .card h1, body.dark .card h2, body.dark .card h3, body.dark .card h4, body.dark .card h5, body.dark .card h6, body.dark .card p {
+body.dark .card a,
+body.dark .card h1,
+body.dark .card h2,
+body.dark .card h3,
+body.dark .card h4,
+body.dark .card h5,
+body.dark .card h6,
+body.dark .card p {
   color: #222;
 }
 
@@ -76,7 +83,11 @@ body.dark .navbar.navbar-light.bg-light {
 
 .navbar {
   border-bottom: 1px solid #666;
-  box-shadow: inset 0px -6px 5px rgba(0, 0, 0, 0.7)
+  box-shadow: inset 0px -6px 5px rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 .brand {
@@ -101,5 +112,5 @@ a {
 }
 
 a:hover {
-  color: #AAA;
+  color: #45738b !important;
 }

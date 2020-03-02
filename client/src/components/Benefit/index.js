@@ -22,7 +22,7 @@ const Benefit = () => {
       </div>
       <div className='row'>
         <div className='col-sm-4'>
-          <div className='card'>
+          <div className='card benefit'>
             <div className='card-body text-center'>
               <i className='fas fa-clock card-icon' />
               <h5 className='card-title benefit-title'>Save Time</h5>
@@ -33,7 +33,7 @@ const Benefit = () => {
           </div>
         </div>
         <div className='col-sm-4'>
-          <div className='card'>
+          <div className='card benefit'>
             <div className='card-body text-center'>
               <i className='fas fa-dollar-sign card-icon' />
               <h5 className='card-title benefit-title'>Get Paid</h5>
@@ -44,7 +44,7 @@ const Benefit = () => {
           </div>
         </div>
         <div className='col-sm-4'>
-          <div className='card'>
+          <div className='card benefit'>
             <div className='card-body text-center'>
               <i className='fas fa-address-card card-icon' />
               <h5 className='card-title benefit-title'>Manage Contacts</h5>
@@ -60,6 +60,7 @@ const Benefit = () => {
       <div className='row'>
         <div className='col-sm-6'>
           <h1>Get Organized.</h1>
+          <br />
           <p>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius
             doloribus officiis dolore perferendis labore impedit a similique

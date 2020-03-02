@@ -20,7 +20,7 @@ const Hero = () => {
                 manage it!
               </p>
               <Link to='/signup'>
-                <button className='hero-btn'>
+                <button className='hero-btn wiggle'>
                   <img src={btnIcon} className='btn-icon' alt='Signup' />
                   PREPARE FOR LAUNCH
                 </button>

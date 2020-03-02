@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 import Icon from "./footer-rocket.png";
 
@@ -35,11 +36,11 @@ const Footer = () => {
           <div className='col-sm-3'>
             <p className='footer-title'>Navigation</p>
             <div className='separator'></div>
-            <a href='#'>Home</a>
+            <Link to='/'>Home</Link>
             <br />
-            <a href='#'>Signup</a>
+            <Link to='/signup'>Signup</Link>
             <br />
-            <a href='#'>Login</a>
+            <Link to='/login'>Login</Link>
             <br />
           </div>
         </div>

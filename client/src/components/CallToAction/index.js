@@ -9,7 +9,7 @@ const CallToAction = () => {
         <span className='call-to-span'>
           Organize Your Co-op Today!{" "}
           <Link to='/signup'>
-            <button className='call-to-btn'>
+            <button className='call-to-btn wiggle'>
               <i className='fas fa-arrow-right btn-icon'></i>GET STARTED
             </button>
           </Link>

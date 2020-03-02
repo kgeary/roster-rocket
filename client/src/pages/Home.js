@@ -6,6 +6,7 @@ import Hero from "../components/Hero";
 import Benefit from "../components/Benefit";
 import Footer from "../components/Footer";
 import CallToAction from "../components/CallToAction";
+import Parallax from "../components/Parallax";
 
 function Home() {
   const [state, dispatch] = useStoreContext();
@@ -19,6 +20,7 @@ function Home() {
       <div>
         <Hero />
         <Benefit />
+        <Parallax />
         <CallToAction />
         <Footer />
       </div>
