@@ -1,19 +1,14 @@
 .hero {
   background-image: url(./heroBG.jpg);
-  background-size: cover;
   width: 100%;
-  height: 700px;
-  /* You must set a specified height */
+  min-height: 750px;
   background-color: #014366;
-  /* Used if the image is unavailable */
   background-position: center;
-  /* Center the image */
   background-repeat: no-repeat;
-  /* Do not repeat the image */
   background-size: cover;
-  /* Resize the background image to cover the entire container */
   margin: 0;
-  margin-top: -2rem;
+  box-shadow: inset 0px -10px 5px rgba(0, 0, 0, 0.3);
+  padding-top: 50px;
 }
 
 .hero-text {
@@ -44,10 +39,10 @@
 
 .hero-btn {
   margin: 25px;
-  background-color: #ffc108;
+  background-color: #fdfd00;
   font: #333;
   font-weight: bold;
-  padding: 10px 25px 10px 25px;
+  padding: 15px 25px 20px 25px;
   border-radius: 10px;
   font-size: 20px;
   cursor: pointer;
@@ -55,19 +50,37 @@
   box-shadow: inset 0px -6px 5px rgba(0, 0, 0, 0.7);
 }
 
+@keyframes wiggle {
+  20%  { transform: translateX(4px);  }
+  40%  { transform: translateX(-4px); }
+  60%  { transform: translateX(2px);  }
+  80%  { transform: translateX(-1px); }
+  100% { transform: translateX(0);    }
+}
+
+.wiggle:hover {
+  animation: wiggle 1s ease;
+  animation-iteration-count: 1;
+}
+
 .btn-icon {
   width: 20px;
   height: 20px;
   margin-right: 20px;
+  transition: transform 1s;
 }
 
 .hero-btn:hover {
-  background-color: #fdfd00;
+  background-color: #ffc108;
+  text-decoration: underline;
+  transform: rotate(1080deg);
 }
 
 .gap {
   margin: 75px;
 }
+
+
 
 @media screen and (max-width: 767px) {
   .hero {

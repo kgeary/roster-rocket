@@ -1,0 +1,21 @@
+.parallax {
+    background-image: url(./kids.jpg);
+    width: 100%;
+    min-height: 550px;
+    background-attachment: fixed;
+
+    /* You must set a specified height */
+    background-color: #014366;
+    /* Used if the image is unavailable */
+    background-position: center;
+    
+    /* Center the image */
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: cover;
+    /* Resize the background image to cover the entire container */
+
+    margin: 0;
+    margin-top: -2rem;
+    box-shadow: inset 0px -750px 5px rgba(255,255,255, 0.3);
+}

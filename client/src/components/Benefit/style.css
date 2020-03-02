@@ -6,6 +6,11 @@
   margin-top: 25px;
 }
 
+.benefit {
+  width: 100%;
+  background-image: url(./school.png);
+}
+
 .card-icon {
   font-size: 56px;
   padding-bottom: 25px;

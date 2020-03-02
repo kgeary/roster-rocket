@@ -9,7 +9,6 @@ import * as ACTIONS from "../../../utils/actions";
 import InputForm from "../InputForm";
 
 function SignupForm() {
-
   const emailRef = useRef();
   const nameRef = useRef();
   const phoneRef = useRef();
@@ -82,22 +81,22 @@ function SignupForm() {
           dispatch({ type: ACTIONS.DONE });
         });
     }
-  }
+  };
 
   return (
     <Container>
-      {state.username ? <Redirect to="/" /> : null}
-      <div className="form-container">
-        <h1>Signup for an Account</h1>
-        <form className="form-group mt-3 mb-2 form-signup">
-
+      {state.username ? <Redirect to='/' /> : null}
+      <div className='form-container'>
+        <br /><div className='gap'></div><br />
+        <h1>Signup for an Account</h1><br />
+        <form className='form-group mt-3 mb-2 form-signup'>
           {/* EMAIL */}
           <InputForm
-            id="email"
+            id='email'
             inputRef={emailRef}
-            type="email"
-            length="64"
-            placeholder="Email"
+            type='email'
+            length='64'
+            placeholder='Email'
           />
 
           {/* NAME */}
@@ -129,38 +128,37 @@ function SignupForm() {
 
           {/* PASSWORD */}
           <InputForm
-            id="password"
+            id='password'
             inputRef={passwordRef}
-            type="password"
-            length="32"
-            placeholder="Password"
+            type='password'
+            length='32'
+            placeholder='Password'
           />
 
           {/* PASSWORD2 */}
           <InputForm
-            id="password2"
+            id='password2'
             inputRef={password2Ref}
-            type="password"
-            length="32"
-            placeholder="Confirm Password"
+            type='password'
+            length='32'
+            placeholder='Confirm Password'
           />
 
           <button
-            id="submitAccount"
-            className="btn btn-success mt-3 mb-5"
-            onClick={handleSubmit}>
+            id='submitAccount'
+            className='btn btn-success mt-3 mb-5'
+            onClick={handleSubmit}
+          >
             Create Account
           </button>
           <br />
-          <Link to="/login">Already a user? Login to your account</Link>
-          <div id="alert" role="alert" />
-
+          <Link to='/login'>Already a user? Login to your account</Link>
+          <div id='alert' role='alert' />
         </form>
       </div>
+      <div className='gap'></div><br />
     </Container>
   );
 }
-
-
 
 export default SignupForm;

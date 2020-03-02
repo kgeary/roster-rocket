@@ -67,7 +67,8 @@ function LoginForm() {
     <Container>
       {state.user ? (state.user.isAdmin ? <Redirect to="/admin" /> : <Redirect to="/parent" />) : null}
       <div className="form-container">
-        <h1>Login</h1>
+      <br /><div className='gap'></div><br />
+        <h1>Login</h1><br />
         <form className="form-group mt-3 mb-2 form-login">
           {/* EMAIL */}
           <InputForm
@@ -99,6 +100,7 @@ function LoginForm() {
           <Link to="/resetPassword">Forgot Password?</Link>
         </form>
       </div>
+      <div className='gap'></div><br />
     </Container >
   );
 }
