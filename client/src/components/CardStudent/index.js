@@ -50,9 +50,33 @@ function CardStudent(props) {
         );
     }
 
+    {/*Start of Cloudinary Upload Widget*/ }
+
+    const openWidget = () => {
+        var myWidget = window.cloudinary.createUploadWidget({
+            cloudName: 'ds8zmuetv',
+            sources: ['local', 'url', 'image_search'],
+            uploadPreset: 'bnlyr9la'
+        }, (error, result) => {
+            if (!error && result && result.event === "success") {
+                console.log('Done! Here is the image info: ', result.info);
+                API.setStudentImage(props.student.id, result.info.url)
+                    .then((data) => {
+                        console.log(result.info.url)
+                        props.updateFunc();
+
+                    });
+            }
+        }
+        ).open()
+    }
+    {/*End of Cloudinary Upload Widget*/ }
+
     return (
         <div className="card student-card">
             <img src={props.student.img} className="card-img-top" alt={props.student.name} style={{ width: 150, height: 150 }} />
+            {/*Cloudinary Upload Widget Button*/}
+            <button id="upload_widget" className="cloudinary-button" onClick={openWidget}>Upload Image</button>
             <div className="card-body">
                 <h5 className="card-title">{props.student.name}</h5>
             </div>
