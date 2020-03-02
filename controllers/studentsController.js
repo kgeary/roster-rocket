@@ -82,4 +82,14 @@ module.exports = {
         res.status(422).json(err);
       });
   },
+
+  updateImage: function (req, res) {
+    db.Student.update({ img: req.body.img }, { where: { id: req.body.id } })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.status(422).json(err);
+      });
+  }
 };

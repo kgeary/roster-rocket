@@ -113,6 +113,9 @@ module.exports = {
     db.User.findAll({ where: { id: req.params.id }, include: { model: Student } })
       .then(data => {
         res.json(data);
+      })
+      .catch(err => {
+        res.status(422).json(err);
       });
   },
 
@@ -120,6 +123,9 @@ module.exports = {
     db.User.destroy({ where: { id: req.params.id } })
       .then(data => {
         res.json(data);
+      })
+      .catch(err => {
+        res.status(422).json(err);
       });
   },
 
@@ -149,5 +155,15 @@ module.exports = {
       res.status(401).json({ message: "Unauthorized" });
     }
   },
+
+  updateImage: function (req, res) {
+    db.User.update({ img: req.body.img }, { where: { id: req.body.id } })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.status(422).json(err);
+      });
+  }
 
 };

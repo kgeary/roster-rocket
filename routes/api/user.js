@@ -34,4 +34,9 @@ router
   .route("/change")
   .post(usersController.changePassword);
 
+// Matches with "/api/user/img"
+router
+  .route("/img")
+  .patch(usersController.updateImage);
+
 module.exports = router;
