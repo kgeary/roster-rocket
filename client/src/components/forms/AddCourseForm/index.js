@@ -53,7 +53,7 @@ function AddCourseForm(props) {
             formAlert(err.message);
           } else {
             console.log(err);
-            formAlert("Course Already Exists!");
+            formAlert("Error Adding Course!");
           }
         })
         .finally(() => {

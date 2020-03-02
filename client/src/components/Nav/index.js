@@ -40,32 +40,32 @@ const Nav = (props) => {
       })
   }
 
-  const getUserOptions = () => {
+  const adminMenu = () => {
+    if (!state.user || !state.user.isAdmin) {
+      return null;
+    }
+    return (
+      <NavLink className="nav-link" activeClassName="active" to="/admin">Admin</NavLink>
+    );
+  }
+
+  const userMenu = () => {
     return (
       <React.Fragment>
-        {
-          state.user && state.user.isAdmin ?
-            <NavLink className="nav-link" activeClassName="active" to="/admin">Admin</NavLink> :
-            null
-        }
+        {adminMenu()}
         <NavLink className="nav-link" activeClassName="active" to="/parent">My Profile</NavLink>
         <button className="nav-link btn" onClick={onLogout}>Logout</button>
       </React.Fragment>
     );
   }
 
-  const getNonUserOptions = () => {
+  const nonUserMenu = () => {
     return (
       <React.Fragment>
         <NavLink className="nav-link" activeClassName="active" to="/signup">Signup</NavLink>
         <NavLink className="nav-link" activeClassName="active" to="/login">Login</NavLink>
       </React.Fragment>
     );
-  }
-
-  const loggingOut = () => {
-    // setLoggedOut(false);
-    return <Redirect to="/" />
   }
 
   if (state.loading) {
@@ -81,20 +81,24 @@ const Nav = (props) => {
 
   return (
     <nav className="navbar navbar-expand-md navbar-light bg-warning">
+
       <Link className="navbar-brand" to="/home">
         <img src={Logo} width="30" height="30" alt="" className="brand-logo" /><span className="brand">Roster Rocket</span>
       </Link>
+
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
+
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <div className="navbar-nav mr-auto">
           {/* Left Aligned Links */}
           <button className="btn change-theme" onClick={toggleTheme}>{"Theme " + state.theme}</button>
         </div>
         {/* Right Aligned Links */}
-        {state.username ? getUserOptions() : getNonUserOptions()}
+        {state.user ? userMenu() : nonUserMenu()}
       </div>
+
     </nav >
   );
 };
