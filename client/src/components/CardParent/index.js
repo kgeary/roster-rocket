@@ -4,6 +4,9 @@ import CardStudent from "../CardStudent";
 import API from "../../utils/API";
 import AddModal from "../AddModal"
 import AddStudentForm from "../forms/AddStudentForm";
+import Avatar from 'react-avatar'
+import "./style.css";
+
 
 function CardParent(props) {
 
@@ -47,10 +50,11 @@ function CardParent(props) {
       </div>
     );
   }
-  {/*Start of Cloudinary Upload Widget*/ }
+
+  // Start of Cloudinary Upload Widget
 
   const openWidget = () => {
-    var myWidget = window.cloudinary.createUploadWidget({
+    window.cloudinary.createUploadWidget({
       cloudName: 'ds8zmuetv',
       sources: ['local', 'url', 'image_search'],
       uploadPreset: 'bnlyr9la'
@@ -66,21 +70,17 @@ function CardParent(props) {
       }
     }
     ).open()
-    {/*End of Cloudinary Upload Widget*/ }
-
   }
   return (
     <div className='container'>
       <div className='card parent-card'>
-        <img src={props.user.img} className='card-img' alt={props.user.name} style={{ width: 150, height: 150 }} />
-
+        {
+          props.user.img.includes("via.placeholder") ?
+            <Avatar name={props.user.name} className='avatarCss' /> :
+            <img src={props.user.img} className='card-img avatarCss' alt={props.user.name} style={{ width: 100, height: 100 }} />
+        }
         {/*Cloudinary Upload Widget Button*/}
         <button id="upload_widget" className="cloudinary-button" onClick={openWidget}>Upload Image</button>
-
-
-
-
-
         <div className='card-body'>
           <h5 className='card-title'>{props.user.name}</h5>
           <Link to="/changePassword">Change Password</Link>

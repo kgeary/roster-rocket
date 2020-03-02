@@ -50,6 +50,8 @@
     "mysql2": "^2.1.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "prop-types": "^15.7.2",
+    "react-avatar": "^3.9.1",
     "sendgrid": "^5.2.3",
     "sequelize": "^5.21.5"
   }

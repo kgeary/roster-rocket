@@ -3,6 +3,8 @@ import API from "../../utils/API";
 import EnrollStudentModal from "../EnrollStudentModal";
 import EnrollStudentForm from "../forms/EnrollStudentForm";
 import PayButton from "../PayButton";
+import Avatar from 'react-avatar'
+import "./style.css";
 
 function CardStudent(props) {
 
@@ -50,10 +52,10 @@ function CardStudent(props) {
         );
     }
 
-    {/*Start of Cloudinary Upload Widget*/ }
+    // Start of Cloudinary Upload Widget
 
     const openWidget = () => {
-        var myWidget = window.cloudinary.createUploadWidget({
+        window.cloudinary.createUploadWidget({
             cloudName: 'ds8zmuetv',
             sources: ['local', 'url', 'image_search'],
             uploadPreset: 'bnlyr9la'
@@ -70,18 +72,22 @@ function CardStudent(props) {
         }
         ).open()
     }
-    {/*End of Cloudinary Upload Widget*/ }
+    // End of Cloudinary Upload Widget
 
     return (
         <div className="card student-card">
-            <img src={props.student.img} className="card-img-top" alt={props.student.name} style={{ width: 150, height: 150 }} />
+            {
+                props.student.img.includes("via.placeholder") ?
+                    <Avatar name={props.student.name} className='avatarCss' /> :
+                    <img src={props.student.img} className='card-img avatarCss' alt={props.student.name} style={{ width: 100, height: 100 }} />
+            }
             {/*Cloudinary Upload Widget Button*/}
             <button id="upload_widget" className="cloudinary-button" onClick={openWidget}>Upload Image</button>
             <div className="card-body">
+
                 <h5 className="card-title">{props.student.name}</h5>
             </div>
             <ul className="list-group list-group-flush">
-                <li className="list-group-item">Name: {props.student.name}</li>
                 <li className="list-group-item">Age: {props.student.age}</li>
                 <li className="list-group-item">Parent: {props.student.User.name}</li>
                 {props.student.StudentCourses.length === 0 ? <li className="list-group-item">Not Currently Enrolled</li> : null}
