@@ -7,6 +7,8 @@ import AddCourseForm from "../components/forms/AddCourseForm";
 import AddStudentForm from "../components/forms/AddStudentForm";
 import AddModal from "../components/AddModal";
 import { Link } from "react-router-dom";
+import { Image } from 'cloudinary-react';
+
 
 function AdminDash() {
   const [state, dispatch] = useStoreContext();
