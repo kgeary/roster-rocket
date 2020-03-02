@@ -1,0 +1,28 @@
+.card {
+  border-radius: 15px;
+  border: 1px solid #999;
+  box-shadow: inset 0px -6px 5px rgba(0, 0, 0, 0.7);
+  padding: 20px 0px 20px 0px;
+  margin-top: 25px;
+}
+
+.card-icon {
+  font-size: 56px;
+  padding-bottom: 25px;
+  color: #014366;
+}
+
+.card-text {
+  color: #222 !important;
+}
+
+.benefit-title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #014366;
+  font-family: Acme;
+}
+
+.screenshot {
+  max-width: 100%;
+}
