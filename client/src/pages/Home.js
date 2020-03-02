@@ -15,26 +15,14 @@ function Home() {
     dispatch({ type: ACTIONS.DONE });
   }, []);
 
-  if (!state.user) {
-    return (
-      <div>
-        <Hero />
-        <Benefit />
-        <Parallax />
-        <CallToAction />
-        <Footer />
-      </div>
-    );
-  }
-
   return (
-    <Container fluid>
-      <Row>
-        <Col size='12'>
-          <h1>Hi {state.username ? state.username : "Guest User"}</h1>
-        </Col>
-      </Row>
-    </Container>
+    <div>
+      <Hero />
+      <Benefit />
+      <Parallax />
+      <CallToAction />
+      <Footer />
+    </div>
   );
 }
 
