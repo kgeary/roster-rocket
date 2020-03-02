@@ -34,11 +34,11 @@ module.exports = {
 
   create: function (req, res) {
     db.User.create({
-      email: req.body.email.toLowerCase(),
+      email: req.body.email.trim().toLowerCase(),
       password: req.body.password,
-      // TODO - Update default value fields
-      phone: "555-1212",
-      name: "Default User Name",
+      name: req.body.name,
+      phone: req.body.phone.trim(),
+      img: req.body.img || "https://via.placeholder.com/150"
     })
       .then(dbModel => {
         console.log(dbModel);
