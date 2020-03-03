@@ -109,6 +109,10 @@ export default {
 
   setStudentImage: function (studentId, imgUrl) {
     return axios.patch("/api/student/img", { id: studentId, img: imgUrl });
+  },
+
+  emailParent: function (email) {
+    return axios.post("/api/auth/invite", { email });
   }
 
 };

@@ -50,8 +50,8 @@ function CardParent(props) {
                 </Row>
               </React.Fragment>
             ) : (
-              <h3>No Children</h3>
-            )
+                <h3>No Children</h3>
+              )
           ) : null}
         </div>
       </div>
@@ -83,13 +83,13 @@ function CardParent(props) {
       <Row>
         <Col size='sm-2'>
           <div className='parent-info'>
-          {
-            props.user.img.includes("via.placeholder") ?
-              <Avatar name={props.user.name} className='avatarCss' /> :
-              <img src={props.user.img} className='card-img avatarCss' alt={props.user.name} style={{ width: 100, height: 100 }} />
-          }
-          {/*Cloudinary Upload Widget Button*/}
-          <button id="upload_widget" className="cloudinary-button" onClick={openWidget}>Upload Image</button>
+            {
+              props.user.img.includes("via.placeholder") ?
+                <Avatar name={props.user.name} className='avatarCss' /> :
+                <img src={props.user.img} className='card-img avatarCss' alt={props.user.name} style={{ width: 100, height: 100 }} />
+            }
+            {/*Cloudinary Upload Widget Button*/}
+            <button id="upload_widget" className="cloudinary-button" onClick={openWidget}>Upload Image</button>
             <h5 className='card-title parent-info-title'>{props.user.name}</h5>
             <Link to='/changePassword'>Change Password</Link>
           </div>
