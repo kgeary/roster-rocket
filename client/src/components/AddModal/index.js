@@ -8,7 +8,7 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
+    transform: 'translate(-50%, -50%)',
   }
 };
 
@@ -36,7 +36,7 @@ function AddModal(props) {
 
   return (
     <React.Fragment>
-      <button className="btn btn-primary btn-sm" onClick={openModal}>{props.title}</button>
+      <button className="btn btn-primary btn-sm" onClick={openModal}><i className="fas fa-plus" /> {props.title}</button>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}

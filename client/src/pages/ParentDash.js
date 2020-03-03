@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import { useStoreContext } from "../utils/GlobalState";
 import CardParent from "../components/CardParent";
+import Footer from "../components/Footer";
 import API from "../utils/API";
 import * as ACTIONS from "../utils/actions";
 
@@ -58,6 +59,7 @@ function ParentDash() {
   }
 
   return (
+    <div>
     <Container fluid>
     <div className='gap' />
       {
@@ -68,6 +70,8 @@ function ParentDash() {
           </React.Fragment> : null
       }
     </Container>
+    <Footer />
+    </div>
   );
 }
 
