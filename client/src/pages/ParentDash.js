@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import { useStoreContext } from "../utils/GlobalState";
 import CardParent from "../components/CardParent";
-import Footer from "../components/Footer";
 import API from "../utils/API";
 import * as ACTIONS from "../utils/actions";
 
@@ -30,21 +29,19 @@ function ParentDash() {
       .finally(() => {
         dispatch({ type: ACTIONS.DONE });
       });
-  }
+  };
 
   useEffect(() => {
     loadData();
   }, []);
-
 
   const LoadScreen = () => {
     return (
       <Container fluid>
         <h1>Loading Parent Data...</h1>
       </Container>
-    )
-  }
-
+    );
+  };
 
   if (state.loading) {
     return LoadScreen();
@@ -55,22 +52,28 @@ function ParentDash() {
       <Container fluid>
         <h1>You must be logged in to access this page.</h1>
       </Container>
-    )
+    );
   }
 
   return (
     <div>
-    <Container fluid>
-    <div className='gap' />
-      {
-        parent ?
+      <Container fluid>
+        <div className='gap' />
+        {parent ? (
           <React.Fragment>
-            <h1>Dashboard for {parent ? parent.name : null}</h1><br />
-                <CardParent user={parent} includeChildren={true} updateFunc={loadData} accordion={true} changePw={true} />
-          </React.Fragment> : null
-      }
-    </Container>
-    <Footer />
+            <h1>Dashboard for {parent ? parent.name : null}</h1>
+            <br />
+            <CardParent
+              user={parent}
+              includeChildren={true}
+              updateFunc={loadData}
+              accordion={true}
+              changePw={true}
+            />
+          </React.Fragment>
+        ) : null}
+      </Container>
+      <div class="gap" />
     </div>
   );
 }

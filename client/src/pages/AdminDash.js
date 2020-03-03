@@ -7,7 +7,6 @@ import AddCourseForm from "../components/forms/AddCourseForm";
 import AddStudentForm from "../components/forms/AddStudentForm";
 import AddParentForm from "../components/forms/AddParentForm";
 import AddModal from "../components/AddModal";
-import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { Image } from "cloudinary-react";
 
@@ -302,7 +301,6 @@ function AdminDash() {
         </Row>
       </Container>
       <div className='gap' />
-      <Footer />
     </div>
   );
 }

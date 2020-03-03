@@ -66,6 +66,7 @@ function Student() {
       ) : (
         status
       )}
+      <div class="gap" />
     </Container>
   );
 }

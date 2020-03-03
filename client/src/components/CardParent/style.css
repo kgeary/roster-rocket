@@ -7,6 +7,8 @@
 .cloud-img {
   border: 4px solid #fff;
   border-radius: 50%;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .parent-info {
