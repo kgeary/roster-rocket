@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../Grid";
+import { useStoreContext } from "../../utils/GlobalState";
 import CardStudent from "../CardStudent";
 import API from "../../utils/API";
 import AddModal from "../AddModal";
@@ -10,6 +11,7 @@ import "./style.css";
 
 function CardParent(props) {
   const [studentState, setStudentState] = useState(props.accordion || false);
+  const [state, dispatch] = useStoreContext();
 
   const onDelete = (id) => {
     API.removeUser(id).then(res => {
@@ -50,8 +52,8 @@ function CardParent(props) {
                 </Row>
               </React.Fragment>
             ) : (
-              <h3>No Children</h3>
-            )
+                <h3>No Children</h3>
+              )
           ) : null}
         </div>
       </div>
@@ -83,13 +85,13 @@ function CardParent(props) {
       <Row>
         <Col size='sm-2'>
           <div className='parent-info'>
-          {
-            props.user.img.includes("via.placeholder") ?
-              <Avatar name={props.user.name} className='avatarCss' /> :
-              <img src={props.user.img} className='card-img avatarCss' alt={props.user.name} style={{ width: 100, height: 100 }} />
-          }
-          {/*Cloudinary Upload Widget Button*/}
-          <button id="upload_widget" className="cloudinary-button" onClick={openWidget}>Upload Image</button>
+            {
+              props.user.img.includes("via.placeholder") ?
+                <Avatar name={props.user.name} className='avatarCss' /> :
+                <img src={props.user.img} className='card-img avatarCss' alt={props.user.name} style={{ width: 100, height: 100 }} />
+            }
+            {/*Cloudinary Upload Widget Button*/}
+            <button id="upload_widget" className="cloudinary-button" onClick={openWidget}>Upload Image</button>
             <h5 className='card-title parent-info-title'>{props.user.name}</h5>
             <Link to='/changePassword'>Change Password</Link>
           </div>
@@ -101,7 +103,7 @@ function CardParent(props) {
               <li className='list-group-item'>{props.user.phone}</li>
               <li className='list-group-item'>Amount Due: ${getAmountDue()}</li>
               <li className='list-group-item'>Mailing Address: {props.user.address1}</li>
-              {props.admin ? (
+              {(state.user && state.user.isAdmin) ? (
                 <button
                   className='btn btn-danger btn-sm'
                   onClick={() => onDelete(props.user.id)}

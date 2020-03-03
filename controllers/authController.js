@@ -110,4 +110,20 @@ module.exports = {
       res.status(422).json("Email not provided");
     }
   },
+
+  invite: function (req, res) {
+    try {
+      sendEmail(
+        req.body.email,
+        "no-reply@roster.rocket.com",
+        "Invitation Signup for Roster Rocket",
+        "Signup at: https://project3-temp.herokuapp.com/signup with Group Code: 123456"
+      );
+
+      res.json({ messsage: "" });
+    } catch (err) {
+      res.status(422).json("Unable to send email");
+    }
+
+  },
 };

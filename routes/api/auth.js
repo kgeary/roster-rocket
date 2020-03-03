@@ -21,4 +21,10 @@ router
   .route("/signup")
   .post(authController.create);
 
+
+// Matches with "/api/auth/invite"
+router
+  .route("/invite")
+  .post(authController.invite);
+
 module.exports = router;

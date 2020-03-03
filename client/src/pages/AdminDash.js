@@ -5,6 +5,7 @@ import * as ACTIONS from "../utils/actions";
 import API from "../utils/API";
 import AddCourseForm from "../components/forms/AddCourseForm";
 import AddStudentForm from "../components/forms/AddStudentForm";
+import AddParentForm from "../components/forms/AddParentForm";
 import AddModal from "../components/AddModal";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
@@ -36,36 +37,6 @@ function AdminDash() {
   const updateUsers = () => API.getAllUsers();
   const updateStudents = () => API.getAllStudents();
   const updateCourses = () => API.getAllCourses();
-
-  const updateCoursesOnly = () => {
-    dispatch({ type: ACTIONS.LOADING });
-    updateUsers()
-      .then(res => {
-        setCourses(res.data);
-      })
-      .catch(err => {
-        console.log("UPDATE ALL COURSES ERROR", err);
-      })
-      .finally(() => {
-        dispatch({ type: ACTIONS.DONE });
-        setLoaded(true);
-      });
-  };
-
-  const updateStudentsOnly = () => {
-    dispatch({ type: ACTIONS.LOADING });
-    updateStudents()
-      .then(res => {
-        setStudents(res.data);
-      })
-      .catch(err => {
-        console.log("UPDATE ALL STUDENTS ALL ERROR", err);
-      })
-      .finally(() => {
-        dispatch({ type: ACTIONS.DONE });
-        setLoaded(true);
-      });
-  };
 
   const updateAll = () => {
     console.log("ADMIN LOAD DATA");
@@ -152,9 +123,8 @@ function AdminDash() {
                   {/***** THE MODAL BELOW (COPY OF ADD CLASS MODAL) NEEDS CHANGED TO GIVE ABILITY TO ADD PARENT *****/}
                   <AddModal
                     title='Add Parent'
-                    users={state.users}
-                    form={AddCourseForm}
-                    onReturn={updateCoursesOnly}
+                    form={AddParentForm}
+                    onReturn={updateAll}
                   />
                 </div>
               </div>
@@ -169,7 +139,7 @@ function AdminDash() {
                   Parents without Children:{" "}
                   <span class='badge badge-primary badge-pill'>
                     {
-                      state.users.filter(course => course.StudentId === null)
+                      state.users.filter(user => user.Students.length < 1)
                         .length
                     }
                   </span>
@@ -195,7 +165,7 @@ function AdminDash() {
                           <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
                             <Link to={`/user/${user.id}`}>{user.name}</Link>
                             <span class='badge badge-primary badge-pill'>
-                              2
+                              {user.Students.length}
                             </span>
                           </li>
                         ))
@@ -215,7 +185,7 @@ function AdminDash() {
                     title='Add Class'
                     users={state.users}
                     form={AddCourseForm}
-                    onReturn={updateCoursesOnly}
+                    onReturn={updateAll}
                   />
                 </div>
               </div>
@@ -259,7 +229,7 @@ function AdminDash() {
                               {course.title}
                             </Link>{" "}
                             <span class='badge badge-primary badge-pill'>
-                              4
+                              {course.Students.length}
                             </span>
                           </li>
                         ))
@@ -279,7 +249,7 @@ function AdminDash() {
                     title='Add Student'
                     form={AddStudentForm}
                     users={state.users}
-                    onReturn={updateStudentsOnly}
+                    onReturn={updateAll}
                   />
                 </div>
               </div>
