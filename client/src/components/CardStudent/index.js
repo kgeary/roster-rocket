@@ -35,7 +35,7 @@ function CardStudent(props) {
                 {props.student.StudentCourses.length > 0 ? <h3 className="subtitle">Classes</h3> : null}
                 {
                     props.student.StudentCourses.map(sc => (
-                        <div className="card course-card" key={sc.Course.title}>
+                        <div className="card" key={sc.Course.title}>
                             <div className="card-body">
                                 <h5 className="card-title">Title: {sc.Course.title}</h5>
                                 <h6>Cost: {sc.Course.cost}</h6>

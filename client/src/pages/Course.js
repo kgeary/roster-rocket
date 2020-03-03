@@ -35,21 +35,19 @@ function Course() {
       .finally(() => {
         dispatch({ type: ACTIONS.DONE });
       });
-  }
+  };
 
   useEffect(() => {
     loadData();
   }, []);
-
 
   const LoadScreen = () => {
     return (
       <Container fluid>
         <h1>Loading Course Data...</h1>
       </Container>
-    )
-  }
-
+    );
+  };
 
   if (state.loading) {
     return LoadScreen();
@@ -57,17 +55,23 @@ function Course() {
 
   return (
     <Container fluid>
-      {
-        course ?
-          <React.Fragment>
-            <h1>Course Page {course ? course.title : null}</h1>
-            <Row>
-              <Col size='md-12'>
-                <CardCourse course={course} updateFunc={loadData} accordion={true} />
-              </Col>
-            </Row>
-          </React.Fragment> : status
-      }
+      {course ? (
+        <React.Fragment>
+          <div className='gap' />
+          <h1>Course Page {course ? course.title : null}</h1>
+          <Row>
+            <Col size='md-12'>
+              <CardCourse
+                course={course}
+                updateFunc={loadData}
+                accordion={true}
+              />
+            </Col>
+          </Row>
+        </React.Fragment>
+      ) : (
+        status
+      )}
     </Container>
   );
 }

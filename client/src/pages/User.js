@@ -35,21 +35,19 @@ function User() {
       .finally(() => {
         dispatch({ type: ACTIONS.DONE });
       });
-  }
+  };
 
   useEffect(() => {
     loadData();
   }, []);
-
 
   const LoadScreen = () => {
     return (
       <Container fluid>
         <h1>Loading Parent Data...</h1>
       </Container>
-    )
-  }
-
+    );
+  };
 
   if (state.loading) {
     return LoadScreen();
@@ -57,17 +55,24 @@ function User() {
 
   return (
     <Container fluid>
-      {
-        parent ?
-          <React.Fragment>
-            <h1>User Page {parent ? parent.email : null}</h1>
-            <Row>
-              <Col size='md-12'>
-                <CardParent user={parent} includeChildren={true} updateFunc={loadData} accordion={true} />
-              </Col>
-            </Row>
-          </React.Fragment> : status
-      }
+      {parent ? (
+        <React.Fragment>
+          <div className='gap' />
+          <h1>User Page {parent ? parent.email : null}</h1>
+          <Row>
+            <Col size='md-12'>
+              <CardParent
+                user={parent}
+                includeChildren={true}
+                updateFunc={loadData}
+                accordion={true}
+              />
+            </Col>
+          </Row>
+        </React.Fragment>
+      ) : (
+        status
+      )}
     </Container>
   );
 }

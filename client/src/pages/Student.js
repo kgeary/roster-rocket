@@ -29,21 +29,19 @@ function Student() {
       .finally(() => {
         dispatch({ type: ACTIONS.DONE });
       });
-  }
+  };
 
   useEffect(() => {
     loadData();
   }, []);
-
 
   const LoadScreen = () => {
     return (
       <Container fluid>
         <h1>Loading Student Data...</h1>
       </Container>
-    )
-  }
-
+    );
+  };
 
   if (state.loading) {
     return LoadScreen();
@@ -51,17 +49,23 @@ function Student() {
 
   return (
     <Container fluid>
-      {
-        student ?
-          <React.Fragment>
-            <h1>Student Page {student ? student.name : null}</h1>
-            <Row>
-              <Col size='md-12'>
-                <CardStudent student={student} updateFunc={loadData} accordion={true} />
-              </Col>
-            </Row>
-          </React.Fragment> : status
-      }
+      {student ? (
+        <React.Fragment>
+          <div className='gap' />
+          <h1>Student Page {student ? student.name : null}</h1>
+          <Row>
+            <Col size='md-12'>
+              <CardStudent
+                student={student}
+                updateFunc={loadData}
+                accordion={true}
+              />
+            </Col>
+          </Row>
+        </React.Fragment>
+      ) : (
+        status
+      )}
     </Container>
   );
 }

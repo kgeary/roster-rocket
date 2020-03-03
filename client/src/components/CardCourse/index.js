@@ -24,7 +24,7 @@ function CardCourse(props) {
           <h5>No Students Enrolled</h5>
         ) : null}
         {props.course.Students.map(student => (
-          <div className='card student-card' key={student.name}>
+          <div className='card' key={student.name}>
             <h5 className='card-title'>Name: {student.name}</h5>
             <div className='card-body'>
               <h6>Parent: {student.User.name}</h6>
