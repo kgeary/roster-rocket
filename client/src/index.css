@@ -37,3 +37,59 @@ code {
 .course-card {
   margin: 1rem;
 }
+
+
+.cloudinary-button {
+  margin: 0 auto;
+  padding: 2px 10px 2px 10px;
+  margin-top: 10px;
+}
+
+
+.admin-card {
+ background-color: #fff !important;
+ height: 420px;
+}
+
+.admin-card-inner {
+  overflow:scroll;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 10px 10px 0px 10px;
+  padding-top: 0px;
+  width: 96%;
+}
+
+.table-styled {
+  border: 0px;
+}
+.input-styled {
+  width: 100%;
+  font-size: 16px;
+  border: 2px solid #bcd8e6;
+  background-color: #eee !important;
+  padding: 5px 5px 5px 15px;
+}
+
+.top-radius {
+  border-radius: 15px 15px 0px 0px;
+  border: none;
+}
+
+.card-header {
+  background-color: #333;
+  border-radius: 15px 15px 0px 0px !important;
+}
+
+.card-header h1 {
+  color: #fff;
+  font-family: Acme;
+}
+
+.dark .card-header {
+  background-color: #ddd;
+}
+
+.alert {
+  border-radius: 15px;
+}
