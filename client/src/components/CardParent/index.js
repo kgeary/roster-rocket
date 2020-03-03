@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../Grid";
+import { useStoreContext } from "../../utils/GlobalState";
 import CardStudent from "../CardStudent";
 import API from "../../utils/API";
 import AddModal from "../AddModal";
@@ -10,6 +11,7 @@ import "./style.css";
 
 function CardParent(props) {
   const [studentState, setStudentState] = useState(props.accordion || false);
+  const [state, dispatch] = useStoreContext();
 
   const onDelete = (id) => {
     API.removeUser(id).then(res => {
@@ -101,7 +103,7 @@ function CardParent(props) {
               <li className='list-group-item'>{props.user.phone}</li>
               <li className='list-group-item'>Amount Due: ${getAmountDue()}</li>
               <li className='list-group-item'>Mailing Address: {props.user.address1}</li>
-              {props.admin ? (
+              {(state.user && state.user.isAdmin) ? (
                 <button
                   className='btn btn-danger btn-sm'
                   onClick={() => onDelete(props.user.id)}

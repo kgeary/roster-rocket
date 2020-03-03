@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import API from "../../utils/API";
+import { useStoreContext } from "../../utils/GlobalState";
 import EnrollStudentModal from "../EnrollStudentModal";
 import EnrollStudentForm from "../forms/EnrollStudentForm";
 import PayButton from "../PayButton";
@@ -9,6 +10,7 @@ import "./style.css";
 function CardStudent(props) {
 
     const [courseState, setCourseState] = useState(false);
+    const [state, dispatch] = useStoreContext();
 
     // console.log("CARD STUDENT", props.student);
     const onDelete = (id) => {
@@ -101,7 +103,7 @@ function CardStudent(props) {
                 <li className="list-group-item">Parent: {props.student.User.name}</li>
                 {props.student.StudentCourses.length === 0 ? <li className="list-group-item">Not Currently Enrolled</li> : null}
             </ul>
-            {props.admin ? <button className="btn btn-danger btn-sm" onClick={() => onDelete(props.student.id)}>Delete Student</button> : null}
+            {(state.user && state.user.isAdmin) ? <button className="btn btn-danger btn-sm" onClick={() => onDelete(props.student.id)}>Delete Student</button> : null}
             <EnrollStudentModal student={props.student} form={EnrollStudentForm} onReturn={props.updateFunc} />
             {showCoursesBtn()}
             </div>

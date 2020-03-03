@@ -38,36 +38,6 @@ function AdminDash() {
   const updateStudents = () => API.getAllStudents();
   const updateCourses = () => API.getAllCourses();
 
-  const updateCoursesOnly = () => {
-    dispatch({ type: ACTIONS.LOADING });
-    updateUsers()
-      .then(res => {
-        setCourses(res.data);
-      })
-      .catch(err => {
-        console.log("UPDATE ALL COURSES ERROR", err);
-      })
-      .finally(() => {
-        dispatch({ type: ACTIONS.DONE });
-        setLoaded(true);
-      });
-  };
-
-  const updateStudentsOnly = () => {
-    dispatch({ type: ACTIONS.LOADING });
-    updateStudents()
-      .then(res => {
-        setStudents(res.data);
-      })
-      .catch(err => {
-        console.log("UPDATE ALL STUDENTS ALL ERROR", err);
-      })
-      .finally(() => {
-        dispatch({ type: ACTIONS.DONE });
-        setLoaded(true);
-      });
-  };
-
   const updateAll = () => {
     console.log("ADMIN LOAD DATA");
     dispatch({ type: ACTIONS.LOADING });
@@ -215,7 +185,7 @@ function AdminDash() {
                     title='Add Class'
                     users={state.users}
                     form={AddCourseForm}
-                    onReturn={updateCoursesOnly}
+                    onReturn={updateAll}
                   />
                 </div>
               </div>
@@ -279,7 +249,7 @@ function AdminDash() {
                     title='Add Student'
                     form={AddStudentForm}
                     users={state.users}
-                    onReturn={updateStudentsOnly}
+                    onReturn={updateAll}
                   />
                 </div>
               </div>
