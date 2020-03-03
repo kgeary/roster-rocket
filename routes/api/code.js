@@ -4,11 +4,13 @@ const codeController = require("../../controllers/codeController");
 // Matches with "/api/code"
 router
   .route("/")
-  .get(codeController.getCodes);
+  .get(codeController.getCodes)
   .post(codeController.addCode);
 
+// Matches with "/api/code/:id"
+
 router
-  .router("/:code")
+  .route("/:code")
   .delete(codeController.removeCode);
 
-export default router;
+module.exports = router;

@@ -13,7 +13,7 @@ module.exports = {
       });
   },
 
-  addCode: (req, res) => {
+  getCodes: (req, res) => {
     db.Code.findAll({})
       .then(data => {
         res.json(data);
