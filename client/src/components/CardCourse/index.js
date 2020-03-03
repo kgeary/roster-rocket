@@ -29,7 +29,7 @@ function CardCourse(props) {
                             <div className="card-body">
                                 <h6>Parent: {student.User.name}</h6>
                                 <h6>Age: {student.age}</h6>
-                                <h6>paid: {student.Paid ? "PAID" : <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID</span>}</h6>
+                                <h6>Paid: {student.Paid ? "PAID" : <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID</span>}</h6>
                                 {
                                     !student.Paid ?
                                         <PayButton StudentId={student.id} CourseId={props.course.id} updateFunc={props.updateFunc} Paid={student.Paid} />

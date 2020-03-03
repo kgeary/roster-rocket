@@ -100,7 +100,7 @@ function CardParent(props) {
               <li className='list-group-item'>{props.user.email}</li>
               <li className='list-group-item'>{props.user.phone}</li>
               <li className='list-group-item'>Amount Due: ${getAmountDue()}</li>
-              <li className='list-group-item'>mailing address</li>
+              <li className='list-group-item'>Mailing Address: {props.user.address1}</li>
               {props.admin ? (
                 <button
                   className='btn btn-danger btn-sm'

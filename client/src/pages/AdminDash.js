@@ -6,17 +6,23 @@ import API from "../utils/API";
 import AddCourseForm from "../components/forms/AddCourseForm";
 import AddStudentForm from "../components/forms/AddStudentForm";
 import AddModal from "../components/AddModal";
+import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
-import { Image } from 'cloudinary-react';
-
+import { Image } from "cloudinary-react";
 
 function AdminDash() {
   const [state, dispatch] = useStoreContext();
   const [loaded, setLoaded] = useState(false);
 
-  const setUsers = (val) => { dispatch({ type: ACTIONS.SET_USERS, value: val }); }
-  const setCourses = (val) => { dispatch({ type: ACTIONS.SET_COURSES, value: val }); }
-  const setStudents = (val) => { dispatch({ type: ACTIONS.SET_STUDENTS, value: val }); }
+  const setUsers = val => {
+    dispatch({ type: ACTIONS.SET_USERS, value: val });
+  };
+  const setCourses = val => {
+    dispatch({ type: ACTIONS.SET_COURSES, value: val });
+  };
+  const setStudents = val => {
+    dispatch({ type: ACTIONS.SET_STUDENTS, value: val });
+  };
 
   const [userFilter, setUserFilter] = useState("");
   const userFilterRef = useRef("");
@@ -39,11 +45,12 @@ function AdminDash() {
       })
       .catch(err => {
         console.log("UPDATE ALL COURSES ERROR", err);
-      }).finally(() => {
+      })
+      .finally(() => {
         dispatch({ type: ACTIONS.DONE });
         setLoaded(true);
       });
-  }
+  };
 
   const updateStudentsOnly = () => {
     dispatch({ type: ACTIONS.LOADING });
@@ -53,41 +60,42 @@ function AdminDash() {
       })
       .catch(err => {
         console.log("UPDATE ALL STUDENTS ALL ERROR", err);
-      }).finally(() => {
+      })
+      .finally(() => {
         dispatch({ type: ACTIONS.DONE });
         setLoaded(true);
       });
-  }
+  };
 
   const updateAll = () => {
     console.log("ADMIN LOAD DATA");
     dispatch({ type: ACTIONS.LOADING });
-    Promise.all([updateUsers(), updateCourses(), updateStudents()]).then((res) => {
-      console.log("PROMISE COMPLETE");
-      const [userData, courseData, studentData] = res.map(i => i.data);
-      setUsers(userData);
-      setCourses(courseData);
-      setStudents(studentData);
-    }).catch(err => {
-      console.log("PROMISE ALL ERROR", err);
-    }).finally(() => {
-      dispatch({ type: ACTIONS.DONE });
-      setLoaded(true);
-    });
-  }
+    Promise.all([updateUsers(), updateCourses(), updateStudents()])
+      .then(res => {
+        console.log("PROMISE COMPLETE");
+        const [userData, courseData, studentData] = res.map(i => i.data);
+        setUsers(userData);
+        setCourses(courseData);
+        setStudents(studentData);
+      })
+      .catch(err => {
+        console.log("PROMISE ALL ERROR", err);
+      })
+      .finally(() => {
+        dispatch({ type: ACTIONS.DONE });
+        setLoaded(true);
+      });
+  };
 
   useEffect(() => {
     updateAll();
   }, []);
 
-  useEffect(() => {
-  }, [userFilter]);
+  useEffect(() => {}, [userFilter]);
 
-  useEffect(() => {
-  }, [courseFilter]);
+  useEffect(() => {}, [courseFilter]);
 
-  useEffect(() => {
-  }, [studentFilter]);
+  useEffect(() => {}, [studentFilter]);
 
   const onFilterChange = e => {
     const { name, value } = e.target;
@@ -106,98 +114,226 @@ function AdminDash() {
     }
   };
 
-
   if (state.loading || !loaded) {
     return (
       <Container fluid>
         <h1>Loading Admin Data...</h1>
       </Container>
-    )
+    );
   }
   if (!state.user || !state.user.isAdmin) {
     return (
       <Container fluid>
         <h1>You must be an administrator to access this page.</h1>
       </Container>
-    )
+    );
   }
 
   return (
-    <Container fluid>
-      <h1>Admin Dashboard</h1>
-      <Row>
-        <Col size="md-4">
-          <div className="card">
-            <div className="card-body">
-              <p className="card-text">
-                Classes: {state.courses.length}<br />
-                Students: {state.students.length}<br />
-              </p>
-            </div>
-          </div>
-        </Col>
-        <Col size="md-4">
-          <div className="card">
-            <div className="card-body">
-              <p className="card-text">
-                Students Unpaid: {state.students.reduce((a, c) => a += c.StudentCourses.filter(sc => !sc.Paid).length, 0)}<br />
-                Classes without teachers: {state.courses.filter(course => course.TeacherId === null).length}<br />
-              </p>
-            </div>
-          </div>
-        </Col>
-        <Col size="md-4">
-          <div className="card card-dark">
-            <div className="card-body card-dark dark">
-              Emergency Hotline: 555-1212<br />
-              Class-Code: 3925643<br />
-            </div>
-          </div>
-        </Col>
-      </Row>
-      <Row>
-        <Col size="md-4">
-          <h1>Parents</h1>
-          <label htmlFor="userFilter">User Filter:</label>
-          <input type="text" id="userFilter" name="userFilter" ref={userFilterRef} onChange={onFilterChange} />
-          <table className="table table-striped">
-            {
-              state.users ?
-                state.users.filter(user => user.name.toLowerCase().includes(userFilter)).map(user => (
-                  <tr><td><Link to={`/user/${user.id}`}>{user.name}</Link></td></tr>
-                )) : null
-            }
-          </table>
-        </Col>
-        <Col size="md-4">
-          <h1>Courses</h1>
-          <AddModal title="Add Course" users={state.users} form={AddCourseForm} onReturn={updateCoursesOnly} />
+    <div>
+      <Container fluid>
+        <div className='gap' />
+        <h1>Admin Dashboard</h1>
+        <div class='alert alert-dark' role='alert'>
+          Emergency Hotline: (512) 555-1212
           <br />
-          <input type="text" id="courseFilter" name="courseFilter" placeholder="Filter by Course" ref={courseFilterRef} onChange={onFilterChange} />
-          <table className="table table-striped">
-            {
-              state.courses ?
-                state.courses.filter(course => course.title.toLowerCase().includes(courseFilter)).map(course => (
-                  <tr><td><Link to={`/course/${course.id}`}>{course.title}</Link></td></tr>
-                )) : null
-            }
-          </table>
-        </Col>
-        <Col size="md-4">
-          <h1>Students</h1>
-          <AddModal title="Add Student" form={AddStudentForm} users={state.users} onReturn={updateStudentsOnly} />
-          <input type="text" id="studentFilter" name="studentFilter" placeholder="Filter by Student" ref={studentFilterRef} onChange={onFilterChange} />
-          <table className="table table-striped">
-            {
-              state.students ?
-                state.students.filter(student => student.name.toLowerCase().includes(studentFilter)).map(student => (
-                  <tr><td><Link to={`/student/${student.id}`}>{student.name}</Link></td></tr>
-                )) : null
-            }
-          </table>
-        </Col>
-      </Row>
-    </Container >
+          Class-Code: 3925643
+          <br />
+        </div>
+
+        <Row>
+          <Col size='md-4'>
+            <div className='card pt-0 admin-card'>
+              <div className='card-header pb-0'>
+                <div className='float-left'>
+                  <h1>Parents</h1>
+                </div>
+                <div className='float-right mt-2 mr-1'>
+                  {/***** THE MODAL BELOW (COPY OF ADD CLASS MODAL) NEEDS CHANGED TO GIVE ABILITY TO ADD PARENT *****/}
+                  <AddModal
+                    title='Add Parent'
+                    users={state.users}
+                    form={AddCourseForm}
+                    onReturn={updateCoursesOnly}
+                  />
+                </div>
+              </div>
+              <ul class='list-group list-group-flush tiny-font'>
+                <li class='list-group-item list-group-item-primary pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
+                  Number of Parents:{" "}
+                  <span class='badge badge-primary badge-pill'>
+                    {state.users.length}
+                  </span>
+                </li>
+                <li class='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
+                  Parents without Children:{" "}
+                  <span class='badge badge-primary badge-pill'>
+                    {
+                      state.users.filter(course => course.StudentId === null)
+                        .length
+                    }
+                  </span>
+                </li>
+              </ul>
+              <input
+                className='input-styled'
+                type='text'
+                id='userFilter'
+                name='userFilter'
+                placeholder='Filter by Parent'
+                ref={userFilterRef}
+                onChange={onFilterChange}
+              />
+              <div className='admin-card-inner'>
+                <ul class='list-group'>
+                  {state.users
+                    ? state.users
+                        .filter(user =>
+                          user.name.toLowerCase().includes(userFilter)
+                        )
+                        .map(user => (
+                          <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                            <Link to={`/user/${user.id}`}>{user.name}</Link>
+                            <span class='badge badge-primary badge-pill'>
+                              2
+                            </span>
+                          </li>
+                        ))
+                    : null}
+                </ul>
+              </div>
+            </div>
+          </Col>
+          <Col size='md-4'>
+            <div className='card pt-0 admin-card'>
+              <div className='card-header pb-0'>
+                <div className='float-left'>
+                  <h1>Classes</h1>
+                </div>
+                <div className='float-right mt-2 mr-1'>
+                  <AddModal
+                    title='Add Class'
+                    users={state.users}
+                    form={AddCourseForm}
+                    onReturn={updateCoursesOnly}
+                  />
+                </div>
+              </div>
+              <ul class='list-group list-group-flush tiny-font'>
+                <li class='list-group-item list-group-item-primary pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
+                  Number of Classes:{" "}
+                  <span class='badge badge-primary badge-pill'>
+                    {state.courses.length}
+                  </span>
+                </li>
+                <li class='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
+                  Classes without Teachers:{" "}
+                  <span class='badge badge-primary badge-pill'>
+                    {
+                      state.courses.filter(course => course.TeacherId === null)
+                        .length
+                    }
+                  </span>
+                </li>
+              </ul>
+
+              <input
+                className='input-styled'
+                type='text'
+                id='courseFilter'
+                name='courseFilter'
+                placeholder='Filter by Class'
+                ref={courseFilterRef}
+                onChange={onFilterChange}
+              />
+              <div className='admin-card-inner'>
+                <ul class='list-group'>
+                  {state.courses
+                    ? state.courses
+                        .filter(course =>
+                          course.title.toLowerCase().includes(courseFilter)
+                        )
+                        .map(course => (
+                          <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                            <Link to={`/course/${course.id}`}>
+                              {course.title}
+                            </Link>{" "}
+                            <span class='badge badge-primary badge-pill'>
+                              4
+                            </span>
+                          </li>
+                        ))
+                    : null}
+                </ul>
+              </div>
+            </div>
+          </Col>
+          <Col size='md-4'>
+            <div className='card pt-0 admin-card'>
+              <div className='card-header pb-0'>
+                <div className='float-left'>
+                  <h1>Students</h1>
+                </div>
+                <div className='float-right mt-2 mr-1'>
+                  <AddModal
+                    title='Add Student'
+                    form={AddStudentForm}
+                    users={state.users}
+                    onReturn={updateStudentsOnly}
+                  />
+                </div>
+              </div>
+              <ul class='list-group list-group-flush tiny-font'>
+                <li class='list-group-item list-group-item-primary pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
+                  Number of Students:{" "}
+                  <span class='badge badge-primary badge-pill'>
+                    {state.students.length}
+                  </span>
+                </li>
+                <li class='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
+                  Unpaid Students:{" "}
+                  <span class='badge badge-primary badge-pill'>
+                    {state.students.reduce(
+                      (a, c) =>
+                        (a += c.StudentCourses.filter(sc => !sc.Paid).length),
+                      0
+                    )}
+                  </span>
+                </li>
+              </ul>
+              <input
+                className='input-styled'
+                type='text'
+                id='studentFilter'
+                name='studentFilter'
+                placeholder='Filter by Student'
+                ref={studentFilterRef}
+                onChange={onFilterChange}
+              />
+              <div className='admin-card-inner'>
+                <ul class='list-group'>
+                  {state.students
+                    ? state.students
+                        .filter(student =>
+                          student.name.toLowerCase().includes(studentFilter)
+                        )
+                        .map(student => (
+                          <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                            <Link to={`/student/${student.id}`}>
+                              {student.name}
+                            </Link>
+                          </li>
+                        ))
+                    : null}
+                </ul>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+      <div className='gap' />
+      <Footer />
+    </div>
   );
 }
 

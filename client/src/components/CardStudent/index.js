@@ -100,10 +100,10 @@ function CardStudent(props) {
                 <li className="list-group-item">Age: {props.student.age}</li>
                 <li className="list-group-item">Parent: {props.student.User.name}</li>
                 {props.student.StudentCourses.length === 0 ? <li className="list-group-item">Not Currently Enrolled</li> : null}
-                {props.admin ? <button className="btn btn-danger btn-sm" onClick={() => onDelete(props.student.id)}>Delete Student</button> : null}
-                <EnrollStudentModal student={props.student} form={EnrollStudentForm} onReturn={props.updateFunc} />
-                {showCoursesBtn()}
             </ul>
+            {props.admin ? <button className="btn btn-danger btn-sm" onClick={() => onDelete(props.student.id)}>Delete Student</button> : null}
+            <EnrollStudentModal student={props.student} form={EnrollStudentForm} onReturn={props.updateFunc} />
+            {showCoursesBtn()}
             </div>
             {
                 courseState ?
