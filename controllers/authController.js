@@ -33,8 +33,13 @@ function sendEmail(to, from, subject, body) {
 module.exports = {
 
   create: function (req, res) {
+    console.log("CREATE ACCOUNT");
+    db.Code.findOne({ where: { code: req.body.code } }).then((data) => {
 
-    db.Code.findOne({ where: { code: req.body.code } }).then(() => {
+      if (!data) {
+        throw new Error("Invalid Code");
+      }
+
       // Valid Code Proceed
       db.User.create({
         email: req.body.email.trim().toLowerCase(),
