@@ -2,7 +2,11 @@
   border-radius: 50%;
   margin: 0 auto;
   text-align: center;
+}
+
+.cloud-img {
   border: 4px solid #fff;
+  border-radius: 50%;
 }
 
 .parent-info {
