@@ -12,7 +12,7 @@ function SignupForm() {
   const emailRef = useRef();
   const nameRef = useRef();
   const phoneRef = useRef();
-  const imgRef = useRef();
+  const codeRef = useRef();
   const passwordRef = useRef();
   const password2Ref = useRef();
   const formAlert = alertFactory("alert");
@@ -32,8 +32,8 @@ function SignupForm() {
     const phone = phoneRef.current.value.trim();
     // Validate Phone?
 
-    const img = imgRef.current.value.trim();
-    // Validate image?
+    const code = codeRef.current.value.trim();
+    // Validate Group Code?
 
     const password = passwordRef.current.value;
     if (!validate.password(password)) {
@@ -48,12 +48,9 @@ function SignupForm() {
       email,
       password,
       name,
-      phone
+      phone,
+      code
     };
-
-    if (img.includes("http")) {
-      newUser.img = img;
-    }
 
     if (errors.length > 0) {
       formAlert(errors.join("<br>"));
@@ -66,7 +63,7 @@ function SignupForm() {
           emailRef.current.value = "";
           nameRef.current.value = "";
           phoneRef.current.value = "";
-          imgRef.current.value = "";
+          codeRef.current.value = "";
           passwordRef.current.value = "";
           password2Ref.current.value = "";
           dispatch({ type: ACTIONS.SET_USER, user: res.data });
@@ -117,13 +114,13 @@ function SignupForm() {
             placeholder="Phone Number"
           />
 
-          {/* Photo */}
+          {/* Group Code */}
           <InputForm
-            id="img"
-            inputRef={imgRef}
-            type="url"
-            length="128"
-            placeholder="URL to Your Photo (Leave Blank for Default)"
+            id="code"
+            inputRef={codeRef}
+            type="tel"
+            length="32"
+            placeholder="Group Code"
           />
 
           {/* PASSWORD */}

@@ -55,7 +55,7 @@ VALUES
   ("Eddie Davis", 10, now(), now(), 2),
   -- 5
   ("Fiona Davis", 9, now(), now(), 2),
--- 6
+  -- 6
   ("Greg Gulp", 10, now(), now(), 3);
 -- 7
   -- COURSE LIST --
@@ -100,6 +100,9 @@ VALUES
   (3, 2, false, now(), now()),
   (1, 7, false, now(), now());
 -- 6
+INSERT INTO Codes(code, createdAt, updatedAt)
+VALUES
+  (123456, now(), now());
 SELECT
   *
 FROM Users;
