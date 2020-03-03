@@ -65,7 +65,7 @@ function AddParentForm(props) {
             className='btn btn-success mt-3 mb-5'
             onClick={handleSubmit}
           >
-            Create Course
+            Send Invite
           </button>
           <br />
           <div id='alert' role='alert' />
