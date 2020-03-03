@@ -33,14 +33,15 @@ function sendEmail(to, from, subject, body) {
 module.exports = {
 
   create: function (req, res) {
-    db.User.create({
-      email: req.body.email.trim().toLowerCase(),
-      password: req.body.password,
-      name: req.body.name,
-      phone: req.body.phone.trim(),
-      img: req.body.img || "https://via.placeholder.com/150"
-    })
-      .then(dbModel => {
+
+    db.Code.findOne({ where: { code: req.body.code } }).then(() => {
+      // Valid Code Proceed
+      db.User.create({
+        email: req.body.email.trim().toLowerCase(),
+        password: req.body.password,
+        name: req.body.name,
+        phone: req.body.phone.trim(),
+      }).then(dbModel => {
         console.log(dbModel);
         req.login(dbModel, function (err) {
           if (!err) {
@@ -51,13 +52,16 @@ module.exports = {
             res.status(422).json(err);
           }
         });
-
       })
-      .catch(err => {
-        console.log("ERROR ADDING USER");
-        console.log(err);
-        res.status(422).json(err);
-      });
+        .catch(err => {
+          console.log("ERROR ADDING USER");
+          console.log(err);
+          res.status(422).json(err);
+        });
+    }).catch(() => {
+      // Group Code not found - Do not create user
+      res.status(401).json({ message: "Invalid Group Code" });
+    });
   },
 
   login: function (req, res) {

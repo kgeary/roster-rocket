@@ -5,7 +5,9 @@ const studentRoutes = require("./student");
 const authRoutes = require("./auth");
 const studentCourseRoutes = require("./studentCourse");
 const isAuthenticated = require("../../config/middleware/isAuthenticated");
-// User routes
+const isAdmin = require("../../config/middleware/isAdmin");
+
+router.use("/code", isAdmin, codeRoutes);
 router.use("/user", isAuthenticated, userRoutes);
 router.use("/course", isAuthenticated, courseRoutes);
 router.use("/student", isAuthenticated, studentRoutes);
