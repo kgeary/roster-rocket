@@ -1,7 +1,7 @@
 # Roster Rocket - Helping Homeschool Co-ops Launch
 
 
-<a href="https://project3-temp.herokuapp.com/"><img src="readmeImages/landingPage.png" title="Landing Page" alt="Landing Page" width=600px></a>
+<a href="https://project3-temp.herokuapp.com/"><img src="images/landingPage.png" title="Landing Page" alt="Landing Page" width=600px></a>
 
 Click the image to view the depoyed site, or use <a href="https://project3-temp.herokuapp.com/">this link</a>.
 
@@ -54,7 +54,7 @@ As a parent, I want an easy way to sign my children up for home school co-op cla
 
 According to <a href="https://www.nheri.org/homeschool-population-size-growing/">all research on the growth rates of homeschool trends</a>, the number of homeschoole children is growing at a tremendoius rate.  
 
-<img src="readmeImages/growthRate.jpg" title="Homeschool Growth Trends" alt="Homeschool Trends" width=600px>
+<img src="images/growthRate.jpg" title="Homeschool Growth Trends" alt="Homeschool Trends" width=600px>
 
 Even with this tremendous growth, still less than 4% of the school age children in the US are homeschooled. Homeschool learning has become a viable, mainstream option for families. 
 
@@ -76,7 +76,7 @@ Roster Rocket meets the exact needs of the small homeschool co-op market. The pl
 
 ## Team
 
-<img src="readmeImages/theTeam.png" title="The team" alt="The team" width=600px>
+<img src="images/theTeam.png" title="The team" alt="The team" width=600px>
 
 ### [Back to Table of Contents](#Contents)
 
@@ -84,25 +84,23 @@ Roster Rocket meets the exact needs of the small homeschool co-op market. The pl
 
 Admin users will be presented with an admin dashboard once logged in:
 
-<img src="readmeImages/adminDashboard.png" title="Admin Dashboard" alt="Admin Dashboard" width=600px>
+<img src="images/adminDashboard.png" title="Admin Dashboard" alt="Admin Dashboard" width=600px>
 
 From the dashboard, they can add parents, classes, and students. They can also click on any item from the lists to see the relevant card:
 
-<img src="readmeImages/adminCardView.png" title="Admin Card View" alt="Admin Card View" width=600px>
+<img src="images/adminCardView.png" title="Admin Card View" alt="Admin Card View" width=600px>
 
 Admins are presented with a modal when they click add class or student:
 
-<img src="readmeImages/addClass.png" title="Add Class" alt="Add Class" width=600px>
+<img src="images/addClass.png" title="Add Class" alt="Add Class" width=600px>
 
 Parents will see their parent dashboard with a card for each child
 
-<img src="readmeImages/parentView1.png" title="Parent View" alt="Parent View" width=600px>
+<img src="images/parentView1.png" title="Parent View" alt="Parent View" width=600px>
 
 Child Card on parent dashboard will have options to add and view classes, and pay:
 
-<img src="readmeImages/parentView2.png" title="Child Card" alt="Child Card" width=600px>
-
-
+<img src="images/parentView2.png" title="Child Card" alt="Child Card" width=600px>
 
 ### [Back to Table of Contents](#Contents)
 
