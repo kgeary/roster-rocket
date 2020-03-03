@@ -59,15 +59,12 @@ function ParentDash() {
 
   return (
     <Container fluid>
+    <div className='gap' />
       {
         parent ?
           <React.Fragment>
-            <h1>Parent Dashboard {parent ? parent.email : null}</h1>
-            <Row>
-              <Col size='md-12'>
+            <h1>Dashboard for {parent ? parent.name : null}</h1><br />
                 <CardParent user={parent} includeChildren={true} updateFunc={loadData} accordion={true} changePw={true} />
-              </Col>
-            </Row>
           </React.Fragment> : null
       }
     </Container>
