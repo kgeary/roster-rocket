@@ -72,6 +72,7 @@ function Course() {
       ) : (
         status
       )}
+      <div class="gap" />
     </Container>
   );
 }

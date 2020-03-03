@@ -4,7 +4,6 @@ import { useStoreContext } from "../utils/GlobalState";
 import * as ACTIONS from "../utils/actions";
 import Hero from "../components/Hero";
 import Benefit from "../components/Benefit";
-import Footer from "../components/Footer";
 import CallToAction from "../components/CallToAction";
 import Parallax from "../components/Parallax";
 
@@ -21,7 +20,6 @@ function Home() {
       <Benefit />
       <Parallax />
       <CallToAction />
-      <Footer />
     </div>
   );
 }

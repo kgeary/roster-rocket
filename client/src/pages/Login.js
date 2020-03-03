@@ -7,12 +7,11 @@ import Footer from "../components/Footer";
 
 function Login() {
   return (
-    <>
+    <div>
       <LoginForm />
       <Parallax />
       <CallToAction />
-      <Footer />
-    </>
+    </div>
   );
 }
 
