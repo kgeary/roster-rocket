@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../Grid";
+import { Col, Row } from "../Grid";
 import { useStoreContext } from "../../utils/GlobalState";
 import CardStudent from "../CardStudent";
 import API from "../../utils/API";
@@ -52,8 +52,8 @@ function CardParent(props) {
                 </Row>
               </React.Fragment>
             ) : (
-              <h3>No Children</h3>
-            )
+                <h3>No Children</h3>
+              )
           ) : null}
         </div>
       </div>
@@ -90,13 +90,13 @@ function CardParent(props) {
             {!props.user.img.includes("res.cloudinary.com") ? (
               <Avatar name={props.user.name} className='avatarCss' />
             ) : (
-              <img
-                src={props.user.img}
-                className='card-img cloud-img'
-                alt={props.user.name}
-                style={{ width: 100, height: 100 }}
-              />
-            )}
+                <img
+                  src={props.user.img}
+                  className='card-img cloud-img'
+                  alt={props.user.name}
+                  style={{ width: 100, height: 100 }}
+                />
+              )}
             {/*Cloudinary Upload Widget Button*/}<br />
             <button
               id='upload_widget'

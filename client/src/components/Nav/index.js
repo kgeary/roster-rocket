@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { NavLink, Link, Redirect } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useStoreContext } from "../../utils/GlobalState";
 import useBodyClass from "../../utils/useBodyClass";
 import "./style.css";
