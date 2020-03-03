@@ -86,9 +86,9 @@ function CardParent(props) {
         <Col size='sm-2'>
           <div className='parent-info'>
             {
-              props.user.img.includes("via.placeholder") ?
+              !props.user.img.includes("res.cloudinary.com") ?
                 <Avatar name={props.user.name} className='avatarCss' /> :
-                <img src={props.user.img} className='card-img avatarCss' alt={props.user.name} style={{ width: 100, height: 100 }} />
+                <img src={props.user.img} className='card-img cloud-img' alt={props.user.name} style={{ width: 100, height: 100 }} />
             }
             {/*Cloudinary Upload Widget Button*/}
             <button id="upload_widget" className="cloudinary-button" onClick={openWidget}>Upload Image</button>

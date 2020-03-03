@@ -89,9 +89,9 @@ function CardStudent(props) {
     return (
         <div className="card student-card benefit">
             {
-                props.student.img.includes("via.placeholder") ?
+                !props.student.img.includes("res.cloudinary.com") ?
                     <Avatar name={props.student.name} className='avatarCss' /> :
-                    <img src={props.student.img} className='card-img avatarCss' alt={props.student.name} style={{ width: 100, height: 100 }} />
+                    <img src={props.student.img} className='card-img cloud-img' alt={props.student.name} style={{ width: 100, height: 100 }} />
             }
             {/*Cloudinary Upload Widget Button*/}
             <button id="upload_widget" className="cloudinary-button" onClick={openWidget}>Upload Image</button>
