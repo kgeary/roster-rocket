@@ -123,6 +123,18 @@ function CardParent(props) {
     }
   }
 
+  const showAmountDue = () => {
+    if (state.user.id !== props.user.id && !state.user.isAdmin) {
+      return null;
+    }
+
+    return (
+      <li className='list-group-item list-group-item-danger'>
+        Amount Due: ${getAmountDue()}
+      </li>
+    );
+  }
+
   const showDeleteUser = () => {
     return (
       state.user && state.user.isAdmin && (state.user.id !== props.user.id) ? (
@@ -213,9 +225,7 @@ function CardParent(props) {
                     <li className='list-group-item'>
                       Phone Number: {props.user.phone}
                     </li>
-                    <li className='list-group-item list-group-item-danger'>
-                      Amount Due: ${getAmountDue()}
-                    </li>
+                    {showAmountDue()}
                     <br />
                     <div className='float-right'>
                       {showChangePassword()}

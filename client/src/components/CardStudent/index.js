@@ -234,6 +234,23 @@ function CardStudent(props) {
     );
   }
 
+  const showAmountPaid = () => {
+    if (state.user.id !== props.student.ParentId && !state.user.isAdmin) {
+      return null;
+    }
+
+    return (
+      <div className='age-text'>
+        Amount Owed: $
+          {props.student.StudentCourses.reduce((a, c) => {
+          return c.Paid ?
+            a :
+            a + c.Course.cost;
+        }, 0)}
+      </div>
+    )
+  }
+
   return (
     <div className='card student-card benefit'>
       {showImage()}
@@ -244,12 +261,7 @@ function CardStudent(props) {
         </h5>
         <div className='age-text'>Age: {props.student.age}</div>
         {showCourseInfo()}
-        <div className='age-text'>
-          Amount Owed: $
-          {props.student.StudentCourses.reduce((a, c) => {
-            return a + c.Course.cost;
-          }, 0)}
-        </div>
+        {showAmountPaid()}
         <ul className='list-group'>
           <li className='list-group-item text-center'>
             Parent:{" "}
