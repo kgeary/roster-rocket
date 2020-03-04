@@ -75,7 +75,7 @@ const Benefit = () => {
         <div className='col-sm-6'>
           <img
             src='https://via.placeholder.com/540x325'
-            class='screenshot'
+            className='screenshot'
             alt='placeholder for screenshot of admin dashboard'
           />
         </div>

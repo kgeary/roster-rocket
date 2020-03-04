@@ -16,14 +16,17 @@ function Student() {
     dispatch({ type: ACTIONS.LOADING });
     API.getStudentById(id)
       .then(res => {
-        console.log("GET STUDENT BY ID " + id, res.data);
         setStudent(res.data);
         if (!res.data) {
           throw new Error("Unable to Find Student");
         }
       })
       .catch(err => {
-        setStatus(<h1>{err.message}</h1>);
+        setStatus(
+          <div className="gap">
+            <h1>{err.response.statusText}</h1>
+          </div>
+        );
         setStudent(undefined);
       })
       .finally(() => {
@@ -47,6 +50,16 @@ function Student() {
     return LoadScreen();
   }
 
+  if (!state.user) {
+    return (
+      <Container fluid>
+        <div className="gap" />
+        <h1>You must be logged in to access this page.</h1>
+      </Container>
+    );
+  }
+
+
   return (
     <Container fluid>
       {student ? (
@@ -63,10 +76,8 @@ function Student() {
             </Col>
           </Row>
         </React.Fragment>
-      ) : (
-        status
-      )}
-      <div class="gap" />
+      ) : status}
+      <div className="gap" />
     </Container>
   );
 }

@@ -11,7 +11,7 @@ import InputForm from "../InputForm";
 function AddStudentForm(props) {
 
   const formAlert = alertFactory("alert");
-  const [state, dispatch] = useStoreContext();
+  const [, dispatch] = useStoreContext();
 
   const handleSubmit = e => {
     e.preventDefault();
