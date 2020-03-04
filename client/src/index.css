@@ -62,6 +62,10 @@ code {
   font-style: italic;
 }
 
+.dark .input-styled{
+color: #333;
+}
+
 .top-radius {
   border-radius: 15px 15px 0px 0px;
   border: none;
