@@ -11,7 +11,7 @@ import "./style.css";
 
 function CardParent(props) {
   const [studentState, setStudentState] = useState(props.accordion || false);
-  const [state, dispatch] = useStoreContext();
+  const [state] = useStoreContext();
 
   const onDelete = id => {
     API.removeUser(id).then(res => {
@@ -30,6 +30,47 @@ function CardParent(props) {
     });
     return sum;
   };
+
+  const showAmountDue = () => {
+    if (!state.user) return null;
+    if (state.user.id === props.user.id || state.user.isAdmin) {
+      return (
+        <li className='list-group-item'>
+          Amount Due: ${getAmountDue()}
+        </li>
+      )
+    } else {
+      return null;
+    }
+  };
+
+  const showDeleteBtn = () => {
+    return (
+      state.user && state.user.isAdmin ? (
+        <button
+          className='btn btn-danger btn-sm'
+          onClick={() => onDelete(props.user.id)}
+        >
+          Delete User
+        </button>
+      ) : null
+    )
+  };
+
+  const showImage = () => {
+    return (
+      !props.user.img.includes("res.cloudinary.com") ? (
+        <Avatar name={props.user.name} className='avatarCss' />
+      ) : (
+          <img
+            src={props.user.img}
+            className='card-img cloud-img'
+            alt={props.user.name}
+            style={{ width: 100, height: 100 }}
+          />
+        )
+    );
+  }
 
   const renderStudents = () => {
     return (
@@ -82,21 +123,13 @@ function CardParent(props) {
       )
       .open();
   };
+
   return (
     <div className='container-fluid'>
       <Row>
         <Col size='sm-4'>
           <div className='parent-info'>
-            {!props.user.img.includes("res.cloudinary.com") ? (
-              <Avatar name={props.user.name} className='avatarCss' />
-            ) : (
-                <img
-                  src={props.user.img}
-                  className='card-img cloud-img'
-                  alt={props.user.name}
-                  style={{ width: 100, height: 100 }}
-                />
-              )}
+            {showImage()}
             {/*Cloudinary Upload Widget Button*/}<br />
             <button
               id='upload_widget'
@@ -117,17 +150,8 @@ function CardParent(props) {
                 <li className='list-group-item'>
                   Phone Number: {props.user.phone}
                 </li>
-                <li className='list-group-item'>
-                  Amount Due: ${getAmountDue()}
-                </li>
-                {state.user && state.user.isAdmin ? (
-                  <button
-                    className='btn btn-danger btn-sm'
-                    onClick={() => onDelete(props.user.id)}
-                  >
-                    Delete User
-                  </button>
-                ) : null}
+                {showAmountDue()}
+                {showDeleteBtn()}
                 <AddModal
                   title='Add Child'
                   users={[props.user]}

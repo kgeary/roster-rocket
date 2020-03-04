@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useStoreContext } from "../../utils/GlobalState";
 import API from "../../utils/API";
 import PayButton from "../PayButton";
@@ -7,7 +8,7 @@ import EnrollCourseForm from "../forms/EnrollCourseForm";
 
 function CardCourse(props) {
   const [courseState, setCourseState] = useState(props.accordion || false);
-  const [state, dispatch] = useStoreContext();
+  const [state] = useStoreContext();
   //console.log("CARD COURSE", props.course);
   const onDelete = id => {
     API.removeCourse(id).then(res => {
@@ -17,6 +18,38 @@ function CardCourse(props) {
     });
   };
 
+  const showPaid = (student) => {
+    if (!state.user ||
+      (!state.user.isAdmin && state.user.id !== student.ParentId)) {
+      return null;
+    }
+
+    return (
+      <React.Fragment>
+        <h6>
+          Paid:{" "}
+          {student.Paid ? (
+            "PAID"
+          ) : (
+              <span style={{ fontWeight: "bold", color: "red" }}>
+                NOT YET PAID
+              </span>
+            )}
+        </h6>
+        {
+          !student.Paid ? (
+            <PayButton
+              StudentId={student.id}
+              CourseId={props.course.id}
+              updateFunc={props.updateFunc}
+              Paid={student.Paid}
+            />
+          ) : null
+        }
+      </React.Fragment>
+    );
+  }
+
   const renderStudents = () => {
     return (
       <React.Fragment>
@@ -24,29 +57,20 @@ function CardCourse(props) {
           <h5>No Students Enrolled</h5>
         ) : null}
         {props.course.Students.map(student => (
-          <div className='card' key={student.name}>
-            <h5 className='card-title'>Name: {student.name}</h5>
+          <div className='card' key={student.id}>
+            <h5 className='card-title'>
+              <Link to={`/student/${student.id}`}>
+                Name: {student.name}
+              </Link>
+            </h5>
             <div className='card-body'>
-              <h6>Parent: {student.User.name}</h6>
-              <h6>Age: {student.age}</h6>
               <h6>
-                Paid:{" "}
-                {student.Paid ? (
-                  "PAID"
-                ) : (
-                  <span style={{ fontWeight: "bold", color: "red" }}>
-                    NOT YET PAID
-                  </span>
-                )}
+                <Link to={`/parent/${student.User.id}`}>
+                  Parent: {student.User.name}
+                </Link>
               </h6>
-              {!student.Paid ? (
-                <PayButton
-                  StudentId={student.id}
-                  CourseId={props.course.id}
-                  updateFunc={props.updateFunc}
-                  Paid={student.Paid}
-                />
-              ) : null}
+              <h6>Age: {student.age}</h6>
+              {showPaid(student)}
             </div>
           </div>
         ))}

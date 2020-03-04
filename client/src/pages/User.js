@@ -53,6 +53,15 @@ function User() {
     return LoadScreen();
   }
 
+  if (!state.user) {
+    return (
+      <Container fluid>
+        <div className="gap" />
+        <h1>You must be logged in to access this page.</h1>
+      </Container>
+    );
+  }
+
   return (
     <Container fluid>
       {parent ? (
@@ -70,10 +79,13 @@ function User() {
             </Col>
           </Row>
         </React.Fragment>
-      ) : (
-        status
-      )}
-      <div class="gap" />
+      ) :
+        <React.Fragment>
+          <div className="gap" />
+          {status}
+          <div className="gap" />
+        </React.Fragment>
+      }
     </Container>
   );
 }

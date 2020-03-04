@@ -20,7 +20,7 @@ router
 // Matches with "/api/student/:id"
 router
   .route("/:id")
-  .get(isAdmin, studentsController.readById)
+  .get(studentsController.readById)
   .delete(isAdmin, studentsController.removeById);
 
 // Matches with "/api/student/img"

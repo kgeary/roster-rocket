@@ -7,10 +7,11 @@ import CallToAction from "../components/CallToAction";
 import Parallax from "../components/Parallax";
 
 function Home() {
-  const [state, dispatch] = useStoreContext();
+  const [, dispatch] = useStoreContext();
 
   useEffect(() => {
     dispatch({ type: ACTIONS.DONE });
+    console.log("USE EFFECT");
   }, []);
 
   return (
