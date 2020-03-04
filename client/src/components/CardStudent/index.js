@@ -38,17 +38,19 @@ function CardStudent(props) {
         {props.student.StudentCourses.map(sc => (
           <div className='card' key={sc.Course.title}>
             <div className='card-body'>
-              <h4 className='card-title'><Link to={`/course/${sc.Course.id}`}>{sc.Course.title}</Link></h4>
+              <h4 className='card-title'>
+                <Link to={`/course/${sc.Course.id}`}>{sc.Course.title}</Link>
+              </h4>
               <h6>Cost: ${sc.Course.cost}</h6>
               <h6>
                 Paid:{" "}
                 {sc.Paid ? (
                   "PAID"
                 ) : (
-                    <span style={{ fontWeight: "bold", color: "red" }}>
-                      NOT YET PAID
+                  <span style={{ fontWeight: "bold", color: "red" }}>
+                    NOT YET PAID
                   </span>
-                  )}
+                )}
               </h6>
               <button
                 className='btn btn-danger btn-sm'
@@ -121,13 +123,13 @@ function CardStudent(props) {
       {!props.student.img.includes("res.cloudinary.com") ? (
         <Avatar name={props.student.name} className='avatarCss' />
       ) : (
-          <img
-            src={props.student.img}
-            className='card-img cloud-img'
-            alt={props.student.name}
-            style={{ width: 200, height: 200 }}
-          />
-        )}
+        <img
+          src={props.student.img}
+          className='card-img cloud-img'
+          alt={props.student.name}
+          style={{ width: 200, height: 200 }}
+        />
+      )}
       {/*  {showImage()} */}
       {/*Cloudinary Upload Widget Button*/}
       <button
@@ -138,7 +140,9 @@ function CardStudent(props) {
         <i className='fas fa-cloud-upload-alt'></i> Upload Image
       </button>
       <div className='card-body'>
-        <h5 className='card-title student-card-title'><Link to={`/student/${props.student.id}`}>{props.student.name}</Link></h5>
+        <h5 className='card-title student-card-title'>
+          <Link to={`/student/${props.student.id}`}>{props.student.name}</Link>
+        </h5>
         <div className='age-text'>Age: {props.student.age}</div>
         {props.student.StudentCourses.length === 0 ? (
           <div className='age-text'>Not yet enrolled in any classes</div>
@@ -150,15 +154,19 @@ function CardStudent(props) {
             </span>
           </div>
         )}
+        <div className='age-text'>
+          Amount Owed: $
+          {props.student.StudentCourses.reduce((a, c) => {
+            return a + c.Course.cost;
+          }, 0)}
+        </div>
         <ul className='list-group'>
           <li className='list-group-item text-center'>
-            Parent: <Link to={`/parent/${props.student.User.id}`}>{props.student.User.name}</Link>
+            Parent:{" "}
+            <Link to={`/parent/${props.student.User.id}`}>
+              {props.student.User.name}
+            </Link>
           </li>
-          {props.student.StudentCourses.length === 0 ? (
-            <li className='list-group-item text-center'>
-              Not Currently Enrolled
-            </li>
-          ) : null}
         </ul>
         <div className='text-center pt-4'>
           <EnrollStudentModal
