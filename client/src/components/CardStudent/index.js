@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import API from "../../utils/API";
 import { useStoreContext } from "../../utils/GlobalState";
+import { Link } from "react-router-dom";
+import { Col, Row, Container } from "../Grid";
 import EnrollStudentModal from "../EnrollStudentModal";
 import EnrollStudentForm from "../forms/EnrollStudentForm";
 import PayButton from "../PayButton";
@@ -37,10 +39,10 @@ function CardStudent(props) {
                     props.student.StudentCourses.map(sc => (
                         <div className="card" key={sc.Course.title}>
                             <div className="card-body">
-                                <h5 className="card-title">Title: {sc.Course.title}</h5>
-                                <h6>Cost: {sc.Course.cost}</h6>
-                                <h6>paid: {sc.Paid ? "PAID" : <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID</span>}</h6>
-                                <button className="btn btn-danger btn-sm" onClick={() => onDrop(props.student.id, sc.CourseId)}>Drop Class</button>
+                                <h4 className="card-title">{sc.Course.title}</h4>
+                                <h6>Cost: ${sc.Course.cost}</h6>
+                                <h6>Paid: {sc.Paid ? "PAID" : <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID</span>}</h6>
+                                <button className="btn btn-danger btn-sm" onClick={() => onDrop(props.student.id, sc.CourseId)}>Drop Class</button>{" "}
                                 {
                                     !sc.Paid ?
                                         <PayButton StudentId={props.student.id} CourseId={sc.Course.id} updateFunc={props.updateFunc} Paid={props.student.Paid} />
@@ -83,30 +85,37 @@ function CardStudent(props) {
             return               <button
             className="btn btn-info btn-sm"
             disabled={props.student.StudentCourses.length === 0}
-            onClick={() => { setCourseState(!courseState) }}>{courseState ? "Hide Classes" : "Show Classes"}</button>
+            onClick={() => { setCourseState(!courseState) }}><i class="far fa-eye"></i> {courseState ? "Hide Classes" : "Show Classes"}</button>
         }
     }
     return (
+        
         <div className="card student-card benefit">
             {
                 !props.student.img.includes("res.cloudinary.com") ?
                     <Avatar name={props.student.name} className='avatarCss' /> :
-                    <img src={props.student.img} className='card-img cloud-img' alt={props.student.name} style={{ width: 100, height: 100 }} />
+                    <img src={props.student.img} className='card-img cloud-img' alt={props.student.name} style={{ width: 200, height: 200 }} />
             }
             {/*Cloudinary Upload Widget Button*/}
-            <button id="upload_widget" className="cloudinary-button" onClick={openWidget}>Upload Image</button>
+            <button id="upload_widget" className="cloudinary-button" onClick={openWidget}><i class="fas fa-cloud-upload-alt"></i> {" "}
+            Upload Image</button>
             <div className="card-body">
 
                 <h5 className="card-title student-card-title">{props.student.name}</h5>
+                <div className="age-text">Age: {props.student.age}</div>
             <ul className="list-group">
-                <li className="list-group-item">Age: {props.student.age}</li>
-                <li className="list-group-item">Parent: {props.student.User.name}</li>
+                <li className="list-group-item">Parent: <Link to="">{props.student.User.name}</Link></li>
                 {props.student.StudentCourses.length === 0 ? <li className="list-group-item">Not Currently Enrolled</li> : null}
             </ul>
-            {(state.user && state.user.isAdmin) ? <button className="btn btn-danger btn-sm" onClick={() => onDelete(props.student.id)}>Delete Student</button> : null}
-            <EnrollStudentModal student={props.student} form={EnrollStudentForm} onReturn={props.updateFunc} />
+            <div className="text-center pt-2">
+            <EnrollStudentModal student={props.student} form={EnrollStudentForm} onReturn={props.updateFunc} />{" "}
             {showCoursesBtn()}
-            </div>
+            <br /><br />
+            {/* NEED TO MAKE EDIT FUNCTION FOR BUTTON */}
+            <button type="button" class="btn btn-dark btn-sm">
+            <i class="fas fa-pencil-alt"></i> Edit Child </button>{" "}
+            {(state.user && state.user.isAdmin) ? <button className="btn btn-danger btn-sm" onClick={() => onDelete(props.student.id)}><i class="far fa-trash-alt"></i>  {" "}
+            Delete Student</button> : null}</div></div>
             {
                 courseState ?
                     <div className="card-body">
@@ -117,6 +126,7 @@ function CardStudent(props) {
             }
 
         </div>
+        
     );
 }
 

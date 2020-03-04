@@ -41,7 +41,7 @@ function CardParent(props) {
                 <h3>Children</h3>
                 <Row>
                   {props.user.Students.map(student => (
-                    <Col size='sm-4'>
+                    <Col size='lg-4'>
                       <CardStudent
                         student={student}
                         key={student.name}
@@ -83,7 +83,7 @@ function CardParent(props) {
       .open();
   };
   return (
-    <div className='container-fluid'>
+    <div className='container'>
       <Row>
         <Col size='sm-4'>
           <div className='parent-info'>
@@ -112,37 +112,76 @@ function CardParent(props) {
         <Col size='sm-8'>
           <div className='card'>
             <div className='card-body'>
-              <ul className='card-text'>
-                <li className='list-group-item'>Email: {props.user.email}</li>
-                <li className='list-group-item'>
-                  Phone Number: {props.user.phone}
-                </li>
-                <li className='list-group-item'>
-                  Amount Due: ${getAmountDue()}
-                </li>
-                {state.user && state.user.isAdmin ? (
-                  <button
-                    className='btn btn-danger btn-sm'
-                    onClick={() => onDelete(props.user.id)}
-                  >
-                    Delete User
-                  </button>
-                ) : null}
-                <AddModal
-                  title='Add Child'
-                  users={[props.user]}
-                  form={AddStudentForm}
-                  onReturn={props.updateFunc}
-                />
-                <button
-                  className='btn btn-info btn-sm'
-                  onClick={() => {
-                    setStudentState(!studentState);
-                  }}
-                >
-                  {studentState ? "Hide Students" : "Show Students"}
-                </button>
-              </ul>
+              <div className='row'>
+                <div className='col col-lg-3'>
+                  <div className='parent-info'>
+                    {!props.user.img.includes("res.cloudinary.com") ? (
+                      <Avatar name={props.user.name} className='avatarCss' />
+                    ) : (
+                      <img
+                        src={props.user.img}
+                        className='card-img cloud-img'
+                        alt={props.user.name}
+                        style={{ width: 200, height: 200 }}
+                      />
+                    )}
+                    {/*Cloudinary Upload Widget Button*/}
+                    <br />
+                    <button
+                      id='upload_widget'
+                      className='cloudinary-button'
+                      onClick={openWidget}
+                    >
+                      <i className='fas fa-cloud-upload-alt' /> Upload Image
+                    </button>
+                  </div>
+                </div>
+                <div className='col col-lg-9'>
+                  <h5 className='card-title parent-info-title'>
+                    {props.user.name}
+                  </h5>
+                  <ul className='card-text'>
+                    <li className='list-group-item'>
+                      Email: {props.user.email}
+                    </li>
+                    <li className='list-group-item'>
+                      Phone Number: {props.user.phone}
+                    </li>
+                    <li className='list-group-item list-group-item-danger'>
+                      Amount Due: ${getAmountDue()}
+                    </li>
+                    <br />
+                    <div className="float-right">
+                    <Link to='/changePassword'><button type="button" class="btn btn-warning btn-sm">
+                      <i class="fas fa-key"></i> Change Password</button></Link>{" "}
+                    <AddModal
+                      title='Add Child'
+                      users={[props.user]}
+                      form={AddStudentForm}
+                      onReturn={props.updateFunc}
+                    />{" "}
+                    <button
+                      className='btn btn-info btn-sm'
+                      onClick={() => {
+                        setStudentState(!studentState);
+                      }}
+                    >
+                      <i class='far fa-eye'></i>{" "}
+                      {studentState ? "Hide Students" : "Show Students"}
+                    </button>{" "} {/* NEED TO MAKE EDIT FUNCTION FOR BUTTON */}
+                    <button type="button" class="btn btn-dark btn-sm">
+                    <i class="fas fa-pencil-alt"></i> Edit User </button>{" "}
+                    {state.user && state.user.isAdmin ? (
+                      <button
+                        className='btn btn-danger btn-sm'
+                        onClick={() => onDelete(props.user.id)}
+                      >
+                        <i class='far fa-trash-alt'></i> Delete User
+                      </button>
+                    ) : null}</div>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </Col>

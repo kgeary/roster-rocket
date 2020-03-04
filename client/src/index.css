@@ -59,6 +59,7 @@ code {
   border: 2px solid #bcd8e6;
   background-color: #eee !important;
   padding: 5px 5px 5px 15px;
+  font-style: italic;
 }
 
 .top-radius {
@@ -74,6 +75,7 @@ code {
 .card-header h1 {
   color: #fff;
   font-family: Acme;
+  margin-bottom: 10px;
 }
 
 .dark .card-header {
@@ -82,4 +84,16 @@ code {
 
 .alert {
   border-radius: 15px;
+}
+
+.badge-title {
+  font-size: 14px;
+}
+
+.profile-upload-cloudinary-btn {
+  border-radius: 50%;
+}
+
+.profile-upload-cloudinary-btn:hover {
+ box-shadow: 0px 0px 5px rgba(0,0,0,0.75);
 }

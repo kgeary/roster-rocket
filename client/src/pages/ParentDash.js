@@ -38,6 +38,7 @@ function ParentDash() {
   const LoadScreen = () => {
     return (
       <Container fluid>
+      <div className="gap" />
         <h1>Loading Parent Data...</h1>
       </Container>
     );
@@ -50,6 +51,7 @@ function ParentDash() {
   if (!state.user) {
     return (
       <Container fluid>
+      <div className="gap" />
         <h1>You must be logged in to access this page.</h1>
       </Container>
     );
@@ -57,7 +59,7 @@ function ParentDash() {
 
   return (
     <div>
-      <Container fluid>
+      <Container>
         <div className='gap' />
         {parent ? (
           <React.Fragment>

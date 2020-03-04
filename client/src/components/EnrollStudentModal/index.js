@@ -39,7 +39,7 @@ function EnrollStudentModal(props) {
 
   return (
     <React.Fragment>
-      <button className="btn btn-primary btn-sm" onClick={openModal}>Add Class</button>
+      <button className="btn btn-primary btn-sm" onClick={openModal}> <i class="fas fa-plus"></i> Add Class</button>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}

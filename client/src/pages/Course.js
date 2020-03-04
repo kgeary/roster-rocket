@@ -54,7 +54,7 @@ function Course() {
   }
 
   return (
-    <Container fluid>
+    <Container>
       {course ? (
         <React.Fragment>
           <div className='gap' />

@@ -52,9 +52,9 @@ function Student() {
       {student ? (
         <React.Fragment>
           <div className='gap' />
-          <h1>Student Page {student ? student.name : null}</h1>
+          <h1>{student ? student.name : null} Student Profile</h1>
           <Row>
-            <Col size='md-12'>
+            <Col size='lg-4'>
               <CardStudent
                 student={student}
                 updateFunc={loadData}
