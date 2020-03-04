@@ -54,6 +54,14 @@ function EnrollCourseForm(props) {
   return (
     <Container>
       <div className='form-container'>
+        <div className='close-modal'>
+          <i
+            className='far fa-times-circle'
+            onClick={() => {
+              props.closeModal(false);
+            }}
+          ></i>
+        </div>
         <h1>Enroll Student in Course</h1>
         {/* COURSE */}
         <form className='form-group'>

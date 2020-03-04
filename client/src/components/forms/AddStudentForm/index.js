@@ -10,6 +10,7 @@ function AddStudentForm(props) {
   const formAlert = alertFactory("alert");
 
   const handleSubmit = e => {
+    let update;
     e.preventDefault();
     const errors = [];
 
@@ -29,8 +30,10 @@ function AddStudentForm(props) {
       })
         .then(res => {
           console.log("COURSE", res.data);
+          update = true;
         })
         .catch(err => {
+          update = false;
           if (err.message) {
             formAlert(err.message);
           } else {
@@ -39,7 +42,7 @@ function AddStudentForm(props) {
           }
         })
         .finally(() => {
-          props.closeModal();
+          props.closeModal(update);
         });
     }
   };
@@ -47,6 +50,14 @@ function AddStudentForm(props) {
   return (
     <Container>
       <div className='form-container'>
+        <div className='close-modal'>
+          <i
+            className='far fa-times-circle'
+            onClick={() => {
+              props.closeModal(false);
+            }}
+          ></i>
+        </div>
         <h1>Add Student</h1>
         <form className='form-group mt-3 mb-2 form-signup'>
           {/* STUDENT NAME */}

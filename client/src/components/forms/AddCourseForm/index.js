@@ -16,6 +16,7 @@ function AddCourseForm(props) {
   const handleSubmit = e => {
     e.preventDefault();
     const errors = [];
+    let update;
 
     const title = titleRef.current.value;
     const location = locRef.current.value;
@@ -38,8 +39,10 @@ function AddCourseForm(props) {
       })
         .then(res => {
           console.log("COURSE", res.data);
+          update = true;
         })
         .catch(err => {
+          update = false;
           if (err.message) {
             formAlert(err.message);
           } else {
@@ -48,7 +51,7 @@ function AddCourseForm(props) {
           }
         })
         .finally(() => {
-          props.closeModal();
+          props.closeModal(update);
         });
     }
   };
@@ -57,7 +60,12 @@ function AddCourseForm(props) {
     <Container>
       <div className='form-container'>
         <div className='close-modal'>
-          <i className='far fa-times-circle'></i>
+          <i
+            className='far fa-times-circle'
+            onClick={() => {
+              props.closeModal(false);
+            }}
+          ></i>
         </div>
         <h1>Create a course</h1>
         <form className='form-group mt-3 mb-2 form-signup'>

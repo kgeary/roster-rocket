@@ -16,9 +16,12 @@ function CardParent(props) {
   const onDelete = id => {
     API.removeUser(id).then(res => {
       if (props.updateFunc) {
-        props.updateFunc();
+        props.updateFunc(true);
       }
-    });
+    })
+      .catch(err => {
+        props.updateFunc(false)
+      });
   };
 
   const getAmountDue = () => {
@@ -35,13 +38,13 @@ function CardParent(props) {
     return !props.user.img.includes("res.cloudinary.com") ? (
       <Avatar name={props.user.name} className='avatarCss' />
     ) : (
-      <img
-        src={props.user.img}
-        className='card-img cloud-img'
-        alt={props.user.name}
-        style={{ width: 100, height: 100 }}
-      />
-    );
+        <img
+          src={props.user.img}
+          className='card-img cloud-img'
+          alt={props.user.name}
+          style={{ width: 100, height: 100 }}
+        />
+      );
   };
 
   const renderStudents = () => {
@@ -65,8 +68,8 @@ function CardParent(props) {
                 </Row>
               </React.Fragment>
             ) : (
-              <h3>No Children</h3>
-            )
+                <h3>No Children</h3>
+              )
           ) : null}
         </div>
       </div>
@@ -108,13 +111,13 @@ function CardParent(props) {
                     {!props.user.img.includes("res.cloudinary.com") ? (
                       <Avatar name={props.user.name} className='avatarCss' />
                     ) : (
-                      <img
-                        src={props.user.img}
-                        className='card-img cloud-img'
-                        alt={props.user.name}
-                        style={{ width: 200, height: 200 }}
-                      />
-                    )}
+                        <img
+                          src={props.user.img}
+                          className='card-img cloud-img'
+                          alt={props.user.name}
+                          style={{ width: 200, height: 200 }}
+                        />
+                      )}
                     {/*Cloudinary Upload Widget Button*/}
                     <br />
                     <button

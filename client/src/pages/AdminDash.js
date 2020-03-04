@@ -173,10 +173,10 @@ function AdminDash() {
                           user.name.toLowerCase().includes(userFilter)
                         )
                         .map(user => (
-                          <Link to={`/parent/${user.id}`}>
+                          <Link key={user.id} to={`/parent/${user.id}`}>
                             <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
                               {user.name}
-                              <span className='badge badge-primary badge-pill'>
+                              <span class='badge badge-primary badge-pill'>
                                 {user.Students.length}
                               </span>
                             </li>
@@ -241,10 +241,10 @@ function AdminDash() {
                           course.title.toLowerCase().includes(courseFilter)
                         )
                         .map(course => (
-                          <Link to={`/course/${course.id}`}>
-                            <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                          <Link key={course.id} to={`/course/${course.id}`}>
+                            <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
                               {course.title}
-                              <span className='badge badge-primary badge-pill'>
+                              <span class='badge badge-primary badge-pill'>
                                 {course.Students.length}
                               </span>
                             </li>
@@ -305,7 +305,7 @@ function AdminDash() {
                           student.name.toLowerCase().includes(studentFilter)
                         )
                         .map(student => (
-                          <Link to={`/student/${student.id}`}>
+                          <Link key={student.id} to={`/student/${student.id}`}>
                             <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
                               {student.name}
                             </li>
