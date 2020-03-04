@@ -8,7 +8,6 @@ router
   .post(codeController.addCode);
 
 // Matches with "/api/code/:id"
-
 router
   .route("/:code")
   .delete(codeController.removeCode);

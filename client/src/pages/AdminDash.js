@@ -8,10 +8,10 @@ import AddStudentForm from "../components/forms/AddStudentForm";
 import AddParentForm from "../components/forms/AddParentForm";
 import AddModal from "../components/AddModal";
 import { Link } from "react-router-dom";
-import { Image } from "cloudinary-react";
 
 function AdminDash() {
   const [state, dispatch] = useStoreContext();
+  const [codes, setCodes] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
   const setUsers = val => {
@@ -37,6 +37,15 @@ function AdminDash() {
   const updateStudents = () => API.getAllStudents();
   const updateCourses = () => API.getAllCourses();
 
+  const getCodes = () => {
+    API.getCodes()
+      .then(res => {
+        setCodes(res.data.map(i => i.code));
+      })
+      .catch(err => {
+        setCodes([]);
+      })
+  }
   const updateAll = () => {
     console.log("ADMIN LOAD DATA");
     dispatch({ type: ACTIONS.LOADING });
@@ -59,13 +68,12 @@ function AdminDash() {
 
   useEffect(() => {
     updateAll();
+    getCodes();
   }, []);
 
-  useEffect(() => {}, [userFilter]);
-
-  useEffect(() => {}, [courseFilter]);
-
-  useEffect(() => {}, [studentFilter]);
+  useEffect(() => { }, [userFilter]);
+  useEffect(() => { }, [courseFilter]);
+  useEffect(() => { }, [studentFilter]);
 
   const onFilterChange = e => {
     const { name, value } = e.target;
@@ -107,7 +115,7 @@ function AdminDash() {
         <div class='alert alert-dark' role='alert'>
           Emergency Hotline: (512) 555-1212
           <br />
-          Class-Code: 3925643
+          Class-Code: {codes.join(", ")}
           <br />
         </div>
 
@@ -157,17 +165,19 @@ function AdminDash() {
                 <ul class='list-group'>
                   {state.users
                     ? state.users
-                        .filter(user =>
-                          user.name.toLowerCase().includes(userFilter)
-                        )
-                        .map(user => (
+                      .filter(user =>
+                        user.name.toLowerCase().includes(userFilter)
+                      )
+                      .map(user => (
+                        <Link to={`/user/${user.id}`}>
                           <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
-                            <Link to={`/user/${user.id}`}>{user.name}</Link>
+                            {user.name}
                             <span class='badge badge-primary badge-pill'>
                               {user.Students.length}
                             </span>
                           </li>
-                        ))
+                        </Link>
+                      ))
                     : null}
                 </ul>
               </div>
@@ -219,19 +229,19 @@ function AdminDash() {
                 <ul class='list-group'>
                   {state.courses
                     ? state.courses
-                        .filter(course =>
-                          course.title.toLowerCase().includes(courseFilter)
-                        )
-                        .map(course => (
+                      .filter(course =>
+                        course.title.toLowerCase().includes(courseFilter)
+                      )
+                      .map(course => (
+                        <Link to={`/course/${course.id}`}>
                           <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
-                            <Link to={`/course/${course.id}`}>
-                              {course.title}
-                            </Link>{" "}
+                            {course.title}
                             <span class='badge badge-primary badge-pill'>
                               {course.Students.length}
                             </span>
                           </li>
-                        ))
+                        </Link>
+                      ))
                     : null}
                 </ul>
               </div>
@@ -283,16 +293,16 @@ function AdminDash() {
                 <ul class='list-group'>
                   {state.students
                     ? state.students
-                        .filter(student =>
-                          student.name.toLowerCase().includes(studentFilter)
-                        )
-                        .map(student => (
+                      .filter(student =>
+                        student.name.toLowerCase().includes(studentFilter)
+                      )
+                      .map(student => (
+                        <Link to={`/student/${student.id}`}>
                           <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
-                            <Link to={`/student/${student.id}`}>
-                              {student.name}
-                            </Link>
+                            {student.name}
                           </li>
-                        ))
+                        </Link>
+                      ))
                     : null}
                 </ul>
               </div>

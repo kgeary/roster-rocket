@@ -113,6 +113,17 @@ export default {
 
   emailParent: function (email) {
     return axios.post("/api/auth/invite", { email });
-  }
+  },
 
+  getCodes: function () {
+    return axios.get("/api/code/");
+  },
+
+  addCode: function (code) {
+    return axios.post("/api/code/", { code });
+  },
+
+  removeCode: function (code) {
+    return axios.delete(`/api/code/${code}`);
+  },
 };
