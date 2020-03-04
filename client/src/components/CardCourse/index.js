@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useStoreContext } from "../../utils/GlobalState";
 import API from "../../utils/API";
 import PayButton from "../PayButton";
@@ -35,17 +36,17 @@ function CardCourse(props) {
             ) : null}
             {props.course.Students.map(student => (
               <tr>
-                <td>{student.name}</td>
-                <td>{student.User.name}</td>
+                <td><Link to={`/student/${student.id}`}>{student.name}</Link></td>
+                <td><Link to={`/parent/${student.User.id}`}>{student.User.name}</Link></td>
                 <td>{student.age}</td>
                 <td>
                   {student.Paid ? (
                     "PAID"
                   ) : (
-                    <span style={{ fontWeight: "bold", color: "red" }}>
-                      NOT YET PAID
+                      <span style={{ fontWeight: "bold", color: "red" }}>
+                        NOT YET PAID
                     </span>
-                  )}
+                    )}
                 </td>
                 <td>
                   {!student.Paid ? (
@@ -93,7 +94,9 @@ function CardCourse(props) {
               <ul className='list-group list-group-flush'>
                 <li className='list-group-item'>
                   Teacher:{" "}
-                  {props.course.User ? props.course.User.name : "Not Assigned"}
+                  {props.course.User ?
+                    <Link to={`/parent/${props.course.User.id}`}>{props.course.User.name}</Link> :
+                    "Not Assigned"}
                 </li>
                 <li className='list-group-item'>
                   Location: {props.course.location}
