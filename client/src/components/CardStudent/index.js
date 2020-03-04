@@ -222,10 +222,10 @@ function CardStudent(props) {
   const showCourseInfo = () => {
     return (
       props.student.StudentCourses.length === 0 ? (
-        <div className='age-text'>Not yet enrolled in any classes</div>
+        <div className='age-text'>Not Enrolled</div>
       ) : (
           <div className='age-text'>
-            Number of enrolled classes:{" "}
+            Number of classes:{" "}
             <span className='badge badge-primary badge-pill'>
               {props.student.StudentCourses.length}
             </span>
