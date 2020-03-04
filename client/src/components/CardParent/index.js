@@ -4,6 +4,10 @@ import { Col, Row } from "../Grid";
 import { useStoreContext } from "../../utils/GlobalState";
 import CardStudent from "../CardStudent";
 import API from "../../utils/API";
+
+import EditUserForm from "../forms/EditUserForm";
+import EditModal from "../EditModal";
+
 import AddModal from "../AddModal";
 import AddStudentForm from "../forms/AddStudentForm";
 import Avatar from "react-avatar";
@@ -14,13 +18,14 @@ function CardParent(props) {
   const [state] = useStoreContext();
 
   const onDelete = id => {
-    API.removeUser(id).then(res => {
-      if (props.updateFunc) {
-        props.updateFunc(true);
-      }
-    })
+    API.removeUser(id)
+      .then(res => {
+        if (props.updateFunc) {
+          props.updateFunc(true);
+        }
+      })
       .catch(err => {
-        props.updateFunc(false)
+        props.updateFunc(false);
       });
   };
 
@@ -38,13 +43,13 @@ function CardParent(props) {
     return !props.user.img.includes("res.cloudinary.com") ? (
       <Avatar name={props.user.name} className='avatarCss' />
     ) : (
-        <img
-          src={props.user.img}
-          className='card-img cloud-img'
-          alt={props.user.name}
-          style={{ width: 100, height: 100 }}
-        />
-      );
+      <img
+        src={props.user.img}
+        className='card-img cloud-img'
+        alt={props.user.name}
+        style={{ width: 100, height: 100 }}
+      />
+    );
   };
 
   const renderStudents = () => {
@@ -68,8 +73,8 @@ function CardParent(props) {
                 </Row>
               </React.Fragment>
             ) : (
-                <h3>No Children</h3>
-              )
+              <h3>No Children</h3>
+            )
           ) : null}
         </div>
       </div>
@@ -111,13 +116,13 @@ function CardParent(props) {
                     {!props.user.img.includes("res.cloudinary.com") ? (
                       <Avatar name={props.user.name} className='avatarCss' />
                     ) : (
-                        <img
-                          src={props.user.img}
-                          className='card-img cloud-img'
-                          alt={props.user.name}
-                          style={{ width: 200, height: 200 }}
-                        />
-                      )}
+                      <img
+                        src={props.user.img}
+                        className='card-img cloud-img'
+                        alt={props.user.name}
+                        style={{ width: 200, height: 200 }}
+                      />
+                    )}
                     {/*Cloudinary Upload Widget Button*/}
                     <br />
                     <button
@@ -169,9 +174,15 @@ function CardParent(props) {
                         {studentState ? "Hide Students" : "Show Students"}
                       </button>{" "}
                       {/* NEED TO MAKE EDIT FUNCTION FOR BUTTON */}
-                      <button type='button' className='btn btn-dark btn-sm'>
+                      <EditModal
+                        title='Edit Parent'
+                        user={props.user}
+                        form={EditUserForm}
+                        onReturn={props.updateFunc}
+                      />{" "}
+                      {/*<button type='button' className='btn btn-dark btn-sm'>
                         <i className='fas fa-pencil-alt'></i> Edit User{" "}
-                      </button>{" "}
+                      </button>*/}
                       {state.user && state.user.isAdmin ? (
                         <button
                           className='btn btn-danger btn-sm'
