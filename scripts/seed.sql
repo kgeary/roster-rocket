@@ -115,19 +115,19 @@ INSERT INTO Students (name, age, createdAt, updatedAt, ParentId)
 VALUES
 ("Adam Jones", 13, now(), now(), 1),
 -- 1
-("Bruce Davis", 14, now(), now(), 2),
+("Bruce Boyd", 14, now(), now(), 2),
 -- 2
-("Cindy Davis", 12, now(), now(), 2),
+("Cindy Boyd", 12, now(), now(), 2),
 -- 3
-("Danny Davis", 11, now(), now(), 2),
+("Danny Boyd", 11, now(), now(), 2),
 -- 4
-("Eddie Davis", 10, now(), now(), 2),
+("Eddie Boyd", 10, now(), now(), 2),
 -- 5
-("Fiona Davis", 9, now(), now(), 2),
+("Fiona Boyd", 9, now(), now(), 2),
 -- 6
 ("Greg Cousins", 10, now(), now(), 3),
 -- 7
-("Sally Cousins", 12, now(), now(), 3),
+("Cindy Cousins", 12, now(), now(), 3),
 -- 8
 ("Sally Cousins", 14, now(), now(), 3),
 -- 9
