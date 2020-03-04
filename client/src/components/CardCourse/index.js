@@ -20,7 +20,7 @@ function CardCourse(props) {
     return (
       <table className='table'>
         <thead className='thead'>
-          <tr class='table-info'>
+          <tr className='table-info'>
             <th scope='col'>Student</th>
             <th scope='col'>Parent</th>
             <th scope='col'>Age</th>
@@ -78,7 +78,7 @@ function CardCourse(props) {
                 className='btn btn-danger btn-sm'
                 onClick={() => onDelete(props.course.id)}
               >
-                <i class='far fa-trash-alt'></i> Delete Course
+                <i className='far fa-trash-alt'></i> Delete Course
               </button>
             ) : null}
           </div>
@@ -117,7 +117,7 @@ function CardCourse(props) {
       </div>
       <div className='card pt-0'>
         <div className='card-header pb-0'>
-          <div class='float-left'>
+          <div className='float-left'>
             <h1>Students Enrolled In This Class</h1>
           </div>
           <div className='float-right pt-2'>
@@ -132,7 +132,7 @@ function CardCourse(props) {
                 setCourseState(!courseState);
               }}
             >
-              <i class='far fa-eye' />{" "}
+              <i className='far fa-eye' />{" "}
               {courseState ? "Hide Students" : "Show Students"}
             </button>
           </div>

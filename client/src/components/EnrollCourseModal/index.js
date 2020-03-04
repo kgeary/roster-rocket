@@ -4,19 +4,18 @@ import { useStoreContext } from "../../utils/GlobalState";
 
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)"
   }
 };
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 function EnrollCourseModal(props) {
-
   console.log("ECM", props.course);
 
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -24,12 +23,12 @@ function EnrollCourseModal(props) {
 
   const openModal = () => {
     setIsOpen(true);
-  }
+  };
 
   const afterOpenModal = () => {
     // references are now sync'd and can be accessed.
     //subtitle.style.color = '#f00';
-  }
+  };
 
   const closeModal = (update = false) => {
     setIsOpen(false);
@@ -37,19 +36,26 @@ function EnrollCourseModal(props) {
       console.log("UPDATE", update);
       props.onReturn();
     }
-  }
+  };
 
   return (
     <React.Fragment>
-      <button className="btn btn-primary btn-sm" onClick={openModal}> <i class="fas fa-plus"></i> Add Student</button>
+      <button className='btn btn-primary btn-sm' onClick={openModal}>
+        {" "}
+        <i className='fas fa-plus'></i> Add Student
+      </button>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
-        contentLabel=""
+        contentLabel=''
       >
-        <props.form students={state.students} course={props.course} closeModal={closeModal} />
+        <props.form
+          students={state.students}
+          course={props.course}
+          closeModal={closeModal}
+        />
       </Modal>
     </React.Fragment>
   );

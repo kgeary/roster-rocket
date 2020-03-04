@@ -4,19 +4,15 @@ import { Container } from "../../Grid";
 // import validate from "../../../utils/validate";
 import alertFactory from "../../../utils/alertFactory";
 import API from "../../../utils/API";
-import { useStoreContext } from "../../../utils/GlobalState";
-import * as ACTIONS from "../../../utils/actions";
 import InputForm from "../InputForm";
 
 function AddParentForm(props) {
   const formAlert = alertFactory("alert");
 
-  const [, dispatch] = useStoreContext();
-
   const handleSubmit = e => {
     e.preventDefault();
     const errors = [];
-
+    let update;
     if (errors.length > 0) {
       formAlert(errors.join("<br>"));
     } else {
@@ -24,15 +20,15 @@ function AddParentForm(props) {
 
       const email = document.getElementById("email").value || "";
 
-      dispatch({ type: ACTIONS.LOADING });
       API.emailParent({
         email
       })
         .then(res => {
           console.log("EMAIL", res.data);
-          document.getElementById("email").value = "";
+          update = true;
         })
         .catch(err => {
+          update = false;
           if (err.message) {
             formAlert(err.message);
           } else {
@@ -41,8 +37,7 @@ function AddParentForm(props) {
           }
         })
         .finally(() => {
-          dispatch({ type: ACTIONS.DONE });
-          props.closeModal();
+          props.closeModal(update);
         });
     }
   };
@@ -50,6 +45,14 @@ function AddParentForm(props) {
   return (
     <Container>
       <div className='form-container'>
+        <div className='close-modal'>
+          <i
+            className='far fa-times-circle'
+            onClick={() => {
+              props.closeModal(false);
+            }}
+          ></i>
+        </div>
         <h1>Invite a Parent</h1>
         <form className='form-group mt-3 mb-2 form-signup'>
           {/* PARENT EMAIL */}
@@ -66,7 +69,7 @@ function AddParentForm(props) {
             className='btn btn-success mt-3 mb-5'
             onClick={handleSubmit}
           >
-            <i class='fas fa-envelope'></i> Send Invite
+            <i className='fas fa-envelope'></i> Send Invite
           </button>
           <br />
           <div id='alert' role='alert' />

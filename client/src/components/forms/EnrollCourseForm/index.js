@@ -8,7 +8,7 @@ import * as ACTIONS from "../../../utils/actions";
 
 function EnrollCourseForm(props) {
   const formAlert = alertFactory("alert");
-  const [state, dispatch] = useStoreContext();
+  const [state] = useStoreContext();
 
   console.log("ENROLL COURSE FORM", state.students);
 
@@ -32,7 +32,6 @@ function EnrollCourseForm(props) {
     } else {
       formAlert(false);
 
-      dispatch({ type: ACTIONS.LOADING });
       API.enrollCourse(
         document.getElementById("student").value,
         props.course.id
@@ -47,7 +46,6 @@ function EnrollCourseForm(props) {
           formAlert("Unable to Enroll!");
         })
         .finally(() => {
-          dispatch({ type: ACTIONS.DONE });
           props.closeModal(updateParent);
         });
     }
@@ -56,6 +54,14 @@ function EnrollCourseForm(props) {
   return (
     <Container>
       <div className='form-container'>
+        <div className='close-modal'>
+          <i
+            className='far fa-times-circle'
+            onClick={() => {
+              props.closeModal(false);
+            }}
+          ></i>
+        </div>
         <h1>Enroll Student in Course</h1>
         {/* COURSE */}
         <form className='form-group'>
@@ -73,7 +79,7 @@ function EnrollCourseForm(props) {
             className='btn btn-success mt-3 mb-5'
             onClick={handleSubmit}
           >
-            <i class='fas fa-user-plus'></i> Enroll
+            <i className='fas fa-user-plus'></i> Enroll
           </button>
           <br />
           <div id='alert' role='alert' />

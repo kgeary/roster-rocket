@@ -12,7 +12,7 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    zIndex: "3"
+    zIndex: "2"
   }
 };
 
@@ -30,9 +30,11 @@ function AddModal(props) {
     //subtitle.style.color = '#f00';
   };
 
-  const closeModal = () => {
+  const closeModal = (args) => {
+    console.log("CLOSE MODAL ARGS", args, typeof args);
     setIsOpen(false);
-    if (props.onReturn) {
+    if (props.onReturn && typeof args === "boolean" && args) {
+      console.log("UPDATE");
       props.onReturn();
     }
   };
@@ -47,6 +49,8 @@ function AddModal(props) {
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
+        shouldCloseOnOverlayClick={false}
+        shouldCloseOnEsc={true}
         contentLabel=''
       >
         <props.form users={props.users} closeModal={closeModal} />

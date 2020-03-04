@@ -106,7 +106,7 @@ function LoginForm() {
             className='btn btn-success mt-3 mb-5'
             onClick={handleSubmit}
           >
-            <i class='fas fa-sign-in-alt'></i> Login
+            <i className='fas fa-sign-in-alt'></i> Login
           </button>
           <br />
           <div id='alert' role='alert' />

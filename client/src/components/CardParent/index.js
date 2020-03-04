@@ -16,9 +16,12 @@ function CardParent(props) {
   const onDelete = id => {
     API.removeUser(id).then(res => {
       if (props.updateFunc) {
-        props.updateFunc();
+        props.updateFunc(true);
       }
-    });
+    })
+      .catch(err => {
+        props.updateFunc(false)
+      });
   };
 
   const getAmountDue = () => {
@@ -35,13 +38,13 @@ function CardParent(props) {
     return !props.user.img.includes("res.cloudinary.com") ? (
       <Avatar name={props.user.name} className='avatarCss' />
     ) : (
-      <img
-        src={props.user.img}
-        className='card-img cloud-img'
-        alt={props.user.name}
-        style={{ width: 100, height: 100 }}
-      />
-    );
+        <img
+          src={props.user.img}
+          className='card-img cloud-img'
+          alt={props.user.name}
+          style={{ width: 100, height: 100 }}
+        />
+      );
   };
 
   const renderStudents = () => {
@@ -65,8 +68,8 @@ function CardParent(props) {
                 </Row>
               </React.Fragment>
             ) : (
-              <h3>No Children</h3>
-            )
+                <h3>No Children</h3>
+              )
           ) : null}
         </div>
       </div>
@@ -108,13 +111,13 @@ function CardParent(props) {
                     {!props.user.img.includes("res.cloudinary.com") ? (
                       <Avatar name={props.user.name} className='avatarCss' />
                     ) : (
-                      <img
-                        src={props.user.img}
-                        className='card-img cloud-img'
-                        alt={props.user.name}
-                        style={{ width: 200, height: 200 }}
-                      />
-                    )}
+                        <img
+                          src={props.user.img}
+                          className='card-img cloud-img'
+                          alt={props.user.name}
+                          style={{ width: 200, height: 200 }}
+                        />
+                      )}
                     {/*Cloudinary Upload Widget Button*/}
                     <br />
                     <button
@@ -143,8 +146,11 @@ function CardParent(props) {
                     <br />
                     <div className='float-right'>
                       <Link to='/changePassword'>
-                        <button type='button' class='btn btn-warning btn-sm'>
-                          <i class='fas fa-key'></i> Change Password
+                        <button
+                          type='button'
+                          className='btn btn-warning btn-sm'
+                        >
+                          <i className='fas fa-key'></i> Change Password
                         </button>
                       </Link>{" "}
                       <AddModal
@@ -159,19 +165,19 @@ function CardParent(props) {
                           setStudentState(!studentState);
                         }}
                       >
-                        <i class='far fa-eye'></i>{" "}
+                        <i className='far fa-eye'></i>{" "}
                         {studentState ? "Hide Students" : "Show Students"}
                       </button>{" "}
                       {/* NEED TO MAKE EDIT FUNCTION FOR BUTTON */}
-                      <button type='button' class='btn btn-dark btn-sm'>
-                        <i class='fas fa-pencil-alt'></i> Edit User{" "}
+                      <button type='button' className='btn btn-dark btn-sm'>
+                        <i className='fas fa-pencil-alt'></i> Edit User{" "}
                       </button>{" "}
                       {state.user && state.user.isAdmin ? (
                         <button
                           className='btn btn-danger btn-sm'
                           onClick={() => onDelete(props.user.id)}
                         >
-                          <i class='far fa-trash-alt'></i> Delete User
+                          <i className='far fa-trash-alt'></i> Delete User
                         </button>
                       ) : null}
                     </div>

@@ -4,15 +4,13 @@ import { Container } from "../../Grid";
 // import validate from "../../../utils/validate";
 import alertFactory from "../../../utils/alertFactory";
 import API from "../../../utils/API";
-import { useStoreContext } from "../../../utils/GlobalState";
-import * as ACTIONS from "../../../utils/actions";
 import InputForm from "../InputForm";
 
 function AddStudentForm(props) {
   const formAlert = alertFactory("alert");
-  const [, dispatch] = useStoreContext();
 
   const handleSubmit = e => {
+    let update;
     e.preventDefault();
     const errors = [];
 
@@ -25,7 +23,6 @@ function AddStudentForm(props) {
     } else {
       formAlert(false);
 
-      dispatch({ type: ACTIONS.LOADING });
       API.addStudent({
         name,
         age,
@@ -33,10 +30,10 @@ function AddStudentForm(props) {
       })
         .then(res => {
           console.log("COURSE", res.data);
-          document.getElementById("name").value = "";
-          document.getElementById("age").value = "";
+          update = true;
         })
         .catch(err => {
+          update = false;
           if (err.message) {
             formAlert(err.message);
           } else {
@@ -45,8 +42,7 @@ function AddStudentForm(props) {
           }
         })
         .finally(() => {
-          dispatch({ type: ACTIONS.DONE });
-          props.closeModal();
+          props.closeModal(update);
         });
     }
   };
@@ -54,6 +50,14 @@ function AddStudentForm(props) {
   return (
     <Container>
       <div className='form-container'>
+        <div className='close-modal'>
+          <i
+            className='far fa-times-circle'
+            onClick={() => {
+              props.closeModal(false);
+            }}
+          ></i>
+        </div>
         <h1>Add Student</h1>
         <form className='form-group mt-3 mb-2 form-signup'>
           {/* STUDENT NAME */}
@@ -89,7 +93,7 @@ function AddStudentForm(props) {
             className='btn btn-success mt-3 mb-5'
             onClick={handleSubmit}
           >
-            <i class='fas fa-user-plus'></i> Add Student
+            <i className='fas fa-user-plus'></i> Add Student
           </button>
           <br />
           <div id='alert' role='alert' />

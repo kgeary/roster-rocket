@@ -8,19 +8,19 @@ import { useStoreContext } from "../../../utils/GlobalState";
 import * as ACTIONS from "../../../utils/actions";
 
 function EnrollStudentForm(props) {
-
   const formAlert = alertFactory("alert");
-  const [state, dispatch] = useStoreContext();
+  const [state] = useStoreContext();
 
   console.log("ENROLL STUDENT FORM", props.student);
 
   const coursesTaken = props.student.StudentCourses.map(sc => sc.Course.id);
-  const availableCourses = state.courses
-    .filter(course => !coursesTaken.includes(course.id));
+  const availableCourses = state.courses.filter(
+    course => !coursesTaken.includes(course.id)
+  );
 
   if (availableCourses.length < 1) {
     // Alert the user then close the modal
-    return <h1>No Available Courses</h1>
+    return <h1>No Available Courses</h1>;
   }
 
   const handleSubmit = e => {
@@ -33,8 +33,10 @@ function EnrollStudentForm(props) {
     } else {
       formAlert(false);
 
-      dispatch({ type: ACTIONS.LOADING });
-      API.enrollCourse(props.student.id, document.getElementById("course").value)
+      API.enrollCourse(
+        props.student.id,
+        document.getElementById("course").value
+      )
         .then(res => {
           console.log("COURSE", res.data);
           updateParent = true;
@@ -45,7 +47,6 @@ function EnrollStudentForm(props) {
           formAlert("Unable to Enroll!");
         })
         .finally(() => {
-          dispatch({ type: ACTIONS.DONE });
           props.closeModal(updateParent);
         });
     }
@@ -54,16 +55,24 @@ function EnrollStudentForm(props) {
   return (
     <Container>
       <div className='form-container'>
+        <div className='close-modal'>
+          <i
+            className='far fa-times-circle'
+            onClick={() => {
+              props.closeModal(false);
+            }}
+          ></i>
+        </div>
         <h1>Enroll in Course</h1>
         {/* COURSE */}
-        <form className="form-group">
-          <label htmlFor="course">Course:</label>
-          <select required className="form-control" id="course">
-            {
-              availableCourses.map(course => (
-                <option key={course.id} value={course.id}>{course.title}</option>
-              ))
-            }
+        <form className='form-group'>
+          <label htmlFor='course'>Course:</label>
+          <select required className='form-control' id='course'>
+            {availableCourses.map(course => (
+              <option key={course.id} value={course.id}>
+                {course.title}
+              </option>
+            ))}
           </select>
 
           <button
@@ -77,7 +86,7 @@ function EnrollStudentForm(props) {
           <div id='alert' role='alert' />
         </form>
       </div>
-    </Container >
+    </Container>
   );
 }
 
