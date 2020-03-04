@@ -23,7 +23,9 @@ function Course() {
         }
       })
       .then(() => {
-        return API.getUserStudents();
+        return (state.user && state.user.isAdmin) ?
+          API.getAllStudents() :
+          API.getUserStudents();
       })
       .then(res => {
         dispatch({ type: ACTIONS.SET_STUDENTS, value: res.data });
