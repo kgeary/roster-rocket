@@ -4,3 +4,12 @@
   font-size: 30px;
   color: #213946;
 }
+
+.age-text {
+  margin: 0 auto;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  text-align: center;
+  font-style: italic;
+}

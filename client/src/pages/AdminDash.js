@@ -109,18 +109,18 @@ function AdminDash() {
 
   return (
     <div>
-      <Container fluid>
+      <Container>
         <div className='gap' />
-        <h1>Admin Dashboard</h1>
+        <h1>Admin Dashboard</h1><br/>
         <div className='alert alert-dark' role='alert'>
           Emergency Hotline: (512) 555-1212
           <br />
           Class-Code: {codes.join(", ")}
           <br />
         </div>
-
+        <br/>
         <Row>
-          <Col size='md-4'>
+          <Col size='lg-4'>
             <div className='card pt-0 admin-card'>
               <div className='card-header pb-0'>
                 <div className='float-left'>
@@ -137,13 +137,13 @@ function AdminDash() {
               </div>
               <ul className='list-group list-group-flush tiny-font'>
                 <li className='list-group-item list-group-item-primary pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
-                  Number of Parents:{" "}
+                  <span className="badge-title"> > Number of Parents:{" "}</span>
                   <span className='badge badge-primary badge-pill'>
                     {state.users.length}
                   </span>
                 </li>
                 <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
-                  Parents without Children:{" "}
+                <span className="badge-title"> > Parents without Children:{" "}</span>
                   <span className='badge badge-primary badge-pill'>
                     {
                       state.users.filter(user => user.Students.length < 1)
@@ -157,7 +157,7 @@ function AdminDash() {
                 type='text'
                 id='userFilter'
                 name='userFilter'
-                placeholder='Filter by Parent'
+                placeholder='Filter by Parent...'
                 ref={userFilterRef}
                 onChange={onFilterChange}
               />
@@ -170,7 +170,7 @@ function AdminDash() {
                       )
                       .map(user => (
                         <Link to={`/parent/${user.id}`}>
-                          <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                          <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
                             {user.name}
                             <span class='badge badge-primary badge-pill'>
                               {user.Students.length}
@@ -183,7 +183,7 @@ function AdminDash() {
               </div>
             </div>
           </Col>
-          <Col size='md-4'>
+          <Col size='lg-4'>
             <div className='card pt-0 admin-card'>
               <div className='card-header pb-0'>
                 <div className='float-left'>
@@ -200,13 +200,13 @@ function AdminDash() {
               </div>
               <ul className='list-group list-group-flush tiny-font'>
                 <li className='list-group-item list-group-item-primary pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
-                  Number of Classes:{" "}
+                  <span className="badge-title"> > Number of Classes:{" "}</span>
                   <span className='badge badge-primary badge-pill'>
                     {state.courses.length}
                   </span>
                 </li>
-                <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
-                  Classes without Teachers:{" "}
+                <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'> <span className="badge-title"> >
+                  Classes without Teachers:{" "}</span>
                   <span className='badge badge-primary badge-pill'>
                     {
                       state.courses.filter(course => course.TeacherId === null)
@@ -221,7 +221,7 @@ function AdminDash() {
                 type='text'
                 id='courseFilter'
                 name='courseFilter'
-                placeholder='Filter by Class'
+                placeholder='Filter by Class...'
                 ref={courseFilterRef}
                 onChange={onFilterChange}
               />
@@ -247,7 +247,7 @@ function AdminDash() {
               </div>
             </div>
           </Col>
-          <Col size='md-4'>
+          <Col size='lg-4'>
             <div className='card pt-0 admin-card'>
               <div className='card-header pb-0'>
                 <div className='float-left'>
@@ -263,14 +263,13 @@ function AdminDash() {
                 </div>
               </div>
               <ul className='list-group list-group-flush tiny-font'>
-                <li className='list-group-item list-group-item-primary pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
-                  Number of Students:{" "}
+                <li className='list-group-item list-group-item-primary pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'><span className="badge-title"> > Number of Students:{" "}</span>
                   <span className='badge badge-primary badge-pill'>
                     {state.students.length}
                   </span>
                 </li>
                 <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
-                  Unpaid Students:{" "}
+                <span className="badge-title"> > Unpaid Students:{" "}</span>
                   <span className='badge badge-primary badge-pill'>
                     {state.students.reduce(
                       (a, c) =>
@@ -285,7 +284,7 @@ function AdminDash() {
                 type='text'
                 id='studentFilter'
                 name='studentFilter'
-                placeholder='Filter by Student'
+                placeholder='Filter by Student...'
                 ref={studentFilterRef}
                 onChange={onFilterChange}
               />
@@ -298,7 +297,7 @@ function AdminDash() {
                       )
                       .map(student => (
                         <Link to={`/student/${student.id}`}>
-                          <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                          <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
                             {student.name}
                           </li>
                         </Link>

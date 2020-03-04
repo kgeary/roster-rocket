@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { useStoreContext } from "../../utils/GlobalState";
 import API from "../../utils/API";
 import PayButton from "../PayButton";
@@ -17,110 +16,127 @@ function CardCourse(props) {
       }
     });
   };
-
-  const showPaid = (student) => {
-    if (!state.user ||
-      (!state.user.isAdmin && state.user.id !== student.ParentId)) {
-      return null;
-    }
-
-    return (
-      <React.Fragment>
-        <h6>
-          Paid:{" "}
-          {student.Paid ? (
-            "PAID"
-          ) : (
-              <span style={{ fontWeight: "bold", color: "red" }}>
-                NOT YET PAID
-              </span>
-            )}
-        </h6>
-        {
-          !student.Paid ? (
-            <PayButton
-              StudentId={student.id}
-              CourseId={props.course.id}
-              updateFunc={props.updateFunc}
-              Paid={student.Paid}
-            />
-          ) : null
-        }
-      </React.Fragment>
-    );
-  }
-
   const renderStudents = () => {
     return (
-      <React.Fragment>
-        {props.course.Students.length === 0 ? (
-          <h5>No Students Enrolled</h5>
-        ) : null}
-        {props.course.Students.map(student => (
-          <div className='card' key={student.id}>
-            <h5 className='card-title'>
-              <Link to={`/student/${student.id}`}>
-                Name: {student.name}
-              </Link>
-            </h5>
-            <div className='card-body'>
-              <h6>
-                <Link to={`/parent/${student.User.id}`}>
-                  Parent: {student.User.name}
-                </Link>
-              </h6>
-              <h6>Age: {student.age}</h6>
-              {showPaid(student)}
-            </div>
-          </div>
-        ))}
-        <EnrollCourseModal
-          course={props.course}
-          form={EnrollCourseForm}
-          onReturn={props.updateFunc}
-        />
-      </React.Fragment>
+      <table className='table'>
+        <thead className='thead'>
+          <tr class='table-info'>
+            <th scope='col'>Student</th>
+            <th scope='col'>Parent</th>
+            <th scope='col'>Age</th>
+            <th scope='col'>Paid</th>
+            <th scope='col'>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <React.Fragment>
+            {props.course.Students.length === 0 ? (
+              <h5>No Students Enrolled</h5>
+            ) : null}
+            {props.course.Students.map(student => (
+              <tr>
+                <td>{student.name}</td>
+                <td>{student.User.name}</td>
+                <td>{student.age}</td>
+                <td>
+                  {student.Paid ? (
+                    "PAID"
+                  ) : (
+                    <span style={{ fontWeight: "bold", color: "red" }}>
+                      NOT YET PAID
+                    </span>
+                  )}
+                </td>
+                <td>
+                  {!student.Paid ? (
+                    <PayButton
+                      StudentId={student.id}
+                      CourseId={props.course.id}
+                      updateFunc={props.updateFunc}
+                      Paid={student.Paid}
+                    />
+                  ) : null}
+                </td>
+              </tr>
+            ))}
+          </React.Fragment>{" "}
+        </tbody>
+      </table>
     );
   };
 
   return (
-    <div className='card course-card'>
-      <div className='card-header'>{props.course.title}</div>
-      <div className='card-body'>
-        <ul className='list-group list-group-flush'>
-          <li className='list-group-item'>
-            Teacher:{" "}
-            {props.course.User ? props.course.User.name : "Not Assigned"}
-          </li>
-          <li className='list-group-item'>Location: {props.course.location}</li>
-          <li className='list-group-item'>
-            Enrolled: {props.course.Students.length}
-          </li>
-          <li className='list-group-item'>Capacity: {props.course.capacity}</li>
-          <li className='list-group-item'>
-            Paid: {props.course.Students.filter(s => s.Paid).length}
-          </li>
-          <li className='list-group-item'>
-            Unpaid: {props.course.Students.filter(s => !s.Paid).length}
-          </li>
-          {state.user && state.user.isAdmin ? (
+    <div>
+      <div className='card course-card pt-0'>
+        <div className='card-header pb-0'>
+          <div className='float-left'>
+            <h1>{props.course.title}</h1>
+          </div>
+          <div className='text-right pt-2'>
+            {state.user && state.user.isAdmin ? (
+              <button
+                className='btn btn-danger btn-sm'
+                onClick={() => onDelete(props.course.id)}
+              >
+                <i class='far fa-trash-alt'></i> Delete Course
+              </button>
+            ) : null}
+          </div>
+        </div>
+        <div className='card-body'>
+          <div className='row'>
+            <div className='col col-lg-3 text-center'>
+              <img src='https://via.placeholder.com/200x200' alt='' />
+              Show Teacher Photo
+            </div>
+            <div className='col col-lg-9'>
+              <ul className='list-group list-group-flush'>
+                <li className='list-group-item'>
+                  Teacher:{" "}
+                  {props.course.User ? props.course.User.name : "Not Assigned"}
+                </li>
+                <li className='list-group-item'>
+                  Location: {props.course.location}
+                </li>
+                <li className='list-group-item'>
+                  Enrolled: {props.course.Students.length}
+                </li>
+                <li className='list-group-item'>
+                  Capacity: {props.course.capacity}
+                </li>
+                <li className='list-group-item'>
+                  Paid: {props.course.Students.filter(s => s.Paid).length}
+                </li>
+                <li className='list-group-item list-group-item-danger'>
+                  Unpaid: {props.course.Students.filter(s => !s.Paid).length}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='card pt-0'>
+        <div className='card-header pb-0'>
+          <div class='float-left'>
+            <h1>Students Enrolled In This Class</h1>
+          </div>
+          <div className='float-right pt-2'>
+            <EnrollCourseModal
+              course={props.course}
+              form={EnrollCourseForm}
+              onReturn={props.updateFunc}
+            />{" "}
             <button
-              className='btn btn-danger btn-sm'
-              onClick={() => onDelete(props.course.id)}
+              className='btn btn-info btn-sm'
+              onClick={() => {
+                setCourseState(!courseState);
+              }}
             >
-              Delete Course
+              <i class='far fa-eye'></i>{" "}
+              {courseState ? "Hide Students" : "Show Students"}
             </button>
-          ) : null}
-
-          <button
-            className='btn btn-info btn-sm'
-            onClick={() => {
-              setCourseState(!courseState);
-            }}
-          >
-            {courseState ? "Hide Students" : "Show Students"}
-          </button>
-        </ul>
+          </div>
+        </div>
         {courseState ? renderStudents() : null}
       </div>
     </div>

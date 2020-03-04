@@ -63,11 +63,12 @@ function User() {
   }
 
   return (
-    <Container fluid>
+    <Container>
       {parent ? (
         <React.Fragment>
           <div className='gap' />
-          <h1>User Page {parent ? parent.email : null}</h1>
+          <h1>{parent ? parent.name.split(" ")[1] : null} Family Profile</h1>
+          <br />
           <Row>
             <Col size='md-12'>
               <CardParent
