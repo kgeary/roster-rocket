@@ -31,6 +31,18 @@ export default {
     return axios.delete(`/api/student/${id}`);
   },
 
+  editUser: function (id, body) {
+    return axios.patch(`/api/user/${id}`, body);
+  },
+
+  editCourse: function (id, body) {
+    return axios.patch(`/api/course/${id}`, body);
+  },
+
+  editStudent: function (id, body) {
+    return axios.patch(`/api/student/${id}`, body);
+  },
+
   enrollCourse: function (StudentId, CourseId) {
     return axios.post(`/api/studentcourse/add`, { StudentId, CourseId });
   },

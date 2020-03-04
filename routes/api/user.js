@@ -22,6 +22,7 @@ router
 router
   .route("/:id")
   .get(usersController.readById)
+  .patch(usersController.updateUser)
   .delete(isAdmin, usersController.removeById);
 
 // Matches with "/api/user/logout"

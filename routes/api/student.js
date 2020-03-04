@@ -21,6 +21,7 @@ router
 router
   .route("/:id")
   .get(studentsController.readById)
+  .patch(studentsController.updateStudent)
   .delete(isAdmin, studentsController.removeById);
 
 // Matches with "/api/student/img"
