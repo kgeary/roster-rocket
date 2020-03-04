@@ -251,6 +251,19 @@ function CardStudent(props) {
     )
   }
 
+  const showDeleteStudent = () => {
+    return (
+      state.user && state.user.isAdmin ? (
+        <button
+          className='btn btn-danger btn-sm'
+          onClick={() => onDelete(props.student.id)}
+        >
+          <i className='far fa-trash-alt'></i> Delete Student
+        </button>
+      ) : null
+    )
+  }
+
   return (
     <div className='card student-card benefit'>
       {showImage()}
@@ -277,14 +290,7 @@ function CardStudent(props) {
           <br />
           {/* NEED TO MAKE EDIT FUNCTION FOR BUTTON */}
           {showEditChild()}
-          {state.user && state.user.isAdmin ? (
-            <button
-              className='btn btn-danger btn-sm'
-              onClick={() => onDelete(props.student.id)}
-            >
-              <i className='far fa-trash-alt'></i> Delete Student
-            </button>
-          ) : null}
+          {showDeleteStudent()}
         </div>
       </div>
       {courseState ? <div className='card-body'>{renderCourses()}</div> : null}
