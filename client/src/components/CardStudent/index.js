@@ -154,14 +154,16 @@ function CardStudent(props) {
         <h5 className='card-title student-card-title'>{props.student.name}</h5>
         <div className='age-text'>Age: {props.student.age}</div>
         <ul className='list-group'>
-          <li className='list-group-item'>
+          <li className='list-group-item text-center'>
             Parent: <Link to=''>{props.student.User.name}</Link>
           </li>
           {props.student.StudentCourses.length === 0 ? (
-            <li className='list-group-item'>Not Currently Enrolled</li>
+            <li className='list-group-item text-center'>
+              Not Currently Enrolled
+            </li>
           ) : null}
         </ul>
-        <div className='text-center pt-2'>
+        <div className='text-center pt-4'>
           <EnrollStudentModal
             student={props.student}
             form={EnrollStudentForm}
