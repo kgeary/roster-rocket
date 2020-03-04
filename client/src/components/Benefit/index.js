@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import Screenshot from "../Benefit/admin-screenshot.png";
 
 const Benefit = () => {
   return (
@@ -62,19 +63,22 @@ const Benefit = () => {
           <h1>Get Organized.</h1>
           <br />
           <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius
-            doloribus officiis dolore perferendis labore impedit a similique
-            adipisci..
+            With our powerful Admin dashboard, you'll be able to see all of your
+            co-op's important information at a glance.
           </p>
           <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rem
-            maiores, iusto possimus modi cupiditate soluta veniam inventore odio
-            corporis aliquam.
+            View the parents and student info, add and edit classes, and even
+            quickly see a full class roster.
+          </p>
+          <p>
+            <strong>
+              With Roster Rocket, your co-op will be ready for take off!
+            </strong>
           </p>
         </div>
         <div className='col-sm-6'>
           <img
-            src='https://via.placeholder.com/540x325'
+            src={Screenshot}
             className='screenshot'
             alt='placeholder for screenshot of admin dashboard'
           />
