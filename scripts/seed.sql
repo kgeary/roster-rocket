@@ -169,15 +169,15 @@ VALUES
 -- 27
 ("Elizabeth Harris", 10, now(), now(), 8),
 -- 28
-("Rachel Harris", 12, now(), now(), 8);
+("Rachel Harris", 12, now(), now(), 8),
 -- 29
 ("Susie Illes", 2, now(), now(), 9),
 -- 30
 ("Sabrina Illes", 4, now(), now(), 9),
 -- 31
-("Marcus Illes", 6, now(), now(), 9);
+("Marcus Illes", 6, now(), now(), 9),
 -- 32
-("Zeke Jacoby", 14, now(), now(), 10);
+("Zeke Jacoby", 14, now(), now(), 10),
 -- 33
 ("Austin Jacoby", 1, now(), now(), 10),
 -- 34
@@ -189,9 +189,9 @@ VALUES
 -- 37
 ("Christian Kraft", 5, now(), now(), 11),
 -- 38
-("Hector Kraft", 8, now(), now(), 11);
+("Hector Kraft", 8, now(), now(), 11),
 -- 39
-("Brady Kraft", 12, now(), now(), 11);
+("Brady Kraft", 12, now(), now(), 11),
 -- 40
 ("Mikey Kraft", 14, now(), now(), 11),
 -- 41
