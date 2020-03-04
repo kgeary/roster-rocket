@@ -10,7 +10,7 @@ When creating a new user for testing, use group code: 123456
 # Overview
 This tool gives homeschool admin teams an easy way to view class rosters, get student or parent info, and see what classes each student is registered for. It will also make collecting and managing dues easy and convenient, and gives parents an easy way to register and pay.
 
-This was a final collaborative project for the UT Full Stack Coding Bootcamp
+This was a final collaborative project for the UT Full Stack Coding Bootcamp.
 
 
 # Contents
@@ -41,7 +41,7 @@ Some of the biggest challenges for the admin team center on organizing and manag
 
 ### User Stories
 
-As an admin, I want an easy way to organize students into available classes, see what students are registered to what classes, and track if a parent has paid their dues. I also want to have a simple way to make class roster lists of students, and track payments for each class.
+As an admin, I want an easy way to organize students into available classes, see what students are registered to what classes, and track if a parent has paid their dues. I also want to have a simple way to see a list of students in a class, and track payments for each class.
 
 As a parent, I want an easy way to sign my children up for home school co-op classes, see class info, see what classes my children are in, and I want an easy way to pay for those classes.
 
@@ -52,7 +52,7 @@ As a parent, I want an easy way to sign my children up for home school co-op cla
 
 ### The Market is Growing
 
-According to <a href="https://www.nheri.org/homeschool-population-size-growing/">all research on the growth rates of homeschool trends</a>, the number of homeschoole children is growing at a tremendoius rate.  
+According to <a href="https://www.nheri.org/homeschool-population-size-growing/">research on the growth rates of homeschool trends</a>, the number of homeschooled children is growing at a tremendous rate.  
 
 <img src="images/growthRate.jpg" title="Homeschool Growth Trends" alt="Homeschool Trends" width=600px>
 
@@ -94,7 +94,7 @@ Admins are presented with a modal when they click add class or student:
 
 <img src="images/addClass.png" title="Add Class" alt="Add Class" width=600px>
 
-Parents will see their parent dashboard with a card for each child
+Parents will see their parent dashboard with a card for each child:
 
 <img src="images/parentView1.png" title="Parent View" alt="Parent View" width=600px>
 
@@ -108,10 +108,10 @@ Child Card on parent dashboard will have options to add and view classes, and pa
 Our final project using the full MERN stack (MySql, Express, React, Node). 
 * Bootstrap used for formatting.
 * Cloudinary used to manage image uploads and user image library.
-* React-Avatar NPM tool to create avatar for uses with no image.
+* React-Avatar NPM tool to create avatar for users with no image.
 * Send-Grid API to send emails to users, reset password, and send parent invites. 
 * React-Modal for modal popups.
-* Monday.com for Project Management and collaboration
+* Monday.com for Project Management and collaboration.
 
 
 ### [Back to Table of Contents](#Contents)
