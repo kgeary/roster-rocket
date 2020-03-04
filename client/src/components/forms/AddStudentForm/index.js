@@ -10,6 +10,7 @@ function AddStudentForm(props) {
   const formAlert = alertFactory("alert");
 
   const handleSubmit = e => {
+    let update;
     e.preventDefault();
     const errors = [];
 
@@ -29,8 +30,10 @@ function AddStudentForm(props) {
       })
         .then(res => {
           console.log("COURSE", res.data);
+          update = true;
         })
         .catch(err => {
+          update = false;
           if (err.message) {
             formAlert(err.message);
           } else {
@@ -39,7 +42,7 @@ function AddStudentForm(props) {
           }
         })
         .finally(() => {
-          props.closeModal();
+          props.closeModal(update);
         });
     }
   };

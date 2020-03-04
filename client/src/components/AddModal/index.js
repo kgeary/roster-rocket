@@ -30,9 +30,11 @@ function AddModal(props) {
     //subtitle.style.color = '#f00';
   };
 
-  const closeModal = () => {
+  const closeModal = (args) => {
+    console.log("CLOSE MODAL ARGS", args, typeof args);
     setIsOpen(false);
-    if (props.onReturn) {
+    if (props.onReturn && typeof args === "boolean" && args) {
+      console.log("UPDATE");
       props.onReturn();
     }
   };

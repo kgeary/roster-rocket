@@ -111,14 +111,14 @@ function AdminDash() {
     <div>
       <Container>
         <div className='gap' />
-        <h1>Admin Dashboard</h1><br/>
+        <h1>Admin Dashboard</h1><br />
         <div className='alert alert-dark' role='alert'>
           Emergency Hotline: (512) 555-1212
           <br />
           Class-Code: {codes.join(", ")}
           <br />
         </div>
-        <br/>
+        <br />
         <Row>
           <Col size='lg-4'>
             <div className='card pt-0 admin-card'>
@@ -143,7 +143,7 @@ function AdminDash() {
                   </span>
                 </li>
                 <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
-                <span className="badge-title"> > Parents without Children:{" "}</span>
+                  <span className="badge-title"> > Parents without Children:{" "}</span>
                   <span className='badge badge-primary badge-pill'>
                     {
                       state.users.filter(user => user.Students.length < 1)
@@ -169,7 +169,7 @@ function AdminDash() {
                         user.name.toLowerCase().includes(userFilter)
                       )
                       .map(user => (
-                        <Link to={`/parent/${user.id}`}>
+                        <Link key={user.id} to={`/parent/${user.id}`}>
                           <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
                             {user.name}
                             <span class='badge badge-primary badge-pill'>
@@ -233,7 +233,7 @@ function AdminDash() {
                         course.title.toLowerCase().includes(courseFilter)
                       )
                       .map(course => (
-                        <Link to={`/course/${course.id}`}>
+                        <Link key={course.id} to={`/course/${course.id}`}>
                           <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
                             {course.title}
                             <span class='badge badge-primary badge-pill'>
@@ -269,7 +269,7 @@ function AdminDash() {
                   </span>
                 </li>
                 <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
-                <span className="badge-title"> > Unpaid Students:{" "}</span>
+                  <span className="badge-title"> > Unpaid Students:{" "}</span>
                   <span className='badge badge-primary badge-pill'>
                     {state.students.reduce(
                       (a, c) =>
@@ -296,7 +296,7 @@ function AdminDash() {
                         student.name.toLowerCase().includes(studentFilter)
                       )
                       .map(student => (
-                        <Link to={`/student/${student.id}`}>
+                        <Link key={student.id} to={`/student/${student.id}`}>
                           <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
                             {student.name}
                           </li>

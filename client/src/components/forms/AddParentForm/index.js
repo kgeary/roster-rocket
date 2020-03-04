@@ -13,7 +13,7 @@ function AddParentForm(props) {
   const handleSubmit = e => {
     e.preventDefault();
     const errors = [];
-
+    let update;
     if (errors.length > 0) {
       formAlert(errors.join("<br>"));
     } else {
@@ -26,8 +26,10 @@ function AddParentForm(props) {
       })
         .then(res => {
           console.log("EMAIL", res.data);
+          update = true;
         })
         .catch(err => {
+          update = false;
           if (err.message) {
             formAlert(err.message);
           } else {
@@ -36,7 +38,7 @@ function AddParentForm(props) {
           }
         })
         .finally(() => {
-          props.closeModal();
+          props.closeModal(update);
         });
     }
   };

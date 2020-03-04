@@ -17,6 +17,7 @@ function AddCourseForm(props) {
   const handleSubmit = e => {
     e.preventDefault();
     const errors = [];
+    let update;
 
     const title = titleRef.current.value;
     const location = locRef.current.value;
@@ -39,8 +40,10 @@ function AddCourseForm(props) {
       })
         .then(res => {
           console.log("COURSE", res.data);
+          update = true;
         })
         .catch(err => {
+          update = false;
           if (err.message) {
             formAlert(err.message);
           } else {
@@ -49,7 +52,7 @@ function AddCourseForm(props) {
           }
         })
         .finally(() => {
-          props.closeModal();
+          props.closeModal(update);
         });
     }
   };
