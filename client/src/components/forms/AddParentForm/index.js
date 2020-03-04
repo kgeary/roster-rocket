@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 
 import { Container } from "../../Grid";
 // import validate from "../../../utils/validate";
@@ -11,7 +11,7 @@ import InputForm from "../InputForm";
 function AddParentForm(props) {
   const formAlert = alertFactory("alert");
 
-  const [state, dispatch] = useStoreContext();
+  const [, dispatch] = useStoreContext();
 
   const handleSubmit = e => {
     e.preventDefault();

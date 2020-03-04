@@ -20,7 +20,7 @@ function EnrollCourseModal(props) {
   console.log("ECM", props.course);
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [state, dispatch] = useStoreContext();
+  const [state] = useStoreContext();
 
   const openModal = () => {
     setIsOpen(true);

@@ -28,7 +28,7 @@ function App() {
             <Route exact path='/signup' component={Signup} />
             <Route exact path='/admin' component={AdminDash} />
             <Route exact path='/parent' component={ParentDash} />
-            <Route exact path='/user/:id' component={User} />
+            <Route exact path='/parent/:id' component={User} />
             <Route exact path='/course/:id' component={Course} />
             <Route exact path='/student/:id' component={Student} />
             <Route exact path='/changePassword' component={PasswordChange} />

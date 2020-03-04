@@ -18,7 +18,7 @@ Modal.setAppElement('#root');
 function EnrollStudentModal(props) {
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [state, dispatch] = useStoreContext();
+  const [state] = useStoreContext();
 
   const openModal = () => {
     setIsOpen(true);

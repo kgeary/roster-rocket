@@ -10,7 +10,7 @@ import { Redirect } from "react-router-dom";
 
 function PasswordResetForm() {
 
-  const [state, dispatch] = useStoreContext();
+  const [, dispatch] = useStoreContext();
   const [finished, setFinished] = useState(false);
 
   const emailRef = useRef();

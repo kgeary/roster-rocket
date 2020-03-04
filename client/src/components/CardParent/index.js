@@ -11,7 +11,7 @@ import "./style.css";
 
 function CardParent(props) {
   const [studentState, setStudentState] = useState(props.accordion || false);
-  const [state, dispatch] = useStoreContext();
+  const [state] = useStoreContext();
 
   const onDelete = id => {
     API.removeUser(id).then(res => {
@@ -29,6 +29,19 @@ function CardParent(props) {
       );
     });
     return sum;
+  };
+
+  const showImage = () => {
+    return !props.user.img.includes("res.cloudinary.com") ? (
+      <Avatar name={props.user.name} className='avatarCss' />
+    ) : (
+      <img
+        src={props.user.img}
+        className='card-img cloud-img'
+        alt={props.user.name}
+        style={{ width: 100, height: 100 }}
+      />
+    );
   };
 
   const renderStudents = () => {
@@ -52,8 +65,8 @@ function CardParent(props) {
                 </Row>
               </React.Fragment>
             ) : (
-                <h3>No Children</h3>
-              )
+              <h3>No Children</h3>
+            )
           ) : null}
         </div>
       </div>
@@ -82,22 +95,15 @@ function CardParent(props) {
       )
       .open();
   };
+
   return (
     <div className='container'>
       <Row>
         <Col size='sm-4'>
           <div className='parent-info'>
-            {!props.user.img.includes("res.cloudinary.com") ? (
-              <Avatar name={props.user.name} className='avatarCss' />
-            ) : (
-                <img
-                  src={props.user.img}
-                  className='card-img cloud-img'
-                  alt={props.user.name}
-                  style={{ width: 100, height: 100 }}
-                />
-              )}
-            {/*Cloudinary Upload Widget Button*/}<br />
+            {showImage()}
+            {/*Cloudinary Upload Widget Button*/}
+            <br />
             <button
               id='upload_widget'
               className='cloudinary-button'
@@ -151,34 +157,40 @@ function CardParent(props) {
                       Amount Due: ${getAmountDue()}
                     </li>
                     <br />
-                    <div className="float-right">
-                    <Link to='/changePassword'><button type="button" class="btn btn-warning btn-sm">
-                      <i class="fas fa-key"></i> Change Password</button></Link>{" "}
-                    <AddModal
-                      title='Add Child'
-                      users={[props.user]}
-                      form={AddStudentForm}
-                      onReturn={props.updateFunc}
-                    />{" "}
-                    <button
-                      className='btn btn-info btn-sm'
-                      onClick={() => {
-                        setStudentState(!studentState);
-                      }}
-                    >
-                      <i class='far fa-eye'></i>{" "}
-                      {studentState ? "Hide Students" : "Show Students"}
-                    </button>{" "} {/* NEED TO MAKE EDIT FUNCTION FOR BUTTON */}
-                    <button type="button" class="btn btn-dark btn-sm">
-                    <i class="fas fa-pencil-alt"></i> Edit User </button>{" "}
-                    {state.user && state.user.isAdmin ? (
+                    <div className='float-right'>
+                      <Link to='/changePassword'>
+                        <button type='button' class='btn btn-warning btn-sm'>
+                          <i class='fas fa-key'></i> Change Password
+                        </button>
+                      </Link>{" "}
+                      <AddModal
+                        title='Add Child'
+                        users={[props.user]}
+                        form={AddStudentForm}
+                        onReturn={props.updateFunc}
+                      />{" "}
                       <button
-                        className='btn btn-danger btn-sm'
-                        onClick={() => onDelete(props.user.id)}
+                        className='btn btn-info btn-sm'
+                        onClick={() => {
+                          setStudentState(!studentState);
+                        }}
                       >
-                        <i class='far fa-trash-alt'></i> Delete User
-                      </button>
-                    ) : null}</div>
+                        <i class='far fa-eye'></i>{" "}
+                        {studentState ? "Hide Students" : "Show Students"}
+                      </button>{" "}
+                      {/* NEED TO MAKE EDIT FUNCTION FOR BUTTON */}
+                      <button type='button' class='btn btn-dark btn-sm'>
+                        <i class='fas fa-pencil-alt'></i> Edit User{" "}
+                      </button>{" "}
+                      {state.user && state.user.isAdmin ? (
+                        <button
+                          className='btn btn-danger btn-sm'
+                          onClick={() => onDelete(props.user.id)}
+                        >
+                          <i class='far fa-trash-alt'></i> Delete User
+                        </button>
+                      ) : null}
+                    </div>
                   </ul>
                 </div>
               </div>

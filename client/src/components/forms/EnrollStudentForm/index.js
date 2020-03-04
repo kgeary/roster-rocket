@@ -12,8 +12,6 @@ function EnrollStudentForm(props) {
   const formAlert = alertFactory("alert");
   const [state, dispatch] = useStoreContext();
 
-
-
   console.log("ENROLL STUDENT FORM", props.student);
 
   const coursesTaken = props.student.StudentCourses.map(sc => sc.Course.id);

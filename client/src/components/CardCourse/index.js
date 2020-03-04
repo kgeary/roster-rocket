@@ -4,11 +4,10 @@ import API from "../../utils/API";
 import PayButton from "../PayButton";
 import EnrollCourseModal from "../EnrollCourseModal";
 import EnrollCourseForm from "../forms/EnrollCourseForm";
-import Avatar from "react-avatar";
 
 function CardCourse(props) {
   const [courseState, setCourseState] = useState(props.accordion || false);
-  const [state, dispatch] = useStoreContext();
+  const [state] = useStoreContext();
   //console.log("CARD COURSE", props.course);
   const onDelete = id => {
     API.removeCourse(id).then(res => {
@@ -87,7 +86,7 @@ function CardCourse(props) {
         <div className='card-body'>
           <div className='row'>
             <div className='col col-lg-3 text-center'>
-              <img src='https://via.placeholder.com/200x200' />
+              <img src='https://via.placeholder.com/200x200' alt='' />
               Show Teacher Photo
             </div>
             <div className='col col-lg-9'>

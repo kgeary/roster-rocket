@@ -112,7 +112,7 @@ function AdminDash() {
       <Container>
         <div className='gap' />
         <h1>Admin Dashboard</h1><br/>
-        <div class='alert alert-dark' role='alert'>
+        <div className='alert alert-dark' role='alert'>
           Emergency Hotline: (512) 555-1212
           <br />
           Class-Code: {codes.join(", ")}
@@ -135,16 +135,16 @@ function AdminDash() {
                   />
                 </div>
               </div>
-              <ul class='list-group list-group-flush tiny-font'>
-                <li class='list-group-item list-group-item-primary pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
+              <ul className='list-group list-group-flush tiny-font'>
+                <li className='list-group-item list-group-item-primary pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
                   <span className="badge-title"> > Number of Parents:{" "}</span>
-                  <span class='badge badge-primary badge-pill'>
+                  <span className='badge badge-primary badge-pill'>
                     {state.users.length}
                   </span>
                 </li>
-                <li class='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
+                <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
                 <span className="badge-title"> > Parents without Children:{" "}</span>
-                  <span class='badge badge-primary badge-pill'>
+                  <span className='badge badge-primary badge-pill'>
                     {
                       state.users.filter(user => user.Students.length < 1)
                         .length
@@ -162,15 +162,15 @@ function AdminDash() {
                 onChange={onFilterChange}
               />
               <div className='admin-card-inner'>
-                <ul class='list-group'>
+                <ul className='list-group'>
                   {state.users
                     ? state.users
                       .filter(user =>
                         user.name.toLowerCase().includes(userFilter)
                       )
                       .map(user => (
-                        <Link to={`/user/${user.id}`}>
-                          <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                        <Link to={`/parent/${user.id}`}>
+                          <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
                             {user.name}
                             <span class='badge badge-primary badge-pill'>
                               {user.Students.length}
@@ -198,16 +198,16 @@ function AdminDash() {
                   />
                 </div>
               </div>
-              <ul class='list-group list-group-flush tiny-font'>
-                <li class='list-group-item list-group-item-primary pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
+              <ul className='list-group list-group-flush tiny-font'>
+                <li className='list-group-item list-group-item-primary pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
                   <span className="badge-title"> > Number of Classes:{" "}</span>
-                  <span class='badge badge-primary badge-pill'>
+                  <span className='badge badge-primary badge-pill'>
                     {state.courses.length}
                   </span>
                 </li>
-                <li class='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'> <span className="badge-title"> >
+                <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'> <span className="badge-title"> >
                   Classes without Teachers:{" "}</span>
-                  <span class='badge badge-primary badge-pill'>
+                  <span className='badge badge-primary badge-pill'>
                     {
                       state.courses.filter(course => course.TeacherId === null)
                         .length
@@ -226,7 +226,7 @@ function AdminDash() {
                 onChange={onFilterChange}
               />
               <div className='admin-card-inner'>
-                <ul class='list-group'>
+                <ul className='list-group'>
                   {state.courses
                     ? state.courses
                       .filter(course =>
@@ -262,15 +262,15 @@ function AdminDash() {
                   />
                 </div>
               </div>
-              <ul class='list-group list-group-flush tiny-font'>
-                <li class='list-group-item list-group-item-primary pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'><span className="badge-title"> > Number of Students:{" "}</span>
-                  <span class='badge badge-primary badge-pill'>
+              <ul className='list-group list-group-flush tiny-font'>
+                <li className='list-group-item list-group-item-primary pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'><span className="badge-title"> > Number of Students:{" "}</span>
+                  <span className='badge badge-primary badge-pill'>
                     {state.students.length}
                   </span>
                 </li>
-                <li class='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
+                <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
                 <span className="badge-title"> > Unpaid Students:{" "}</span>
-                  <span class='badge badge-primary badge-pill'>
+                  <span className='badge badge-primary badge-pill'>
                     {state.students.reduce(
                       (a, c) =>
                         (a += c.StudentCourses.filter(sc => !sc.Paid).length),
@@ -289,7 +289,7 @@ function AdminDash() {
                 onChange={onFilterChange}
               />
               <div className='admin-card-inner'>
-                <ul class='list-group'>
+                <ul className='list-group'>
                   {state.students
                     ? state.students
                       .filter(student =>
@@ -297,7 +297,7 @@ function AdminDash() {
                       )
                       .map(student => (
                         <Link to={`/student/${student.id}`}>
-                          <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                          <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
                             {student.name}
                           </li>
                         </Link>

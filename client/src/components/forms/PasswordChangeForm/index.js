@@ -10,7 +10,7 @@ import InputForm from "../InputForm";
 
 function PasswordChangeForm() {
 
-  const [state, dispatch] = useStoreContext();
+  const [, dispatch] = useStoreContext();
   const oldPassword = useRef();
   const newPassword = useRef();
   const newPassword2 = useRef();

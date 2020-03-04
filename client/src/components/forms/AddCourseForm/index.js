@@ -15,7 +15,7 @@ function AddCourseForm(props) {
   const costRef = useRef();
   const formAlert = alertFactory("alert");
 
-  const [state, dispatch] = useStoreContext();
+  const [, dispatch] = useStoreContext();
 
   const handleSubmit = e => {
     e.preventDefault();
