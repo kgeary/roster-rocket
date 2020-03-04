@@ -9,7 +9,6 @@ import * as ACTIONS from "../../../utils/actions";
 import InputForm from "../InputForm";
 
 function AddStudentForm(props) {
-
   const formAlert = alertFactory("alert");
   const [, dispatch] = useStoreContext();
 
@@ -58,6 +57,7 @@ function AddStudentForm(props) {
         <h1>Add Student</h1>
         <form className='form-group mt-3 mb-2 form-signup'>
           {/* STUDENT NAME */}
+          <label htmlFor='name'>Name:</label>
           <InputForm
             id='name'
             type='text'
@@ -66,6 +66,7 @@ function AddStudentForm(props) {
           />
 
           {/* STUDENT AGE */}
+          <label htmlFor='age'>Age:</label>
           <InputForm
             id='age'
             type='number'
@@ -74,13 +75,13 @@ function AddStudentForm(props) {
           />
 
           {/* STUDENT PARENT */}
-          <label htmlFor="parent">Parent</label>
-          <select required className="form-control" id="parent">
-            {
-              props.users.map(user => (
-                <option key={user.id} value={user.id}>{user.name}</option>
-              ))
-            }
+          <label htmlFor='parent'>Parent:</label>
+          <select required className='form-control' id='parent'>
+            {props.users.map(user => (
+              <option key={user.id} value={user.id}>
+                {user.name}
+              </option>
+            ))}
           </select>
 
           <button
@@ -88,7 +89,7 @@ function AddStudentForm(props) {
             className='btn btn-success mt-3 mb-5'
             onClick={handleSubmit}
           >
-            Add Student
+            <i class='fas fa-user-plus'></i> Add Student
           </button>
           <br />
           <div id='alert' role='alert' />

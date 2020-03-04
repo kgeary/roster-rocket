@@ -53,6 +53,7 @@ function AddParentForm(props) {
         <h1>Invite a Parent</h1>
         <form className='form-group mt-3 mb-2 form-signup'>
           {/* PARENT EMAIL */}
+          <label htmlFor='email'>Enter parent's email address:</label>
           <InputForm
             id='email'
             type='email'
@@ -65,7 +66,7 @@ function AddParentForm(props) {
             className='btn btn-success mt-3 mb-5'
             onClick={handleSubmit}
           >
-            Send Invite
+            <i class='fas fa-envelope'></i> Send Invite
           </button>
           <br />
           <div id='alert' role='alert' />

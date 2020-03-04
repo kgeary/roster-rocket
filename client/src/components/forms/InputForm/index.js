@@ -3,7 +3,7 @@ import React from "react";
 function InputForm(props) {
   return (
     <React.Fragment>
-      <label htmlFor={props.id}>{props.placeholder}</label>
+      {/* <label htmlFor={props.id}>{props.placeholder}</label> */}
       <input
         required
         id={props.id}
