@@ -161,7 +161,7 @@ VALUES
 -- 23
 ("Gregory Gilroy", 15, now(), now(), 7),
 -- 24
-("Hillary Gilroy", 17, now(), now(), 7);
+("Hillary Gilroy", 17, now(), now(), 7),
 -- 25
 ("Mark Harris", 6, now(), now(), 8),
 -- 26
@@ -183,7 +183,7 @@ VALUES
 -- 34
 ("Holly Jacoby", 3, now(), now(), 10),
 -- 35
-("Jan Jacoby", 4, now(), now(), 10);
+("Jan Jacoby", 4, now(), now(), 10),
 -- 36
 ("Heather Kraft", 2, now(), now(), 11),
 -- 37
