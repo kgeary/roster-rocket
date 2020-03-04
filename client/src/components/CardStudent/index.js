@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import API from "../../utils/API";
 import { useStoreContext } from "../../utils/GlobalState";
 import EnrollStudentModal from "../EnrollStudentModal";
@@ -29,6 +29,60 @@ function CardStudent(props) {
     });
   };
 
+  const showDropBtn = (sc) => {
+    if (props.student.ParentId !== state.user.id && !state.user.isAdmin) {
+      return null;
+    }
+
+    return (
+      <React.Fragment>
+        <button
+          className='btn btn-danger btn-sm'
+          onClick={() => onDrop(props.student.id, sc.CourseId)}
+        >
+          Drop Class
+        </button>{" "}
+      </React.Fragment>
+    );
+  }
+
+  const showStudentPaid = (sc) => {
+    if (props.student.ParentId !== state.user.id && !state.user.isAdmin) {
+      return null;
+    }
+
+    return (
+      <h6>
+        Paid:{" "}
+        {sc.Paid ? (
+          "PAID"
+        ) : (
+            <span style={{ fontWeight: "bold", color: "red" }}>
+              NOT YET PAID
+        </span>
+          )}
+      </h6>
+    )
+  }
+
+  const showTeacher = (sc) => {
+    if (!sc.Course.User) {
+      return (
+        <h6>Teacher: Not Assigned</h6>
+      )
+    }
+    return (
+      <React.Fragment>
+        <h6>
+          <Link to={`/parent/${sc.Course.User.id}`}>Teacher: {sc.Course.User.name}</Link>
+        </h6>
+        <h6>
+          Teacher Phone: {sc.Course.User.phone}
+        </h6>
+      </React.Fragment>
+    )
+  }
+
   const renderCourses = () => {
     return (
       <React.Fragment>
@@ -41,23 +95,11 @@ function CardStudent(props) {
               <h4 className='card-title'>
                 <Link to={`/course/${sc.Course.id}`}>{sc.Course.title}</Link>
               </h4>
-              <h6>Cost: ${sc.Course.cost}</h6>
-              <h6>
-                Paid:{" "}
-                {sc.Paid ? (
-                  "PAID"
-                ) : (
-                    <span style={{ fontWeight: "bold", color: "red" }}>
-                      NOT YET PAID
-                  </span>
-                  )}
-              </h6>
-              <button
-                className='btn btn-danger btn-sm'
-                onClick={() => onDrop(props.student.id, sc.CourseId)}
-              >
-                Drop Class
-              </button>{" "}
+              {showTeacher(sc)}
+              <h6>Location: {sc.Course.location}</h6>
+              <h6>Cost: {sc.Course.cost}</h6>
+              {showStudentPaid(sc)}
+              {showDropBtn(sc)}
               {!sc.Paid ? (
                 <PayButton
                   StudentId={props.student.id}
