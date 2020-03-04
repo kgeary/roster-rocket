@@ -143,8 +143,11 @@ function CardParent(props) {
                     <br />
                     <div className='float-right'>
                       <Link to='/changePassword'>
-                        <button type='button' class='btn btn-warning btn-sm'>
-                          <i class='fas fa-key'></i> Change Password
+                        <button
+                          type='button'
+                          className='btn btn-warning btn-sm'
+                        >
+                          <i className='fas fa-key'></i> Change Password
                         </button>
                       </Link>{" "}
                       <AddModal
@@ -159,19 +162,19 @@ function CardParent(props) {
                           setStudentState(!studentState);
                         }}
                       >
-                        <i class='far fa-eye'></i>{" "}
+                        <i className='far fa-eye'></i>{" "}
                         {studentState ? "Hide Students" : "Show Students"}
                       </button>{" "}
                       {/* NEED TO MAKE EDIT FUNCTION FOR BUTTON */}
-                      <button type='button' class='btn btn-dark btn-sm'>
-                        <i class='fas fa-pencil-alt'></i> Edit User{" "}
+                      <button type='button' className='btn btn-dark btn-sm'>
+                        <i className='fas fa-pencil-alt'></i> Edit User{" "}
                       </button>{" "}
                       {state.user && state.user.isAdmin ? (
                         <button
                           className='btn btn-danger btn-sm'
                           onClick={() => onDelete(props.user.id)}
                         >
-                          <i class='far fa-trash-alt'></i> Delete User
+                          <i className='far fa-trash-alt'></i> Delete User
                         </button>
                       ) : null}
                     </div>

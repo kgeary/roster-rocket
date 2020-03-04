@@ -109,7 +109,7 @@ function CardStudent(props) {
             setCourseState(!courseState);
           }}
         >
-          <i class='far fa-eye'></i>{" "}
+          <i className='far fa-eye'></i>{" "}
           {courseState ? "Hide Classes" : "Show Classes"}
         </button>
       );
@@ -148,7 +148,7 @@ function CardStudent(props) {
         className='cloudinary-button'
         onClick={openWidget}
       >
-        <i class='fas fa-cloud-upload-alt'></i> Upload Image
+        <i className='fas fa-cloud-upload-alt'></i> Upload Image
       </button>
       <div className='card-body'>
         <h5 className='card-title student-card-title'>{props.student.name}</h5>
@@ -173,15 +173,15 @@ function CardStudent(props) {
           <br />
           <br />
           {/* NEED TO MAKE EDIT FUNCTION FOR BUTTON */}
-          <button type='button' class='btn btn-dark btn-sm'>
-            <i class='fas fa-pencil-alt'></i> Edit Child{" "}
+          <button type='button' className='btn btn-dark btn-sm'>
+            <i className='fas fa-pencil-alt'></i> Edit Child{" "}
           </button>{" "}
           {state.user && state.user.isAdmin ? (
             <button
               className='btn btn-danger btn-sm'
               onClick={() => onDelete(props.student.id)}
             >
-              <i class='far fa-trash-alt'></i> Delete Student
+              <i className='far fa-trash-alt'></i> Delete Student
             </button>
           ) : null}
         </div>

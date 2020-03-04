@@ -82,7 +82,7 @@ function AddStudentForm(props) {
             className='btn btn-success mt-3 mb-5'
             onClick={handleSubmit}
           >
-            <i class='fas fa-user-plus'></i> Add Student
+            <i className='fas fa-user-plus'></i> Add Student
           </button>
           <br />
           <div id='alert' role='alert' />

@@ -163,7 +163,7 @@ function SignupForm() {
             className='btn btn-success mt-3 mb-5'
             onClick={handleSubmit}
           >
-            <i class='fas fa-user-plus'></i> Create Account
+            <i className='fas fa-user-plus'></i> Create Account
           </button>
           <br />
           <Link to='/login'>Already a user? Login to your account</Link>

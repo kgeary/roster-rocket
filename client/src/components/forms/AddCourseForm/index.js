@@ -13,7 +13,6 @@ function AddCourseForm(props) {
   const costRef = useRef();
   const formAlert = alertFactory("alert");
 
-
   const handleSubmit = e => {
     e.preventDefault();
     const errors = [];
@@ -57,11 +56,14 @@ function AddCourseForm(props) {
   return (
     <Container>
       <div className='form-container'>
+        <div className='close-modal'>
+          <i className='far fa-times-circle'></i>
+        </div>
         <h1>Create a course</h1>
         <form className='form-group mt-3 mb-2 form-signup'>
           {/* COURSE TITLE */}
 
-          <label htmlFor="title">Course Title:</label>
+          <label htmlFor='title'>Course Title:</label>
           <InputForm
             id='title'
             inputRef={titleRef}
@@ -71,7 +73,7 @@ function AddCourseForm(props) {
           />
 
           {/* COURSE LOCATION */}
-          <label htmlFor="location">Location:</label>
+          <label htmlFor='location'>Location:</label>
           <InputForm
             id='location'
             inputRef={locRef}
@@ -81,7 +83,7 @@ function AddCourseForm(props) {
           />
 
           {/* COURSE CAPACITY */}
-          <label htmlFor="capacity">Max Class Capacity:</label>
+          <label htmlFor='capacity'>Max Class Capacity:</label>
           <InputForm
             id='capacity'
             inputRef={capacityRef}
@@ -91,7 +93,7 @@ function AddCourseForm(props) {
           />
 
           {/* COURSE COST */}
-          <label htmlFor="location">Cost:</label>
+          <label htmlFor='location'>Cost:</label>
           <InputForm
             id='cost'
             inputRef={costRef}
@@ -101,21 +103,24 @@ function AddCourseForm(props) {
           />
 
           {/* COURSE TEACHER */}
-          <label htmlFor="teacher">Teacher:</label>
-          <select className="form-control" id="teacher">
-            <option key={null} value="">None</option>
-            {
-              props.users.map(user => (
-                <option key={user.id} value={user.id}>{user.name}</option>
-              ))
-            }
+          <label htmlFor='teacher'>Teacher:</label>
+          <select className='form-control' id='teacher'>
+            <option key={null} value=''>
+              None
+            </option>
+            {props.users.map(user => (
+              <option key={user.id} value={user.id}>
+                {user.name}
+              </option>
+            ))}
           </select>
 
           <button
             id='submitCourse'
             className='btn btn-success mt-3 mb-5'
             onClick={handleSubmit}
-          ><i class='fas fa-folder-plus'></i> Create Course
+          >
+            <i className='fas fa-folder-plus'></i> Create Course
           </button>
           <br />
           <div id='alert' role='alert' />
