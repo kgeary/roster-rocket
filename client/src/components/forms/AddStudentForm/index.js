@@ -4,13 +4,10 @@ import { Container } from "../../Grid";
 // import validate from "../../../utils/validate";
 import alertFactory from "../../../utils/alertFactory";
 import API from "../../../utils/API";
-import { useStoreContext } from "../../../utils/GlobalState";
-import * as ACTIONS from "../../../utils/actions";
 import InputForm from "../InputForm";
 
 function AddStudentForm(props) {
   const formAlert = alertFactory("alert");
-  const [, dispatch] = useStoreContext();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -25,7 +22,6 @@ function AddStudentForm(props) {
     } else {
       formAlert(false);
 
-      dispatch({ type: ACTIONS.LOADING });
       API.addStudent({
         name,
         age,
@@ -33,8 +29,6 @@ function AddStudentForm(props) {
       })
         .then(res => {
           console.log("COURSE", res.data);
-          document.getElementById("name").value = "";
-          document.getElementById("age").value = "";
         })
         .catch(err => {
           if (err.message) {
@@ -45,7 +39,6 @@ function AddStudentForm(props) {
           }
         })
         .finally(() => {
-          dispatch({ type: ACTIONS.DONE });
           props.closeModal();
         });
     }

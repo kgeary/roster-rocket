@@ -4,8 +4,6 @@ import { Container } from "../../Grid";
 // import validate from "../../../utils/validate";
 import alertFactory from "../../../utils/alertFactory";
 import API from "../../../utils/API";
-import { useStoreContext } from "../../../utils/GlobalState";
-import * as ACTIONS from "../../../utils/actions";
 import InputForm from "../InputForm";
 
 function AddCourseForm(props) {
@@ -15,7 +13,6 @@ function AddCourseForm(props) {
   const costRef = useRef();
   const formAlert = alertFactory("alert");
 
-  const [, dispatch] = useStoreContext();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -33,7 +30,6 @@ function AddCourseForm(props) {
 
       const TeacherId = document.getElementById("teacher").value || null;
 
-      dispatch({ type: ACTIONS.LOADING });
       API.addCourse({
         title,
         location,
@@ -43,10 +39,6 @@ function AddCourseForm(props) {
       })
         .then(res => {
           console.log("COURSE", res.data);
-          titleRef.current.value = "";
-          locRef.current.value = "";
-          capacityRef.current.value = "";
-          costRef.current.value = "";
         })
         .catch(err => {
           if (err.message) {
@@ -57,7 +49,6 @@ function AddCourseForm(props) {
           }
         })
         .finally(() => {
-          dispatch({ type: ACTIONS.DONE });
           props.closeModal();
         });
     }
@@ -69,7 +60,7 @@ function AddCourseForm(props) {
         <h1>Create a course</h1>
         <form className='form-group mt-3 mb-2 form-signup'>
           {/* COURSE TITLE */}
-          
+
           <label htmlFor="title">Course Title:</label>
           <InputForm
             id='title'

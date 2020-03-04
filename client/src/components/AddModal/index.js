@@ -47,6 +47,8 @@ function AddModal(props) {
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
+        shouldCloseOnOverlayClick={false}
+        shouldCloseOnEsc={true}
         contentLabel=''
       >
         <props.form users={props.users} closeModal={closeModal} />

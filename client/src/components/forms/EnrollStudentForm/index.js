@@ -10,7 +10,7 @@ import * as ACTIONS from "../../../utils/actions";
 function EnrollStudentForm(props) {
 
   const formAlert = alertFactory("alert");
-  const [state, dispatch] = useStoreContext();
+  const [state] = useStoreContext();
 
   console.log("ENROLL STUDENT FORM", props.student);
 
@@ -33,7 +33,6 @@ function EnrollStudentForm(props) {
     } else {
       formAlert(false);
 
-      dispatch({ type: ACTIONS.LOADING });
       API.enrollCourse(props.student.id, document.getElementById("course").value)
         .then(res => {
           console.log("COURSE", res.data);
@@ -45,7 +44,6 @@ function EnrollStudentForm(props) {
           formAlert("Unable to Enroll!");
         })
         .finally(() => {
-          dispatch({ type: ACTIONS.DONE });
           props.closeModal(updateParent);
         });
     }

@@ -4,14 +4,11 @@ import { Container } from "../../Grid";
 // import validate from "../../../utils/validate";
 import alertFactory from "../../../utils/alertFactory";
 import API from "../../../utils/API";
-import { useStoreContext } from "../../../utils/GlobalState";
-import * as ACTIONS from "../../../utils/actions";
 import InputForm from "../InputForm";
 
 function AddParentForm(props) {
   const formAlert = alertFactory("alert");
 
-  const [, dispatch] = useStoreContext();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -24,13 +21,11 @@ function AddParentForm(props) {
 
       const email = document.getElementById("email").value || "";
 
-      dispatch({ type: ACTIONS.LOADING });
       API.emailParent({
         email
       })
         .then(res => {
           console.log("EMAIL", res.data);
-          document.getElementById("email").value = "";
         })
         .catch(err => {
           if (err.message) {
@@ -41,7 +36,6 @@ function AddParentForm(props) {
           }
         })
         .finally(() => {
-          dispatch({ type: ACTIONS.DONE });
           props.closeModal();
         });
     }
