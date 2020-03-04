@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 
+
 const CallToAction = () => {
   return (
     <div className='container-fluid call-to-action'>
