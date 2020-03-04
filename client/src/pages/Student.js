@@ -24,7 +24,7 @@ function Student() {
       .catch(err => {
         setStatus(
           <div className="gap">
-            <h1>{err.response.statusText}</h1>
+            <h1>{err.message}</h1>
           </div>
         );
         setStudent(undefined);

@@ -81,7 +81,9 @@ function Course() {
           </Row>
         </React.Fragment>
       ) : (
-          status
+          <div className="gap" >
+            {status}
+          </div>
         )}
       <div className="gap" />
     </Container>

@@ -134,6 +134,14 @@ function CardCourse(props) {
     );
   }
 
+  const showTeacher = () => {
+    return (
+      props.course.User ?
+        <Link to={`/parent/${props.course.User.id}`}>{props.course.User.name}</Link> :
+        "Not Assigned"
+    );
+  }
+
   return (
     <div>
       <div className='card course-card pt-0'>
@@ -154,9 +162,7 @@ function CardCourse(props) {
               <ul className='list-group list-group-flush'>
                 <li className='list-group-item'>
                   Teacher:{" "}
-                  {props.course.User ?
-                    <Link to={`/parent/${props.course.User.id}`}>{props.course.User.name}</Link> :
-                    "Not Assigned"}
+                  {showTeacher()}
                 </li>
                 <li className='list-group-item'>
                   Location: {props.course.location}
