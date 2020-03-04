@@ -53,6 +53,15 @@ function Course() {
     return LoadScreen();
   }
 
+  if (!state.user) {
+    return (
+      <Container fluid>
+        <div className="gap" />
+        <h1>You must be logged in to access this page.</h1>
+      </Container>
+    );
+  }
+
   return (
     <Container>
       {course ? (
