@@ -14,6 +14,13 @@ function Home() {
     console.log("USE EFFECT");
   }, []);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }, []);
+
   return (
     <div>
       <Hero />

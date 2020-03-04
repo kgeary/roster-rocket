@@ -140,6 +140,16 @@ function CardStudent(props) {
       <div className='card-body'>
         <h5 className='card-title student-card-title'><Link to={`/student/${props.student.id}`}>{props.student.name}</Link></h5>
         <div className='age-text'>Age: {props.student.age}</div>
+        {props.student.StudentCourses.length === 0 ? (
+          <div className='age-text'>Not yet enrolled in any classes</div>
+        ) : (
+          <div className='age-text'>
+            Number of enrolled classes:{" "}
+            <span className='badge badge-primary badge-pill'>
+              {props.student.StudentCourses.length}
+            </span>
+          </div>
+        )}
         <ul className='list-group'>
           <li className='list-group-item text-center'>
             Parent: <Link to={`/parent/${props.student.User.id}`}>{props.student.User.name}</Link>
