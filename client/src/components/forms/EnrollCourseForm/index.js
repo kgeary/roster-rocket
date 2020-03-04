@@ -7,19 +7,19 @@ import { useStoreContext } from "../../../utils/GlobalState";
 import * as ACTIONS from "../../../utils/actions";
 
 function EnrollCourseForm(props) {
-
   const formAlert = alertFactory("alert");
   const [state, dispatch] = useStoreContext();
 
   console.log("ENROLL COURSE FORM", state.students);
 
   const studentsEnrolled = props.course.Students.map(student => student.id);
-  const availableStudents = state.students
-    .filter(student => !studentsEnrolled.includes(student.id));
+  const availableStudents = state.students.filter(
+    student => !studentsEnrolled.includes(student.id)
+  );
 
   if (availableStudents.length < 1) {
     // Alert the user then close the modal
-    return <h1>No Available Students</h1>
+    return <h1>No Available Students</h1>;
   }
 
   const handleSubmit = e => {
@@ -33,7 +33,10 @@ function EnrollCourseForm(props) {
       formAlert(false);
 
       dispatch({ type: ACTIONS.LOADING });
-      API.enrollCourse(document.getElementById("student").value, props.course.id)
+      API.enrollCourse(
+        document.getElementById("student").value,
+        props.course.id
+      )
         .then(res => {
           console.log("STUDENT", res.data);
           updateParent = true;
@@ -55,14 +58,14 @@ function EnrollCourseForm(props) {
       <div className='form-container'>
         <h1>Enroll Student in Course</h1>
         {/* COURSE */}
-        <form className="form-group">
-          <label htmlFor="course">Student</label>
-          <select required className="form-control" id="student">
-            {
-              availableStudents.map(student => (
-                <option key={student.id} value={student.id}>{student.name}</option>
-              ))
-            }
+        <form className='form-group'>
+          <label htmlFor='course'>Student:</label>
+          <select required className='form-control' id='student'>
+            {availableStudents.map(student => (
+              <option key={student.id} value={student.id}>
+                {student.name}
+              </option>
+            ))}
           </select>
 
           <button
@@ -70,13 +73,13 @@ function EnrollCourseForm(props) {
             className='btn btn-success mt-3 mb-5'
             onClick={handleSubmit}
           >
-            Enroll
+            <i class='fas fa-user-plus'></i> Enroll
           </button>
           <br />
           <div id='alert' role='alert' />
         </form>
       </div>
-    </Container >
+    </Container>
   );
 }
 

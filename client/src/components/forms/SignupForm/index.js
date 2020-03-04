@@ -24,10 +24,14 @@ function SignupForm() {
     const errors = [];
 
     const email = emailRef.current.value.trim();
-    if (!validate.email(email)) { errors.push("Invalid Email Address"); }
+    if (!validate.email(email)) {
+      errors.push("Invalid Email Address");
+    }
 
     const name = nameRef.current.value.trim();
-    if (name.length < 2) { errors.push("Invalid Name"); }
+    if (name.length < 2) {
+      errors.push("Invalid Name");
+    }
 
     const phone = phoneRef.current.value.trim();
     // Validate Phone?
@@ -37,7 +41,9 @@ function SignupForm() {
 
     const password = passwordRef.current.value;
     if (!validate.password(password)) {
-      errors.push("Invalid Password.<br>Password must be 6-18 chars and may only contain Letters, Numbers, Space, -, or _");
+      errors.push(
+        "Invalid Password.<br>Password must be 6-18 chars and may only contain Letters, Numbers, Space, -, or _"
+      );
     }
 
     const password2 = password2Ref.current.value;
@@ -67,14 +73,16 @@ function SignupForm() {
           passwordRef.current.value = "";
           password2Ref.current.value = "";
           dispatch({ type: ACTIONS.SET_USER, user: res.data });
-        }).catch(err => {
+        })
+        .catch(err => {
           if (err.message) {
             formAlert(err.message);
           } else {
             console.log(err);
             formAlert("Username Already Exists!");
           }
-        }).finally(() => {
+        })
+        .finally(() => {
           dispatch({ type: ACTIONS.DONE });
         });
     }
@@ -84,10 +92,14 @@ function SignupForm() {
     <Container>
       {state.username ? <Redirect to='/' /> : null}
       <div className='form-container'>
-        <br /><div className='gap'></div><br />
-        <h1>Signup for an Account</h1><br />
+        <br />
+        <div className='gap'></div>
+        <br />
+        <h1>Signup for an Account</h1>
+        <br />
         <form className='form-group mt-3 mb-2 form-signup'>
           {/* EMAIL */}
+          <label htmlFor='email'>Email:</label>
           <InputForm
             id='email'
             inputRef={emailRef}
@@ -97,33 +109,37 @@ function SignupForm() {
           />
 
           {/* NAME */}
+          <label htmlFor='name'>Full Name:</label>
           <InputForm
-            id="name"
+            id='name'
             inputRef={nameRef}
-            type="text"
-            length="32"
-            placeholder="Your Name"
+            type='text'
+            length='32'
+            placeholder='Your Name'
           />
 
           {/* PHONE */}
+          <label htmlFor='phone'>Phone:</label>
           <InputForm
-            id="phone"
+            id='phone'
             inputRef={phoneRef}
-            type="tel"
-            length="32"
-            placeholder="Phone Number"
+            type='tel'
+            length='32'
+            placeholder='Phone Number'
           />
 
           {/* Group Code */}
+          <label htmlFor='code'>Co-op Group Code:</label>
           <InputForm
-            id="code"
+            id='code'
             inputRef={codeRef}
-            type="tel"
-            length="32"
-            placeholder="Group Code"
+            type='tel'
+            length='32'
+            placeholder='Group Code'
           />
 
           {/* PASSWORD */}
+          <label htmlFor='password'>Password:</label>
           <InputForm
             id='password'
             inputRef={passwordRef}
@@ -133,6 +149,7 @@ function SignupForm() {
           />
 
           {/* PASSWORD2 */}
+          <label htmlFor='password2'>Confirm Password:</label>
           <InputForm
             id='password2'
             inputRef={password2Ref}
@@ -146,14 +163,15 @@ function SignupForm() {
             className='btn btn-success mt-3 mb-5'
             onClick={handleSubmit}
           >
-            Create Account
+            <i class='fas fa-user-plus'></i> Create Account
           </button>
           <br />
           <Link to='/login'>Already a user? Login to your account</Link>
           <div id='alert' role='alert' />
         </form>
       </div>
-      <div className='gap'></div><br />
+      <div className='gap'></div>
+      <br />
     </Container>
   );
 }

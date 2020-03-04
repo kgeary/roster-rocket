@@ -81,6 +81,7 @@ function PasswordChangeForm() {
         <h1>Change Password</h1>
         <form className="form-group mt-3 mb-2 form-login">
           {/* OLD PASSWORD */}
+          <label htmlFor="old">Old Password:</label>
           <InputForm
             id="old"
             inputRef={oldPassword}
@@ -89,6 +90,7 @@ function PasswordChangeForm() {
             placeholder="Old Password"
           />
           {/* PASSWORD */}
+          <label htmlFor="password">Password:</label>
           <InputForm
             id="password"
             inputRef={newPassword}
@@ -98,6 +100,7 @@ function PasswordChangeForm() {
           />
 
           {/* CONFIRM PASSWORD */}
+          <label htmlFor="password2">Confirm Password:</label>
           <InputForm
             id="password2"
             inputRef={newPassword2}

@@ -9,7 +9,6 @@ import InputForm from "../InputForm";
 import { Redirect } from "react-router-dom";
 
 function PasswordResetForm() {
-
   const [, dispatch] = useStoreContext();
   const [finished, setFinished] = useState(false);
 
@@ -23,7 +22,9 @@ function PasswordResetForm() {
 
     // Old Password
     const email = emailRef.current.value;
-    if (!validate.email(email)) { errors.push("Invalid Email Address"); }
+    if (!validate.email(email)) {
+      errors.push("Invalid Email Address");
+    }
 
     if (errors.length > 0) {
       // Errors found during validaition - Set an alert and do not proceed
@@ -42,10 +43,12 @@ function PasswordResetForm() {
           emailRef.current.value = "";
           setTimeout(() => setFinished(true), 2000);
         })
-        .catch((err) => {
+        .catch(err => {
           // Login Failed
           console.log("PASSWORD CHANGE", err);
-          if (err.status) { console.log("ERROR STATUS", err.status); }
+          if (err.status) {
+            console.log("ERROR STATUS", err.status);
+          }
           if (err.message.includes("status code 404")) {
             formAlert("Unable to connect to server");
           } else {
@@ -56,40 +59,40 @@ function PasswordResetForm() {
           dispatch({ type: ACTIONS.DONE });
         });
     }
-  }
+  };
 
   if (finished) {
-    return <Redirect to="/login" />
+    return <Redirect to='/login' />;
   }
-
 
   return (
     <Container>
-      <div className="form-container">
+    <div className="gap" />
+      <div className='form-container'>
         <h1>Reset Password</h1>
-        <form className="form-group mt-3 mb-2 form-login">
+        <form className='form-group mt-3 mb-2 form-login'>
           {/* EMAIL */}
+          <label htmlFor='email'>Email:</label>
           <InputForm
-            id="email"
+            id='email'
             inputRef={emailRef}
-            type="email"
-            length="32"
-            placeholder="Email Address"
+            type='email'
+            length='32'
+            placeholder='Email Address'
           />
           {/* SUBMIT */}
           <button
-            id="submit"
-            className="btn btn-success mt-3 mb-5"
-            onClick={handleSubmit}>
-            Reset Password
-        </button>
+            id='submit'
+            className='btn btn-success mt-3 mb-5'
+            onClick={handleSubmit}
+          >
+          Reset Password
+          </button>
         </form>
-        <div id="alert" role="alert" />
+        <div id='alert' role='alert' />
       </div>
-    </Container >
+    </Container>
   );
 }
-
-
 
 export default PasswordResetForm;

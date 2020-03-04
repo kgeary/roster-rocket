@@ -132,7 +132,7 @@ function CardCourse(props) {
                 setCourseState(!courseState);
               }}
             >
-              <i class='far fa-eye'></i>{" "}
+              <i class='far fa-eye' />{" "}
               {courseState ? "Hide Students" : "Show Students"}
             </button>
           </div>

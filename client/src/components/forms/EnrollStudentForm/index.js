@@ -57,7 +57,7 @@ function EnrollStudentForm(props) {
         <h1>Enroll in Course</h1>
         {/* COURSE */}
         <form className="form-group">
-          <label htmlFor="course">Course</label>
+          <label htmlFor="course">Course:</label>
           <select required className="form-control" id="course">
             {
               availableCourses.map(course => (
