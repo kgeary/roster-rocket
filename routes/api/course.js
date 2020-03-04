@@ -11,6 +11,7 @@ router
 router
   .route("/:id")
   .get(coursesController.readById)
+  .patch(coursesController.updateCourse)
   .delete(isAdmin, coursesController.removeById);
 
 // Matches with "/api/course/add"

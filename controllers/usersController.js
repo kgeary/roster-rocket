@@ -164,6 +164,16 @@ module.exports = {
       .catch(err => {
         res.status(422).json(err);
       });
+  },
+
+  updateUser: function (req, res) {
+    db.User.update(req.body, { where: { id: req.params.id } })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.status(422).json(err);
+      });
   }
 
 };

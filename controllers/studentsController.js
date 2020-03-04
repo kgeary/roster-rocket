@@ -91,5 +91,17 @@ module.exports = {
       .catch(err => {
         res.status(422).json(err);
       });
+  },
+
+
+  updateStudent: function (req, res) {
+    db.Student.update(req.body, { where: { id: req.params.id } })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.status(422).json(err);
+      });
   }
+
 };
