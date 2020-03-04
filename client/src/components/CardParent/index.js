@@ -99,23 +99,7 @@ function CardParent(props) {
   return (
     <div className='container'>
       <Row>
-        <Col size='sm-4'>
-          <div className='parent-info'>
-            {showImage()}
-            {/*Cloudinary Upload Widget Button*/}
-            <br />
-            <button
-              id='upload_widget'
-              className='cloudinary-button'
-              onClick={openWidget}
-            >
-              Upload Image
-            </button>
-            <h5 className='card-title parent-info-title'>{props.user.name}</h5>
-            <Link to='/changePassword'>Change Password</Link>
-          </div>
-        </Col>
-        <Col size='sm-8'>
+        <Col size='lg-12'>
           <div className='card'>
             <div className='card-body'>
               <div className='row'>
@@ -200,6 +184,7 @@ function CardParent(props) {
       </Row>
       <div className='gap' />
       {studentState ? renderStudents() : null}
+      <div className='gap' />
     </div>
   );
 }
