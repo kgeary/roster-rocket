@@ -47,7 +47,7 @@ function CardParent(props) {
           src={props.user.img}
           className='card-img cloud-img'
           alt={props.user.name}
-          style={{ width: 100, height: 100 }}
+          style={{ width: 200, height: 200 }}
         />
       );
   };
@@ -174,6 +174,21 @@ function CardParent(props) {
     )
   }
 
+  const showUploadWidget = () => {
+    return (
+      <React.Fragment>
+        <br />
+        <button
+          id='upload_widget'
+          className='cloudinary-button'
+          onClick={openWidget}
+        >
+          <i className='fas fa-cloud-upload-alt' /> Upload Image
+        </button>
+      </React.Fragment>
+    );
+  }
+
   return (
     <div className='container'>
       <Row>
@@ -183,25 +198,8 @@ function CardParent(props) {
               <div className='row'>
                 <div className='col col-lg-3'>
                   <div className='parent-info'>
-                    {!props.user.img.includes("res.cloudinary.com") ? (
-                      <Avatar name={props.user.name} className='avatarCss' />
-                    ) : (
-                        <img
-                          src={props.user.img}
-                          className='card-img cloud-img'
-                          alt={props.user.name}
-                          style={{ width: 200, height: 200 }}
-                        />
-                      )}
-                    {/*Cloudinary Upload Widget Button*/}
-                    <br />
-                    <button
-                      id='upload_widget'
-                      className='cloudinary-button'
-                      onClick={openWidget}
-                    >
-                      <i className='fas fa-cloud-upload-alt' /> Upload Image
-                    </button>
+                    {showImage()}
+                    {showUploadWidget()}
                   </div>
                 </div>
                 <div className='col col-lg-9'>

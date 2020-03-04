@@ -9,44 +9,37 @@ import * as ACTIONS from "../../../utils/actions";
 import InputForm from "../InputForm";
 
 function SignupForm() {
-  const emailRef = useRef();
-  const nameRef = useRef();
-  const phoneRef = useRef();
-  const codeRef = useRef();
-  const passwordRef = useRef();
-  const password2Ref = useRef();
   const formAlert = alertFactory("alert");
-
   const [state, dispatch] = useStoreContext();
 
   const handleSubmit = e => {
     e.preventDefault();
     const errors = [];
 
-    const email = emailRef.current.value.trim();
+    const email = document.getElementById("email").value.trim();
     if (!validate.email(email)) {
       errors.push("Invalid Email Address");
     }
 
-    const name = nameRef.current.value.trim();
+    const name = document.getElementById("name").value.trim();
     if (name.length < 2) {
       errors.push("Invalid Name");
     }
 
-    const phone = phoneRef.current.value.trim();
+    const phone = document.getElementById("phone").value.trim();
     // Validate Phone?
 
-    const code = codeRef.current.value.trim();
+    const code = document.getElementById("code").value.trim();
     // Validate Group Code?
 
-    const password = passwordRef.current.value;
+    const password = document.getElementById("password").value;
     if (!validate.password(password)) {
       errors.push(
         "Invalid Password.<br>Password must be 6-18 chars and may only contain Letters, Numbers, Space, -, or _"
       );
     }
 
-    const password2 = password2Ref.current.value;
+    const password2 = document.getElementById("password2").value;
     if (password !== password2) {
       errors.push("Passwords Do Not Match!");
     }
@@ -65,13 +58,11 @@ function SignupForm() {
       dispatch({ type: ACTIONS.LOADING });
       API.addUser(newUser)
         .then(res => {
-          console.log("USER", res.data);
-          emailRef.current.value = "";
-          nameRef.current.value = "";
-          phoneRef.current.value = "";
-          codeRef.current.value = "";
-          passwordRef.current.value = "";
-          password2Ref.current.value = "";
+          document.getElementById("email").value = "";
+          document.getElementById("name").value = "";
+          document.getElementById("phone").value = "";
+          document.getElementById("password").value = "";
+          document.getElementById("password2").value = "";
           dispatch({ type: ACTIONS.SET_USER, user: res.data });
         })
         .catch(err => {
@@ -90,7 +81,15 @@ function SignupForm() {
 
   return (
     <Container>
-      {state.username ? <Redirect to='/' /> : null}
+      {
+        state.user ?
+          (
+            state.user.isAdmin ?
+              <Redirect to='/admin' /> :
+              <Redirect to='/parent' />
+          ) :
+          null
+      }
       <div className='form-container'>
         <br />
         <div className='gap'></div>
@@ -102,7 +101,6 @@ function SignupForm() {
           <label htmlFor='email'>Email:</label>
           <InputForm
             id='email'
-            inputRef={emailRef}
             type='email'
             length='64'
             placeholder='Email'
@@ -112,7 +110,6 @@ function SignupForm() {
           <label htmlFor='name'>Full Name:</label>
           <InputForm
             id='name'
-            inputRef={nameRef}
             type='text'
             length='32'
             placeholder='Your Name'
@@ -122,7 +119,6 @@ function SignupForm() {
           <label htmlFor='phone'>Phone:</label>
           <InputForm
             id='phone'
-            inputRef={phoneRef}
             type='tel'
             length='32'
             placeholder='Phone Number'
@@ -132,7 +128,6 @@ function SignupForm() {
           <label htmlFor='code'>Co-op Group Code:</label>
           <InputForm
             id='code'
-            inputRef={codeRef}
             type='tel'
             length='32'
             placeholder='Group Code'
@@ -142,7 +137,6 @@ function SignupForm() {
           <label htmlFor='password'>Password:</label>
           <InputForm
             id='password'
-            inputRef={passwordRef}
             type='password'
             length='32'
             placeholder='Password'
@@ -152,7 +146,6 @@ function SignupForm() {
           <label htmlFor='password2'>Confirm Password:</label>
           <InputForm
             id='password2'
-            inputRef={password2Ref}
             type='password'
             length='32'
             placeholder='Confirm Password'
