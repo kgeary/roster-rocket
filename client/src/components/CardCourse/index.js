@@ -5,6 +5,7 @@ import API from "../../utils/API";
 import PayButton from "../PayButton";
 import EnrollCourseModal from "../EnrollCourseModal";
 import EnrollCourseForm from "../forms/EnrollCourseForm";
+import Avatar from "react-avatar";
 
 function CardCourse(props) {
   const [courseState, setCourseState] = useState(props.accordion || false);
@@ -66,6 +67,23 @@ function CardCourse(props) {
     );
   }
 
+  const showPaidSummary = () => {
+    if (!state.user || !state.user.isAdmin) {
+      return null;
+    }
+
+    return (
+      <React.Fragment>
+        <li className='list-group-item'>
+          Paid: {props.course.Students.filter(s => s.Paid).length}
+        </li>
+        <li className='list-group-item list-group-item-danger'>
+          Unpaid: {props.course.Students.filter(s => !s.Paid).length}
+        </li>
+      </React.Fragment>
+    );
+  }
+
   const renderStudents = () => {
     return (
       <table className='table'>
@@ -97,6 +115,25 @@ function CardCourse(props) {
     );
   };
 
+  const showTeacherImage = () => {
+    if (!props.course.User) {
+      return <Avatar name="Not Available" className='avatarCss' />
+    }
+
+    return (
+      !props.course.User.img.includes("res.cloudinary.com") ? (
+        <Avatar name={props.course.User.name} className='avatarCss' />
+      ) : (
+          <img
+            src={props.course.User.img}
+            className='card-img cloud-img'
+            alt={props.course.User.name}
+            style={{ width: 200, height: 200 }}
+          />
+        )
+    );
+  }
+
   return (
     <div>
       <div className='card course-card pt-0'>
@@ -111,8 +148,7 @@ function CardCourse(props) {
         <div className='card-body'>
           <div className='row'>
             <div className='col col-lg-3 text-center'>
-              <img src='https://via.placeholder.com/200x200' alt='' />
-              Show Teacher Photo
+              {showTeacherImage()}
             </div>
             <div className='col col-lg-9'>
               <ul className='list-group list-group-flush'>
@@ -131,12 +167,7 @@ function CardCourse(props) {
                 <li className='list-group-item'>
                   Capacity: {props.course.capacity}
                 </li>
-                <li className='list-group-item'>
-                  Paid: {props.course.Students.filter(s => s.Paid).length}
-                </li>
-                <li className='list-group-item list-group-item-danger'>
-                  Unpaid: {props.course.Students.filter(s => !s.Paid).length}
-                </li>
+                {showPaidSummary()}
               </ul>
             </div>
           </div>
