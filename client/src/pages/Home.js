@@ -12,6 +12,10 @@ function Home() {
   useEffect(() => {
     dispatch({ type: ACTIONS.DONE });
     console.log("USE EFFECT");
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }, []);
 
   return (
