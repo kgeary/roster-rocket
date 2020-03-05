@@ -9,6 +9,7 @@ import AdminDash from "./pages/AdminDash";
 import ParentDash from "./pages/ParentDash";
 import User from "./pages/User";
 import Course from "./pages/Course";
+import Courses from "./pages/Courses";
 import Student from "./pages/Student";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
@@ -29,6 +30,7 @@ function App() {
             <Route exact path='/admin' component={AdminDash} />
             <Route exact path='/parent' component={ParentDash} />
             <Route exact path='/parent/:id' component={User} />
+            <Route exact path='/course' component={Courses} />
             <Route exact path='/course/:id' component={Course} />
             <Route exact path='/student/:id' component={Student} />
             <Route exact path='/changePassword' component={PasswordChange} />

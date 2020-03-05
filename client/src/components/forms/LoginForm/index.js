@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { Container } from "../../Grid";
 import validate from "../../../utils/validate";
@@ -66,14 +66,18 @@ function LoginForm() {
     }
   };
 
+  useEffect(() => {
+    dispatch({ type: ACTIONS.DONE });
+  }, []);
+
   return (
     <Container>
       {state.user ? (
         state.user.isAdmin ? (
           <Redirect to='/admin' />
         ) : (
-          <Redirect to='/parent' />
-        )
+            <Redirect to='/parent' />
+          )
       ) : null}
       <div className='form-container'>
         <br />
