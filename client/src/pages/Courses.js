@@ -5,6 +5,8 @@ import { useStoreContext } from "../utils/GlobalState";
 import CardCourse from "../components/CardCourse";
 import API from "../utils/API";
 import * as ACTIONS from "../utils/actions";
+import download from "../utils/download";
+import getCsv from "../utils/getCsv";
 
 function Courses() {
   const [state, dispatch] = useStoreContext();
@@ -51,6 +53,10 @@ function Courses() {
     );
   };
 
+  const saveToCsv = () => {
+    download(getCsv(state.courses));
+  }
+
   if (state.loading) {
     return LoadScreen();
   }
@@ -69,6 +75,10 @@ function Courses() {
             <Col size='md-12'>
               <label htmlFor="search" className="mr-2">Filter Classes By Title:</label>
               <input type="text" id="search" onChange={(event) => setSearch(event.target.value)} value={search} />
+              <button className="btn btn-info btn-sm ml-2" onClick={saveToCsv}>
+                <i className='fas fa-save' />{" "}
+                Save Class Data to CSV
+          </button>
               {
                 courses.filter(c => c.title.toLowerCase().includes(search.toLowerCase())).map(course => (
                   <div className="card pt-0" key={course.id}>

@@ -11,6 +11,8 @@ import { Link, Redirect } from "react-router-dom";
 import DeleteModal from "../components/DeleteModal";
 import AddCodeForm from "../components/forms/AddCodeForm";
 import DeleteCodeForm from "../components/forms/DeleteCodeForm";
+import getCsv from "../utils/getCsv";
+import download from "../utils/download";
 
 function AdminDash() {
   const [state, dispatch] = useStoreContext();
@@ -74,9 +76,9 @@ function AdminDash() {
     getCodes();
   }, []);
 
-  useEffect(() => {}, [userFilter]);
-  useEffect(() => {}, [courseFilter]);
-  useEffect(() => {}, [studentFilter]);
+  useEffect(() => { }, [userFilter]);
+  useEffect(() => { }, [courseFilter]);
+  useEffect(() => { }, [studentFilter]);
 
   const onFilterChange = e => {
     const { name, value } = e.target;
@@ -94,6 +96,10 @@ function AdminDash() {
         throw new Error("Unknown filter");
     }
   };
+
+  const saveToCsv = () => {
+    download(getCsv(state.courses));
+  }
 
   if (state.loading || !loaded) {
     return (
@@ -132,6 +138,10 @@ function AdminDash() {
             form={DeleteCodeForm}
             onReturn={getCodes}
           />
+          <button className="btn btn-info btn-sm ml-2" onClick={saveToCsv}>
+            <i className='fas fa-save' />{" "}
+            Save Class Data to CSV
+          </button>
           <br />
         </div>
         <br />
@@ -183,19 +193,19 @@ function AdminDash() {
                 <ul className='list-group'>
                   {state.users
                     ? state.users
-                        .filter(user =>
-                          user.name.toLowerCase().includes(userFilter)
-                        )
-                        .map(user => (
-                          <Link key={user.id} to={`/parent/${user.id}`}>
-                            <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
-                              {user.name}
-                              <span class='badge badge-primary badge-pill'>
-                                {user.Students.length}
-                              </span>
-                            </li>
-                          </Link>
-                        ))
+                      .filter(user =>
+                        user.name.toLowerCase().includes(userFilter)
+                      )
+                      .map(user => (
+                        <Link key={user.id} to={`/parent/${user.id}`}>
+                          <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                            {user.name}
+                            <span class='badge badge-primary badge-pill'>
+                              {user.Students.length}
+                            </span>
+                          </li>
+                        </Link>
+                      ))
                     : null}
                 </ul>
               </div>
@@ -251,19 +261,19 @@ function AdminDash() {
                 <ul className='list-group'>
                   {state.courses
                     ? state.courses
-                        .filter(course =>
-                          course.title.toLowerCase().includes(courseFilter)
-                        )
-                        .map(course => (
-                          <Link key={course.id} to={`/course/${course.id}`}>
-                            <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
-                              {course.title}
-                              <span class='badge badge-primary badge-pill'>
-                                {course.Students.length}
-                              </span>
-                            </li>
-                          </Link>
-                        ))
+                      .filter(course =>
+                        course.title.toLowerCase().includes(courseFilter)
+                      )
+                      .map(course => (
+                        <Link key={course.id} to={`/course/${course.id}`}>
+                          <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                            {course.title}
+                            <span class='badge badge-primary badge-pill'>
+                              {course.Students.length}
+                            </span>
+                          </li>
+                        </Link>
+                      ))
                     : null}
                 </ul>
               </div>
@@ -315,16 +325,16 @@ function AdminDash() {
                 <ul className='list-group'>
                   {state.students
                     ? state.students
-                        .filter(student =>
-                          student.name.toLowerCase().includes(studentFilter)
-                        )
-                        .map(student => (
-                          <Link key={student.id} to={`/student/${student.id}`}>
-                            <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
-                              {student.name}
-                            </li>
-                          </Link>
-                        ))
+                      .filter(student =>
+                        student.name.toLowerCase().includes(studentFilter)
+                      )
+                      .map(student => (
+                        <Link key={student.id} to={`/student/${student.id}`}>
+                          <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                            {student.name}
+                          </li>
+                        </Link>
+                      ))
                     : null}
                 </ul>
               </div>
