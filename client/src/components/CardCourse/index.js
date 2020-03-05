@@ -19,7 +19,7 @@ function CardCourse(props) {
     });
   };
 
-  const getPaid = (student) => {
+  const getPaid = student => {
     if (state.user && (state.user.id === student.id || state.user.isAdmin)) {
       return (
         <React.Fragment>
@@ -27,10 +27,8 @@ function CardCourse(props) {
             {student.StudentCourse.Paid ? (
               "PAID"
             ) : (
-                <span style={{ fontWeight: "bold", color: "red" }}>
-                  NOT YET PAID
-                      </span>
-              )}
+              <span style={{ fontWeight: "bold", color: "red" }}>NOT PAID</span>
+            )}
           </td>
           <td>
             {!student.StudentCourse.Paid ? (
@@ -52,20 +50,18 @@ function CardCourse(props) {
         </React.Fragment>
       );
     }
-  }
+  };
 
-  const getDeleteCourse = (course) => {
-    return (
-      state.user && state.user.isAdmin ? (
-        <button
-          className='btn btn-danger btn-sm'
-          onClick={() => onDelete(course.id)}
-        >
-          <i className='far fa-trash-alt'></i> Delete Course
-        </button>
-      ) : null
-    );
-  }
+  const getDeleteCourse = course => {
+    return state.user && state.user.isAdmin ? (
+      <button
+        className='btn btn-danger btn-sm'
+        onClick={() => onDelete(course.id)}
+      >
+        <i className='far fa-trash-alt'></i> Delete Course
+      </button>
+    ) : null;
+  };
 
   const showPaidSummary = () => {
     if (!state.user || !state.user.isAdmin) {
@@ -82,65 +78,81 @@ function CardCourse(props) {
         </li>
       </React.Fragment>
     );
-  }
+  };
 
   const renderStudents = () => {
     return (
-      <table className='table'>
-        <thead className='thead'>
-          <tr className='table-info'>
-            <th scope='col'>Student</th>
-            <th scope='col'>Parent</th>
-            <th scope='col'>Age</th>
-            <th scope='col'>Paid</th>
-            <th scope='col'>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          <React.Fragment>
-            {props.course.Students.length === 0 ? (
-              <h5>No Students Enrolled</h5>
-            ) : null}
-            {props.course.Students.map(student => (
-              <tr key={student.id}>
-                <td><Link to={`/student/${student.id}`}>{student.name}</Link></td>
-                <td><Link to={`/parent/${student.User.id}`}>{student.User.name}</Link></td>
-                <td>{student.age}</td>
-                {getPaid(student)}
-              </tr>
-            ))}
-          </React.Fragment>{" "}
-        </tbody>
-      </table>
+      <div className='table-responsive'>
+        <table className='table'>
+          <thead className='thead'>
+            <tr className='table-info'>
+              <th scope='col'>Student</th>
+              <th scope='col'>Parent</th>
+              <th scope='col'>Age</th>
+              <th scope='col'>Paid</th>
+              <th scope='col'>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <React.Fragment>
+              {props.course.Students.length === 0 ? (
+                <tr>
+                  <td colspan='5'>
+                    <p className='p-4 text-center alert-danger'>
+                      <strong>
+                        Zero students are currently enrolled in this class.
+                      </strong>
+                    </p>
+                  </td>
+                </tr>
+              ) : null}
+              {props.course.Students.map(student => (
+                <tr key={student.id}>
+                  <td>
+                    <Link to={`/student/${student.id}`}>{student.name}</Link>
+                  </td>
+                  <td>
+                    <Link to={`/parent/${student.User.id}`}>
+                      {student.User.name}
+                    </Link>
+                  </td>
+                  <td>{student.age}</td>
+                  {getPaid(student)}
+                </tr>
+              ))}
+            </React.Fragment>
+          </tbody>
+        </table>
+      </div>
     );
   };
 
   const showTeacherImage = () => {
     if (!props.course.User) {
-      return <Avatar name="Not Available" className='avatarCss' />
+      return <Avatar name='Not Available' className='avatarCss' />;
     }
 
-    return (
-      !props.course.User.img.includes("res.cloudinary.com") ? (
-        <Avatar name={props.course.User.name} className='avatarCss' />
-      ) : (
-          <img
-            src={props.course.User.img}
-            className='card-img cloud-img'
-            alt={props.course.User.name}
-            style={{ width: 200, height: 200 }}
-          />
-        )
+    return !props.course.User.img.includes("res.cloudinary.com") ? (
+      <Avatar name={props.course.User.name} className='avatarCss' />
+    ) : (
+      <img
+        src={props.course.User.img}
+        className='card-img cloud-img'
+        alt={props.course.User.name}
+        style={{ width: 200, height: 200 }}
+      />
     );
-  }
+  };
 
   const showTeacher = () => {
-    return (
-      props.course.User ?
-        <Link to={`/parent/${props.course.User.id}`}>{props.course.User.name}</Link> :
-        "Not Assigned"
+    return props.course.User ? (
+      <Link to={`/parent/${props.course.User.id}`}>
+        {props.course.User.name}
+      </Link>
+    ) : (
+      "Not Assigned"
     );
-  }
+  };
 
   return (
     <div>
@@ -149,21 +161,14 @@ function CardCourse(props) {
           <div className='float-left'>
             <h1>{props.course.title}</h1>
           </div>
-          <div className='text-right pt-2'>
-            {getDeleteCourse(props.course)}
-          </div>
+          <div className='text-right pt-2'>{getDeleteCourse(props.course)}</div>
         </div>
         <div className='card-body'>
           <div className='row'>
-            <div className='col col-lg-3 text-center'>
-              {showTeacherImage()}
-            </div>
+            <div className='col col-lg-3 text-center'>{showTeacherImage()}</div>
             <div className='col col-lg-9'>
               <ul className='list-group list-group-flush'>
-                <li className='list-group-item'>
-                  Teacher:{" "}
-                  {showTeacher()}
-                </li>
+                <li className='list-group-item'>Teacher: {showTeacher()}</li>
                 <li className='list-group-item'>
                   Location: {props.course.location}
                 </li>
@@ -179,7 +184,7 @@ function CardCourse(props) {
           </div>
         </div>
       </div>
-      <div className='card pt-0'>
+      <div className='card pt-0 mt-5'>
         <div className='card-header pb-0'>
           <div className='float-left'>
             <h1>Students Enrolled In This Class</h1>

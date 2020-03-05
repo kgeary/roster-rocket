@@ -84,6 +84,7 @@ function PasswordChangeForm() {
       <div className='form-container'>
         <div className='gap' />
         <h1>Change Password</h1>
+        <div className='gap' />
         <form className='form-group mt-3 mb-2 form-login'>
           {/* OLD PASSWORD */}
           <label htmlFor='old'>Old Password:</label>
@@ -95,17 +96,17 @@ function PasswordChangeForm() {
             placeholder='Old Password'
           />
           {/* PASSWORD */}
-          <label htmlFor='password'>Password:</label>
+          <label htmlFor='password'>New Password:</label>
           <InputForm
             id='password'
             inputRef={newPassword}
             type='password'
             length='32'
-            placeholder='Password'
+            placeholder='New Password'
           />
 
           {/* CONFIRM PASSWORD */}
-          <label htmlFor='password2'>Confirm Password:</label>
+          <label htmlFor='password2'>Confirm New Password:</label>
           <InputForm
             id='password2'
             inputRef={newPassword2}

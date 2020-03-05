@@ -41,7 +41,7 @@ function AddModal(props) {
 
   return (
     <React.Fragment>
-      <button className='btn btn-primary btn-sm' onClick={openModal}>
+      <button className='btn btn-primary btn-sm m-2' onClick={openModal}>
         <i className='fas fa-plus' /> {props.title}
       </button>
       <Modal

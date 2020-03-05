@@ -41,7 +41,7 @@ function EditModal(props) {
 
   return (
     <React.Fragment>
-      <button className='btn btn-dark btn-sm' onClick={openModal}>
+      <button className='btn btn-dark btn-sm m-2' onClick={openModal}>
         <i className='fas fa-edit' /> {props.title}
       </button>
       <Modal

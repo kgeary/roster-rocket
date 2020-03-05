@@ -13,7 +13,8 @@ function NoMatch() {
   }, []);
 
   return (
-    <Container fluid>
+    <Container>
+    <div className="big-gap" />
       <Row>
         <Col size="md-12">
           <Jumbotron>

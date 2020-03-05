@@ -38,8 +38,8 @@ function ParentDash() {
 
   const LoadScreen = () => {
     return (
-      <Container fluid>
-        <div className='gap' />
+      <Container>
+        <div className='big-gap' />
         <h1>Loading Parent Data...</h1>
       </Container>
     );
@@ -56,10 +56,10 @@ function ParentDash() {
   return (
     <div>
       <Container>
-        <div className='gap' />
+        <div className='big-gap' />
         {parent ? (
           <React.Fragment>
-            <h1>Dashboard for {parent ? parent.name : null}</h1>
+            <h1>Parent Dashboard</h1>
             <br />
             <CardParent
               user={parent}
@@ -71,7 +71,7 @@ function ParentDash() {
           </React.Fragment>
         ) : null}
       </Container>
-      <div className='gap' />
+      <div className='big-gap' />
     </div>
   );
 }

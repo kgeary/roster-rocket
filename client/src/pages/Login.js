@@ -16,6 +16,7 @@ function Login() {
   return (
     <div>
       <LoginForm />
+      <div className="gap" />
       <Parallax />
       <CallToAction />
     </div>

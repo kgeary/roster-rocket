@@ -43,7 +43,7 @@ function User() {
 
   const LoadScreen = () => {
     return (
-      <Container fluid>
+      <Container>
         <h1>Loading Parent Data...</h1>
       </Container>
     );
@@ -61,7 +61,7 @@ function User() {
     <Container>
       {parent ? (
         <React.Fragment>
-          <div className='gap' />
+          <div className='big-gap' />
           <h1>{parent ? parent.name.split(" ")[1] : null} Family Profile</h1>
           <br />
           <Row>
@@ -79,7 +79,7 @@ function User() {
         <React.Fragment>
           <div className="gap" />
           {status}
-          <div className="gap" />
+          <div className="big-gap" />
         </React.Fragment>
       }
     </Container>

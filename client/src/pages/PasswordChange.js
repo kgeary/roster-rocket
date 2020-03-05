@@ -3,9 +3,12 @@ import PasswordChangeForm from "../components/forms/PasswordChangeForm";
 
 function PasswordChange() {
   return (
-    <PasswordChangeForm />
+    <div>
+      <div className='big-gap' />
+      <PasswordChangeForm />
+      <div className='big-gap' />
+    </div>
   );
 }
-
 
 export default PasswordChange;

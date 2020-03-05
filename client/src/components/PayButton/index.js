@@ -16,7 +16,7 @@ function PayButton(props) {
   };
 
   return props.Paid || !state.user || !state.user.isAdmin ? null : (
-    <button className='btn btn-sm btn-info' onClick={onClick}>
+    <button className='btn btn-sm btn-success' onClick={onClick}>
       <i className='fas fa-check'></i> MARK PAID
     </button>
   );
