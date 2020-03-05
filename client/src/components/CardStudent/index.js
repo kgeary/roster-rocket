@@ -61,8 +61,8 @@ function CardStudent(props) {
         {sc.Paid ? (
           "PAID"
         ) : (
-          <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID</span>
-        )}
+            <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID</span>
+          )}
       </h6>
     );
   };
@@ -179,15 +179,17 @@ function CardStudent(props) {
   };
 
   const showImage = () => {
-    return !props.student.img.includes("res.cloudinary.com") ? (
-      <Avatar name={props.student.name} className='avatarCss' />
-    ) : (
-      <img
-        src={props.student.img}
-        className='card-img cloud-img'
-        alt={props.student.name}
-        style={{ width: 200, height: 200 }}
-      />
+    return (
+      !props.student.img.includes("res.cloudinary.com") ? (
+        <Avatar size={150} name={props.student.name} className='avatarCss' />
+      ) : (
+          <img
+            src={props.student.img}
+            className='card-img cloud-img'
+            alt={props.student.name}
+            style={{ width: 150, height: 150 }}
+          />
+        )
     );
   };
 
@@ -248,13 +250,13 @@ function CardStudent(props) {
         </li>
       </ul>
     ) : (
-      <ul className='list-group'>
-        <li className='list-group-item list-group-item-danger text-center'>
-          <i className='fas fa-exclamation-circle' /> Amount Due:{" "}
-          <strong>${AmountDue} </strong>
-        </li>
-      </ul>
-    );
+        <ul className='list-group'>
+          <li className='list-group-item list-group-item-danger text-center'>
+            <i className='fas fa-exclamation-circle' /> Amount Due:{" "}
+            <strong>${AmountDue} </strong>
+          </li>
+        </ul>
+      );
   };
 
   const showParentName = () => {
