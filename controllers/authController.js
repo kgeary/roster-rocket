@@ -117,7 +117,7 @@ module.exports = {
         req.body.email,
         "no-reply@roster.rocket.com",
         "Invitation Signup for Roster Rocket",
-        "Signup at: https://project3-temp.herokuapp.com/signup with Group Code: 123456"
+        "Signup at: https://roster-rocket.herokuapp.com/ with Group Code: " + req.body.code || "123456"
       );
 
       res.json({ messsage: "" });
