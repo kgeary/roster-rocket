@@ -229,7 +229,6 @@ function CardParent(props) {
                   </div>
                 </div>
                 <div className='col col-lg-9'>
-                  <h5 className='card-title parent-info-title'></h5>
                   <ul className='card-text'>
                     <li className='list-group-item'>
                       Email: {props.user.email}
@@ -240,7 +239,6 @@ function CardParent(props) {
                     {showAmountDue()}
                     <br />
                     <div className='float-right'>
-                      
                       {showAddChild()}
                       <button
                         className='btn btn-info btn-sm m-2'

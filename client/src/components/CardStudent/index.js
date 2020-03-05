@@ -41,7 +41,7 @@ function CardStudent(props) {
             className='btn btn-danger btn-sm'
             onClick={() => onDrop(props.student.id, sc.CourseId)}
           >
-            <i className="far fa-times-circle" /> Drop Class
+            <i className='far fa-times-circle' /> Drop Class
           </button>
         </div>
       </React.Fragment>
@@ -91,7 +91,7 @@ function CardStudent(props) {
             <div className='card-body'>
               {showDropBtn(sc)}
               <Link to={`/course/${sc.Course.id}`}>
-                <h3 className="enrolled-course-title">{sc.Course.title}</h3>
+                <h3 className='enrolled-course-title'>{sc.Course.title}</h3>
               </Link>
 
               {showTeacher(sc)}
@@ -234,24 +234,22 @@ function CardStudent(props) {
       return null;
     }
 
-    return (
+    const AmountDue = props.student.StudentCourses.reduce((a, c) => {
+      return c.Paid ? a : a + c.Course.cost;
+    }, 0);
+
+    return AmountDue < 1 ? (
       <ul className='list-group'>
-        {props.student.StudentCourses.reduce((a, c) => {
-          if (c.Paid) {
-            return (
-              <li className='list-group-item list-group-item-success text-center'>
-                <i className='fas fa-check' /> PAID IN FULL
-              </li>
-            );
-          } else {
-            return (
-              <li className='list-group-item list-group-item-danger text-center'>
-                <i className='fas fa-exclamation-circle' /> Amount Due:{" "}
-                <strong>${c.Course.cost} </strong>
-              </li>
-            );
-          }
-        }, 0)}
+        <li className='list-group-item list-group-item-success text-center'>
+          <i className='fas fa-check' /> PAID IN FULL
+        </li>
+      </ul>
+    ) : (
+      <ul className='list-group'>
+        <li className='list-group-item list-group-item-danger text-center'>
+          <i className='fas fa-exclamation-circle' /> Amount Due:{" "}
+          <strong>${AmountDue} </strong>
+        </li>
       </ul>
     );
   };
