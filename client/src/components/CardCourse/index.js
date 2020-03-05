@@ -33,14 +33,12 @@ function CardCourse(props) {
               )}
           </td>
           <td>
-            {!student.StudentCourse.Paid ? (
-              <PayButton
-                StudentId={student.id}
-                CourseId={props.course.id}
-                updateFunc={props.updateFunc}
-                Paid={student.Paid}
-              />
-            ) : null}
+            <PayButton
+              StudentId={student.id}
+              CourseId={props.course.id}
+              updateFunc={props.updateFunc}
+              Paid={student.StudentCourse.Paid}
+            />
           </td>
         </React.Fragment>
       );
@@ -199,6 +197,9 @@ function CardCourse(props) {
                 </li>
                 <li className='list-group-item'>
                   Capacity: {props.course.capacity}
+                </li>
+                <li className='list-group-item'>
+                  Cost: {props.course.cost}
                 </li>
                 {showPaidSummary()}
               </ul>

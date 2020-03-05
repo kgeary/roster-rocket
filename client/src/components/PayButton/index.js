@@ -5,7 +5,7 @@ function PayButton(props) {
   const [state] = useStoreContext();
 
   const onClick = () => {
-    API.markPaid(props.StudentId, props.CourseId)
+    API.markPaid(!props.Paid, props.StudentId, props.CourseId)
       .then(res => {
         // Call the updateFunc cb on success
         props.updateFunc();
@@ -15,9 +15,11 @@ function PayButton(props) {
       });
   };
 
-  return props.Paid || !state.user || !state.user.isAdmin ? null : (
-    <button className='btn btn-sm btn-success' onClick={onClick}>
-      <i className='fas fa-check'></i> MARK PAID
+  const btnClass = props.Paid ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success';
+  const btnText = props.Paid ? "UNDO PAID" : "MARK PAID";
+  return !state.user || !state.user.isAdmin ? null : (
+    <button className={btnClass} onClick={onClick}>
+      <i className='fas fa-check'></i> {btnText}
     </button>
   );
 }
