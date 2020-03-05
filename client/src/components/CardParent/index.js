@@ -41,7 +41,7 @@ function CardParent(props) {
 
   const showImage = () => {
     return !props.user.img.includes("res.cloudinary.com") ? (
-      <Avatar name={props.user.name} className='avatarCss' />
+      <Avatar size={150} name={props.user.name} className='avatarCss' />
     ) : (
       <img
         src={props.user.img}
