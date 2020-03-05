@@ -146,12 +146,12 @@ function CardCourse(props) {
 
   const showTeacherImage = () => {
     if (!props.course.User) {
-      return <Avatar size={150} name="Not Available" className='avatarCss' />
+      return <Avatar size={200} name="Not Available" className='avatarCss' />
     }
 
     return (
       !props.course.User.img.includes("res.cloudinary.com") ? (
-        <Avatar size={150} name={props.course.User.name} className='avatarCss' />
+        <Avatar size={200} name={props.course.User.name} className='avatarCss' />
       ) : (
           <img
             src={props.course.User.img}
