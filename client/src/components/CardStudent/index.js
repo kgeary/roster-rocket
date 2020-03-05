@@ -206,7 +206,7 @@ function CardStudent(props) {
   };
 
   const showEnrollBtn = () => {
-    if (!state.user || state.user.id !== props.student.ParentId) {
+    if (!state.user || (state.user.id !== props.student.ParentId && !state.user.isAdmin)) {
       return null;
     }
 
