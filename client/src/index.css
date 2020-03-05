@@ -167,7 +167,7 @@ body.dark .navbar.navbar-light.bg-light {
 .close-modal {
   color: #333;
   float: right;
-  margin: 8px -25px -10px -10px;
+  margin: -15px -25px -10px -10px;
   cursor: pointer;
 }
 

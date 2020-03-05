@@ -59,9 +59,10 @@ function CardStudent(props) {
       <h6>
         Paid:{" "}
         {sc.Paid ? (
-          "PAID"
+          <span style={{ fontWeight: "bold", color: "green" }}>PAID <i className="fas fa-check" /></span>
+          
         ) : (
-            <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID</span>
+            <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID <i className="fas fa-exclamation-circle" /></span>
           )}
       </h6>
     );
@@ -169,7 +170,7 @@ function CardStudent(props) {
     return (
       <React.Fragment>
         <EditModal
-          title='Edit Student'
+          title='Edit Child'
           user={props.student}
           form={EditStudentForm}
           onReturn={props.updateFunc}
