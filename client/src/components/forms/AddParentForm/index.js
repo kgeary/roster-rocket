@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Container } from "../../Grid";
-// import validate from "../../../utils/validate";
+import validate from "../../../utils/validate";
 import alertFactory from "../../../utils/alertFactory";
 import API from "../../../utils/API";
 import InputForm from "../InputForm";
@@ -18,11 +18,18 @@ function AddParentForm(props) {
     } else {
       formAlert(false);
 
-      const email = document.getElementById("email").value || "";
+      const email = document.getElementById("email").value.trim();
+      const code = document.getElementById("code").value;
 
-      API.emailParent({
-        email
-      })
+      if (!validate.email(email)) {
+        errors.push("Invalid Email Address");
+      }
+
+      if (code.length < 1) {
+        errors.push("Invalid Group Code");
+      }
+
+      API.emailParent(email, code)
         .then(res => {
           console.log("EMAIL", res.data);
           update = true;
@@ -63,6 +70,15 @@ function AddParentForm(props) {
             length='64'
             placeholder='Email...'
           />
+
+          <label htmlFor='teacher'>Group Code:</label>
+          <select className='form-control' id='code'>
+            {props.users.map(user => (
+              <option key={user} value={user}>
+                {user}
+              </option>
+            ))}
+          </select>
 
           <button
             id='submitParent'
