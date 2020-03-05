@@ -4,6 +4,8 @@ import API from "../../utils/API";
 import { useStoreContext } from "../../utils/GlobalState";
 import EnrollStudentModal from "../EnrollStudentModal";
 import EnrollStudentForm from "../forms/EnrollStudentForm";
+import EditStudentForm from "../forms/EditStudentForm"
+import EditModal from "../EditModal"
 import PayButton from "../PayButton";
 import Avatar from "react-avatar";
 import "./style.css";
@@ -165,13 +167,14 @@ function CardStudent(props) {
       return null;
     }
 
-    // TODO - UPDATE RETURN WITH EDIT CHILD MODAL
-
     return (
       <React.Fragment>
-        <button type='button' className='btn btn-dark btn-sm'>
-          <i className='fas fa-pencil-alt'></i> Edit Child{" "}
-        </button>{" "}
+        <EditModal
+          title='Edit Student'
+          user={props.student}
+          form={EditStudentForm}
+          onReturn={props.updateFunc}
+        />
       </React.Fragment>
     );
   }

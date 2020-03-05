@@ -2,16 +2,13 @@ body {
   margin: 0;
   font-size: 18px;
   line-height: 28px;
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-    "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 body.dark {
@@ -52,14 +49,7 @@ body.dark input {
   background-color: #aaa;
 }
 
-body.dark .card a,
-body.dark .card h1,
-body.dark .card h2,
-body.dark .card h3,
-body.dark .card h4,
-body.dark .card h5,
-body.dark .card h6,
-body.dark .card p {
+body.dark .card a, body.dark .card h1, body.dark .card h2, body.dark .card h3, body.dark .card h4, body.dark .card h5, body.dark .card h6, body.dark .card p {
   color: #222;
 }
 
@@ -80,8 +70,7 @@ body.dark .navbar.navbar-light.bg-light {
   background-color: red;
 }
 
-.container,
-.container-fluid {
+.container, .container-fluid {
   /* margin-top: 2rem; */
 }
 
@@ -89,8 +78,7 @@ body.dark .navbar.navbar-light.bg-light {
   text-align: center;
 }
 
-.form-login,
-.form-signup {
+.form-login, .form-signup {
   margin: 0 auto;
   max-width: 700px;
 }
@@ -128,8 +116,8 @@ body.dark .navbar.navbar-light.bg-light {
   font-style: italic;
 }
 
-.dark .input-styled{
-color: #333;
+.dark .input-styled {
+  color: #333;
 }
 
 .top-radius {
@@ -171,11 +159,11 @@ color: #333;
 .close-modal {
   color: #333;
   float: right;
-  margin: -15px -25px -10px -10px;
+  margin: 8px -25px -10px -10px;
   cursor: pointer;
 }
 
 .close-modal:hover {
   color: rgb(209, 79, 79);
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
