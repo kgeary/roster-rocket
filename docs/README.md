@@ -1,9 +1,9 @@
 # Roster Rocket - Helping Homeschool Co-ops Launch
 
 
-<a href="https://project3-temp.herokuapp.com/"><img src="images/landingPage.png" title="Landing Page" alt="Landing Page" width=600px></a>
+<a href="https://roster-rocket.herokuapp.com/"><img src="images/landingPage.png" title="Landing Page" alt="Landing Page" width=600px></a>
 
-Click the image to view the depoyed site, or use <a href="https://project3-temp.herokuapp.com/">this link</a>.
+Click the image to view the depoyed site, or use <a href="https://roster-rocket.herokuapp.com/">this link</a>.
 
 When creating a new user for testing, use group code: 123456
 
