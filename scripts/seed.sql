@@ -7,7 +7,8 @@ INSERT INTO Users(
     email,
     name,
     phone,
-    password
+    password,
+    img
     
   )
 VALUES
@@ -18,7 +19,8 @@ VALUES
     "blah1@blah.com",
     "Adam Anderson",
     "555-1212",
-    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG"
+    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG",
+    "https://res.cloudinary.com/ds8zmuetv/image/upload/v1583255784/rmeinbgpfgukjxlrpa32.png"
   ),
   (
     false,
@@ -27,7 +29,8 @@ VALUES
     "blah2@blah.com",
     "Brian Boyd",
     "555-1213",
-    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG"
+    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG",
+    "https://res.cloudinary.com/ds8zmuetv/image/upload/v1583250758/fjvyiyukyehqdlbbepqo.png"
   ),
   (
     false,
@@ -36,7 +39,8 @@ VALUES
     "blah3@blah.com",
     "Chris Cousins",
     "555-1214",
-    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG"
+    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG",
+    "https://res.cloudinary.com/ds8zmuetv/image/upload/v1583250756/pxsh2nlgpr8dk7wzv9oo.png"
   ),
    (
     false,
@@ -45,7 +49,8 @@ VALUES
     "blah4@blah.com",
     "Denny Davers",
     "555-1215",
-    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG"
+    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG",
+    "https://res.cloudinary.com/ds8zmuetv/image/upload/v1583250756/huw46kasooyobmsx4ejs.png"
   ),
    (
     false,
@@ -54,7 +59,8 @@ VALUES
     "blah5@blah.com",
     "Edgar Easter",
     "555-1216",
-    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG"
+    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG",
+    "https://res.cloudinary.com/ds8zmuetv/image/upload/v1583250754/gaexhzmsz0jvttksue0y.png"
   ),
    (
     false,
@@ -63,7 +69,8 @@ VALUES
     "blah6@blah.com",
     "Fatima Fellows",
     "555-1217",
-    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG"
+    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG",
+    "https://res.cloudinary.com/ds8zmuetv/image/upload/v1583250756/wp90beooohbxx2g0df7g.png"
   ),
   (
     false,
@@ -72,7 +79,8 @@ VALUES
     "blah7@blah.com",
     "Georgina Gilroy",
     "555-1218",
-    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG"
+    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG",
+    "https://res.cloudinary.com/ds8zmuetv/image/upload/v1583250756/adaeiqjukwejvmznitea.png"
   ),
    (
     false,
@@ -81,7 +89,8 @@ VALUES
     "blah8@blah.com",
     "Henrietta Harris",
     "555-1219",
-    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG"
+    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG",
+    "https://res.cloudinary.com/ds8zmuetv/image/upload/v1583250755/qfyfpe7ne3ze03vrjpnc.png"
   ),
   (
     false,
@@ -90,7 +99,8 @@ VALUES
     "blah9@blah.com",
     "Isabelle Illes",
     "555-1220",
-    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG"
+    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG",
+    "https://res.cloudinary.com/ds8zmuetv/image/upload/v1583250755/irktuoqem9ec4orpztol.png"
   ),
   (
     false,
@@ -99,7 +109,8 @@ VALUES
     "blah10@blah.com",
     "Joe Jacoby",
     "555-1221",
-    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG"
+    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG",
+    "https://res.cloudinary.com/ds8zmuetv/image/upload/v1583250754/kcgobup71pvftaa2ikk0.png"
   ),
    (
     false,
@@ -108,7 +119,8 @@ VALUES
     "blah11@blah.com",
     "Kelly Kraft",
     "555-1222",
-    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG"
+    "$2a$10$JaQb7W6/Rwi5yQJTmPEYCOYh8Qdkf6VcRYLhyai8eeTOStq5piPkG",
+    "https://res.cloudinary.com/ds8zmuetv/image/upload/v1583250755/ggc3ylog2ddja0mtw96r.png"
   );
 -- STUDENTS LIST --
 INSERT INTO Students (name, age, createdAt, updatedAt, ParentId)
