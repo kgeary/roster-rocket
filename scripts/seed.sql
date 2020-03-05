@@ -211,7 +211,7 @@ INSERT INTO Courses(
     TeacherId
   )
 VALUES
-  ("Algebra", "Room 2", 100, 10, now(), now(), 1),
+  ("Algebra", "Room 2", 100, 10, now(), now(), 4),
   -- 1
   ("English", "Room 3", 50, 8, now(), now(), 2),
   -- 2
