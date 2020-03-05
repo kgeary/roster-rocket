@@ -58,7 +58,7 @@ function AddStudentForm(props) {
             }}
           ></i>
         </div>
-        <h1>Add Student</h1>
+        <h1>Add Child</h1>
         <form className='form-group mt-3 mb-2 form-signup'>
           {/* STUDENT NAME */}
           <label htmlFor='name'>Name:</label>
@@ -66,7 +66,7 @@ function AddStudentForm(props) {
             id='name'
             type='text'
             length='64'
-            placeholder='Student Name'
+            placeholder='Child Name'
           />
 
           {/* STUDENT AGE */}
@@ -75,7 +75,7 @@ function AddStudentForm(props) {
             id='age'
             type='number'
             length='3'
-            placeholder='Student Age'
+            placeholder='Child Age'
           />
 
           {/* STUDENT PARENT */}
@@ -93,7 +93,7 @@ function AddStudentForm(props) {
             className='btn btn-success mt-3'
             onClick={handleSubmit}
           >
-            <i className='fas fa-user-plus'></i> Add Student
+            <i className='fas fa-user-plus'></i> Add Child
           </button>
           <br />
           <div id='alert' role='alert' />

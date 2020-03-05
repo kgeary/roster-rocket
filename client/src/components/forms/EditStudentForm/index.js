@@ -62,7 +62,7 @@ function EditStudentForm(props) {
             }}
           ></i>
         </div>
-        <h1>Edit Student Account Info</h1>
+        <h1>Edit Child's Info</h1>
         <br />
         <form className='form-group'>
           {/* NAME */}
@@ -71,7 +71,7 @@ function EditStudentForm(props) {
             id='name'
             type='text'
             length='32'
-            placeholder='Student Name'
+            placeholder='Child Name'
             defaultValue={props.user.name}
           />
 
@@ -89,7 +89,7 @@ function EditStudentForm(props) {
             className='btn btn-success mt-3'
             onClick={handleSubmit}
           >
-            <i className='fas fa-user-plus'></i> Update Student Info
+            <i className='fas fa-user-plus'></i> Update Child's Info
           </button>
         </form>
       </div>
