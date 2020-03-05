@@ -83,62 +83,86 @@ function AddCourseForm(props) {
             }}
           ></i>
         </div>
-        <h1>Create Class</h1>
-        <form className='form-group'>
-          {/* COURSE TITLE */}
-
-          <label htmlFor='title'>Class Title:</label>
-          <InputForm
-            id='title'
-            inputRef={titleRef}
-            type='text'
-            length='64'
-            placeholder='Class Title...'
-          />
-
-          {/* COURSE LOCATION */}
-          <label htmlFor='location'>Location:</label>
-          <InputForm
-            id='location'
-            inputRef={locRef}
-            type='text'
-            length='64'
-            placeholder='Location...'
-          />
-
-          {/* COURSE CAPACITY */}
-          <label htmlFor='capacity'>Max Class Capacity:</label>
-          <InputForm
-            id='capacity'
-            inputRef={capacityRef}
-            type='int'
-            length='64'
-            placeholder='Max Class Capacity...'
-          />
-
-          {/* COURSE COST */}
-          <label htmlFor='location'>Cost:</label>
-          <InputForm
-            id='cost'
-            inputRef={costRef}
-            type='int'
-            length='64'
-            placeholder='Cost'
-          />
-
-          {/* COURSE TEACHER */}
-          <label htmlFor='teacher'>Teacher:</label>
-          <select className='form-control' id='teacher'>
-            <option key={null} value=''>
-              None
-            </option>
-            {props.users.map(user => (
-              <option key={user.id} value={user.id}>
-                {user.name}
-              </option>
-            ))}
-          </select>
-
+        <h1>Create New Class</h1>
+        <form className='mt-3 mb-2 form-signup'>
+          <div class='form-group row'>
+            {/* COURSE TITLE */}
+            <label className='col-sm-4 col-form-label-sm' htmlFor='title'>
+              Class Title:
+            </label>
+            <div class='col-sm-8'>
+              <InputForm
+                id='title'
+                inputRef={titleRef}
+                type='text'
+                length='64'
+                placeholder='Class Title...'
+              />
+            </div>
+          </div>
+          <div class='form-group row'>
+            {/* COURSE LOCATION */}
+            <label className='col-sm-4 col-form-label-sm' htmlFor='location'>
+              Location:
+            </label>
+            <div class='col-sm-8'>
+              <InputForm
+                id='location'
+                inputRef={locRef}
+                type='text'
+                length='64'
+                placeholder='Location...'
+              />
+            </div>
+          </div>
+          <div class='form-group row'>
+            {/* COURSE CAPACITY */}
+            <label className='col-sm-4 col-form-label-sm' htmlFor='capacity'>
+              Max Size:
+            </label>
+            <div class='col-sm-8'>
+              <InputForm
+                id='capacity'
+                inputRef={capacityRef}
+                type='int'
+                length='64'
+                placeholder='Max Class Size...'
+              />
+            </div>
+          </div>
+          <div class='form-group row'>
+            {/* COURSE COST */}
+            <label className='col-sm-4 col-form-label-sm' htmlFor='location'>
+              Cost:
+            </label>
+            <div class='col-sm-8'>
+              <InputForm
+                id='cost'
+                inputRef={costRef}
+                type='int'
+                length='64'
+                placeholder='Cost'
+              />
+            </div>
+          </div>
+          <div class='form-group row'>
+            {/* COURSE TEACHER */}
+            <label className='col-sm-4 col-form-label-sm' htmlFor='teacher'>
+              Teacher:
+            </label>
+            <div class='col-sm-8'>
+              <select className='form-control' id='teacher'>
+                <option key={null} value=''>
+                  None
+                </option>
+                {props.users.map(user => (
+                  <option key={user.id} value={user.id}>
+                    {user.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
           <button
             id='submitCourse'
             className='btn btn-success mt-3'

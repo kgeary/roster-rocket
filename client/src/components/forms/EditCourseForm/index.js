@@ -63,7 +63,9 @@ function EditCourseForm(props) {
     document.getElementById("location").value = course.location;
     document.getElementById("capacity").value = course.capacity;
     document.getElementById("cost").value = course.cost;
-    document.getElementById("teacher").value = course.TeacherId ? course.TeacherId : "";
+    document.getElementById("teacher").value = course.TeacherId
+      ? course.TeacherId
+      : "";
   }, []);
 
   return (
@@ -77,65 +79,90 @@ function EditCourseForm(props) {
         ></i>
       </div>
       <h1>Edit Course</h1>
-      <form className='form-group'>
-        {/* TITLE */}
-        <label htmlFor='title'>Title:</label>
-        <InputForm
-          id='title'
-          type='text'
-          length='64'
-          defaultValue={course.title}
-        />
-
-        {/* LOCATION */}
-        <label htmlFor='name'>Location:</label>
-        <InputForm
-          id='location'
-          type='text'
-          length='32'
-          placeholder='Class Location'
-          defaultValue={course.location}
-        />
-
-        {/* COST */}
-        <label htmlFor='cost'>Cost:</label>
-        <InputForm
-          id='cost'
-          type='number'
-          length='8'
-          placeholder='Cost of Class'
-          defaultValue={course.cost}
-        />
-
-        {/* CAPACITY */}
-        <label htmlFor='capacity'>Capacity:</label>
-        <InputForm
-          id='capacity'
-          type='number'
-          length='4'
-          placeholder='Max Capacity'
-          defaultValue={course.capacity}
-        />
-
-        <label htmlFor='teacher'>Teacher:</label>
-        <select className='form-control' id='teacher'>
-          <option key={null} value=''>
-            None
-            </option>
-          {state.users.map(user => (
-            <option key={user.id} value={user.id}>
-              {user.name}
-            </option>
-          ))}
-        </select>
-
+      <form className='mt-3 mb-2 form-signup'>
+        <div class='form-group row'>
+          {/* TITLE */}
+          <label className='col-sm-4 col-form-label-sm' htmlFor='title'>
+            Title:
+          </label>
+          <div class='col-sm-8'>
+            <InputForm
+              id='title'
+              type='text'
+              length='64'
+              defaultValue={course.title}
+            />
+          </div>
+        </div>
+        <div class='form-group row'>
+          {/* LOCATION */}
+          <label className='col-sm-4 col-form-label-sm' htmlFor='name'>
+            Location:
+          </label>
+          <div class='col-sm-8'>
+            <InputForm
+              id='location'
+              type='text'
+              length='32'
+              placeholder='Class Location'
+              defaultValue={course.location}
+            />
+          </div>
+        </div>
+        <div class='form-group row'>
+          {/* COST */}
+          <label className='col-sm-4 col-form-label-sm' htmlFor='cost'>
+            Cost:
+          </label>
+          <div class='col-sm-8'>
+            <InputForm
+              id='cost'
+              type='number'
+              length='8'
+              placeholder='Cost of Class'
+              defaultValue={course.cost}
+            />
+          </div>
+        </div>
+        <div class='form-group row'>
+          {/* CAPACITY */}
+          <label className='col-sm-4 col-form-label-sm' htmlFor='capacity'>
+            Capacity:
+          </label>
+          <div class='col-sm-8'>
+            <InputForm
+              id='capacity'
+              type='number'
+              length='4'
+              placeholder='Max Capacity'
+              defaultValue={course.capacity}
+            />
+          </div>
+        </div>
+        <div class='form-group row'>
+          <label className='col-sm-4 col-form-label-sm' htmlFor='teacher'>
+            Teacher:
+          </label>
+          <div class='col-sm-8'>
+            <select className='form-control' id='teacher'>
+              <option key={null} value=''>
+                None
+              </option>
+              {state.users.map(user => (
+                <option key={user.id} value={user.id}>
+                  {user.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
         <button
           id='submitEditAccount'
           className='btn btn-success mt-3'
           onClick={handleSubmit}
         >
           <i className='fas fa-user-plus'></i> Update Account Info
-          </button>
+        </button>
       </form>
     </Container>
   );
