@@ -81,13 +81,11 @@ function PasswordChangeForm() {
 
   return (
     <Container>
-      {state.user ? (
-        state.user.isAdmin ? (
-          <Redirect to='/admin' />
-        ) : (
-            <Redirect to='/parent' />
-          )
-      ) : null}
+      {
+        !state.user ?
+          <Redirect to='/login' /> :
+          null
+      }
       <div className='form-container'>
         <div className='gap' />
         <h1>Change Password</h1>
