@@ -68,6 +68,19 @@ function CardStudent(props) {
     );
   };
 
+  const showAdminPay = sc => {
+    if (!state.user || !state.user.isAdmin) return null;
+
+    return (
+      <PayButton
+        StudentId={props.student.id}
+        CourseId={sc.Course.id}
+        updateFunc={props.updateFunc}
+        Paid={sc.Paid}
+      />
+    );
+  }
+
   const showTeacher = sc => {
     if (!sc.Course.User) {
       return <h6>Teacher: Not Assigned</h6>;
@@ -101,15 +114,7 @@ function CardStudent(props) {
               <h6>Location: {sc.Course.location}</h6>
               <h6>Cost: {sc.Course.cost}</h6>
               {showStudentPaid(sc)}
-
-              {!sc.Paid ? (
-                <PayButton
-                  StudentId={props.student.id}
-                  CourseId={sc.Course.id}
-                  updateFunc={props.updateFunc}
-                  Paid={props.student.Paid}
-                />
-              ) : null}
+              {showAdminPay(sc)}
             </div>
           </div>
         ))}
