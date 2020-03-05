@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Container } from "../../Grid";
 import validate from "../../../utils/validate";
@@ -11,6 +11,10 @@ import InputForm from "../InputForm";
 function SignupForm() {
   const formAlert = alertFactory("alert");
   const [state, dispatch] = useStoreContext();
+
+  useEffect(() => {
+    dispatch({ type: ACTIONS.DONE });
+  }, []);
 
   const handleSubmit = e => {
     e.preventDefault();
