@@ -54,7 +54,7 @@ function Courses() {
   };
 
   const saveToCsv = () => {
-    download(getCsv(state.courses));
+    download(getCsv(courses));
   }
 
   if (state.loading) {
