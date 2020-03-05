@@ -10,6 +10,7 @@ function Courses() {
   const [state, dispatch] = useStoreContext();
   const [courses, setCourses] = useState([]);
   const [status, setStatus] = useState(null);
+  const [search, setSearch] = useState("");
 
   const loadData = () => {
     dispatch({ type: ACTIONS.LOADING });
@@ -66,8 +67,10 @@ function Courses() {
           <h1>Courses Page</h1>
           <Row>
             <Col size='md-12'>
+              <label htmlFor="search" className="mr-2">Filter Classes By Title:</label>
+              <input type="text" id="search" onChange={(event) => setSearch(event.target.value)} value={search} />
               {
-                courses.map(course => (
+                courses.filter(c => c.title.toLowerCase().includes(search.toLowerCase())).map(course => (
                   <div className="card pt-0" key={course.id}>
                     <div className="card-body">
                       <CardCourse
