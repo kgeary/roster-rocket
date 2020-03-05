@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { useStoreContext } from "../utils/GlobalState";
 import CardCourse from "../components/CardCourse";
@@ -56,12 +56,7 @@ function Course() {
   }
 
   if (!state.user) {
-    return (
-      <Container fluid>
-        <div className="gap" />
-        <h1>You must be logged in to access this page.</h1>
-      </Container>
-    );
+    return <Redirect to="/login" />
   }
 
   return (
@@ -81,7 +76,9 @@ function Course() {
           </Row>
         </React.Fragment>
       ) : (
-          status
+          <div className="gap" >
+            {status}
+          </div>
         )}
       <div className="gap" />
     </Container>

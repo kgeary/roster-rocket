@@ -5,6 +5,7 @@ import API from "../../utils/API";
 import PayButton from "../PayButton";
 import EnrollCourseModal from "../EnrollCourseModal";
 import EnrollCourseForm from "../forms/EnrollCourseForm";
+import Avatar from "react-avatar";
 
 function CardCourse(props) {
   const [courseState, setCourseState] = useState(props.accordion || false);
@@ -17,6 +18,72 @@ function CardCourse(props) {
       }
     });
   };
+
+  const getPaid = (student) => {
+    if (state.user && (state.user.id === student.id || state.user.isAdmin)) {
+      return (
+        <React.Fragment>
+          <td>
+            {student.StudentCourse.Paid ? (
+              "PAID"
+            ) : (
+                <span style={{ fontWeight: "bold", color: "red" }}>
+                  NOT YET PAID
+                      </span>
+              )}
+          </td>
+          <td>
+            {!student.StudentCourse.Paid ? (
+              <PayButton
+                StudentId={student.id}
+                CourseId={props.course.id}
+                updateFunc={props.updateFunc}
+                Paid={student.Paid}
+              />
+            ) : null}
+          </td>
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <React.Fragment>
+          <td>N/A</td>
+          <td></td>
+        </React.Fragment>
+      );
+    }
+  }
+
+  const getDeleteCourse = (course) => {
+    return (
+      state.user && state.user.isAdmin ? (
+        <button
+          className='btn btn-danger btn-sm'
+          onClick={() => onDelete(course.id)}
+        >
+          <i className='far fa-trash-alt'></i> Delete Course
+        </button>
+      ) : null
+    );
+  }
+
+  const showPaidSummary = () => {
+    if (!state.user || !state.user.isAdmin) {
+      return null;
+    }
+
+    return (
+      <React.Fragment>
+        <li className='list-group-item'>
+          Paid: {props.course.Students.filter(s => s.Paid).length}
+        </li>
+        <li className='list-group-item list-group-item-danger'>
+          Unpaid: {props.course.Students.filter(s => !s.Paid).length}
+        </li>
+      </React.Fragment>
+    );
+  }
+
   const renderStudents = () => {
     return (
       <table className='table'>
@@ -35,29 +102,11 @@ function CardCourse(props) {
               <h5>No Students Enrolled</h5>
             ) : null}
             {props.course.Students.map(student => (
-              <tr>
+              <tr key={student.id}>
                 <td><Link to={`/student/${student.id}`}>{student.name}</Link></td>
                 <td><Link to={`/parent/${student.User.id}`}>{student.User.name}</Link></td>
                 <td>{student.age}</td>
-                <td>
-                  {student.Paid ? (
-                    "PAID"
-                  ) : (
-                      <span style={{ fontWeight: "bold", color: "red" }}>
-                        NOT YET PAID
-                    </span>
-                    )}
-                </td>
-                <td>
-                  {!student.Paid ? (
-                    <PayButton
-                      StudentId={student.id}
-                      CourseId={props.course.id}
-                      updateFunc={props.updateFunc}
-                      Paid={student.Paid}
-                    />
-                  ) : null}
-                </td>
+                {getPaid(student)}
               </tr>
             ))}
           </React.Fragment>{" "}
@@ -65,6 +114,33 @@ function CardCourse(props) {
       </table>
     );
   };
+
+  const showTeacherImage = () => {
+    if (!props.course.User) {
+      return <Avatar name="Not Available" className='avatarCss' />
+    }
+
+    return (
+      !props.course.User.img.includes("res.cloudinary.com") ? (
+        <Avatar name={props.course.User.name} className='avatarCss' />
+      ) : (
+          <img
+            src={props.course.User.img}
+            className='card-img cloud-img'
+            alt={props.course.User.name}
+            style={{ width: 200, height: 200 }}
+          />
+        )
+    );
+  }
+
+  const showTeacher = () => {
+    return (
+      props.course.User ?
+        <Link to={`/parent/${props.course.User.id}`}>{props.course.User.name}</Link> :
+        "Not Assigned"
+    );
+  }
 
   return (
     <div>
@@ -74,29 +150,19 @@ function CardCourse(props) {
             <h1>{props.course.title}</h1>
           </div>
           <div className='text-right pt-2'>
-            {state.user && state.user.isAdmin ? (
-              <button
-                className='btn btn-danger btn-sm'
-                onClick={() => onDelete(props.course.id)}
-              >
-                <i className='far fa-trash-alt'></i> Delete Course
-              </button>
-            ) : null}
+            {getDeleteCourse(props.course)}
           </div>
         </div>
         <div className='card-body'>
           <div className='row'>
             <div className='col col-lg-3 text-center'>
-              <img src='https://via.placeholder.com/200x200' alt='' />
-              Show Teacher Photo
+              {showTeacherImage()}
             </div>
             <div className='col col-lg-9'>
               <ul className='list-group list-group-flush'>
                 <li className='list-group-item'>
                   Teacher:{" "}
-                  {props.course.User ?
-                    <Link to={`/parent/${props.course.User.id}`}>{props.course.User.name}</Link> :
-                    "Not Assigned"}
+                  {showTeacher()}
                 </li>
                 <li className='list-group-item'>
                   Location: {props.course.location}
@@ -107,12 +173,7 @@ function CardCourse(props) {
                 <li className='list-group-item'>
                   Capacity: {props.course.capacity}
                 </li>
-                <li className='list-group-item'>
-                  Paid: {props.course.Students.filter(s => s.Paid).length}
-                </li>
-                <li className='list-group-item list-group-item-danger'>
-                  Unpaid: {props.course.Students.filter(s => !s.Paid).length}
-                </li>
+                {showPaidSummary()}
               </ul>
             </div>
           </div>

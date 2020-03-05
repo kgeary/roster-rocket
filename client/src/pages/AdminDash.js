@@ -7,7 +7,7 @@ import AddCourseForm from "../components/forms/AddCourseForm";
 import AddStudentForm from "../components/forms/AddStudentForm";
 import AddParentForm from "../components/forms/AddParentForm";
 import AddModal from "../components/AddModal";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 function AdminDash() {
   const [state, dispatch] = useStoreContext();
@@ -71,9 +71,9 @@ function AdminDash() {
     getCodes();
   }, []);
 
-  useEffect(() => {}, [userFilter]);
-  useEffect(() => {}, [courseFilter]);
-  useEffect(() => {}, [studentFilter]);
+  useEffect(() => { }, [userFilter]);
+  useEffect(() => { }, [courseFilter]);
+  useEffect(() => { }, [studentFilter]);
 
   const onFilterChange = e => {
     const { name, value } = e.target;
@@ -95,13 +95,18 @@ function AdminDash() {
   if (state.loading || !loaded) {
     return (
       <Container fluid>
+        <div className="gap" />
         <h1>Loading Admin Data...</h1>
       </Container>
     );
   }
-  if (!state.user || !state.user.isAdmin) {
+  if (!state.user) {
+    return <Redirect to="/login" />
+  }
+  if (!state.user.isAdmin) {
     return (
       <Container fluid>
+        <div className="gap" />
         <h1>You must be an administrator to access this page.</h1>
       </Container>
     );
@@ -169,19 +174,19 @@ function AdminDash() {
                 <ul className='list-group'>
                   {state.users
                     ? state.users
-                        .filter(user =>
-                          user.name.toLowerCase().includes(userFilter)
-                        )
-                        .map(user => (
-                          <Link key={user.id} to={`/parent/${user.id}`}>
-                            <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
-                              {user.name}
-                              <span class='badge badge-primary badge-pill'>
-                                {user.Students.length}
-                              </span>
-                            </li>
-                          </Link>
-                        ))
+                      .filter(user =>
+                        user.name.toLowerCase().includes(userFilter)
+                      )
+                      .map(user => (
+                        <Link key={user.id} to={`/parent/${user.id}`}>
+                          <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                            {user.name}
+                            <span class='badge badge-primary badge-pill'>
+                              {user.Students.length}
+                            </span>
+                          </li>
+                        </Link>
+                      ))
                     : null}
                 </ul>
               </div>
@@ -237,19 +242,19 @@ function AdminDash() {
                 <ul className='list-group'>
                   {state.courses
                     ? state.courses
-                        .filter(course =>
-                          course.title.toLowerCase().includes(courseFilter)
-                        )
-                        .map(course => (
-                          <Link key={course.id} to={`/course/${course.id}`}>
-                            <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
-                              {course.title}
-                              <span class='badge badge-primary badge-pill'>
-                                {course.Students.length}
-                              </span>
-                            </li>
-                          </Link>
-                        ))
+                      .filter(course =>
+                        course.title.toLowerCase().includes(courseFilter)
+                      )
+                      .map(course => (
+                        <Link key={course.id} to={`/course/${course.id}`}>
+                          <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                            {course.title}
+                            <span class='badge badge-primary badge-pill'>
+                              {course.Students.length}
+                            </span>
+                          </li>
+                        </Link>
+                      ))
                     : null}
                 </ul>
               </div>
@@ -301,16 +306,16 @@ function AdminDash() {
                 <ul className='list-group'>
                   {state.students
                     ? state.students
-                        .filter(student =>
-                          student.name.toLowerCase().includes(studentFilter)
-                        )
-                        .map(student => (
-                          <Link key={student.id} to={`/student/${student.id}`}>
-                            <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
-                              {student.name}
-                            </li>
-                          </Link>
-                        ))
+                      .filter(student =>
+                        student.name.toLowerCase().includes(studentFilter)
+                      )
+                      .map(student => (
+                        <Link key={student.id} to={`/student/${student.id}`}>
+                          <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                            {student.name}
+                          </li>
+                        </Link>
+                      ))
                     : null}
                 </ul>
               </div>

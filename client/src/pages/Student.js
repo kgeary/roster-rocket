@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { useStoreContext } from "../utils/GlobalState";
 import CardStudent from "../components/CardStudent";
@@ -24,7 +24,7 @@ function Student() {
       .catch(err => {
         setStatus(
           <div className="gap">
-            <h1>{err.response.statusText}</h1>
+            <h1>{err.message}</h1>
           </div>
         );
         setStudent(undefined);
@@ -51,14 +51,8 @@ function Student() {
   }
 
   if (!state.user) {
-    return (
-      <Container fluid>
-        <div className="gap" />
-        <h1>You must be logged in to access this page.</h1>
-      </Container>
-    );
+    return <Redirect to="/login" />
   }
-
 
   return (
     <Container fluid>

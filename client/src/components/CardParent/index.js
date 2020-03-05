@@ -43,13 +43,13 @@ function CardParent(props) {
     return !props.user.img.includes("res.cloudinary.com") ? (
       <Avatar name={props.user.name} className='avatarCss' />
     ) : (
-      <img
-        src={props.user.img}
-        className='card-img cloud-img'
-        alt={props.user.name}
-        style={{ width: 100, height: 100 }}
-      />
-    );
+        <img
+          src={props.user.img}
+          className='card-img cloud-img'
+          alt={props.user.name}
+          style={{ width: 200, height: 200 }}
+        />
+      );
   };
 
   const renderStudents = () => {
@@ -73,8 +73,8 @@ function CardParent(props) {
                 </Row>
               </React.Fragment>
             ) : (
-              <h3>No Children</h3>
-            )
+                <h3>No Children</h3>
+              )
           ) : null}
         </div>
       </div>
@@ -104,6 +104,103 @@ function CardParent(props) {
       .open();
   };
 
+  const showChangePassword = () => {
+    if (!state.user || props.user.id !== state.user.id) {
+      return null;
+    } else {
+      return (
+        <React.Fragment>
+          <Link to='/changePassword'>
+            <button
+              type='button'
+              className='btn btn-warning btn-sm'
+            >
+              <i className='fas fa-key'></i> Change Password
+                          </button>
+          </Link > {" "}
+        </React.Fragment>
+      );
+    }
+  }
+
+  const showAmountDue = () => {
+    if (state.user.id !== props.user.id && !state.user.isAdmin) {
+      return null;
+    }
+
+    return (
+      <li className='list-group-item list-group-item-danger'>
+        Amount Due: ${getAmountDue()}
+      </li>
+    );
+  }
+
+  const showDeleteUser = () => {
+    return (
+      state.user && state.user.isAdmin && (state.user.id !== props.user.id) ? (
+        <button
+          className='btn btn-danger btn-sm'
+          onClick={() => onDelete(props.user.id)}
+        >
+          <i className='far fa-trash-alt'></i> Delete User
+        </button>
+      ) : null
+    );
+  }
+
+  const showAddChild = () => {
+    if (!state.user) {
+      return null;
+    }
+
+    if ((state.user.id !== props.user.id) && !state.user.isAdmin) {
+      return null;
+    }
+
+    return (
+      <React.Fragment>
+        <AddModal
+          title='Add Child'
+          users={[props.user]}
+          form={AddStudentForm}
+          onReturn={props.updateFunc}
+        />{" "}
+      </React.Fragment>
+    );
+  }
+
+  const showEditUser = () => {
+    if (!state.user || state.user.id !== props.user.id) {
+      return null;
+    }
+
+    return (
+      <React.Fragment>
+        <EditModal
+          title='Edit Parent'
+          user={props.user}
+          form={EditUserForm}
+          onReturn={props.updateFunc}
+        /> {" "}
+      </React.Fragment>
+    )
+  }
+
+  const showUploadWidget = () => {
+    return (
+      <React.Fragment>
+        <br />
+        <button
+          id='upload_widget'
+          className='cloudinary-button'
+          onClick={openWidget}
+        >
+          <i className='fas fa-cloud-upload-alt' /> Upload Image
+        </button>
+      </React.Fragment>
+    );
+  }
+
   return (
     <div className='container'>
       <Row>
@@ -113,25 +210,8 @@ function CardParent(props) {
               <div className='row'>
                 <div className='col col-lg-3'>
                   <div className='parent-info'>
-                    {!props.user.img.includes("res.cloudinary.com") ? (
-                      <Avatar name={props.user.name} className='avatarCss' />
-                    ) : (
-                      <img
-                        src={props.user.img}
-                        className='card-img cloud-img'
-                        alt={props.user.name}
-                        style={{ width: 200, height: 200 }}
-                      />
-                    )}
-                    {/*Cloudinary Upload Widget Button*/}
-                    <br />
-                    <button
-                      id='upload_widget'
-                      className='cloudinary-button'
-                      onClick={openWidget}
-                    >
-                      <i className='fas fa-cloud-upload-alt' /> Upload Image
-                    </button>
+                    {showImage()}
+                    {showUploadWidget()}
                   </div>
                 </div>
                 <div className='col col-lg-9'>
@@ -145,25 +225,11 @@ function CardParent(props) {
                     <li className='list-group-item'>
                       Phone Number: {props.user.phone}
                     </li>
-                    <li className='list-group-item list-group-item-danger'>
-                      Amount Due: ${getAmountDue()}
-                    </li>
+                    {showAmountDue()}
                     <br />
                     <div className='float-right'>
-                      <Link to='/changePassword'>
-                        <button
-                          type='button'
-                          className='btn btn-warning btn-sm'
-                        >
-                          <i className='fas fa-key'></i> Change Password
-                        </button>
-                      </Link>{" "}
-                      <AddModal
-                        title='Add Child'
-                        users={[props.user]}
-                        form={AddStudentForm}
-                        onReturn={props.updateFunc}
-                      />{" "}
+                      {showChangePassword()}
+                      {showAddChild()}
                       <button
                         className='btn btn-info btn-sm'
                         onClick={() => {
@@ -173,24 +239,8 @@ function CardParent(props) {
                         <i className='far fa-eye'></i>{" "}
                         {studentState ? "Hide Students" : "Show Students"}
                       </button>{" "}
-                      {/* NEED TO MAKE EDIT FUNCTION FOR BUTTON */}
-                      <EditModal
-                        title='Edit Parent'
-                        user={props.user}
-                        form={EditUserForm}
-                        onReturn={props.updateFunc}
-                      />{" "}
-                      {/*<button type='button' className='btn btn-dark btn-sm'>
-                        <i className='fas fa-pencil-alt'></i> Edit User{" "}
-                      </button>*/}
-                      {state.user && state.user.isAdmin ? (
-                        <button
-                          className='btn btn-danger btn-sm'
-                          onClick={() => onDelete(props.user.id)}
-                        >
-                          <i className='far fa-trash-alt'></i> Delete User
-                        </button>
-                      ) : null}
+                      {showEditUser()}
+                      {showDeleteUser()}
                     </div>
                   </ul>
                 </div>
@@ -202,7 +252,7 @@ function CardParent(props) {
       <div className='gap' />
       {studentState ? renderStudents() : null}
       <div className='gap' />
-    </div>
+    </div >
   );
 }
 

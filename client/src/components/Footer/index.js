@@ -2,8 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import Icon from "./footer-rocket.png";
+import { useStoreContext } from "../../utils/GlobalState";
 
 const Footer = () => {
+  const [state] = useStoreContext();
+  if (state.loading) return null;
+
   return (
     <div className='container-fluid footer'>
       <div className='container'>
