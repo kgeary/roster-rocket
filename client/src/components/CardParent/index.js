@@ -41,15 +41,15 @@ function CardParent(props) {
 
   const showImage = () => {
     return !props.user.img.includes("res.cloudinary.com") ? (
-      <Avatar size={150} name={props.user.name} className='avatarCss' />
+      <Avatar size={200} name={props.user.name} className='avatarCss' />
     ) : (
-      <img
-        src={props.user.img}
-        className='card-img cloud-img'
-        alt={props.user.name}
-        style={{ width: 200, height: 200 }}
-      />
-    );
+        <img
+          src={props.user.img}
+          className='card-img cloud-img'
+          alt={props.user.name}
+          style={{ width: 200, height: 200 }}
+        />
+      );
   };
 
   const renderStudents = () => {
@@ -73,10 +73,10 @@ function CardParent(props) {
                 </Row>
               </React.Fragment>
             ) : (
-              <div className='alert-info p-3'>
-                <h2>No Children - Add a child to get started...</h2>
-              </div>
-            )
+                <div className='alert-info p-3'>
+                  <h2>No Children - Add a child to get started...</h2>
+                </div>
+              )
           ) : null}
         </div>
       </div>
@@ -132,24 +132,24 @@ function CardParent(props) {
         <i className='fas fa-check' /> PAID IN FULL
       </li>
     ) : (
-      <li className='list-group-item list-group-item-danger'>
-        <i className='fas fa-exclamation-circle' /> Amount Due:{" "}
-        <strong>${getAmountDue()}</strong>
-      </li>
-    );
+        <li className='list-group-item list-group-item-danger'>
+          <i className='fas fa-exclamation-circle' /> Amount Due:{" "}
+          <strong>${getAmountDue()}</strong>
+        </li>
+      );
   };
 
   const showDeleteUser = () => {
     return state.user &&
       state.user.isAdmin &&
       state.user.id !== props.user.id ? (
-      <button
-        className='btn btn-danger btn-sm m-2'
-        onClick={() => onDelete(props.user.id)}
-      >
-        <i className='far fa-trash-alt'></i> Delete User
+        <button
+          className='btn btn-danger btn-sm m-2'
+          onClick={() => onDelete(props.user.id)}
+        >
+          <i className='far fa-trash-alt'></i> Delete User
       </button>
-    ) : null;
+      ) : null;
   };
 
   const showAddChild = () => {
