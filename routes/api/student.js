@@ -24,9 +24,9 @@ router
   .patch(studentsController.updateStudent)
   .delete(isAdmin, studentsController.removeById);
 
-// Matches with "/api/student/img"
+// Matches with "/api/student/img/:id"
 router
-  .route("/img")
+  .route("/img/:id")
   .patch(studentsController.updateImage);
 
 module.exports = router;
