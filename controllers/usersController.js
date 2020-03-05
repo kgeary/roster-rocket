@@ -157,11 +157,13 @@ module.exports = {
   },
 
   updateImage: function (req, res) {
-    db.User.update({ img: req.body.img }, { where: { id: req.body.id } })
+    console.log("UPDATE IMAGE USER", req.body);
+    db.User.update({ img: req.body.img }, { where: { id: req.params.id } })
       .then(data => {
         res.json(data);
       })
       .catch(err => {
+        console.log("UPDATE IMAGE ERROR", err);
         res.status(422).json(err);
       });
   },

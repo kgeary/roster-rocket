@@ -84,7 +84,7 @@ module.exports = {
   },
 
   updateImage: function (req, res) {
-    db.Student.update({ img: req.body.img }, { where: { id: req.body.id } })
+    db.Student.update({ img: req.body.img }, { where: { id: req.params.id } })
       .then(data => {
         res.json(data);
       })
