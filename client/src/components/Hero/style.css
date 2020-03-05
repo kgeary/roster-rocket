@@ -11,6 +11,10 @@
   padding-top: 50px;
 }
 
+.dark .hero {
+  background-image: url(./heroBG-dark.jpg);
+}
+
 .hero-text {
   text-align: center;
   padding-top: 120px;
@@ -51,11 +55,21 @@
 }
 
 @keyframes wiggle {
-  20%  { transform: translateX(4px);  }
-  40%  { transform: translateX(-4px); }
-  60%  { transform: translateX(2px);  }
-  80%  { transform: translateX(-1px); }
-  100% { transform: translateX(0);    }
+  20% {
+    transform: translateX(4px);
+  }
+  40% {
+    transform: translateX(-4px);
+  }
+  60% {
+    transform: translateX(2px);
+  }
+  80% {
+    transform: translateX(-1px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .wiggle:hover {
