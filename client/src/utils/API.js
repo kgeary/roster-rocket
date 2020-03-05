@@ -123,8 +123,8 @@ export default {
     return axios.patch(`/api/student/img/${studentId}`, { img: imgUrl });
   },
 
-  emailParent: function (email) {
-    return axios.post("/api/auth/invite", { email });
+  emailParent: function (email, code) {
+    return axios.post("/api/auth/invite", { email, code });
   },
 
   getCodes: function () {
