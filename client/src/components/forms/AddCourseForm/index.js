@@ -18,10 +18,26 @@ function AddCourseForm(props) {
     const errors = [];
     let update;
 
-    const title = titleRef.current.value;
-    const location = locRef.current.value;
-    const capacity = capacityRef.current.value;
-    const cost = costRef.current.value;
+    const title = titleRef.current.value.trim();
+    const location = locRef.current.value.trim();
+    const capacity = parseInt(capacityRef.current.value.trim());
+    const cost = parseInt(costRef.current.value.trim());
+
+    if (title.length < 3) {
+      errors.push("Invalid Course Title");
+    }
+
+    if (location.length < 1) {
+      errors.push("Invalid Location");
+    }
+
+    if (isNaN(cost) || cost < 0) {
+      errors.push("Invalid Cost");
+    }
+
+    if (isNaN(capacity) || capacity < 0) {
+      errors.push("Invalid Capacity");
+    }
 
     if (errors.length > 0) {
       formAlert(errors.join("<br>"));
@@ -68,7 +84,7 @@ function AddCourseForm(props) {
           ></i>
         </div>
         <h1>Create Class</h1>
-        <form className='form-group mt-3 mb-2 form-signup'>
+        <form className='form-group'>
           {/* COURSE TITLE */}
 
           <label htmlFor='title'>Class Title:</label>
@@ -77,7 +93,7 @@ function AddCourseForm(props) {
             inputRef={titleRef}
             type='text'
             length='64'
-            placeholder='Course Title...'
+            placeholder='Class Title...'
           />
 
           {/* COURSE LOCATION */}
@@ -125,7 +141,7 @@ function AddCourseForm(props) {
 
           <button
             id='submitCourse'
-            className='btn btn-success mt-3 mb-5'
+            className='btn btn-success mt-3'
             onClick={handleSubmit}
           >
             <i className='fas fa-folder-plus'></i> Create Class

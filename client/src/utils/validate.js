@@ -1,5 +1,5 @@
-const user = (str) => {
-  return /^[a-z0-9_-]{3,16}$/i.test(str);
+const name = (str) => {
+  return /^[a-z0-9_ -.]{3,32}$/i.test(str);
 }
 
 const email = (str) => {
@@ -20,5 +20,5 @@ const password = (str) => {
 export default {
   email,
   password,
-  user,
+  name,
 }

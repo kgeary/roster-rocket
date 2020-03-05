@@ -1,14 +1,11 @@
 import React, { useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import { Container } from "../../Grid";
 import validate from "../../../utils/validate";
 import alertFactory from "../../../utils/alertFactory";
 import API from "../../../utils/API";
-import { useStoreContext } from "../../../utils/GlobalState";
-import * as ACTIONS from "../../../utils/actions";
 import InputForm from "../InputForm";
 
-function EditUserForm(props) {
+function EditStudentForm(props) {
   const formAlert = alertFactory("alert");
 
   const handleSubmit = e => {
@@ -16,35 +13,32 @@ function EditUserForm(props) {
     let update = false;
     const errors = [];
 
-    const email = document.getElementById("email").value;
-    if (!validate.email(email)) {
-      errors.push("Invalid Email Address");
-    }
-
-    const name = document.getElementById("name").value;
+    const name = document.getElementById("name").value.trim();
     if (name.length < 2) {
       errors.push("Invalid Name");
     }
 
-    const phone = document.getElementById("phone").value;
-    // Validate Phone?
+    const age = parseInt(document.getElementById("age").value.trim());
+    if (isNaN(age) || age < 1) {
+      errors.push("Invalid Age");
+    }
+    // Validate age
 
     if (errors.length > 0) {
       formAlert(errors.join("<br>"));
     } else {
       formAlert(false);
-      API.editUser(props.user.id, { email, name, phone })
+      API.editStudent(props.user.id, { name, age })
         .then(res => {
-          console.log("USER", res.data);
+          console.log("Student Updated", res.data);
           update = true;
-          // dispatch({ type: ACTIONS.SET_USER, user: res.data });
         })
         .catch(err => {
           if (err.message) {
             formAlert(err.message);
           } else {
             console.log(err);
-            formAlert("Username Already Exists!");
+            formAlert("Name Already Exists!");
           }
         })
         .finally(() => {
@@ -53,9 +47,8 @@ function EditUserForm(props) {
     }
   };
   useEffect(() => {
-    document.getElementById("email").value = props.user.email;
     document.getElementById("name").value = props.user.name;
-    document.getElementById("phone").value = props.user.phone;
+    document.getElementById("age").value = props.user.age;
   }, []);
 
   return (
@@ -69,49 +62,39 @@ function EditUserForm(props) {
             }}
           ></i>
         </div>
-        <h1>Edit Your Account Info</h1>
+        <h1>Edit Student Account Info</h1>
         <br />
-        <form className='form-group mt-3 mb-2 form-signup'>
-          {/* EMAIL */}
-          <label htmlFor='email'>Email:</label>
-          <InputForm
-            id='email'
-            type='email'
-            length='64'
-            defaultValue={props.user.email}
-          />
-
+        <form className='form-group'>
           {/* NAME */}
           <label htmlFor='name'>Full Name:</label>
           <InputForm
             id='name'
             type='text'
             length='32'
-            placeholder='Your Name'
+            placeholder='Student Name'
             defaultValue={props.user.name}
           />
 
-          {/* PHONE */}
-          <label htmlFor='phone'>Phone:</label>
+          {/* AGE */}
+          <label htmlFor='age'>Age:</label>
           <InputForm
-            id='phone'
-            type='tel'
-            length='32'
-            placeholder='Phone Number'
-            defaultValue={props.user.phone}
+            id='age'
+            type='number'
+            length='3'
+            placeholder='Age'
+            defaultValue={props.user.age}
           />
           <button
-            id='submitEditAccount'
-            className='btn btn-success mt-3 mb-5'
+            id='submitEditStudent'
+            className='btn btn-success mt-3'
             onClick={handleSubmit}
           >
-            <i className='fas fa-user-plus'></i> Update Account Info
+            <i className='fas fa-user-plus'></i> Update Student Info
           </button>
-          <br />
         </form>
       </div>
     </Container>
   );
 }
 
-export default EditUserForm;
+export default EditStudentForm;

@@ -116,11 +116,11 @@ export default {
   },
 
   setUserImage: function (userId, imgUrl) {
-    return axios.patch("/api/user/img", { id: userId, img: imgUrl });
+    return axios.patch(`/api/user/img/${userId}`, { img: imgUrl });
   },
 
   setStudentImage: function (studentId, imgUrl) {
-    return axios.patch("/api/student/img", { id: studentId, img: imgUrl });
+    return axios.patch(`/api/student/img/${studentId}`, { img: imgUrl });
   },
 
   emailParent: function (email) {

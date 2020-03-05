@@ -27,7 +27,9 @@ function SignupForm() {
     }
 
     const phone = document.getElementById("phone").value.trim();
-    // Validate Phone?
+    if (phone.length < 7) {
+      errors.push("Invalid Phone Number")
+    }
 
     const code = document.getElementById("code").value.trim();
     // Validate Group Code?
@@ -43,6 +45,7 @@ function SignupForm() {
     if (password !== password2) {
       errors.push("Passwords Do Not Match!");
     }
+
     const newUser = {
       email,
       password,
@@ -70,7 +73,7 @@ function SignupForm() {
             formAlert(err.message);
           } else {
             console.log(err);
-            formAlert("Username Already Exists!");
+            formAlert("A user with that email already exists!");
           }
         })
         .finally(() => {

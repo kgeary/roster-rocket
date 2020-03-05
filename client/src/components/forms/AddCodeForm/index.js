@@ -6,7 +6,7 @@ import alertFactory from "../../../utils/alertFactory";
 import API from "../../../utils/API";
 import InputForm from "../InputForm";
 
-function AddParentForm(props) {
+function AddCodeForm(props) {
   const formAlert = alertFactory("alert");
 
   const handleSubmit = e => {
@@ -18,13 +18,11 @@ function AddParentForm(props) {
     } else {
       formAlert(false);
 
-      const email = document.getElementById("email").value || "";
+      const code = document.getElementById("code").value.trim() || "";
 
-      API.emailParent({
-        email
-      })
+      API.addCode(code)
         .then(res => {
-          console.log("EMAIL", res.data);
+          console.log("CODE", res.data);
           update = true;
         })
         .catch(err => {
@@ -33,7 +31,7 @@ function AddParentForm(props) {
             formAlert(err.message);
           } else {
             console.log(err);
-            formAlert("Error Inviting Parent!");
+            formAlert("Error Adding Code!");
           }
         })
         .finally(() => {
@@ -53,23 +51,23 @@ function AddParentForm(props) {
             }}
           ></i>
         </div>
-        <h1>Invite a Parent</h1>
+        <h1>Add a Group Code</h1>
         <form className='form-group mt-3 mb-2 form-signup'>
           {/* PARENT EMAIL */}
-          <label htmlFor='email'>Enter parent's email address:</label>
+          <label htmlFor='email'>New Group Code:</label>
           <InputForm
-            id='email'
-            type='email'
-            length='64'
-            placeholder='Email...'
+            id='code'
+            type='number'
+            length='10'
+            placeholder='Group Code...'
           />
 
           <button
-            id='submitParent'
+            id='submitCode'
             className='btn btn-success mt-3'
             onClick={handleSubmit}
           >
-            <i className='fas fa-envelope'></i> Send Invite
+            <i className='fas fa-envelope'></i> Add Code
           </button>
           <br />
           <div id='alert' role='alert' />
@@ -79,4 +77,4 @@ function AddParentForm(props) {
   );
 }
 
-export default AddParentForm;
+export default AddCodeForm;

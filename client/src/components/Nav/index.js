@@ -57,6 +57,9 @@ const Nav = props => {
         <NavLink className='nav-link' activeClassName='active' to='/parent'>
           My Profile
         </NavLink>
+        <NavLink className='nav-link' activeClassName='active' to='/course'>
+          Courses
+        </NavLink>
         <button className='nav-link btn btn-dark pt-0 pb-0' onClick={onLogout}>
           Logout
         </button>

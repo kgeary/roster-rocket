@@ -8,6 +8,9 @@ import AddStudentForm from "../components/forms/AddStudentForm";
 import AddParentForm from "../components/forms/AddParentForm";
 import AddModal from "../components/AddModal";
 import { Link, Redirect } from "react-router-dom";
+import DeleteModal from "../components/DeleteModal";
+import AddCodeForm from "../components/forms/AddCodeForm";
+import DeleteCodeForm from "../components/forms/DeleteCodeForm";
 
 function AdminDash() {
   const [state, dispatch] = useStoreContext();
@@ -122,6 +125,17 @@ function AdminDash() {
           Emergency Hotline: (512) 555-1212
           <br />
           Class-Code: {codes.join(", ")}
+          <AddModal
+            title="Add Code"
+            form={AddCodeForm}
+            onReturn={getCodes}
+          />
+          <DeleteModal
+            title="Delete Code"
+            users={codes}
+            form={DeleteCodeForm}
+            onReturn={getCodes}
+          />
           <br />
         </div>
         <br />

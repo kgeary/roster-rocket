@@ -5,7 +5,9 @@ import API from "../../utils/API";
 import PayButton from "../PayButton";
 import EnrollCourseModal from "../EnrollCourseModal";
 import EnrollCourseForm from "../forms/EnrollCourseForm";
+import EditCourseForm from "../forms/EditCourseForm";
 import Avatar from "react-avatar";
+import EditModal from "../EditModal";
 
 function CardCourse(props) {
   const [courseState, setCourseState] = useState(props.accordion || false);
@@ -52,16 +54,31 @@ function CardCourse(props) {
     }
   };
 
-  const getDeleteCourse = course => {
-    return state.user && state.user.isAdmin ? (
-      <button
-        className='btn btn-danger btn-sm'
-        onClick={() => onDelete(course.id)}
-      >
-        <i className='far fa-trash-alt'></i> Delete Course
-      </button>
-    ) : null;
-  };
+  const getEditCourse = () => {
+    return (
+      state.user && state.user.isAdmin ? (
+        <EditModal
+          title="Edit Course"
+          user={props.course}
+          form={EditCourseForm}
+          onReturn={props.updateFunc}
+        />
+      ) : null
+    )
+  }
+
+  const getDeleteCourse = (course) => {
+    return (
+      state.user && state.user.isAdmin ? (
+        <button
+          className='btn btn-danger btn-sm'
+          onClick={() => onDelete(course.id)}
+        >
+          <i className='far fa-trash-alt'></i> Delete Course
+        </button>
+      ) : null
+    );
+  }
 
   const showPaidSummary = () => {
     if (!state.user || !state.user.isAdmin) {
@@ -71,10 +88,10 @@ function CardCourse(props) {
     return (
       <React.Fragment>
         <li className='list-group-item'>
-          Paid: {props.course.Students.filter(s => s.Paid).length}
+          Paid: {props.course.Students.filter(s => s.StudentCourse.Paid).length}
         </li>
         <li className='list-group-item list-group-item-danger'>
-          Unpaid: {props.course.Students.filter(s => !s.Paid).length}
+          Unpaid: {props.course.Students.filter(s => !s.StudentCourse.Paid).length}
         </li>
       </React.Fragment>
     );
@@ -161,7 +178,10 @@ function CardCourse(props) {
           <div className='float-left'>
             <h1>{props.course.title}</h1>
           </div>
-          <div className='text-right pt-2'>{getDeleteCourse(props.course)}</div>
+          <div className='text-right pt-2'>
+            {getEditCourse()}
+            {getDeleteCourse(props.course)}
+          </div>
         </div>
         <div className='card-body'>
           <div className='row'>

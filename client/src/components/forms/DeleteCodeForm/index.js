@@ -6,7 +6,7 @@ import alertFactory from "../../../utils/alertFactory";
 import API from "../../../utils/API";
 import InputForm from "../InputForm";
 
-function AddParentForm(props) {
+function DeleteCodeForm(props) {
   const formAlert = alertFactory("alert");
 
   const handleSubmit = e => {
@@ -18,13 +18,13 @@ function AddParentForm(props) {
     } else {
       formAlert(false);
 
-      const email = document.getElementById("email").value || "";
-
-      API.emailParent({
-        email
-      })
+      const code = parseInt(document.getElementById("code").value.trim()) || 0;
+      if (isNaN(code) || code.length < 2 || code < 1) {
+        errors.push("Invalid Code!");
+      }
+      API.removeCode(code)
         .then(res => {
-          console.log("EMAIL", res.data);
+          console.log("CODE", res.data);
           update = true;
         })
         .catch(err => {
@@ -33,7 +33,7 @@ function AddParentForm(props) {
             formAlert(err.message);
           } else {
             console.log(err);
-            formAlert("Error Inviting Parent!");
+            formAlert("Error Removing Code!");
           }
         })
         .finally(() => {
@@ -53,23 +53,24 @@ function AddParentForm(props) {
             }}
           ></i>
         </div>
-        <h1>Invite a Parent</h1>
+        <h1>Delete a Group Code</h1>
         <form className='form-group mt-3 mb-2 form-signup'>
-          {/* PARENT EMAIL */}
-          <label htmlFor='email'>Enter parent's email address:</label>
-          <InputForm
-            id='email'
-            type='email'
-            length='64'
-            placeholder='Email...'
-          />
+
+          <label htmlFor='code'>Group Code to Remove:</label>
+          <select className='form-control' id='code'>
+            {props.users.map(code => (
+              <option key={code} value={code}>
+                {code}
+              </option>
+            ))}
+          </select>
 
           <button
-            id='submitParent'
+            id='submitCode'
             className='btn btn-success mt-3'
             onClick={handleSubmit}
           >
-            <i className='fas fa-envelope'></i> Send Invite
+            <i className='fas fa-envelope'></i> Delete Code
           </button>
           <br />
           <div id='alert' role='alert' />
@@ -79,4 +80,4 @@ function AddParentForm(props) {
   );
 }
 
-export default AddParentForm;
+export default DeleteCodeForm;
