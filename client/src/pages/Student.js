@@ -40,7 +40,7 @@ function Student() {
 
   const LoadScreen = () => {
     return (
-      <Container fluid>
+      <Container>
         <h1>Loading Student Data...</h1>
       </Container>
     );
@@ -55,10 +55,10 @@ function Student() {
   }
 
   return (
-    <Container fluid>
+    <Container>
       {student ? (
         <React.Fragment>
-          <div className='gap' />
+          <div className='big-gap' />
           <h1>{student ? student.name : null} Student Profile</h1>
           <Row>
             <Col size='lg-4'>
@@ -71,7 +71,7 @@ function Student() {
           </Row>
         </React.Fragment>
       ) : status}
-      <div className="gap" />
+      <div className="big-gap" />
     </Container>
   );
 }

@@ -3,6 +3,9 @@ import Modal from "react-modal";
 import { useStoreContext } from "../../utils/GlobalState";
 
 const customStyles = {
+  overlay: {
+    backgroundColor: "rgba(0,0,0,0.75)"
+  },
   content: {
     top: "50%",
     left: "50%",

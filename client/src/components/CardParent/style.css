@@ -8,7 +8,7 @@
   border-radius: 50%;
   margin: 0 auto;
   text-align: center;
-  background-color: #fff;;
+  background-color: #fff;
 }
 
 .parent-info {
@@ -18,9 +18,18 @@
 }
 
 .parent-info-title {
-  
   font-family: Acme;
   font-size: 30px;
   color: #213946;
   padding-left: 40px;
+}
+
+.account-info-title-card-parent {
+  color: #bbb;
+  font-size: 26px;
+  font-family: Acme;
+}
+
+.dark .account-info-title-card-parent {
+  color: #666;
 }

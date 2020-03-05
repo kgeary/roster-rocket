@@ -83,6 +83,14 @@ body.dark .navbar.navbar-light.bg-light {
   max-width: 700px;
 }
 
+.gap {
+  margin: 75px;
+}
+
+.big-gap {
+  margin: 100px;
+}
+
 .cloudinary-button {
   margin: 0 auto;
   padding: 2px 10px 2px 10px;

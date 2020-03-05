@@ -83,17 +83,17 @@ function AddCourseForm(props) {
             }}
           ></i>
         </div>
-        <h1>Create a course</h1>
+        <h1>Create Class</h1>
         <form className='form-group'>
           {/* COURSE TITLE */}
 
-          <label htmlFor='title'>Course Title:</label>
+          <label htmlFor='title'>Class Title:</label>
           <InputForm
             id='title'
             inputRef={titleRef}
             type='text'
             length='64'
-            placeholder='Course Title...'
+            placeholder='Class Title...'
           />
 
           {/* COURSE LOCATION */}
@@ -113,7 +113,7 @@ function AddCourseForm(props) {
             inputRef={capacityRef}
             type='int'
             length='64'
-            placeholder='Max Course Capacity...'
+            placeholder='Max Class Capacity...'
           />
 
           {/* COURSE COST */}
@@ -144,7 +144,7 @@ function AddCourseForm(props) {
             className='btn btn-success mt-3'
             onClick={handleSubmit}
           >
-            <i className='fas fa-folder-plus'></i> Create Course
+            <i className='fas fa-folder-plus'></i> Create Class
           </button>
           <br />
           <div id='alert' role='alert' />

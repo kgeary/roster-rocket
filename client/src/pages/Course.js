@@ -45,7 +45,7 @@ function Course() {
 
   const LoadScreen = () => {
     return (
-      <Container fluid>
+      <Container>
         <h1>Loading Course Data...</h1>
       </Container>
     );
@@ -63,8 +63,8 @@ function Course() {
     <Container>
       {course ? (
         <React.Fragment>
-          <div className='gap' />
-          <h1>Course Page {course ? course.title : null}</h1>
+          <div className='big-gap' />
+          <h1>Class Details</h1>
           <Row>
             <Col size='md-12'>
               <CardCourse
@@ -80,7 +80,7 @@ function Course() {
             {status}
           </div>
         )}
-      <div className="gap" />
+      <div className="big-gap" />
     </Container>
   );
 }
