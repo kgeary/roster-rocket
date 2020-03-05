@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Container } from "../../Grid";
 import validate from "../../../utils/validate";
 import alertFactory from "../../../utils/alertFactory";
@@ -61,13 +61,18 @@ function PasswordResetForm() {
     }
   };
 
+
+  useEffect(() => {
+    dispatch({ type: ACTIONS.DONE });
+  }, []);
+
   if (finished) {
     return <Redirect to='/login' />;
   }
 
   return (
     <Container>
-    <div className="gap" />
+      <div className="gap" />
       <div className='form-container'>
         <h1>Reset Password</h1>
         <form className='form-group mt-3 mb-2 form-login'>
@@ -86,7 +91,7 @@ function PasswordResetForm() {
             className='btn btn-success mt-3 mb-5'
             onClick={handleSubmit}
           >
-          Reset Password
+            Reset Password
           </button>
         </form>
         <div id='alert' role='alert' />
