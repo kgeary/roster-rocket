@@ -90,10 +90,10 @@ function CardCourse(props) {
     return (
       <React.Fragment>
         <li className='list-group-item'>
-          Paid: {props.course.Students.filter(s => s.Paid).length}
+          Paid: {props.course.Students.filter(s => s.StudentCourse.Paid).length}
         </li>
         <li className='list-group-item list-group-item-danger'>
-          Unpaid: {props.course.Students.filter(s => !s.Paid).length}
+          Unpaid: {props.course.Students.filter(s => !s.StudentCourse.Paid).length}
         </li>
       </React.Fragment>
     );
