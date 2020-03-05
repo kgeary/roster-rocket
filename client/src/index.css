@@ -164,6 +164,10 @@ body.dark .navbar.navbar-light.bg-light {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.75);
 }
 
+ul {
+  list-style-type: none;
+}
+
 .close-modal {
   color: #333;
   float: right;

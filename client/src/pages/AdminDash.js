@@ -11,11 +11,16 @@ import { Link, Redirect } from "react-router-dom";
 import DeleteModal from "../components/DeleteModal";
 import AddCodeForm from "../components/forms/AddCodeForm";
 import DeleteCodeForm from "../components/forms/DeleteCodeForm";
+import getCsv from "../utils/getCsv";
+import download from "../utils/download";
 
 function AdminDash() {
   const [state, dispatch] = useStoreContext();
   const [codes, setCodes] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [parentFlip, setParentFlip] = useState(false);
+  const [classFlip, setClassFlip] = useState(false);
+  const [childFlip, setChildFlip] = useState(false);
 
   const setUsers = val => {
     dispatch({ type: ACTIONS.SET_USERS, value: val });
@@ -74,9 +79,9 @@ function AdminDash() {
     getCodes();
   }, []);
 
-  useEffect(() => {}, [userFilter]);
-  useEffect(() => {}, [courseFilter]);
-  useEffect(() => {}, [studentFilter]);
+  useEffect(() => { }, [userFilter]);
+  useEffect(() => { }, [courseFilter]);
+  useEffect(() => { }, [studentFilter]);
 
   const onFilterChange = e => {
     const { name, value } = e.target;
@@ -94,6 +99,10 @@ function AdminDash() {
         throw new Error("Unknown filter");
     }
   };
+
+  const saveToCsv = () => {
+    download(getCsv(state.courses));
+  }
 
   if (state.loading || !loaded) {
     return (
@@ -132,6 +141,10 @@ function AdminDash() {
             form={DeleteCodeForm}
             onReturn={getCodes}
           />
+          <button className="btn btn-info btn-sm ml-2" onClick={saveToCsv}>
+            <i className='fas fa-save' />{" "}
+            Save Class Data to CSV
+          </button>
           <br />
         </div>
         <br />
@@ -157,7 +170,7 @@ function AdminDash() {
                     {state.users.length}
                   </span>
                 </li>
-                <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
+                <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center' onClick={() => setParentFlip(!parentFlip)}>
                   <span className='badge-title'>
                     {" "}
                     > Parents without Children:{" "}
@@ -169,6 +182,22 @@ function AdminDash() {
                     }
                   </span>
                 </li>
+                {
+                  !parentFlip ? null :
+                    <li>
+                      <ul className="list-group list-group-flush tiny-font">
+                        {
+                          state.users
+                            .filter(user => user.Students.length < 1)
+                            .map(user => (
+                              <Link to={`/parent/${user.id}`}>
+                                <li className="list-group-item" key={user.id}>{user.name}</li>
+                              </Link>
+                            ))
+                        }
+                      </ul>
+                    </li>
+                }
               </ul>
               <input
                 className='input-styled'
@@ -183,19 +212,19 @@ function AdminDash() {
                 <ul className='list-group'>
                   {state.users
                     ? state.users
-                        .filter(user =>
-                          user.name.toLowerCase().includes(userFilter)
-                        )
-                        .map(user => (
-                          <Link key={user.id} to={`/parent/${user.id}`}>
-                            <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
-                              {user.name}
-                              <span class='badge badge-primary badge-pill'>
-                                {user.Students.length}
-                              </span>
-                            </li>
-                          </Link>
-                        ))
+                      .filter(user =>
+                        user.name.toLowerCase().includes(userFilter)
+                      )
+                      .map(user => (
+                        <Link key={user.id} to={`/parent/${user.id}`}>
+                          <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                            {user.name}
+                            <span class='badge badge-primary badge-pill'>
+                              {user.Students.length}
+                            </span>
+                          </li>
+                        </Link>
+                      ))
                     : null}
                 </ul>
               </div>
@@ -223,7 +252,7 @@ function AdminDash() {
                     {state.courses.length}
                   </span>
                 </li>
-                <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
+                <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center' onClick={() => setClassFlip(!classFlip)}>
                   {" "}
                   <span className='badge-title'>
                     {" "}
@@ -236,6 +265,22 @@ function AdminDash() {
                     }
                   </span>
                 </li>
+                {
+                  !classFlip ? null :
+                    <li>
+                      <ul className="list-group list-group-flush tiny-font">
+                        {
+                          state.courses
+                            .filter(course => course.TeacherId === null)
+                            .map(course => (
+                              <Link to={`/course/${course.id}`}>
+                                <li className="list-group-item" key={course.id}>{course.title}</li>
+                              </Link>
+                            ))
+                        }
+                      </ul>
+                    </li>
+                }
               </ul>
 
               <input
@@ -251,19 +296,19 @@ function AdminDash() {
                 <ul className='list-group'>
                   {state.courses
                     ? state.courses
-                        .filter(course =>
-                          course.title.toLowerCase().includes(courseFilter)
-                        )
-                        .map(course => (
-                          <Link key={course.id} to={`/course/${course.id}`}>
-                            <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
-                              {course.title}
-                              <span class='badge badge-primary badge-pill'>
-                                {course.Students.length}
-                              </span>
-                            </li>
-                          </Link>
-                        ))
+                      .filter(course =>
+                        course.title.toLowerCase().includes(courseFilter)
+                      )
+                      .map(course => (
+                        <Link key={course.id} to={`/course/${course.id}`}>
+                          <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                            {course.title}
+                            <span class='badge badge-primary badge-pill'>
+                              {course.Students.length}
+                            </span>
+                          </li>
+                        </Link>
+                      ))
                     : null}
                 </ul>
               </div>
@@ -291,16 +336,32 @@ function AdminDash() {
                     {state.students.length}
                   </span>
                 </li>
-                <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
+                <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center' onClick={() => setChildFlip(!childFlip)}>
                   <span className='badge-title'> > Unpaid Students: </span>
                   <span className='badge badge-primary badge-pill'>
                     {state.students.reduce(
                       (a, c) =>
-                        (a += c.StudentCourses.filter(sc => !sc.Paid).length),
+                        (a += c.StudentCourses.filter(sc => !sc.Paid).length > 0 ? 1 : 0),
                       0
                     )}
                   </span>
                 </li>
+                {
+                  !childFlip ? null :
+                    <li>
+                      <ul className="list-group list-group-flush tiny-font">
+                        {
+                          state.students
+                            .filter(student => student.StudentCourses.filter(sc => !sc.Paid).length > 0)
+                            .map(student => (
+                              <Link to={`/student/${student.id}`}>
+                                <li className="list-group-item" key={student.id}>{student.name}</li>
+                              </Link>
+                            ))
+                        }
+                      </ul>
+                    </li>
+                }
               </ul>
               <input
                 className='input-styled'
@@ -315,25 +376,25 @@ function AdminDash() {
                 <ul className='list-group'>
                   {state.students
                     ? state.students
-                        .filter(student =>
-                          student.name.toLowerCase().includes(studentFilter)
-                        )
-                        .map(student => (
-                          <Link key={student.id} to={`/student/${student.id}`}>
-                            <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
-                              {student.name}
-                            </li>
-                          </Link>
-                        ))
+                      .filter(student =>
+                        student.name.toLowerCase().includes(studentFilter)
+                      )
+                      .map(student => (
+                        <Link key={student.id} to={`/student/${student.id}`}>
+                          <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                            {student.name}
+                          </li>
+                        </Link>
+                      ))
                     : null}
                 </ul>
               </div>
             </div>
           </Col>
         </Row>
-      </Container>
+      </Container >
       <div className='big-gap' />
-    </div>
+    </div >
   );
 }
 
