@@ -60,7 +60,7 @@ function CardStudent(props) {
         Paid:{" "}
         {sc.Paid ? (
           <span style={{ fontWeight: "bold", color: "green" }}>PAID <i className="fas fa-check" /></span>
-          
+
         ) : (
             <span style={{ fontWeight: "bold", color: "red" }}>NOT YET PAID <i className="fas fa-exclamation-circle" /></span>
           )}
@@ -266,6 +266,10 @@ function CardStudent(props) {
   };
 
   const showParentName = () => {
+    if (!state.user.isAdmin && state.user.id === props.student.User.id) {
+      return null;
+    }
+
     return (
       <ul className='list-group'>
         <li className='list-group-item list-group-item-dark text-center'>
