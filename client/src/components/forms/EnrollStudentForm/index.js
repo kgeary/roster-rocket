@@ -77,7 +77,7 @@ function EnrollStudentForm(props) {
 
           <button
             id='submitCourse'
-            className='btn btn-success mt-3 mb-5'
+            className='btn btn-success mt-3'
             onClick={handleSubmit}
           >
             Enroll

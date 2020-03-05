@@ -5,7 +5,9 @@ import API from "../../utils/API";
 import PayButton from "../PayButton";
 import EnrollCourseModal from "../EnrollCourseModal";
 import EnrollCourseForm from "../forms/EnrollCourseForm";
+import EditCourseForm from "../forms/EditCourseForm";
 import Avatar from "react-avatar";
+import EditModal from "../EditModal";
 
 function CardCourse(props) {
   const [courseState, setCourseState] = useState(props.accordion || false);
@@ -52,6 +54,19 @@ function CardCourse(props) {
         </React.Fragment>
       );
     }
+  }
+
+  const getEditCourse = () => {
+    return (
+      state.user && state.user.isAdmin ? (
+        <EditModal
+          title="Edit Course"
+          user={props.course}
+          form={EditCourseForm}
+          onReturn={props.updateFunc}
+        />
+      ) : null
+    )
   }
 
   const getDeleteCourse = (course) => {
@@ -150,6 +165,7 @@ function CardCourse(props) {
             <h1>{props.course.title}</h1>
           </div>
           <div className='text-right pt-2'>
+            {getEditCourse()}
             {getDeleteCourse(props.course)}
           </div>
         </div>
