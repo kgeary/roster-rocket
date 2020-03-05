@@ -9,7 +9,7 @@ import { useStoreContext } from "../../../utils/GlobalState";
 import InputForm from "../InputForm";
 
 function PasswordChangeForm() {
-  const [, dispatch] = useStoreContext();
+  const [state, dispatch] = useStoreContext();
   const oldPassword = useRef();
   const newPassword = useRef();
   const newPassword2 = useRef();
@@ -81,6 +81,13 @@ function PasswordChangeForm() {
 
   return (
     <Container>
+      {state.user ? (
+        state.user.isAdmin ? (
+          <Redirect to='/admin' />
+        ) : (
+            <Redirect to='/parent' />
+          )
+      ) : null}
       <div className='form-container'>
         <div className='gap' />
         <h1>Change Password</h1>
