@@ -29,8 +29,8 @@ function CardCourse(props) {
             {student.StudentCourse.Paid ? (
               "PAID"
             ) : (
-                <span style={{ fontWeight: "bold", color: "red" }}>NOT PAID</span>
-              )}
+              <span style={{ fontWeight: "bold", color: "red" }}>NOT PAID</span>
+            )}
           </td>
           <td>
             <PayButton
@@ -53,30 +53,26 @@ function CardCourse(props) {
   };
 
   const getEditCourse = () => {
-    return (
-      state.user && state.user.isAdmin ? (
-        <EditModal
-          title="Edit Course"
-          user={props.course}
-          form={EditCourseForm}
-          onReturn={props.updateFunc}
-        />
-      ) : null
-    )
-  }
+    return state.user && state.user.isAdmin ? (
+      <EditModal
+        title='Edit Course'
+        user={props.course}
+        form={EditCourseForm}
+        onReturn={props.updateFunc}
+      />
+    ) : null;
+  };
 
-  const getDeleteCourse = (course) => {
-    return (
-      state.user && state.user.isAdmin ? (
-        <button
-          className='btn btn-danger btn-sm'
-          onClick={() => onDelete(course.id)}
-        >
-          <i className='far fa-trash-alt'></i> Delete Course
-        </button>
-      ) : null
-    );
-  }
+  const getDeleteCourse = course => {
+    return state.user && state.user.isAdmin ? (
+      <button
+        className='btn btn-danger btn-sm'
+        onClick={() => onDelete(course.id)}
+      >
+        <i className='far fa-trash-alt'></i> Delete Course
+      </button>
+    ) : null;
+  };
 
   const showPaidSummary = () => {
     if (!state.user || !state.user.isAdmin) {
@@ -89,7 +85,8 @@ function CardCourse(props) {
           Paid: {props.course.Students.filter(s => s.StudentCourse.Paid).length}
         </li>
         <li className='list-group-item list-group-item-danger'>
-          Unpaid: {props.course.Students.filter(s => !s.StudentCourse.Paid).length}
+          Unpaid:{" "}
+          {props.course.Students.filter(s => !s.StudentCourse.Paid).length}
         </li>
       </React.Fragment>
     );
@@ -144,20 +141,18 @@ function CardCourse(props) {
 
   const showTeacherImage = () => {
     if (!props.course.User) {
-      return <Avatar size={200} name="Not Available" className='avatarCss' />
+      return <Avatar size={200} name='Not Available' className='avatarCss' />;
     }
 
-    return (
-      !props.course.User.img.includes("res.cloudinary.com") ? (
-        <Avatar size={200} name={props.course.User.name} className='avatarCss' />
-      ) : (
-          <img
-            src={props.course.User.img}
-            className='card-img cloud-img'
-            alt={props.course.User.name}
-            style={{ width: 200, height: 200 }}
-          />
-        )
+    return !props.course.User.img.includes("res.cloudinary.com") ? (
+      <Avatar size={200} name={props.course.User.name} className='avatarCss' />
+    ) : (
+      <img
+        src={props.course.User.img}
+        className='card-img cloud-img'
+        alt={props.course.User.name}
+        style={{ width: 200, height: 200 }}
+      />
     );
   };
 
@@ -167,8 +162,8 @@ function CardCourse(props) {
         {props.course.User.name}
       </Link>
     ) : (
-        "Not Assigned"
-      );
+      "Not Assigned"
+    );
   };
 
   return (
@@ -178,7 +173,7 @@ function CardCourse(props) {
           <div className='float-left'>
             <h1>{props.course.title}</h1>
           </div>
-          <div className='text-right pt-2'>
+          <div className='float-right'>
             {getEditCourse()}
             {getDeleteCourse(props.course)}
           </div>
@@ -198,9 +193,7 @@ function CardCourse(props) {
                 <li className='list-group-item'>
                   Capacity: {props.course.capacity}
                 </li>
-                <li className='list-group-item'>
-                  Cost: {props.course.cost}
-                </li>
+                <li className='list-group-item'>Cost: {props.course.cost}</li>
                 {showPaidSummary()}
               </ul>
             </div>
