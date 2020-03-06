@@ -81,14 +81,14 @@ function AddCourseForm(props) {
             }}
           ></i>
         </div>
-        <h1>Create New Class</h1>
-        <form className='mt-3 mb-2 form-signup'>
-          <div class='form-group row'>
+        <h1>Add Class</h1>
+        <form>
+          <div className='form-group row'>
             {/* COURSE TITLE */}
-            <label className='col-sm-4 col-form-label-sm' htmlFor='title'>
+            <label className='col-sm-4 col-form-label-sm hidden-xs' htmlFor='title'>
               Class Title:
             </label>
-            <div class='col-sm-8'>
+            <div className='col-sm-8'>
               <InputForm
                 id='title'
                 inputRef={titleRef}
@@ -98,12 +98,12 @@ function AddCourseForm(props) {
               />
             </div>
           </div>
-          <div class='form-group row'>
+          <div className='form-group row'>
             {/* COURSE LOCATION */}
-            <label className='col-sm-4 col-form-label-sm' htmlFor='location'>
+            <label className='col-sm-4 col-form-label-sm hidden-xs' htmlFor='location'>
               Location:
             </label>
-            <div class='col-sm-8'>
+            <div className='col-sm-8'>
               <InputForm
                 id='location'
                 inputRef={locRef}
@@ -113,12 +113,12 @@ function AddCourseForm(props) {
               />
             </div>
           </div>
-          <div class='form-group row'>
+          <div className='form-group row'>
             {/* COURSE CAPACITY */}
-            <label className='col-sm-4 col-form-label-sm' htmlFor='capacity'>
+            <label className='col-sm-4 col-form-label-sm hidden-xs' htmlFor='capacity'>
               Max Size:
             </label>
-            <div class='col-sm-8'>
+            <div className='col-sm-8'>
               <InputForm
                 id='capacity'
                 inputRef={capacityRef}
@@ -128,12 +128,12 @@ function AddCourseForm(props) {
               />
             </div>
           </div>
-          <div class='form-group row'>
+          <div className='form-group row'>
             {/* COURSE COST */}
-            <label className='col-sm-4 col-form-label-sm' htmlFor='location'>
+            <label className='col-sm-4 col-form-label-sm hidden-xs' htmlFor='location'>
               Cost:
             </label>
-            <div class='col-sm-8'>
+            <div className='col-sm-8'>
               <InputForm
                 id='cost'
                 inputRef={costRef}
@@ -143,12 +143,12 @@ function AddCourseForm(props) {
               />
             </div>
           </div>
-          <div class='form-group row'>
+          <div className='form-group row'>
             {/* COURSE TEACHER */}
             <label className='col-sm-4 col-form-label-sm' htmlFor='teacher'>
               Teacher:
             </label>
-            <div class='col-sm-8'>
+            <div className='col-sm-8'>
               <select className='form-control' id='teacher'>
                 <option key={null} value=''>
                   None

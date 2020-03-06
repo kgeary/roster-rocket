@@ -59,7 +59,7 @@ function CardParent(props) {
           {props.includeChildren ? (
             props.user.Students.length > 0 ? (
               <React.Fragment>
-                <h2 class='children-of-parent-title'>Children</h2>
+                <h2 className='children-of-parent-title'>Children</h2>
                 <Row>
                   {props.user.Students.map(student => (
                     <Col size='lg-4'>

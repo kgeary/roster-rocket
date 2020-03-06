@@ -7,7 +7,7 @@ const customStyles = {
     backgroundColor: "rgba(0,0,0,0.75)"
   },
   content: {
-    top: "50%",
+    top: "55%",
     left: "50%",
     right: "auto",
     bottom: "auto",
