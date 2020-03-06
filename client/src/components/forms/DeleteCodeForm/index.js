@@ -26,6 +26,7 @@ function DeleteCodeForm(props) {
         .then(res => {
           console.log("CODE", res.data);
           update = true;
+          props.closeModal(update);
         })
         .catch(err => {
           update = false;
@@ -35,9 +36,6 @@ function DeleteCodeForm(props) {
             console.log(err);
             formAlert("Error Removing Code!");
           }
-        })
-        .finally(() => {
-          props.closeModal(update);
         });
     }
   };

@@ -44,6 +44,7 @@ function EditCourseForm(props) {
         .then(res => {
           console.log("COURSE UPDATED", res.data);
           update = true;
+          props.closeModal(update);
         })
         .catch(err => {
           if (err.message) {
@@ -52,9 +53,6 @@ function EditCourseForm(props) {
             console.log(err);
             formAlert("Course Already Exists!");
           }
-        })
-        .finally(() => {
-          props.closeModal(update);
         });
     }
   };
@@ -163,6 +161,8 @@ function EditCourseForm(props) {
         >
           <i className='fas fa-user-plus'></i> Update Account Info
         </button>
+        <br />
+        <div id='alert' role='alert' />
       </form>
     </Container>
   );
