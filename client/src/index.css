@@ -180,6 +180,8 @@ ul {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
-.hidden-xs {
-  display: none;
+@media screen and (max-width: 600px) {
+  .hidden-xs {
+    display: none;
+  }
 }
