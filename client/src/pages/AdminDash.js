@@ -133,7 +133,7 @@ function AdminDash() {
         <div className='alert alert-dark' role='alert'>
           <Row>
             <Col size="md-5">
-              <p style={{ margin: "auto" }}>
+              <p className='admin-info'>
                 Emergency Hotline: (512) 555-1212<br />
                 Class-Codes: {codes.join(", ")}
               </p>
