@@ -31,6 +31,7 @@ function AddStudentForm(props) {
         .then(res => {
           console.log("COURSE", res.data);
           update = true;
+          props.closeModal(update);
         })
         .catch(err => {
           update = false;
@@ -40,9 +41,6 @@ function AddStudentForm(props) {
             console.log(err);
             formAlert("Unable to add Student!");
           }
-        })
-        .finally(() => {
-          props.closeModal(update);
         });
     }
   };

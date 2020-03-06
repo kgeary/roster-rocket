@@ -56,6 +56,7 @@ function AddCourseForm(props) {
         .then(res => {
           console.log("COURSE", res.data);
           update = true;
+          props.closeModal(update);
         })
         .catch(err => {
           update = false;
@@ -65,9 +66,6 @@ function AddCourseForm(props) {
             console.log(err);
             formAlert("Error Adding Course!");
           }
-        })
-        .finally(() => {
-          props.closeModal(update);
         });
     }
   };

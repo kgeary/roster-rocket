@@ -32,6 +32,7 @@ function EditStudentForm(props) {
         .then(res => {
           console.log("Student Updated", res.data);
           update = true;
+          props.closeModal(update);
         })
         .catch(err => {
           if (err.message) {
@@ -40,9 +41,6 @@ function EditStudentForm(props) {
             console.log(err);
             formAlert("Name Already Exists!");
           }
-        })
-        .finally(() => {
-          props.closeModal(update);
         });
     }
   };
@@ -91,6 +89,8 @@ function EditStudentForm(props) {
           >
             <i className='fas fa-user-plus'></i> Update Child's Info
           </button>
+          <br />
+          <div id='alert' role='alert' />
         </form>
       </div>
     </Container>

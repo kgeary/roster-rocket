@@ -33,6 +33,7 @@ function AddParentForm(props) {
         .then(res => {
           console.log("EMAIL", res.data);
           update = true;
+          props.closeModal(update);
         })
         .catch(err => {
           update = false;
@@ -42,9 +43,6 @@ function AddParentForm(props) {
             console.log(err);
             formAlert("Error Inviting Parent!");
           }
-        })
-        .finally(() => {
-          props.closeModal(update);
         });
     }
   };

@@ -168,7 +168,7 @@ function CardStudent(props) {
   };
 
   const showEditChild = () => {
-    if (!state.user || state.user.id !== props.student.ParentId) {
+    if (!state.user || (state.user.id !== props.student.ParentId && !state.user.isAdmin)) {
       return null;
     }
 

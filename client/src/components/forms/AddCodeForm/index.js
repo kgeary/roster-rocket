@@ -24,6 +24,7 @@ function AddCodeForm(props) {
         .then(res => {
           console.log("CODE", res.data);
           update = true;
+          props.closeModal(update);
         })
         .catch(err => {
           update = false;
@@ -33,9 +34,6 @@ function AddCodeForm(props) {
             console.log(err);
             formAlert("Error Adding Code!");
           }
-        })
-        .finally(() => {
-          props.closeModal(update);
         });
     }
   };

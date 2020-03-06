@@ -39,14 +39,12 @@ function EnrollCourseForm(props) {
         .then(res => {
           console.log("STUDENT", res.data);
           updateParent = true;
+          props.closeModal(updateParent);
         })
         .catch(err => {
           updateParent = false;
           console.log("ENROLL COURSE ERROR", err);
           formAlert("Unable to Enroll!");
-        })
-        .finally(() => {
-          props.closeModal(updateParent);
         });
     }
   };

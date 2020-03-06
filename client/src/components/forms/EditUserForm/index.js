@@ -37,7 +37,7 @@ function EditUserForm(props) {
         .then(res => {
           console.log("USER", res.data);
           update = true;
-          // dispatch({ type: ACTIONS.SET_USER, user: res.data });
+          props.closeModal(update);
         })
         .catch(err => {
           if (err.message) {
@@ -46,9 +46,6 @@ function EditUserForm(props) {
             console.log(err);
             formAlert("Username Already Exists!");
           }
-        })
-        .finally(() => {
-          props.closeModal(update);
         });
     }
   };
@@ -108,6 +105,7 @@ function EditUserForm(props) {
             <i className='fas fa-user-plus'></i> Update Account Info
           </button>
           <br />
+          <div id='alert' role='alert' />
         </form>
       </div>
     </Container>
