@@ -191,6 +191,10 @@ function CardParent(props) {
   };
 
   const showUploadWidget = () => {
+    if (!state.user || (state.user.id !== props.user.id && !state.user.isAdmin)) {
+      return null;
+    }
+
     return (
       <React.Fragment>
         <br />
