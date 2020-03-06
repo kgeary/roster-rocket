@@ -179,3 +179,7 @@ ul {
   color: rgb(209, 79, 79);
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
+
+.hidden-xs {
+  display: none;
+}

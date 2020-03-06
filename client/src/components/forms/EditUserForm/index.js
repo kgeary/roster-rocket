@@ -1,11 +1,8 @@
 import React, { useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import { Container } from "../../Grid";
 import validate from "../../../utils/validate";
 import alertFactory from "../../../utils/alertFactory";
 import API from "../../../utils/API";
-import { useStoreContext } from "../../../utils/GlobalState";
-import * as ACTIONS from "../../../utils/actions";
 import InputForm from "../InputForm";
 
 function EditUserForm(props) {

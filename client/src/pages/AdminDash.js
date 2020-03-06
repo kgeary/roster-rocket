@@ -131,21 +131,31 @@ function AdminDash() {
         <h1>Admin Dashboard</h1>
         <br />
         <div className='alert alert-dark' role='alert'>
-          Emergency Hotline: (512) 555-1212
-          <br />
-          Class-Code: {codes.join(", ")}
-          <AddModal title='Add Code' form={AddCodeForm} onReturn={getCodes} />
-          <DeleteModal
-            title='Delete Code'
-            users={codes}
-            form={DeleteCodeForm}
-            onReturn={getCodes}
-          />
-          <button className="btn btn-info btn-sm ml-2" onClick={saveToCsv}>
-            <i className='fas fa-save' />{" "}
-            Save Class Data to CSV
-          </button>
-          <br />
+          <Row>
+            <Col size="md-5">
+              <p style={{ margin: "auto" }}>
+                Emergency Hotline: (512) 555-1212<br />
+                Class-Codes: {codes.join(", ")}
+              </p>
+            </Col>
+            <Col size="md-7">
+              <div style={{
+                display: "flex", justifyContent: "center", alignItems: "center", flexWrap: "wrap"
+              }}>
+                <AddModal title='Add Code' form={AddCodeForm} onReturn={getCodes} />
+                <DeleteModal
+                  title='Delete Code'
+                  users={codes}
+                  form={DeleteCodeForm}
+                  onReturn={getCodes}
+                />
+                <button className="btn btn-info btn-sm m-2" onClick={saveToCsv}>
+                  <i className='fas fa-save' />{" "}
+                  Save Class Data to CSV
+                </button>
+              </div>
+            </Col>
+          </Row>
         </div>
         <br />
         <Row>
@@ -190,7 +200,7 @@ function AdminDash() {
                           state.users
                             .filter(user => user.Students.length < 1)
                             .map(user => (
-                              <Link to={`/parent/${user.id}`}>
+                              <Link key={user.id} to={`/parent/${user.id}`}>
                                 <li className="list-group-item" key={user.id}>{user.name}</li>
                               </Link>
                             ))
@@ -219,7 +229,7 @@ function AdminDash() {
                         <Link key={user.id} to={`/parent/${user.id}`}>
                           <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
                             {user.name}
-                            <span class='badge badge-primary badge-pill'>
+                            <span className='badge badge-primary badge-pill'>
                               {user.Students.length}
                             </span>
                           </li>
@@ -301,9 +311,9 @@ function AdminDash() {
                       )
                       .map(course => (
                         <Link key={course.id} to={`/course/${course.id}`}>
-                          <li class='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
+                          <li className='list-group-item list-group-item-warning list-group-item-action pt-1 pb-1 pl-2 pr-2 d-flex justify-content-between align-items-center'>
                             {course.title}
-                            <span class='badge badge-primary badge-pill'>
+                            <span className='badge badge-primary badge-pill'>
                               {course.Students.length}
                             </span>
                           </li>

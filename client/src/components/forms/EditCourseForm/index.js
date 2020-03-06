@@ -78,12 +78,12 @@ function EditCourseForm(props) {
       </div>
       <h1>Edit Course</h1>
       <form className='mt-3 mb-2 form-signup'>
-        <div class='form-group row'>
+        <div className='form-group row'>
           {/* TITLE */}
           <label className='col-sm-4 col-form-label-sm' htmlFor='title'>
             Title:
           </label>
-          <div class='col-sm-8'>
+          <div className='col-sm-8'>
             <InputForm
               id='title'
               type='text'
@@ -92,12 +92,12 @@ function EditCourseForm(props) {
             />
           </div>
         </div>
-        <div class='form-group row'>
+        <div className='form-group row'>
           {/* LOCATION */}
           <label className='col-sm-4 col-form-label-sm' htmlFor='name'>
             Location:
           </label>
-          <div class='col-sm-8'>
+          <div className='col-sm-8'>
             <InputForm
               id='location'
               type='text'
@@ -107,12 +107,12 @@ function EditCourseForm(props) {
             />
           </div>
         </div>
-        <div class='form-group row'>
+        <div className='form-group row'>
           {/* COST */}
           <label className='col-sm-4 col-form-label-sm' htmlFor='cost'>
             Cost:
           </label>
-          <div class='col-sm-8'>
+          <div className='col-sm-8'>
             <InputForm
               id='cost'
               type='number'
@@ -122,12 +122,12 @@ function EditCourseForm(props) {
             />
           </div>
         </div>
-        <div class='form-group row'>
+        <div className='form-group row'>
           {/* CAPACITY */}
           <label className='col-sm-4 col-form-label-sm' htmlFor='capacity'>
             Capacity:
           </label>
-          <div class='col-sm-8'>
+          <div className='col-sm-8'>
             <InputForm
               id='capacity'
               type='number'
@@ -137,11 +137,11 @@ function EditCourseForm(props) {
             />
           </div>
         </div>
-        <div class='form-group row'>
+        <div className='form-group row'>
           <label className='col-sm-4 col-form-label-sm' htmlFor='teacher'>
             Teacher:
           </label>
-          <div class='col-sm-8'>
+          <div className='col-sm-8'>
             <select className='form-control' id='teacher'>
               <option key={null} value=''>
                 None

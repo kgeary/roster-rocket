@@ -6,7 +6,7 @@ const customStyles = {
     backgroundColor: "rgba(0,0,0,0.75)"
   },
   content: {
-    top: "50%",
+    top: "55%",
     left: "50%",
     right: "auto",
     bottom: "auto",
@@ -41,7 +41,7 @@ function DeleteModal(props) {
 
   return (
     <React.Fragment>
-      <button className='btn btn-danger btn-sm' onClick={openModal}>
+      <button className='btn btn-danger btn-sm m-2' onClick={openModal}>
         <i className='fas fa-times-circle' /> {props.title}
       </button>
       <Modal
