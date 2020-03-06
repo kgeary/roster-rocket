@@ -173,7 +173,7 @@ function AdminDash() {
                 <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center' onClick={() => setParentFlip(!parentFlip)}>
                   <span className='badge-title'>
                     {" "}
-                    > Parents without Children:{" "}
+                    {parentFlip ? "˅" : ">"} Parents without Children:{" "}
                   </span>
                   <span className='badge badge-primary badge-pill'>
                     {
@@ -185,7 +185,7 @@ function AdminDash() {
                 {
                   !parentFlip ? null :
                     <li>
-                      <ul className="list-group list-group-flush tiny-font">
+                      <ul className="list-group list-group-flush tiny-font" style={{ maxHeight: "160px", overflow: "auto" }}>
                         {
                           state.users
                             .filter(user => user.Students.length < 1)
@@ -256,7 +256,7 @@ function AdminDash() {
                   {" "}
                   <span className='badge-title'>
                     {" "}
-                    > Classes without Teachers:{" "}
+                    {classFlip ? "˅" : ">"} Classes without Teachers:{" "}
                   </span>
                   <span className='badge badge-primary badge-pill'>
                     {
@@ -268,7 +268,7 @@ function AdminDash() {
                 {
                   !classFlip ? null :
                     <li>
-                      <ul className="list-group list-group-flush tiny-font">
+                      <ul className="list-group list-group-flush tiny-font" style={{ maxHeight: "160px", overflow: "auto" }}>
                         {
                           state.courses
                             .filter(course => course.TeacherId === null)
@@ -331,13 +331,14 @@ function AdminDash() {
               </div>
               <ul className='list-group list-group-flush tiny-font'>
                 <li className='list-group-item list-group-item-primary pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center'>
-                  <span className='badge-title'> > Number of Students: </span>
+                  <span className='badge-title'>
+                    > Number of Students: </span>
                   <span className='badge badge-primary badge-pill'>
                     {state.students.length}
                   </span>
                 </li>
                 <li className='list-group-item list-group-item-danger pt-1 pb-1 pl-3 pr-4 d-flex justify-content-between align-items-center' onClick={() => setChildFlip(!childFlip)}>
-                  <span className='badge-title'> > Unpaid Students: </span>
+                  <span className='badge-title'> {childFlip ? "˅" : ">"} Unpaid Students: </span>
                   <span className='badge badge-primary badge-pill'>
                     {state.students.reduce(
                       (a, c) =>
@@ -349,7 +350,7 @@ function AdminDash() {
                 {
                   !childFlip ? null :
                     <li>
-                      <ul className="list-group list-group-flush tiny-font">
+                      <ul className="list-group list-group-flush tiny-font" style={{ maxHeight: "160px", overflow: "auto" }}>
                         {
                           state.students
                             .filter(student => student.StudentCourses.filter(sc => !sc.Paid).length > 0)
