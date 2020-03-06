@@ -14,7 +14,6 @@ function ParentDash() {
     dispatch({ type: ACTIONS.LOADING });
     API.getUser(true)
       .then(res => {
-        console.log("GET Current user", res.data);
         setParent(res.data);
       })
       .then(() => {

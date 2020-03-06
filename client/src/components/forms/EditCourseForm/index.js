@@ -42,7 +42,7 @@ function EditCourseForm(props) {
       body.TeacherId = TeacherId ? TeacherId : null;
       API.editCourse(props.user.id, body)
         .then(res => {
-          console.log("COURSE UPDATED", res.data);
+          //console.log("COURSE UPDATED", res.data);
           update = true;
           props.closeModal(update);
         })

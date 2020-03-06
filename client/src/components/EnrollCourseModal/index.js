@@ -19,7 +19,6 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 function EnrollCourseModal(props) {
-  console.log("ECM", props.course);
 
   const [modalIsOpen, setIsOpen] = useState(false);
   const [state] = useStoreContext();
@@ -36,7 +35,6 @@ function EnrollCourseModal(props) {
   const closeModal = (update = false) => {
     setIsOpen(false);
     if (props.onReturn && update && typeof update === "boolean") {
-      console.log("UPDATE", update);
       props.onReturn();
     }
   };

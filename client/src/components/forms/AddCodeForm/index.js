@@ -22,7 +22,6 @@ function AddCodeForm(props) {
 
       API.addCode(code)
         .then(res => {
-          console.log("CODE", res.data);
           update = true;
           props.closeModal(update);
         })

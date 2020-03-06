@@ -50,7 +50,7 @@ function PasswordChangeForm() {
       API.changePassword({ pwOld, pwNew })
         .then(res => {
           // Successful Login
-          console.log("Password Changed", res);
+          //console.log("Password Changed", res);
           oldPassword.current.value = "";
           newPassword.current.value = "";
           newPassword2.current.value = "";

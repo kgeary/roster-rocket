@@ -29,7 +29,7 @@ function AddStudentForm(props) {
         ParentId
       })
         .then(res => {
-          console.log("COURSE", res.data);
+          //console.log("COURSE", res.data);
           update = true;
           props.closeModal(update);
         })

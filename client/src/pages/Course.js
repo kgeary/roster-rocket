@@ -16,7 +16,7 @@ function Course() {
     dispatch({ type: ACTIONS.LOADING });
     API.getCourseById(id)
       .then(res => {
-        console.log("GET COURSE BY ID " + id, res.data);
+        //console.log("GET COURSE BY ID " + id, res.data);
         setCourse(res.data);
         if (!res.data) {
           throw new Error("Unable to Find Course");
