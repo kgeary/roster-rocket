@@ -11,7 +11,7 @@ function EnrollStudentForm(props) {
   const formAlert = alertFactory("alert");
   const [state] = useStoreContext();
 
-  console.log("ENROLL STUDENT FORM", props.student);
+  //console.log("ENROLL STUDENT FORM", props.student);
 
   const coursesTaken = props.student.StudentCourses.map(sc => sc.Course.id);
   const availableCourses = state.courses.filter(
@@ -38,7 +38,7 @@ function EnrollStudentForm(props) {
         document.getElementById("course").value
       )
         .then(res => {
-          console.log("COURSE", res.data);
+          //console.log("COURSE", res.data);
           updateParent = true;
           props.closeModal(updateParent);
         })

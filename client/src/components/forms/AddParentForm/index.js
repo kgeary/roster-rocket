@@ -31,7 +31,7 @@ function AddParentForm(props) {
 
       API.emailParent(email, code)
         .then(res => {
-          console.log("EMAIL", res.data);
+          //console.log("EMAIL", res.data);
           update = true;
           props.closeModal(update);
         })

@@ -24,7 +24,7 @@ function DeleteCodeForm(props) {
       }
       API.removeCode(code)
         .then(res => {
-          console.log("CODE", res.data);
+          //console.log("CODE", res.data);
           update = true;
           props.closeModal(update);
         })

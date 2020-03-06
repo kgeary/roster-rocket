@@ -16,7 +16,7 @@ function User() {
     dispatch({ type: ACTIONS.LOADING });
     API.getUserById(id)
       .then(res => {
-        console.log("GET USER BY ID " + id, res.data);
+        //console.log("GET USER BY ID " + id, res.data);
         setParent(res.data);
         if (!res.data) {
           throw new Error("Unable to Find User");

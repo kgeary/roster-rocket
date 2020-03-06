@@ -134,10 +134,10 @@ function CardStudent(props) {
         },
         (error, result) => {
           if (!error && result && result.event === "success") {
-            console.log("Done! Here is the image info: ", result.info);
+            //console.log("Done! Here is the image info: ", result.info);
             API.setStudentImage(props.student.id, result.info.url).then(
               data => {
-                console.log(result.info.url);
+                //console.log(result.info.url);
                 props.updateFunc();
               }
             );

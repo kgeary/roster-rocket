@@ -95,9 +95,9 @@ function CardParent(props) {
         },
         (error, result) => {
           if (!error && result && result.event === "success") {
-            console.log("Done! Here is the image info: ", result.info);
+            //console.log("Done! Here is the image info: ", result.info);
             API.setUserImage(props.user.id, result.info.url).then(data => {
-              console.log(result.info.url);
+              //console.log(result.info.url);
               props.updateFunc();
             });
           }

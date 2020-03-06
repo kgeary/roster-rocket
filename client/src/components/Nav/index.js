@@ -24,12 +24,10 @@ const Nav = props => {
 
   const toggleTheme = () => {
     const newTheme = state.theme === "dark" ? "light" : "dark";
-    console.log(newTheme);
     dispatch({ type: ACTIONS.SET_THEME, theme: newTheme });
   };
 
   const onLogout = () => {
-    console.log("on logout");
     API.logoutUser()
       .then(res => {
         dispatch({ type: ACTIONS.SET_USER, user: undefined });

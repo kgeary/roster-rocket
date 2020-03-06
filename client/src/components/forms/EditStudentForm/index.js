@@ -30,7 +30,7 @@ function EditStudentForm(props) {
       formAlert(false);
       API.editStudent(props.user.id, { name, age })
         .then(res => {
-          console.log("Student Updated", res.data);
+          //console.log("Student Updated", res.data);
           update = true;
           props.closeModal(update);
         })

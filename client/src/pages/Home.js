@@ -11,7 +11,6 @@ function Home() {
 
   useEffect(() => {
     dispatch({ type: ACTIONS.DONE });
-    console.log("USE EFFECT");
   }, []);
 
   useEffect(() => {

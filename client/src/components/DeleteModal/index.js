@@ -31,10 +31,8 @@ function DeleteModal(props) {
   };
 
   const closeModal = (args) => {
-    console.log("CLOSE MODAL ARGS", args, typeof args);
     setIsOpen(false);
     if (props.onReturn && typeof args === "boolean" && args) {
-      console.log("UPDATE");
       props.onReturn();
     }
   };

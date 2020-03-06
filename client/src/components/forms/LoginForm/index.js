@@ -43,7 +43,7 @@ function LoginForm() {
       API.loginUser({ email, password })
         .then(res => {
           // Successful Login
-          console.log("LOGGED IN");
+          //console.log("LOGGED IN");
           emailRef.current.value = "";
           passwordRef.current.value = "";
           dispatch({ type: ACTIONS.SET_USER, user: res.data });

@@ -34,7 +34,6 @@ function EnrollStudentModal(props) {
   const closeModal = (update = false) => {
     setIsOpen(false);
     if (props.onReturn && update && typeof update === "boolean") {
-      console.log("UPDATE", update);
       props.onReturn();
     }
   };

@@ -32,7 +32,7 @@ function EditUserForm(props) {
       formAlert(false);
       API.editUser(props.user.id, { email, name, phone })
         .then(res => {
-          console.log("USER", res.data);
+          //console.log("USER", res.data);
           update = true;
           props.closeModal(update);
         })

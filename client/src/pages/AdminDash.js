@@ -55,11 +55,11 @@ function AdminDash() {
       });
   };
   const updateAll = () => {
-    console.log("ADMIN LOAD DATA");
+    //console.log("ADMIN LOAD DATA");
     dispatch({ type: ACTIONS.LOADING });
     Promise.all([updateUsers(), updateCourses(), updateStudents()])
       .then(res => {
-        console.log("PROMISE COMPLETE");
+        //console.log("PROMISE COMPLETE");
         const [userData, courseData, studentData] = res.map(i => i.data);
         setUsers(userData);
         setCourses(courseData);
