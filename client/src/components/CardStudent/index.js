@@ -200,6 +200,10 @@ function CardStudent(props) {
   };
 
   const showUploadWidget = () => {
+    if (!state.user || (state.user.id !== props.student.User.id && !state.user.isAdmin)) {
+      return null;
+    }
+
     return (
       <button
         id='upload_widget'
